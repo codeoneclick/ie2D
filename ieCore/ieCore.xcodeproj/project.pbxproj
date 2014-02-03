@@ -174,6 +174,9 @@
 		21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D8189FDAFA003CB322 /* ieEvent.cpp */; };
 		21EBB4E5189FEED3003CB322 /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4BA189FD6B4003CB322 /* ieObject.cpp */; };
 		21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4E6189FFA91003CB322 /* ieStage.cpp */; };
+		21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */; };
+		21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971518A0265200A65E68 /* ieColorTransformation.cpp */; };
+		21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971818A0279800A65E68 /* ieColor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -301,6 +304,12 @@
 		21EBB4D9189FDAFA003CB322 /* ieEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieEvent.h; path = Sources/ieEvent.h; sourceTree = "<group>"; };
 		21EBB4E6189FFA91003CB322 /* ieStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieStage.cpp; path = Sources/ieStage.cpp; sourceTree = "<group>"; };
 		21EBB4E7189FFA91003CB322 /* ieStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieStage.h; path = Sources/ieStage.h; sourceTree = "<group>"; };
+		21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBitmapFilter.cpp; path = Sources/ieBitmapFilter.cpp; sourceTree = "<group>"; };
+		21EE971318A023F800A65E68 /* ieBitmapFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBitmapFilter.h; path = Sources/ieBitmapFilter.h; sourceTree = "<group>"; };
+		21EE971518A0265200A65E68 /* ieColorTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieColorTransformation.cpp; path = Sources/ieColorTransformation.cpp; sourceTree = "<group>"; };
+		21EE971618A0265200A65E68 /* ieColorTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieColorTransformation.h; path = Sources/ieColorTransformation.h; sourceTree = "<group>"; };
+		21EE971818A0279800A65E68 /* ieColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieColor.cpp; path = Sources/ieColor.cpp; sourceTree = "<group>"; };
+		21EE971918A0279800A65E68 /* ieColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieColor.h; path = Sources/ieColor.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -916,6 +925,10 @@
 			children = (
 				21EBB4BB189FD6B4003CB322 /* ieObject.h */,
 				21EBB4BA189FD6B4003CB322 /* ieObject.cpp */,
+				21EE971618A0265200A65E68 /* ieColorTransformation.h */,
+				21EE971518A0265200A65E68 /* ieColorTransformation.cpp */,
+				21EE971918A0279800A65E68 /* ieColor.h */,
+				21EE971818A0279800A65E68 /* ieColor.cpp */,
 			);
 			name = ieCore;
 			sourceTree = "<group>";
@@ -962,6 +975,15 @@
 				21EBB4B9189FD683003CB322 /* ieCommon.h */,
 			);
 			name = ieCommon;
+			sourceTree = "<group>";
+		};
+		21EE971118A023C700A65E68 /* ieFilters */ = {
+			isa = PBXGroup;
+			children = (
+				21EE971318A023F800A65E68 /* ieBitmapFilter.h */,
+				21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */,
+			);
+			name = ieFilters;
 			sourceTree = "<group>";
 		};
 		A40138BC1754E9CE0056461B /* Templates */ = {
@@ -1144,6 +1166,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21EE971118A023C700A65E68 /* ieFilters */,
 				21EBB4B8189FD663003CB322 /* ieCommon */,
 				21EBB4B7189FD648003CB322 /* ieDisplay */,
 				21EBB4B6189FD5FA003CB322 /* ieEvents */,
@@ -2007,9 +2030,12 @@
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
+				21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */,
 				21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */,
 				21EBB4E1189FEED3003CB322 /* ieMovieClip.cpp in Sources */,
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
+				21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */,
+				21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */,
 				21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */,
 				21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */,
 				21EBB4E5189FEED3003CB322 /* ieObject.cpp in Sources */,

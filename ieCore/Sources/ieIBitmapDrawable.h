@@ -11,6 +11,7 @@
 
 #include "ieCommon.h"
 class ieBitmapData;
+class ieBitmapFilter;
 class ieIBitmapDrawable
 {
 private:
@@ -36,10 +37,10 @@ public:
                             const glm::ivec2& destinationPoint);
     virtual void copyPixelsToByteArray(const glm::ivec4& rectangle,
                                        const std::vector<ui8>& data) = 0;
-    virtual void draw(void) = 0;
     virtual void fillRect(const glm::ivec4& rectangle,
                           ui32 color);
-    
+    virtual void floodFill(f32 x, f32 y, ui32 color);
+    //virtual glm::ivec4 generateFilterRectangle(
 };
 
 #endif
