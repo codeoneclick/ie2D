@@ -40,14 +40,14 @@ void ieEventDispatcher::addEventListener(const std::string& type,
 void ieEventDispatcher::removeEventListener(const std::string& type,
                                             const ieEventDispatcherFunction& function)
 {
-    auto iterator = m_functions.find(type);
+    const auto& iterator = m_functions.find(type);
     if(iterator != m_functions.end())
     {
         iterator->second.erase(function);
     }
 }
 
-bool ieEventDispatcher::hasEventListener(const std::string& _type)
+bool ieEventDispatcher::hasEventListener(const std::string& type)
 {
     auto iterator = m_functions.find(type);
     return iterator != m_functions.end();
@@ -55,6 +55,14 @@ bool ieEventDispatcher::hasEventListener(const std::string& _type)
 
 void ieEventDispatcher::dispatchEvent(const std::shared_ptr<ieEvent>& event)
 {
-    assert(event->getTarget() != nullptr)
-    
+    assert(event->getTarget() != nullptr);
+    std::shared_ptr<ieEventDispatcher> dispatcher = std::static_pointer_cast<ieEventDispatcher>(event->getTarget());
+    if(dispatcher->hasEventListener(event->getType()))
+    {
+        const auto& iterator = dispatcher->m_functions.find(event->getType());
+        for(const auto& function : iterator->second)
+        {
+            (*function)(event);
+        }
+    }
 }

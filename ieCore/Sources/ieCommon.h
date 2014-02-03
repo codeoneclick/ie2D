@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <list>
 #include <numeric>
 #include <future>
 #include <algorithm>
@@ -26,6 +27,13 @@
 #include <iostream>
 #include <assert.h>
 #include <functional>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/type_precision.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/euler_angles.hpp>
 
 typedef signed char i8;
 typedef unsigned char ui8;

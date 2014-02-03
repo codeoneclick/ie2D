@@ -30,7 +30,7 @@ public:
     void addObjectWithKey(const std::shared_ptr<ieObject>& object, const std::string& key);
     void removeObjectWithKey(const std::string& key);
     void setObjectWithKey(const std::shared_ptr<ieObject>& object, const std::string& key);
-    const std::shared_ptr<ieObject>& getObjectWithKey(const std::string& key);
+    std::shared_ptr<ieObject> getObjectWithKey(const std::string& key);
 };
 
 #endif 

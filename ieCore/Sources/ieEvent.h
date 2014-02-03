@@ -11,7 +11,7 @@
 
 #include "ieObject.h"
 
-class ieEventDispatcher;
+class ieIEventDispatcher;
 class ieEvent : public ieObject
 {
 private:

@@ -12,7 +12,7 @@
 #include "ieObject.h"
 #include "ieIEventDispatcher.h"
 
-typedef std::function<void(const std::shared_ptr<ieEvent>&)> ieEventDispatcherFunction;
+typedef std::shared_ptr<std::function<void(const std::shared_ptr<ieEvent>&)>> ieEventDispatcherFunction;
 
 class ieEventDispatcher :
 public ieObject,
@@ -33,7 +33,7 @@ public:
                           const ieEventDispatcherFunction& function);
     void removeEventListener(const std::string& type,
                              const ieEventDispatcherFunction& function);
-    bool hasEventListener(const std::string& _type);
+    bool hasEventListener(const std::string& type);
     void dispatchEvent(const std::shared_ptr<ieEvent>& event);
     
 };

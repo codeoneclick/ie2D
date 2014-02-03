@@ -173,6 +173,7 @@
 		21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C0189FD727003CB322 /* ieEventDispatcher.cpp */; };
 		21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D8189FDAFA003CB322 /* ieEvent.cpp */; };
 		21EBB4E5189FEED3003CB322 /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4BA189FD6B4003CB322 /* ieObject.cpp */; };
+		21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4E6189FFA91003CB322 /* ieStage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -298,6 +299,8 @@
 		21EBB4D6189FDA6E003CB322 /* ieMovieClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMovieClip.h; path = Sources/ieMovieClip.h; sourceTree = "<group>"; };
 		21EBB4D8189FDAFA003CB322 /* ieEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieEvent.cpp; path = Sources/ieEvent.cpp; sourceTree = "<group>"; };
 		21EBB4D9189FDAFA003CB322 /* ieEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieEvent.h; path = Sources/ieEvent.h; sourceTree = "<group>"; };
+		21EBB4E6189FFA91003CB322 /* ieStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieStage.cpp; path = Sources/ieStage.cpp; sourceTree = "<group>"; };
+		21EBB4E7189FFA91003CB322 /* ieStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieStage.h; path = Sources/ieStage.h; sourceTree = "<group>"; };
 		A40138C21754EF060056461B /* CModelTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelTemplateSerializer.cpp; path = Sources/CModelTemplateSerializer.cpp; sourceTree = "<group>"; };
 		A40138C31754EF060056461B /* CModelTemplateSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CModelTemplateSerializer.h; path = Sources/CModelTemplateSerializer.h; sourceTree = "<group>"; };
 		A40138C51754EF280056461B /* CParticleEmitterTemplateSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParticleEmitterTemplateSerializer.cpp; path = Sources/CParticleEmitterTemplateSerializer.cpp; sourceTree = "<group>"; };
@@ -947,6 +950,8 @@
 				21EBB4D2189FDA46003CB322 /* ieSprite.cpp */,
 				21EBB4D6189FDA6E003CB322 /* ieMovieClip.h */,
 				21EBB4D5189FDA6E003CB322 /* ieMovieClip.cpp */,
+				21EBB4E7189FFA91003CB322 /* ieStage.h */,
+				21EBB4E6189FFA91003CB322 /* ieStage.cpp */,
 			);
 			name = ieDisplay;
 			sourceTree = "<group>";
@@ -2002,6 +2007,7 @@
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
+				21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */,
 				21EBB4E1189FEED3003CB322 /* ieMovieClip.cpp in Sources */,
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
 				21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */,
