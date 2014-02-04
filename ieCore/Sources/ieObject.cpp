@@ -46,6 +46,6 @@ void ieObject::setObjectWithKey(const std::shared_ptr<ieObject>& object, const s
 
 std::shared_ptr<ieObject> ieObject::getObjectWithKey(const std::string& key)
 {
-    const auto& iterator = m_objects.find(key);
+    auto iterator = m_objects.find(key);
     return iterator != m_objects.end() ? iterator->second : nullptr;
 }

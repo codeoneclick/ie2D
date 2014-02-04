@@ -977,6 +977,13 @@
 			name = ieCommon;
 			sourceTree = "<group>";
 		};
+		21EBB4F718A14647003CB322 /* ieShaders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ieShaders;
+			sourceTree = "<group>";
+		};
 		21EE971118A023C700A65E68 /* ieFilters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1166,6 +1173,7 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21EBB4F718A14647003CB322 /* ieShaders */,
 				21EE971118A023C700A65E68 /* ieFilters */,
 				21EBB4B8189FD663003CB322 /* ieCommon */,
 				21EBB4B7189FD648003CB322 /* ieDisplay */,

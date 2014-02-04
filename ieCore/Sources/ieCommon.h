@@ -35,6 +35,14 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
+#if defined(__IOS__)
+
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+#include <QuartzCore/QuartzCore.h>
+
+#endif
+
 typedef signed char i8;
 typedef unsigned char ui8;
 typedef signed short i16;

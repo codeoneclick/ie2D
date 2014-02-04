@@ -9,14 +9,14 @@
 #ifndef __ieCore__ieColor__
 #define __ieCore__ieColor__
 
-#include "ieObject.h"
+#include "ieColorTransformation.h"
 
-class ieColor : public ieObject
+class ieColor : public ieColorTransformation
 {
 private:
     
 protected:
-    union
+    union ieUColor
     {
         struct
         {
@@ -27,6 +27,11 @@ protected:
         };
         ui32 m_hexColor;
     } m_color;
+    
+    void updateRedChannel(void);
+    void updateGreenChannel(void);
+    void updateBlueChannel(void);
+    void updateAlphaChannel(void);
     
 public:
     
@@ -48,6 +53,14 @@ public:
     
     void setHexColor(ui32 hexColor);
     
+    void setRedMultiplier(f32 redMultiplier);
+    void setRedOffset(i16 redOffset);
+    void setGreenMultiplier(f32 greenMultiplier);
+    void setGreenOffset(i16 greenOffset);
+    void setBlueMultiplier(f32 blueMultiplier);
+    void setBlueOffset(i16 blueOffset);
+    void setAlphaMultiplier(f32 alphaMultiplier);
+    void setAlphaOffset(i16 alphaOffset);
 };
 
 #endif

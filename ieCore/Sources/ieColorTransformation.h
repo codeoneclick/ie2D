@@ -48,14 +48,14 @@ public:
     f32 getAlphaMultiplier(void);
     i16 getAlphaOffset(void);
     
-    void setRedMultiplier(f32 redMultiplier);
-    void setRedOffset(i16 redOffset);
-    void setGreenMultiplier(f32 greenMultiplier);
-    void setGreenOffset(i16 greenOffset);
-    void setBlueMultiplier(f32 blueMultiplier);
-    void setBlueOffset(i16 blueOffset);
-    void setAlphaMultiplier(f32 alphaMultiplier);
-    void setAlphaOffset(i16 alphaOffset);
+    virtual void setRedMultiplier(f32 redMultiplier);
+    virtual void setRedOffset(i16 redOffset);
+    virtual void setGreenMultiplier(f32 greenMultiplier);
+    virtual void setGreenOffset(i16 greenOffset);
+    virtual void setBlueMultiplier(f32 blueMultiplier);
+    virtual void setBlueOffset(i16 blueOffset);
+    virtual void setAlphaMultiplier(f32 alphaMultiplier);
+    virtual void setAlphaOffset(i16 alphaOffset);
 };
 
 #endif
