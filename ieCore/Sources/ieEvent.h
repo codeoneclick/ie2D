@@ -11,6 +11,15 @@
 
 #include "ieObject.h"
 
+static const std::string kEVENT_ON_UPDATE = "EVENT_ON_UPDATE";
+static const std::string kEVENT_ON_DRAW = "EVENT_ON_DRAW";
+static const std::string kEVENT_ON_ENTER_FRAME = "EVENT_ON_ENTER_FRAME";
+static const std::string kEVENT_ON_EXIT_FRAME = "EVENT_ON_EXIT_FRAME";
+static const std::string kEVENT_ON_TRANSITION_REGISTER = "EVENT_ON_TRANSITION_REGISTER";
+static const std::string kEVENT_ON_TRANSITION_UNREGISTER = "EVENT_ON_TRANSITION_UNREGISTER";
+static const std::string kEVENT_ON_TRANSITION_ENTER = "EVENT_ON_TRANSITION_ENTER";
+static const std::string kEVENT_ON_TRANSITION_EXIT = "EVENT_ON_TRANSITION_EXIT";
+
 class ieIEventDispatcher;
 class ieEvent : public ieObject
 {
@@ -20,14 +29,18 @@ protected:
     
     std::string m_type;
     std::shared_ptr<ieIEventDispatcher> m_target;
+    bool m_bubbles;
     
 public:
     
-    ieEvent(const std::string& type, const std::shared_ptr<ieIEventDispatcher>& target);
-    ~ieEvent(void);
+    ieEvent(const std::string& type,
+            const std::shared_ptr<ieIEventDispatcher>& target,
+            bool bubbles = false);
+    virtual ~ieEvent(void);
     
     std::string getType(void) const;
     std::shared_ptr<ieIEventDispatcher> getTarget(void) const;
+    bool isBubbles(void);
 };
 
 #endif

@@ -24,12 +24,12 @@ ieEventDispatcher::~ieEventDispatcher(void)
 }
 
 void ieEventDispatcher::addEventListener(const std::string& type,
-                                         const ieEventDispatcherFunction& function)
+                                         const ieEventDispatcherFunctionShared& function)
 {
     auto iterator = m_functions.find(type);
     if(iterator == m_functions.end())
     {
-        std::set<ieEventDispatcherFunction> functions;
+        std::set<ieEventDispatcherFunctionShared> functions;
         functions.insert(function);
         m_functions.insert(std::make_pair(type, functions));
         return;
@@ -38,7 +38,7 @@ void ieEventDispatcher::addEventListener(const std::string& type,
 }
 
 void ieEventDispatcher::removeEventListener(const std::string& type,
-                                            const ieEventDispatcherFunction& function)
+                                            const ieEventDispatcherFunctionShared& function)
 {
     const auto& iterator = m_functions.find(type);
     if(iterator != m_functions.end())

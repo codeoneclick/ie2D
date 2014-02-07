@@ -7,3 +7,13 @@
 //
 
 #include "ieDisplayObjectContainer.h"
+
+ieDisplayObjectContainer::ieDisplayObjectContainer(void)
+{
+    
+}
+
+ieDisplayObjectContainer::~ieDisplayObjectContainer(void)
+{
+    
+}

@@ -12,6 +12,10 @@
 #include "ieCommon.h"
 
 class ieEvent;
+
+typedef std::function<void(const std::shared_ptr<ieEvent>&)> ieEventDispatcherFunction;
+typedef std::shared_ptr<ieEventDispatcherFunction> ieEventDispatcherFunctionShared;
+
 class ieIEventDispatcher
 {
 private:
@@ -21,13 +25,16 @@ protected:
 public:
     
     ieIEventDispatcher(void) = default;
-    ~ieIEventDispatcher(void) = default;
+    virtual ~ieIEventDispatcher(void) = default;
     
     virtual void addEventListener(const std::string& type,
-                                  const std::function<void(const std::shared_ptr<ieEvent>&)>& function) = 0;
+                                  const ieEventDispatcherFunctionShared& function) = 0;
+    
     virtual void removeEventListener(const std::string& type,
-                                     const std::function<void(const std::shared_ptr<ieEvent>&)>& function) = 0;
+                                     const ieEventDispatcherFunctionShared& function) = 0;
+    
     virtual bool hasEventListener(const std::string& _type) = 0;
+    
     virtual void dispatchEvent(const std::shared_ptr<ieEvent>& event) = 0;
 };
 

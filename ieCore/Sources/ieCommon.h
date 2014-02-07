@@ -53,4 +53,8 @@ typedef long long i64;
 typedef unsigned long long ui64;
 typedef float f32;
 
+
+#define MAX(a,b) (((a) > (b)) ? (a) : (b))
+#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+
 #endif

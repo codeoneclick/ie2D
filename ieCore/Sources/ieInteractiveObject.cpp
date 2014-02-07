@@ -7,3 +7,13 @@
 //
 
 #include "ieInteractiveObject.h"
+
+ieInteractiveObject::ieInteractiveObject(void)
+{
+    
+}
+
+ieInteractiveObject::~ieInteractiveObject(void)
+{
+    
+}

@@ -10,6 +10,7 @@
 #define __ieCore__ieIBitmapDrawable__
 
 #include "ieCommon.h"
+
 class ieBitmapData;
 class ieBitmapFilter;
 class ieColorTransformation;
@@ -22,11 +23,7 @@ protected:
 public:
     
     ieIBitmapDrawable(void) = default;
-    ~ieIBitmapDrawable(void) = default;
-    
-    virtual ui32 getWidth(void) = 0;
-    
-    virtual ui32 getHeight(void) = 0;
+    virtual ~ieIBitmapDrawable(void) = default;
     
     virtual void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                              const glm::ivec4& sourceRectangle,
@@ -44,7 +41,7 @@ public:
     
     virtual void copyPixels(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                             const glm::ivec4& sourceRectangle,
-                            const glm::ivec2& destinationPoint);
+                            const glm::ivec2& destinationPoint) = 0;
     
     virtual void copyPixelsToByteArray(const glm::ivec4& rectangle,
                                        const std::vector<ui32>& data) = 0;

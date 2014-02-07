@@ -9,6 +9,37 @@
 #ifndef __ieCore__ieStage__
 #define __ieCore__ieStage__
 
-#include <iostream>
+#include "ieDisplayObjectContainer.h"
 
-#endif /* defined(__ieCore__ieStage__) */
+class ieStage : public ieDisplayObjectContainer
+{
+private:
+    
+    ieEventDispatcherFunctionShared m_functionOnUpdate;
+    ieEventDispatcherFunctionShared m_functionOnDraw;
+    ieEventDispatcherFunctionShared m_functionOnEnterFrame;
+    ieEventDispatcherFunctionShared m_functionOnExitFrame;
+    
+protected:
+    
+    ui32 m_frameBuffer;
+    ui32 m_colorAttachment;
+    ui32 m_depthAttachment;
+    
+    virtual void onResize(const std::shared_ptr<ieEvent>& event);
+    
+    virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
+    virtual void onDraw(const std::shared_ptr<ieEvent>& event);
+    virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);
+    virtual void onExitFrame(const std::shared_ptr<ieEvent>& event);
+    
+    virtual void onAdded(const std::shared_ptr<ieEvent>& event);
+    virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
+    
+public:
+    
+    ieStage(void);
+    virtual ~ieStage(void);
+};
+
+#endif

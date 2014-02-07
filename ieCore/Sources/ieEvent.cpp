@@ -9,9 +9,12 @@
 #include "ieEvent.h"
 #include "ieIEventDispatcher.h"
 
-ieEvent::ieEvent(const std::string& _type, const std::shared_ptr<ieIEventDispatcher>& target):
+ieEvent::ieEvent(const std::string& _type,
+                 const std::shared_ptr<ieIEventDispatcher>& target,
+                 bool bubbles):
 m_type(_type),
-m_target(target)
+m_target(target),
+m_bubbles(bubbles)
 {
     m_description = "ieEvent";
 }
@@ -29,4 +32,9 @@ std::string ieEvent::getType(void) const
 std::shared_ptr<ieIEventDispatcher> ieEvent::getTarget(void) const
 {
     return m_target;
+}
+
+bool ieEvent::isBubbles(void)
+{
+    return m_bubbles;
 }

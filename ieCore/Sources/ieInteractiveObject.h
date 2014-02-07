@@ -9,6 +9,18 @@
 #ifndef __ieCore__ieInteractiveObject__
 #define __ieCore__ieInteractiveObject__
 
-#include <iostream>
+#include "ieDisplayObject.h"
 
-#endif /* defined(__ieCore__ieInteractiveObject__) */
+class ieInteractiveObject : public ieDisplayObject
+{
+private:
+    
+protected:
+    
+public:
+    
+    ieInteractiveObject(void);
+    ~ieInteractiveObject(void);
+};
+
+#endif

@@ -214,6 +214,7 @@ void IGameObject::_OnSceneUpdate(f32 _deltatime)
     m_matrixRotation = glm::rotate(glm::mat4(1.0f), m_rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
     m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
     m_matrixRotation = glm::rotate(m_matrixRotation, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+    
     m_matrixTranslation = glm::translate(glm::mat4(1.0f), m_position);
     m_matrixScale = glm::scale(glm::mat4(1.0f), m_scale);
     m_matrixWorld = m_matrixTranslation * m_matrixRotation * m_matrixScale;

@@ -49,3 +49,23 @@ std::shared_ptr<ieObject> ieObject::getObjectWithKey(const std::string& key)
     auto iterator = m_objects.find(key);
     return iterator != m_objects.end() ? iterator->second : nullptr;
 }
+
+void ieObject::addValueWithKey(const ieValue& value, const std::string& key)
+{
+    
+}
+
+void ieObject::removeValueWithKey(const std::string& key)
+{
+    
+}
+
+void ieObject::setValueWithKey(const ieValue& value, const std::string& key)
+{
+    
+}
+
+ieValue ieObject::getValueWithKey(const std::string& key)
+{
+    
+}

@@ -174,6 +174,20 @@
 		21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D8189FDAFA003CB322 /* ieEvent.cpp */; };
 		21EBB4E5189FEED3003CB322 /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4BA189FD6B4003CB322 /* ieObject.cpp */; };
 		21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4E6189FFA91003CB322 /* ieStage.cpp */; };
+		21EBB4FA18A23C9A003CB322 /* ieShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4F818A23C9A003CB322 /* ieShape.cpp */; };
+		21EBB4FD18A23CC4003CB322 /* ieVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */; };
+		21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */; };
+		21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */; };
+		21EBB51218A26921003CB322 /* ieIGameWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */; };
+		21EBB51518A26937003CB322 /* ieIGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51318A26937003CB322 /* ieIGameTransition.cpp */; };
+		21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51718A2716F003CB322 /* ieResource.cpp */; };
+		21EBB51C18A2719E003CB322 /* ieResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51A18A2719E003CB322 /* ieResourceAccessor.cpp */; };
+		21EBB51F18A271C6003CB322 /* ieImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51D18A271C6003CB322 /* ieImage.cpp */; };
+		21EBB52218A271DF003CB322 /* ieSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52018A271DF003CB322 /* ieSequence.cpp */; };
+		21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */; };
+		21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52618A2863B003CB322 /* ieOGLWindow_ios.cpp */; };
+		21EBB52B18A299A5003CB322 /* ieIGameLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52918A299A5003CB322 /* ieIGameLoop.cpp */; };
+		21EBB52E18A29ABB003CB322 /* ieGameLoop_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52C18A29ABB003CB322 /* ieGameLoop_ios.cpp */; };
 		21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */; };
 		21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971518A0265200A65E68 /* ieColorTransformation.cpp */; };
 		21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971818A0279800A65E68 /* ieColor.cpp */; };
@@ -304,6 +318,33 @@
 		21EBB4D9189FDAFA003CB322 /* ieEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieEvent.h; path = Sources/ieEvent.h; sourceTree = "<group>"; };
 		21EBB4E6189FFA91003CB322 /* ieStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieStage.cpp; path = Sources/ieStage.cpp; sourceTree = "<group>"; };
 		21EBB4E7189FFA91003CB322 /* ieStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieStage.h; path = Sources/ieStage.h; sourceTree = "<group>"; };
+		21EBB4F818A23C9A003CB322 /* ieShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieShape.cpp; path = Sources/ieShape.cpp; sourceTree = "<group>"; };
+		21EBB4F918A23C9A003CB322 /* ieShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieShape.h; path = Sources/ieShape.h; sourceTree = "<group>"; };
+		21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieVertexBuffer.cpp; path = Sources/ieVertexBuffer.cpp; sourceTree = "<group>"; };
+		21EBB4FC18A23CC4003CB322 /* ieVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieVertexBuffer.h; path = Sources/ieVertexBuffer.h; sourceTree = "<group>"; };
+		21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIndexBuffer.cpp; path = Sources/ieIndexBuffer.cpp; sourceTree = "<group>"; };
+		21EBB4FF18A23CD2003CB322 /* ieIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIndexBuffer.h; path = Sources/ieIndexBuffer.h; sourceTree = "<group>"; };
+		21EBB50118A2487E003CB322 /* ieEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieEnums.h; path = Sources/ieEnums.h; sourceTree = "<group>"; };
+		21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGraphicsContext.cpp; path = Sources/ieIGraphicsContext.cpp; sourceTree = "<group>"; };
+		21EBB50718A26616003CB322 /* ieIGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGraphicsContext.h; path = Sources/ieIGraphicsContext.h; sourceTree = "<group>"; };
+		21EBB50D18A2679F003CB322 /* ieIOGLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIOGLWindow.h; path = Sources/ieIOGLWindow.h; sourceTree = "<group>"; };
+		21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGameWorkflow.cpp; path = Sources/ieIGameWorkflow.cpp; sourceTree = "<group>"; };
+		21EBB51118A26921003CB322 /* ieIGameWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGameWorkflow.h; path = Sources/ieIGameWorkflow.h; sourceTree = "<group>"; };
+		21EBB51318A26937003CB322 /* ieIGameTransition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGameTransition.cpp; path = Sources/ieIGameTransition.cpp; sourceTree = "<group>"; };
+		21EBB51418A26937003CB322 /* ieIGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGameTransition.h; path = Sources/ieIGameTransition.h; sourceTree = "<group>"; };
+		21EBB51718A2716F003CB322 /* ieResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieResource.cpp; path = Sources/ieResource.cpp; sourceTree = "<group>"; };
+		21EBB51818A2716F003CB322 /* ieResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieResource.h; path = Sources/ieResource.h; sourceTree = "<group>"; };
+		21EBB51A18A2719E003CB322 /* ieResourceAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieResourceAccessor.cpp; path = Sources/ieResourceAccessor.cpp; sourceTree = "<group>"; };
+		21EBB51B18A2719E003CB322 /* ieResourceAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieResourceAccessor.h; path = Sources/ieResourceAccessor.h; sourceTree = "<group>"; };
+		21EBB51D18A271C6003CB322 /* ieImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieImage.cpp; path = Sources/ieImage.cpp; sourceTree = "<group>"; };
+		21EBB51E18A271C6003CB322 /* ieImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieImage.h; path = Sources/ieImage.h; sourceTree = "<group>"; };
+		21EBB52018A271DF003CB322 /* ieSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieSequence.cpp; path = Sources/ieSequence.cpp; sourceTree = "<group>"; };
+		21EBB52118A271DF003CB322 /* ieSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieSequence.h; path = Sources/ieSequence.h; sourceTree = "<group>"; };
+		21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieGraphicsContext_ios.cpp; path = Sources/ieGraphicsContext_ios.cpp; sourceTree = "<group>"; };
+		21EBB52618A2863B003CB322 /* ieOGLWindow_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieOGLWindow_ios.cpp; path = Sources/ieOGLWindow_ios.cpp; sourceTree = "<group>"; };
+		21EBB52918A299A5003CB322 /* ieIGameLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGameLoop.cpp; path = Sources/ieIGameLoop.cpp; sourceTree = "<group>"; };
+		21EBB52A18A299A5003CB322 /* ieIGameLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGameLoop.h; path = Sources/ieIGameLoop.h; sourceTree = "<group>"; };
+		21EBB52C18A29ABB003CB322 /* ieGameLoop_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieGameLoop_ios.cpp; path = Sources/ieGameLoop_ios.cpp; sourceTree = "<group>"; };
 		21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBitmapFilter.cpp; path = Sources/ieBitmapFilter.cpp; sourceTree = "<group>"; };
 		21EE971318A023F800A65E68 /* ieBitmapFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBitmapFilter.h; path = Sources/ieBitmapFilter.h; sourceTree = "<group>"; };
 		21EE971518A0265200A65E68 /* ieColorTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieColorTransformation.cpp; path = Sources/ieColorTransformation.cpp; sourceTree = "<group>"; };
@@ -929,6 +970,10 @@
 				21EE971518A0265200A65E68 /* ieColorTransformation.cpp */,
 				21EE971918A0279800A65E68 /* ieColor.h */,
 				21EE971818A0279800A65E68 /* ieColor.cpp */,
+				21EBB4FC18A23CC4003CB322 /* ieVertexBuffer.h */,
+				21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */,
+				21EBB4FF18A23CD2003CB322 /* ieIndexBuffer.h */,
+				21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */,
 			);
 			name = ieCore;
 			sourceTree = "<group>";
@@ -965,6 +1010,13 @@
 				21EBB4D5189FDA6E003CB322 /* ieMovieClip.cpp */,
 				21EBB4E7189FFA91003CB322 /* ieStage.h */,
 				21EBB4E6189FFA91003CB322 /* ieStage.cpp */,
+				21EBB4F918A23C9A003CB322 /* ieShape.h */,
+				21EBB4F818A23C9A003CB322 /* ieShape.cpp */,
+				21EBB50D18A2679F003CB322 /* ieIOGLWindow.h */,
+				21EBB52618A2863B003CB322 /* ieOGLWindow_ios.cpp */,
+				21EBB50718A26616003CB322 /* ieIGraphicsContext.h */,
+				21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */,
+				21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */,
 			);
 			name = ieDisplay;
 			sourceTree = "<group>";
@@ -973,6 +1025,7 @@
 			isa = PBXGroup;
 			children = (
 				21EBB4B9189FD683003CB322 /* ieCommon.h */,
+				21EBB50118A2487E003CB322 /* ieEnums.h */,
 			);
 			name = ieCommon;
 			sourceTree = "<group>";
@@ -982,6 +1035,35 @@
 			children = (
 			);
 			name = ieShaders;
+			sourceTree = "<group>";
+		};
+		21EBB50F18A267BD003CB322 /* ieTransition */ = {
+			isa = PBXGroup;
+			children = (
+				21EBB51118A26921003CB322 /* ieIGameWorkflow.h */,
+				21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */,
+				21EBB51418A26937003CB322 /* ieIGameTransition.h */,
+				21EBB51318A26937003CB322 /* ieIGameTransition.cpp */,
+				21EBB52A18A299A5003CB322 /* ieIGameLoop.h */,
+				21EBB52918A299A5003CB322 /* ieIGameLoop.cpp */,
+				21EBB52C18A29ABB003CB322 /* ieGameLoop_ios.cpp */,
+			);
+			name = ieTransition;
+			sourceTree = "<group>";
+		};
+		21EBB51618A26FC7003CB322 /* ieResources */ = {
+			isa = PBXGroup;
+			children = (
+				21EBB51818A2716F003CB322 /* ieResource.h */,
+				21EBB51718A2716F003CB322 /* ieResource.cpp */,
+				21EBB51E18A271C6003CB322 /* ieImage.h */,
+				21EBB51D18A271C6003CB322 /* ieImage.cpp */,
+				21EBB52118A271DF003CB322 /* ieSequence.h */,
+				21EBB52018A271DF003CB322 /* ieSequence.cpp */,
+				21EBB51B18A2719E003CB322 /* ieResourceAccessor.h */,
+				21EBB51A18A2719E003CB322 /* ieResourceAccessor.cpp */,
+			);
+			name = ieResources;
 			sourceTree = "<group>";
 		};
 		21EE971118A023C700A65E68 /* ieFilters */ = {
@@ -1173,6 +1255,8 @@
 		A420817C1733AA6F0004729E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				21EBB51618A26FC7003CB322 /* ieResources */,
+				21EBB50F18A267BD003CB322 /* ieTransition */,
 				21EBB4F718A14647003CB322 /* ieShaders */,
 				21EE971118A023C700A65E68 /* ieFilters */,
 				21EBB4B8189FD663003CB322 /* ieCommon */,
@@ -2032,17 +2116,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21EBB51518A26937003CB322 /* ieIGameTransition.cpp in Sources */,
 				21EBB4DB189FEED3003CB322 /* ieIBitmapDrawable.cpp in Sources */,
+				21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */,
 				21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */,
+				21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */,
 				21EBB4DD189FEED3003CB322 /* ieDisplayObject.cpp in Sources */,
+				21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */,
+				21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */,
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
+				21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
+				21EBB52E18A29ABB003CB322 /* ieGameLoop_ios.cpp in Sources */,
 				21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */,
 				21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */,
+				21EBB4FD18A23CC4003CB322 /* ieVertexBuffer.cpp in Sources */,
 				21EBB4E1189FEED3003CB322 /* ieMovieClip.cpp in Sources */,
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
+				21EBB52B18A299A5003CB322 /* ieIGameLoop.cpp in Sources */,
+				21EBB52218A271DF003CB322 /* ieSequence.cpp in Sources */,
+				21EBB51C18A2719E003CB322 /* ieResourceAccessor.cpp in Sources */,
 				21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */,
+				21EBB51F18A271C6003CB322 /* ieImage.cpp in Sources */,
+				21EBB4FA18A23C9A003CB322 /* ieShape.cpp in Sources */,
+				21EBB51218A26921003CB322 /* ieIGameWorkflow.cpp in Sources */,
 				21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */,
 				21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */,
 				21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */,
@@ -2164,7 +2262,7 @@
 		21D07148181DA5630019D264 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2211,7 +2309,7 @@
 		21D07149181DA5630019D264 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;

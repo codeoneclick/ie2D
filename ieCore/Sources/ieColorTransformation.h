@@ -37,7 +37,7 @@ public:
                           f32 alphaMultiplier = 1.0f,
                           i16 alphaOffset = 0);
     
-    ~ieColorTransformation(void);
+    virtual ~ieColorTransformation(void);
     
     f32 getRedMultiplier(void);
     i16 getRedOffset(void);
