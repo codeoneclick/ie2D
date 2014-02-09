@@ -52,20 +52,27 @@ std::shared_ptr<ieObject> ieObject::getObjectWithKey(const std::string& key)
 
 void ieObject::addValueWithKey(const ieValue& value, const std::string& key)
 {
-    
+    const auto& iterator = m_values.find(key);
+    assert(iterator == m_values.end());
+    m_values.insert(std::make_pair(key, value));
 }
 
 void ieObject::removeValueWithKey(const std::string& key)
 {
-    
+    const auto& iterator = m_values.find(key);
+    assert(iterator != m_values.end());
+    m_values.erase(iterator);
 }
 
 void ieObject::setValueWithKey(const ieValue& value, const std::string& key)
 {
-    
+    const auto& iterator = m_values.find(key);
+    assert(iterator != m_values.end());
+    iterator->second = value;
 }
 
 ieValue ieObject::getValueWithKey(const std::string& key)
 {
-    
+    auto iterator = m_values.find(key);
+    return iterator != m_values.end() ? iterator->second : nullptr;
 }

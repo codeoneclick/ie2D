@@ -19,12 +19,6 @@ ieStage::~ieStage(void)
     
 }
 
-void ieStage::createRenderSurface(ui32 width, ui32 height)
-{
-
-
-}
-
 void ieStage::onResize(const std::shared_ptr<ieEvent>& event)
 {
     
@@ -58,8 +52,10 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+                 event->getValueWithKey("width").getValue<ui32>(),
+                 event->getValueWithKey("height").getValue<ui32>(),
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
     glGenTextures(1, &m_depthAttachment);
     glBindTexture(GL_TEXTURE_2D, m_depthAttachment);
@@ -69,17 +65,21 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
 #if defined(__NDK__)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width,
-                 height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                 event->getValueWithKey("width").getValue<ui32>(),
+                 event->getValueWithKey("height").getValue<ui32>(),
+                 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 #else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width,
-                 height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                 event->getValueWithKey("width").getValue<ui32>(),
+                 event->getValueWithKey("height").getValue<ui32>(),
+                 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 #endif
     
     glGenFramebuffers(1, &m_frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_frameBuffer, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_frameBuffer, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorAttachment, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthAttachment, 0);
     
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }

@@ -12,6 +12,16 @@
 #include "ieCommon.h"
 #include "ieEnums.h"
 
+template<typename T> struct type_name { static E_VALUE_TYPE name() { assert(false); } };
+template<> struct type_name<bool> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_BOOL;} };
+template<> struct type_name<i8> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_I8;} };
+template<> struct type_name<ui8> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_UI8;} };
+template<> struct type_name<i16> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_I16;} };
+template<> struct type_name<ui16> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_UI16;} };
+template<> struct type_name<i32> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_I32;} };
+template<> struct type_name<ui32> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_UI32;} };
+template<> struct type_name<f32> { static E_VALUE_TYPE name() {return E_VALUE_TYPE_F32;} };
+
 class ieValue
 {
 private:
@@ -19,41 +29,94 @@ private:
 protected:
     
     E_VALUE_TYPE m_type;
-    union
-    {
-        bool        m_BOOL;
-        i8          m_I8;
-        ui8         m_UI8;
-        i16         m_I16;
-        ui16        m_UI16;
-        i32         m_I32;
-        ui32        m_UI32;
-        f32         m_F32;
-    } m_data;
-    std::string m_STRING;
+    std::tuple<bool, i8, ui8, i16, ui16, i32, ui32, f32> m_value;
     
 public:
     
-    ieValue(bool value) { m_data.m_BOOL = value; m_type = E_VALUE_TYPE_BOOL; };
-    ieValue(i8 value) { m_data.m_I8 = value; m_type = E_VALUE_TYPE_I8; };
-    ieValue(ui8 value) { m_data.m_UI8 = value; m_type = E_VALUE_TYPE_UI8; };
-    ieValue(i16 value) { m_data.m_I16 = value; m_type = E_VALUE_TYPE_I16; };
-    ieValue(ui16 value) { m_data.m_UI16 = value; m_type = E_VALUE_TYPE_UI16; };
-    ieValue(i32 value) { m_data.m_I32 = value; m_type = E_VALUE_TYPE_I32; };
-    ieValue(ui32 value) { m_data.m_UI32 = value; m_type = E_VALUE_TYPE_UI32; };
-    ieValue(f32 value) { m_data.m_F32 = value; m_type = E_VALUE_TYPE_F32; };
-    ieValue(const char* value) { m_STRING = value; m_type = E_VALUE_TYPE_STRING; };
+    ieValue(bool value)
+    {
+        m_type = type_name<bool>::name();
+        m_value = std::make_tuple(value, 0, 0, 0, 0, 0, 0, 0);
+    };
     
-    E_VALUE_TYPE getType(void);
-    bool getBool(void);
-    i8 getI8(void);
-    ui8 getUI8(void);
-    i16 getI16(void);
-    ui16 getUI16(void);
-    i32 getI32(void);
-    ui32 getUI32(void);
-    f32 getF32(void);
-    std::string getString(void);
+    ieValue(i8 value)
+    {
+        m_type = type_name<i8>::name();
+        m_value = std::make_tuple(false, value, 0, 0, 0, 0, 0, 0);
+    };
+    
+    ieValue(ui8 value)
+    {
+        m_type = type_name<ui8>::name();
+        m_value = std::make_tuple(false, 0, value, 0, 0, 0, 0, 0);
+    };
+    
+    ieValue(i16 value)
+    {
+        m_type = type_name<i16>::name();
+        m_value = std::make_tuple(false, 0, 0, value, 0, 0, 0, 0);
+    };
+    
+    ieValue(ui16 value)
+    {
+        m_type = type_name<ui16>::name();
+        m_value = std::make_tuple(false, 0, 0, 0, value, 0, 0, 0);
+    };
+    
+    ieValue(i32 value)
+    {
+        m_type = type_name<i32>::name();
+        m_value = std::make_tuple(false, 0, 0, 0, 0, value, 0, 0);
+    };
+    
+    ieValue(ui32 value)
+    {
+        m_type = type_name<ui32>::name();
+        m_value = std::make_tuple(false, 0, 0, 0, 0, 0, value, 0);
+    };
+    
+    ieValue(f32 value)
+    {
+        m_type = type_name<f32>::name();
+        m_value = std::make_tuple(false, 0, 0, 0, 0, 0, 0, value);
+    };
+
+    template<class T_GET_VALUE>
+    T_GET_VALUE getValue(void)
+    {
+        assert(type_name<T_GET_VALUE>::name() == m_type);
+        switch (m_type) {
+            case E_VALUE_TYPE_BOOL:
+                return std::get<0>(m_value);
+                break;
+            case E_VALUE_TYPE_I8:
+                return std::get<1>(m_value);
+                break;
+            case E_VALUE_TYPE_UI8:
+                return std::get<2>(m_value);
+                break;
+            case E_VALUE_TYPE_I16:
+                return std::get<3>(m_value);
+                break;
+            case E_VALUE_TYPE_UI16:
+                return std::get<4>(m_value);
+                break;
+            case E_VALUE_TYPE_I32:
+                return std::get<5>(m_value);
+                break;
+            case E_VALUE_TYPE_UI32:
+                return std::get<6>(m_value);
+                break;
+            case E_VALUE_TYPE_F32:
+                return std::get<7>(m_value);
+                break;
+            
+            default:
+                assert(false);
+                break;
+        }
+        return 0;
+    };
 };
 
 

@@ -67,32 +67,18 @@ std::shared_ptr<ieIGraphicsContext> ieIGraphicsContext::createGraphicsContext(co
     return context;
 }
 
-const ui32 ieIGraphicsContext::getScreenFrameBuffer(void) const
+const ui32 ieIGraphicsContext::getFrameBuffer(void) const
 {
-    return m_screenFrameBuffer;
+    return m_frameBuffer;
 }
 
-const ui32 ieIGraphicsContext::getScreenRenderBuffer(void) const
+const ui32 ieIGraphicsContext::getRenderBuffer(void) const
 {
-    return m_screenRenderBuffer;
+    return m_renderBuffer;
 }
 
-const ui32 ieIGraphicsContext::getScreenDepthBuffer(void) const
+const ui32 ieIGraphicsContext::getDepthBuffer(void) const
 {
     return m_depthBuffer;
 }
 
-const ui32 ieIGraphicsContext::getWorldFrameBuffer(void) const
-{
-    return m_worldFrameBuffer;
-}
-
-const ui32 ieIGraphicsContext::getWorldColorAttachment(void) const
-{
-    return m_worldColorAttachment;
-}
-
-const ui32 ieIGraphicsContext::getWorldDepthAttachment(void) const
-{
-    return m_worldDepthAttachment;
-}

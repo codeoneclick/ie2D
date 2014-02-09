@@ -19,13 +19,9 @@ private:
     
 protected:
     
-    ui32 m_screenFrameBuffer;
-    ui32 m_screenRenderBuffer;
-	ui32 m_screenDepthBuffer;
-    
-    ui32 m_worldFrameBuffer;
-    ui32 m_worldColorAttachment;
-    ui32 m_worldDepthAttachment;
+    ui32 m_frameBuffer;
+    ui32 m_renderBuffer;
+	ui32 m_depthBuffer;
     
     std::shared_ptr<ieIOGLWindow> m_window;
     
@@ -38,13 +34,9 @@ public:
     static std::shared_ptr<ieIGraphicsContext> createGraphicsContext(const std::shared_ptr<ieIOGLWindow>& window,
                                                                      E_PLATFORM_API api);
     
-    const ui32 getScreenFrameBuffer(void) const;
-    const ui32 getScreenRenderBuffer(void) const;
-    const ui32 getScreenDepthBuffer(void) const;
-    
-    const ui32 getWorldFrameBuffer(void) const;
-    const ui32 getWorldColorAttachment(void) const;
-    const ui32 getWorldDepthAttachment(void) const;
+    const ui32 getFrameBuffer(void) const;
+    const ui32 getRenderBuffer(void) const;
+    const ui32 getDepthBuffer(void) const;
     
     virtual void draw(void) const = 0;
 };

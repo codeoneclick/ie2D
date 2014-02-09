@@ -12,7 +12,27 @@
 
 ieShape::ieShape(void)
 {
+    m_vertexBuffer = std::make_shared<ieVertexBuffer>(4, GL_STATIC_DRAW);
+    ieVertex* vertexData = m_vertexBuffer->lock();
+    vertexData[0].m_position = glm::vec3(-1.0f, -1.0f, 0.0f);
+    vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 0.0f));
+    vertexData[1].m_position = glm::vec3(-1.0f, 1.0f, 0.0f);
+    vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f));
+    vertexData[2].m_position = glm::vec3(1.0f, -1.0f, 0.0f);
+    vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 0.0f));
+    vertexData[3].m_position = glm::vec3(1.0f, 1.0f, 0.0f);
+    vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 1.0f));
+    m_vertexBuffer->unlock();
     
+    m_indexBuffer = std::make_shared<ieIndexBuffer>(6, GL_STATIC_DRAW);
+    ui16* indexData = m_indexBuffer->lock();
+    indexData[0] = 0;
+    indexData[1] = 1;
+    indexData[2] = 2;
+    indexData[3] = 1;
+    indexData[4] = 2;
+    indexData[5] = 3;
+    m_indexBuffer->unlock();
 }
 
 ieShape::~ieShape(void)

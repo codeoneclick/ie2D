@@ -49,13 +49,13 @@ ieGraphicsContext_ios::ieGraphicsContext_ios(const std::shared_ptr<ieIOGLWindow>
     ui8 result = [EAGLContext setCurrentContext:m_context];
     assert(result == true);
     
-    glGenRenderbuffers(1, &m_screenRenderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_screenRenderBuffer);
+    glGenRenderbuffers(1, &m_renderBuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, m_renderBuffer);
     [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:static_cast<CAEAGLLayer*>(hwnd.layer)];
     
-    glGenFramebuffers(1, &m_screenFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_screenFrameBuffer);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_screenRenderBuffer);
+    glGenFramebuffers(1, &m_frameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_renderBuffer);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 
