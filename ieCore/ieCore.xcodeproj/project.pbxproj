@@ -158,6 +158,8 @@
 		2159BA391887444200BA098A /* CResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46A331A174E4C700044643E /* CResourceAccessor.cpp */; };
 		2159BA3A1887444200BA098A /* IResourceLoadingHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 211D30E117C2A61A0038B703 /* IResourceLoadingHandler.cpp */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
+		21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343D718A8D59B0041EF47 /* ieShader.cpp */; };
+		21C343DC18A8D5AF0041EF47 /* ieMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */; };
 		21D0712B181DA5620019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42081601733A9370004729E /* Foundation.framework */; };
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
@@ -288,6 +290,10 @@
 		21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInputContext_osx.cpp; path = Sources/CInputContext_osx.cpp; sourceTree = "<group>"; };
 		21BE113C1896BCC900040804 /* CFileStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileStream.cpp; path = Sources/CFileStream.cpp; sourceTree = "<group>"; };
 		21BE113D1896BCC900040804 /* CFileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFileStream.h; path = Sources/CFileStream.h; sourceTree = "<group>"; };
+		21C343D718A8D59B0041EF47 /* ieShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieShader.cpp; path = Sources/ieShader.cpp; sourceTree = "<group>"; };
+		21C343D818A8D59B0041EF47 /* ieShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieShader.h; path = Sources/ieShader.h; sourceTree = "<group>"; };
+		21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieMaterial.cpp; path = Sources/ieMaterial.cpp; sourceTree = "<group>"; };
+		21C343DB18A8D5AF0041EF47 /* ieMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMaterial.h; path = Sources/ieMaterial.h; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libieCore-ios_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieCore-ios_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21E4D58818658466006F84D6 /* CTemplateCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTemplateCommon.cpp; path = Sources/CTemplateCommon.cpp; sourceTree = "<group>"; };
 		21E4D58918658466006F84D6 /* CTemplateCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTemplateCommon.h; path = Sources/CTemplateCommon.h; sourceTree = "<group>"; };
@@ -1033,6 +1039,10 @@
 		21EBB4F718A14647003CB322 /* ieShaders */ = {
 			isa = PBXGroup;
 			children = (
+				21C343D818A8D59B0041EF47 /* ieShader.h */,
+				21C343D718A8D59B0041EF47 /* ieShader.cpp */,
+				21C343DB18A8D5AF0041EF47 /* ieMaterial.h */,
+				21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */,
 			);
 			name = ieShaders;
 			sourceTree = "<group>";
@@ -2120,9 +2130,11 @@
 				21EBB4DB189FEED3003CB322 /* ieIBitmapDrawable.cpp in Sources */,
 				21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */,
 				21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */,
+				21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */,
 				21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */,
 				21EBB4DD189FEED3003CB322 /* ieDisplayObject.cpp in Sources */,
 				21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */,
+				21C343DC18A8D5AF0041EF47 /* ieMaterial.cpp in Sources */,
 				21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */,
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
