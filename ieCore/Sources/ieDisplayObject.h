@@ -12,6 +12,11 @@
 #include "ieIBitmapDrawable.h"
 #include "ieEventDispatcher.h"
 
+class ieBitmapData;
+class ieShape;
+class ieMaterial;
+class ieShader;
+
 class ieDisplayObject :
 public ieIBitmapDrawable,
 public ieEventDispatcher

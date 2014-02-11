@@ -29,6 +29,9 @@ protected:
     std::string m_fsSourceCode;
     ui32 m_shader;
     
+    ui32 link(ui32 vertexShader, ui32 fragmentShader);
+    ui32 compile(const std::string &sourceCode,  GLenum shader);
+    
 public:
     
     ieShader(const std::string& vsSourceCode,

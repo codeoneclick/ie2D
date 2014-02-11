@@ -9,6 +9,52 @@
 #ifndef __ieCore__ieMaterial__
 #define __ieCore__ieMaterial__
 
-#include <iostream>
+#include "ieCommon.h"
+#include "ieEnums.h"
 
-#endif /* defined(__ieCore__ieMaterial__) */
+class ieShader;
+class ieMaterialCachedParameters;
+
+class ieMaterial
+{
+private:
+    
+protected:
+    
+    std::shared_ptr<ieMaterialCachedParameters> m_parameters;
+    static std::shared_ptr<ieMaterialCachedParameters> m_cachedParameters;
+    static std::shared_ptr<ieMaterialCachedParameters> getCachedParameters(void);
+    
+public:
+    
+    ieMaterial(void);
+    ~ieMaterial(void);
+    
+    bool isCulling(void) const;
+    GLenum getCullingMode(void) const;
+    
+    bool isBlending(void) const;
+    GLenum getBlendingFunctionSource(void) const;
+    GLenum getBlendingFunctionDestination(void) const;
+    
+    bool isDepthTest(void) const;
+    bool isDepthMask(void) const;
+    
+    void setCulling(bool value);
+    void setCullingMode(GLenum value);
+    
+    void setBlending(bool value);
+    void setBlendingFunctionSource(GLenum value);
+    void setBlendingFunctionDestination(GLenum value);
+    
+    void setDepthTest(bool value);
+    void setDepthMask(bool value);
+    
+    void setShader(const std::shared_ptr<ieShader>& shader);
+    void setTexture(ui32 texture,
+                    E_SHADER_SAMPLER sampler);
+    void bind(void);
+    void unbind(void);
+};
+
+#endif
