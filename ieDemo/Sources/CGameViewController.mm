@@ -13,6 +13,7 @@
 #include "ieDisplayObject.h"
 #include "ieDisplayObjectContainer.h"
 #include "ieStage.h"
+#include <png.h>
 
 @interface CGameViewController ()
 
@@ -33,6 +34,39 @@
     std::shared_ptr<ieIGameTransition> transition = std::make_shared<ieIGameTransition>("demo", window);
     workflow->registerTransition(transition);
     workflow->goToTransition("demo");
+    
+    std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
+    path.append("/");
+    path.append("_e01_move_18.png");
+    
+    png_byte *header = new png_byte[8];
+    FILE *fp = fopen(path.c_str(), "rb");
+    if (!fp)
+    {
+        assert(false);
+    }
+    
+    fread(header, 1, 8, fp);
+    bool is_png = !png_sig_cmp(header, 0, 8);
+    
+    if (!is_png)
+    {
+        assert(false);
+    }
+    
+    png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, (png_voidp)0, 0, 0);
+    
+    if (!png_ptr)
+        assert(false);
+    
+    png_infop info_ptr = png_create_info_struct(png_ptr);
+    
+    if (!info_ptr)
+    {
+        png_destroy_read_struct(&png_ptr,
+                                (png_infopp)NULL, (png_infopp)NULL);
+        assert(false);
+    }
 }
 
 - (void)didReceiveMemoryWarning

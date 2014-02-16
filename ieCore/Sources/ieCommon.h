@@ -28,6 +28,8 @@
 #include <assert.h>
 #include <functional>
 
+#define GLM_FORCE_RADIANS
+
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>

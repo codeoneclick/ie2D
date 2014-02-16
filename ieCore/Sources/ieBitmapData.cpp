@@ -49,7 +49,6 @@ m_transparent(transparent)
 ieBitmapData::~ieBitmapData(void)
 {
     glDeleteTextures(1, &m_oglTextureId);
-    
 }
 
 void ieBitmapData::applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
