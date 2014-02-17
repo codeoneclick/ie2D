@@ -11,15 +11,16 @@
 
 #include "ieIBitmapDrawable.h"
 #include "ieEventDispatcher.h"
+#include "ieMaterial.h"
 
 class ieBitmapData;
 class ieShape;
-class ieMaterial;
 class ieShader;
 
 class ieDisplayObject :
 public ieIBitmapDrawable,
-public ieEventDispatcher
+public ieEventDispatcher,
+public ieMaterial
 {
 private:
     
@@ -34,6 +35,7 @@ private:
 protected:
     
     std::shared_ptr<ieShape> m_shape;
+    std::shared_ptr<ieShader> m_shader;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);

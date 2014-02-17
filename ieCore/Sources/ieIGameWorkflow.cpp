@@ -46,6 +46,7 @@ void ieIGameWorkflow::unregisterTransition(const std::shared_ptr<ieIGameTransiti
 
 void ieIGameWorkflow::goToTransition(const std::string& name)
 {
+    std::cout<<"ieIGameWorkflow::goToTransition"<<std::endl;
     assert(m_transitions.find(name) != m_transitions.end());
     if(m_currentTransition != nullptr)
     {

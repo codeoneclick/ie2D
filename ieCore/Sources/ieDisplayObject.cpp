@@ -9,8 +9,11 @@
 #include "ieDisplayObject.h"
 #include "ieEvent.h"
 #include "ieShape.h"
+#include "ieShader.h"
 
-ieDisplayObject::ieDisplayObject(void)
+ieDisplayObject::ieDisplayObject(void) :
+m_shape(nullptr),
+m_shader(nullptr)
 {
     m_description = "ieDisplayObject";
     
@@ -44,22 +47,35 @@ void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieMaterial::bind();
 }
 
 void ieDisplayObject::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieMaterial::unbind();
 }
 
 void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
 {
+    ieDisplayObject::addEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
+    ieDisplayObject::addEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
+    ieDisplayObject::addEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
+    ieDisplayObject::addEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
     
+    m_shader = std::make_shared<ieShader>(shaderCommonVertex,
+                                          shaderCommonFragment);
+    ieMaterial::setShader(m_shader);
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
+    ieDisplayObject::removeEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
+    ieDisplayObject::removeEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
+    ieDisplayObject::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
+    ieDisplayObject::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
     
+    m_shader = nullptr;
+    ieMaterial::setShader(nullptr);
 }
 
 void ieDisplayObject::applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,

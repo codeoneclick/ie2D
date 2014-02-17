@@ -12,6 +12,10 @@
 #include "ieCommon.h"
 #include "ieEnums.h"
 
+#define STRING_SHADER(SHADER)  #SHADER
+
+#include "ieShaderCommon.h"
+
 class ieShaderUniform;
 
 class ieShader

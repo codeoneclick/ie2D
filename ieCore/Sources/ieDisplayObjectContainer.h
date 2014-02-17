@@ -15,14 +15,6 @@ class ieDisplayObjectContainer : public ieInteractiveObject
 {
 private:
     
-    ieEventDispatcherFunctionShared m_functionOnUpdate;
-    ieEventDispatcherFunctionShared m_functionOnDraw;
-    ieEventDispatcherFunctionShared m_functionOnEnterFrame;
-    ieEventDispatcherFunctionShared m_functionOnExitFrame;
-    
-    ieEventDispatcherFunctionShared m_functionOnAdded;
-    ieEventDispatcherFunctionShared m_functionOnRemoved;
-    
 protected:
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);

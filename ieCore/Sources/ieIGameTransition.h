@@ -24,11 +24,6 @@ private:
     ieEventDispatcherFunctionShared m_functionOnTransitionEnter;
     ieEventDispatcherFunctionShared m_functionOnTransitionExit;
     
-    ieEventDispatcherFunctionShared m_functionOnUpdate;
-    ieEventDispatcherFunctionShared m_functionOnDraw;
-    ieEventDispatcherFunctionShared m_functionOnEnterFrame;
-    ieEventDispatcherFunctionShared m_functionOnExitFrame;
-    
 protected:
     
     std::string m_name;

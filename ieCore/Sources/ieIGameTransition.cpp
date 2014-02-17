@@ -30,11 +30,6 @@ m_name(name)
     m_functionOnTransitionEnter = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onEnter, this, std::placeholders::_1));
     m_functionOnTransitionExit = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onExit, this, std::placeholders::_1));
     
-    m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onUpdate, this, std::placeholders::_1));
-    m_functionOnDraw = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onDraw, this, std::placeholders::_1));
-    m_functionOnEnterFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onEnterFrame, this, std::placeholders::_1));
-    m_functionOnExitFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onExitFrame, this, std::placeholders::_1));
-    
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_REGISTER, m_functionOnTransitionRegister);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_UNREGISTER, m_functionOnTransitionUnregister);
 }
@@ -54,22 +49,12 @@ void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
 {
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
-    
-    ieIGameTransition::addEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    ieIGameTransition::addEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
-    ieIGameTransition::addEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
-    ieIGameTransition::addEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
 }
 
 void ieIGameTransition::onUnregistered(const std::shared_ptr<ieEvent>& event)
 {
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
-    
-    ieIGameTransition::removeEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    ieIGameTransition::removeEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
-    ieIGameTransition::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
-    ieIGameTransition::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
 }
 
 void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)

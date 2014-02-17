@@ -11,21 +11,12 @@
 
 ieStage::ieStage(void)
 {
-    m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onUpdate, this, std::placeholders::_1));
-    m_functionOnDraw = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onDraw, this, std::placeholders::_1));
-    m_functionOnEnterFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onEnterFrame, this, std::placeholders::_1));
-    m_functionOnExitFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onExitFrame, this, std::placeholders::_1));
-    m_functionOnAdded = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onAdded, this, std::placeholders::_1));
-    m_functionOnRemoved = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onRemoved, this, std::placeholders::_1));;
-    
-    ieStage::addEventListener(kEVENT_ON_ADDED, m_functionOnAdded);
-    ieStage::addEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
+
 }
 
 ieStage::~ieStage(void)
 {
-    ieStage::removeEventListener(kEVENT_ON_ADDED, m_functionOnAdded);
-    ieStage::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
+
 }
 
 void ieStage::onResize(const std::shared_ptr<ieEvent>& event)
@@ -55,6 +46,8 @@ void ieStage::onExitFrame(const std::shared_ptr<ieEvent>& event)
 
 void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
 {
+    ieDisplayObjectContainer::onAdded(event);
+    
     glGenTextures(1, &m_colorAttachment);
     glBindTexture(GL_TEXTURE_2D, m_colorAttachment);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -92,21 +85,11 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     
-    ieStage::addEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    ieStage::addEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
-    ieStage::addEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
-    ieStage::addEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
-    
-    ieDisplayObjectContainer::onAdded(event);
+    std::cout<<"ieStage::onAdded"<<std::endl;
 }
 
 void ieStage::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
-    ieStage::removeEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    ieStage::removeEventListener(kEVENT_ON_DRAW, m_functionOnDraw);
-    ieStage::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
-    ieStage::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
-    
     ieDisplayObjectContainer::onRemoved(event);
 }
 

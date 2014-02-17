@@ -15,14 +15,6 @@ class ieStage : public ieDisplayObjectContainer
 {
 private:
     
-    ieEventDispatcherFunctionShared m_functionOnUpdate;
-    ieEventDispatcherFunctionShared m_functionOnDraw;
-    ieEventDispatcherFunctionShared m_functionOnEnterFrame;
-    ieEventDispatcherFunctionShared m_functionOnExitFrame;
-    
-    ieEventDispatcherFunctionShared m_functionOnAdded;
-    ieEventDispatcherFunctionShared m_functionOnRemoved;
-    
 protected:
     
     ui32 m_frameBuffer;
