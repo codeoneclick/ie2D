@@ -19,6 +19,8 @@ static const std::string kEVENT_ON_TRANSITION_REGISTER = "EVENT_ON_TRANSITION_RE
 static const std::string kEVENT_ON_TRANSITION_UNREGISTER = "EVENT_ON_TRANSITION_UNREGISTER";
 static const std::string kEVENT_ON_TRANSITION_ENTER = "EVENT_ON_TRANSITION_ENTER";
 static const std::string kEVENT_ON_TRANSITION_EXIT = "EVENT_ON_TRANSITION_EXIT";
+static const std::string kEVENT_ON_ADDED = "EVENT_ON_ADDED";
+static const std::string kEVENT_ON_REMOVED = "EVENT_ON_REMOVED";
 
 class ieIEventDispatcher;
 class ieEvent : public ieObject

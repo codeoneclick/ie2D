@@ -13,7 +13,7 @@
 #include "ieDisplayObject.h"
 #include "ieDisplayObjectContainer.h"
 #include "ieStage.h"
-#include <png.h>
+#include "ieImage.h"
 
 @interface CGameViewController ()
 
@@ -39,18 +39,7 @@
     path.append("/");
     path.append("_e01_move_18.png");
     
-    png_image image;
-    memset(&image, 0, sizeof image);
-    image.version = PNG_IMAGE_VERSION;
-    
-    if (png_image_begin_read_from_file(&image, path.c_str()))
-    {
-        std::cout<<"loaded"<<std::endl;
-    }
-    else
-    {
-        assert(false);
-    }
+    ieImage *image = new ieImage(path);
 }
 
 - (void)didReceiveMemoryWarning

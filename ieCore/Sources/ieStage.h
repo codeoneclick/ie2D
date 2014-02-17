@@ -20,6 +20,9 @@ private:
     ieEventDispatcherFunctionShared m_functionOnEnterFrame;
     ieEventDispatcherFunctionShared m_functionOnExitFrame;
     
+    ieEventDispatcherFunctionShared m_functionOnAdded;
+    ieEventDispatcherFunctionShared m_functionOnRemoved;
+    
 protected:
     
     ui32 m_frameBuffer;

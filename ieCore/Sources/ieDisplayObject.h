@@ -23,7 +23,25 @@ public ieEventDispatcher
 {
 private:
     
+    ieEventDispatcherFunctionShared m_functionOnUpdate;
+    ieEventDispatcherFunctionShared m_functionOnDraw;
+    ieEventDispatcherFunctionShared m_functionOnEnterFrame;
+    ieEventDispatcherFunctionShared m_functionOnExitFrame;
+    
+    ieEventDispatcherFunctionShared m_functionOnAdded;
+    ieEventDispatcherFunctionShared m_functionOnRemoved;
+    
 protected:
+    
+    std::shared_ptr<ieShape> m_shape;
+    
+    virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
+    virtual void onDraw(const std::shared_ptr<ieEvent>& event);
+    virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);
+    virtual void onExitFrame(const std::shared_ptr<ieEvent>& event);
+    
+    virtual void onAdded(const std::shared_ptr<ieEvent>& event);
+    virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
 public:
     

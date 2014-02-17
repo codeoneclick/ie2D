@@ -37,6 +37,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
+#include <png.h>
+
 #if defined(__IOS__)
 
 #include <OpenGLES/ES2/gl.h>

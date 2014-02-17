@@ -9,6 +9,27 @@
 #ifndef __ieCore__ieImage__
 #define __ieCore__ieImage__
 
-#include <iostream>
+#include "ieCommon.h"
 
-#endif /* defined(__ieCore__ieImage__) */
+class ieImage
+{
+private:
+    
+protected:
+    
+    png_byte* m_data;
+    ui32 m_width;
+    ui32 m_height;
+    
+public:
+    
+    ieImage(const std::string& filename);
+    ~ieImage(void);
+    
+    const png_byte* getData(void) const;
+    const ui32 getWidth(void) const;
+    const ui32 getHeight(void) const;
+    
+};
+
+#endif

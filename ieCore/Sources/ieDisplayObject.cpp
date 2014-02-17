@@ -7,13 +7,57 @@
 //
 
 #include "ieDisplayObject.h"
+#include "ieEvent.h"
+#include "ieShape.h"
 
 ieDisplayObject::ieDisplayObject(void)
+{
+    m_description = "ieDisplayObject";
+    
+    m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onUpdate, this, std::placeholders::_1));
+    m_functionOnDraw = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onDraw, this, std::placeholders::_1));
+    m_functionOnEnterFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onEnterFrame, this, std::placeholders::_1));
+    m_functionOnExitFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onExitFrame, this, std::placeholders::_1));
+    m_functionOnAdded = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onAdded, this, std::placeholders::_1));
+    m_functionOnRemoved = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onRemoved, this, std::placeholders::_1));
+    
+    
+    ieDisplayObject::addEventListener(kEVENT_ON_ADDED, m_functionOnAdded);
+    ieDisplayObject::addEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
+}
+
+ieDisplayObject::~ieDisplayObject(void)
+{
+    ieDisplayObject::removeEventListener(kEVENT_ON_ADDED, m_functionOnAdded);
+    ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
+}
+
+void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     
 }
 
-ieDisplayObject::~ieDisplayObject(void)
+void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
+{
+    
+}
+
+void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
+{
+    
+}
+
+void ieDisplayObject::onExitFrame(const std::shared_ptr<ieEvent>& event)
+{
+    
+}
+
+void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
+{
+    
+}
+
+void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
     
 }

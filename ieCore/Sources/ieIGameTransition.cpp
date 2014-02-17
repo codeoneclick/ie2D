@@ -9,6 +9,7 @@
 #include "ieIGameTransition.h"
 #include "ieIGraphicsContext.h"
 #include "ieEvent.h"
+#include "ieIOGLWindow.h"
 
 ieIGameTransition::ieIGameTransition(const std::string& name,
                                    const std::shared_ptr<ieIOGLWindow>& window) :
@@ -73,30 +74,39 @@ void ieIGameTransition::onUnregistered(const std::shared_ptr<ieEvent>& event)
 
 void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
 {
-    
+    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
+    std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, stage);
+    assert(m_window != nullptr);
+    ieValue width(m_window->getWidth());
+    eventOnStageAdded->addValueWithKey(width, "width");
+    ieValue height(m_window->getHeight());
+    eventOnStageAdded->addValueWithKey(height, "height");
+    ieIGameTransition::dispatchEvent(eventOnStageAdded);
 }
 
 void ieIGameTransition::onExit(const std::shared_ptr<ieEvent>& event)
 {
-    
+    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
+    std::shared_ptr<ieEvent> eventOnStageRemoved = std::make_shared<ieEvent>(kEVENT_ON_REMOVED, stage);
+    ieIGameTransition::dispatchEvent(eventOnStageRemoved);
 }
 
 void ieIGameTransition::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieStage::onUpdate(event);
 }
 
 void ieIGameTransition::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieStage::onDraw(event);
 }
 
 void ieIGameTransition::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieStage::onEnterFrame(event);
 }
 
 void ieIGameTransition::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
-    
+    ieStage::onExitFrame(event);
 }
