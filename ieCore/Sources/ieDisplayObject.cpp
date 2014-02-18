@@ -15,7 +15,8 @@
 ieDisplayObject::ieDisplayObject(void) :
 m_shape(nullptr),
 m_shader(nullptr),
-m_resourceAccessor(nullptr)
+m_resourceAccessor(nullptr),
+m_size(0.0f)
 {
     m_description = "ieDisplayObject";
     
@@ -43,17 +44,22 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    
+    m_shape->draw();
+    std::cout<<"ieDisplayObject::onDraw"<<std::endl;
 }
 
 void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
     ieMaterial::bind();
+    m_shape->bind(m_shader->getAttributes());
+    std::cout<<"ieDisplayObject::onEnterFrame"<<std::endl;
 }
 
 void ieDisplayObject::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
     ieMaterial::unbind();
+    m_shape->unbind(m_shader->getAttributes());
+    std::cout<<"ieDisplayObject::onExitFrame"<<std::endl;
 }
 
 void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
@@ -68,7 +74,7 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     
     m_shader = m_resourceAccessor->getShader(shaderCommonVertex, shaderCommonFragment, shared_from_this());
     ieMaterial::setShader(m_shader);
-    std::cout<<"ieDisplayObject::onAdded"<<std::endl;
+    m_shape = std::make_shared<ieShape>();
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
@@ -78,7 +84,9 @@ void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
     ieDisplayObject::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
     
+    m_shader->removeOwner(shared_from_this());
     m_shader = nullptr;
+    m_shape = nullptr;
     ieMaterial::setShader(nullptr);
 }
 

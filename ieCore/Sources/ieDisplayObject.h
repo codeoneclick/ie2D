@@ -40,6 +40,8 @@ protected:
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
     
+    glm::vec2 m_size;
+    
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
     virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);

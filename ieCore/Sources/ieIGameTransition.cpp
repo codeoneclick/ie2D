@@ -98,4 +98,6 @@ void ieIGameTransition::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 void ieIGameTransition::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
     ieStage::onExitFrame(event);
+    assert(m_graphicsContext != nullptr);
+    m_graphicsContext->draw();
 }
