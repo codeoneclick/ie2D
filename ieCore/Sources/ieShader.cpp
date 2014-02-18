@@ -240,6 +240,7 @@ const ui32 ieShaderUniform::getTexture(void) const
 
 ieShader::ieShader(const std::string& vsSourceCode,
                    const std::string& fsSourceCode) :
+ieResource(E_RESOURCE_TYPE_SHADER),
 m_vsSourceCode(vsSourceCode),
 m_fsSourceCode(fsSourceCode)
 {

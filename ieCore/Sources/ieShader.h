@@ -11,6 +11,7 @@
 
 #include "ieCommon.h"
 #include "ieEnums.h"
+#include "ieResource.h"
 
 #define STRING_SHADER(SHADER)  #SHADER
 
@@ -18,7 +19,8 @@
 
 class ieShaderUniform;
 
-class ieShader
+class ieShader :
+public ieResource
 {
 private:
     

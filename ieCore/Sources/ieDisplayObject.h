@@ -16,6 +16,7 @@
 class ieBitmapData;
 class ieShape;
 class ieShader;
+class ieResourceAccessor;
 
 class ieDisplayObject :
 public ieIBitmapDrawable,
@@ -33,6 +34,8 @@ private:
     ieEventDispatcherFunctionShared m_functionOnRemoved;
     
 protected:
+    
+    std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;

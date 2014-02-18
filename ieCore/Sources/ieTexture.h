@@ -9,6 +9,18 @@
 #ifndef __ieCore__ieTexture__
 #define __ieCore__ieTexture__
 
-#include <iostream>
+#include "ieResource.h"
 
-#endif /* defined(__ieCore__ieTexture__) */
+class ieTexture : public ieResource
+{
+private:
+    
+protected:
+    
+public:
+    
+    ieTexture(const std::string& filename);
+    ~ieTexture(void);
+};
+
+#endif

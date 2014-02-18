@@ -7,3 +7,30 @@
 //
 
 #include "ieResource.h"
+
+ieResource::ieResource(E_RESOURCE_TYPE resourceType) :
+m_resourceType(resourceType),
+m_isLoaded(false)
+{
+    
+}
+
+ieResource::~ieResource(void)
+{
+    assert(m_owners.size() == 0);
+}
+
+void ieResource::addOwner(const std::shared_ptr<ieObject>& owner)
+{
+    m_owners.insert(owner);
+}
+
+void ieResource::removeOwner(const std::shared_ptr<ieObject>& owner)
+{
+    m_owners.erase(owner);
+}
+
+const ui32 ieResource::getOwnersCount(void) const
+{
+    return m_owners.size();
+}

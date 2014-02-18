@@ -9,6 +9,18 @@
 #ifndef __ieCore__ieSequence__
 #define __ieCore__ieSequence__
 
-#include <iostream>
+#include "ieResource.h"
 
-#endif /* defined(__ieCore__ieSequence__) */
+class ieSequence : public ieResource
+{
+private:
+    
+protected:
+    
+public:
+    
+    ieSequence(const std::string& filename);
+    ~ieSequence(void);
+};
+
+#endif

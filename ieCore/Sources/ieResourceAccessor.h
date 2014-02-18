@@ -9,6 +9,36 @@
 #ifndef __ieCore__ieResourceAccessor__
 #define __ieCore__ieResourceAccessor__
 
-#include <iostream>
+#include "ieObject.h"
 
-#endif /* defined(__ieCore__ieResourceAccessor__) */
+class ieObject;
+class ieResource;
+class ieShader;
+class ieTexture;
+class ieSequence;
+
+class ieResourceAccessor : public ieObject
+{
+private:
+    
+protected:
+    
+    std::map<std::string, std::shared_ptr<ieResource>> m_resources;
+    
+public:
+    
+    ieResourceAccessor(void);
+    ~ieResourceAccessor(void);
+    
+    std::shared_ptr<ieShader> getShader(const std::string& vsFilename,
+                                        const std::string& fsFilename,
+                                        const std::shared_ptr<ieObject>& owner = nullptr);
+    
+    std::shared_ptr<ieTexture> getTexture(const std::string& filename,
+                                          const std::shared_ptr<ieObject>& owner = nullptr);
+    
+    std::shared_ptr<ieSequence> getSequence(const std::string& filename,
+                                            const std::shared_ptr<ieObject>& owner = nullptr);
+};
+
+#endif

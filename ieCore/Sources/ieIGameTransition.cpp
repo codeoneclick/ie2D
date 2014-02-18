@@ -10,6 +10,7 @@
 #include "ieIGraphicsContext.h"
 #include "ieEvent.h"
 #include "ieIOGLWindow.h"
+#include "ieResourceAccessor.h"
 
 ieIGameTransition::ieIGameTransition(const std::string& name,
                                    const std::shared_ptr<ieIOGLWindow>& window) :
@@ -29,6 +30,8 @@ m_name(name)
     
     m_functionOnTransitionEnter = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onEnter, this, std::placeholders::_1));
     m_functionOnTransitionExit = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onExit, this, std::placeholders::_1));
+    
+    m_resourceAccessor = std::make_shared<ieResourceAccessor>();
     
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_REGISTER, m_functionOnTransitionRegister);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_UNREGISTER, m_functionOnTransitionUnregister);
@@ -66,6 +69,7 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     eventOnStageAdded->addValueWithKey(width, "width");
     ieValue height(m_window->getHeight());
     eventOnStageAdded->addValueWithKey(height, "height");
+    eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
 }
 

@@ -7,3 +7,14 @@
 //
 
 #include "ieSequence.h"
+
+ieSequence::ieSequence(const std::string& filename) :
+ieResource(E_RESOURCE_TYPE_SEQUENSE)
+{
+    
+}
+
+ieSequence::~ieSequence(void)
+{
+    
+}

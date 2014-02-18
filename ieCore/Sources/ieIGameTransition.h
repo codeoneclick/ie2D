@@ -12,6 +12,7 @@
 #include "ieCommon.h"
 #include "ieStage.h"
 
+class ieResourceAccessor;
 class ieIOGLWindow;
 class ieIGraphicsContext;
 class ieIGameTransition : public ieStage
@@ -29,6 +30,7 @@ protected:
     std::string m_name;
     std::shared_ptr<ieIOGLWindow> m_window;
     std::shared_ptr<ieIGraphicsContext> m_graphicsContext;
+    std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     
     virtual void onRegistered(const std::shared_ptr<ieEvent>& event);
     virtual void onUnregistered(const std::shared_ptr<ieEvent>& event);

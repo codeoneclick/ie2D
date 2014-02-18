@@ -7,3 +7,14 @@
 //
 
 #include "ieTexture.h"
+
+ieTexture::ieTexture(const std::string& filename) :
+ieResource(E_RESOURCE_TYPE_TEXTURE)
+{
+    
+}
+
+ieTexture::~ieTexture(void)
+{
+    
+}
