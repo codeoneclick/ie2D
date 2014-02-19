@@ -25,6 +25,12 @@ private:
     ieEventDispatcherFunctionShared m_functionOnTransitionEnter;
     ieEventDispatcherFunctionShared m_functionOnTransitionExit;
     
+    ieEventDispatcherFunctionShared m_functionOnPresentFrame;
+    
+    std::shared_ptr<ieShape> m_shape;
+    std::shared_ptr<ieShader> m_shader;
+    std::shared_ptr<ieMaterial> m_material;
+    
 protected:
     
     std::string m_name;
@@ -42,6 +48,7 @@ protected:
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
     virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);
     virtual void onExitFrame(const std::shared_ptr<ieEvent>& event);
+    virtual void onPresentFrame(const std::shared_ptr<ieEvent>& event);
     
 public:
     

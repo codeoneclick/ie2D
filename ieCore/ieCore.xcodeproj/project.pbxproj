@@ -589,7 +589,7 @@
 		2109421418B15D1600C86176 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		2109421518B15D1600C86176 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		2109421618B15D1600C86176 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
-		2109425318B2B27F00C86176 /* ieShaderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderCommon.h; path = Sources/ieShaderCommon.h; sourceTree = "<group>"; };
+		2109425318B2B27F00C86176 /* ieShaderTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderTexture.h; path = Sources/ieShaderTexture.h; sourceTree = "<group>"; };
 		210EFD0C175266EC00DDB182 /* CMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMesh.cpp; path = Sources/CMesh.cpp; sourceTree = "<group>"; };
 		210EFD0D175266EC00DDB182 /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMesh.h; path = Sources/CMesh.h; sourceTree = "<group>"; };
 		210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL.cpp; path = Sources/CMeshCommiter_MDL.cpp; sourceTree = "<group>"; };
@@ -615,6 +615,8 @@
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
 		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
 		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
+		2151C6BC18B4B31E00A33707 /* ieShaderScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderScreen.h; path = Sources/ieShaderScreen.h; sourceTree = "<group>"; };
+		2151C6BD18B4B35000A33707 /* ieShaderColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderColor.h; path = Sources/ieShaderColor.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
@@ -1657,7 +1659,9 @@
 				21C343D718A8D59B0041EF47 /* ieShader.cpp */,
 				21C343DB18A8D5AF0041EF47 /* ieMaterial.h */,
 				21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */,
-				2109425318B2B27F00C86176 /* ieShaderCommon.h */,
+				2151C6BD18B4B35000A33707 /* ieShaderColor.h */,
+				2109425318B2B27F00C86176 /* ieShaderTexture.h */,
+				2151C6BC18B4B31E00A33707 /* ieShaderScreen.h */,
 			);
 			name = ieShaders;
 			sourceTree = "<group>";

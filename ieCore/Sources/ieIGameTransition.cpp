@@ -11,11 +11,17 @@
 #include "ieEvent.h"
 #include "ieIOGLWindow.h"
 #include "ieResourceAccessor.h"
+#include "ieShader.h"
+#include "ieShape.h"
+#include "ieTexture.h"
 
 ieIGameTransition::ieIGameTransition(const std::string& name,
                                    const std::shared_ptr<ieIOGLWindow>& window) :
 m_window(window),
-m_name(name)
+m_name(name),
+m_shader(nullptr),
+m_shape(nullptr),
+m_material(nullptr)
 {
 #if defined (__IOS__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_IOS);
@@ -30,6 +36,8 @@ m_name(name)
     
     m_functionOnTransitionEnter = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onEnter, this, std::placeholders::_1));
     m_functionOnTransitionExit = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onExit, this, std::placeholders::_1));
+    
+    m_functionOnPresentFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onPresentFrame, this, std::placeholders::_1));
     
     m_resourceAccessor = std::make_shared<ieResourceAccessor>();
     
@@ -52,12 +60,26 @@ void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
 {
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
+    
+    m_shader = m_resourceAccessor->getShader(shaderScreenVertex, shaderScreenFragment, shared_from_this());
+    m_shape = std::make_shared<ieShape>();
+    
+    m_material = std::make_shared<ieMaterial>();
+    m_material->setBlending(false);
+    m_material->setCulling(false);
+    m_material->setDepthTest(false);
+    m_material->setShader(m_shader);
 }
 
 void ieIGameTransition::onUnregistered(const std::shared_ptr<ieEvent>& event)
 {
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
+    
+    m_shader->removeOwner(shared_from_this());
+    m_shader = nullptr;
+    m_shape = nullptr;
+    m_material = nullptr;
 }
 
 void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
@@ -71,6 +93,13 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     eventOnStageAdded->addValueWithKey(height, "height");
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
+    
+    assert(m_graphicsContext != nullptr);
+    std::shared_ptr<ieTexture> texture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());
+    assert(m_shader != nullptr);
+    m_shader->setTexture(texture->getTexture(), E_SHADER_SAMPLER_01);
+    
+    ieIGameTransition::addEventListener(kEVENT_ON_PRESENT_FRAME, m_functionOnPresentFrame);
 }
 
 void ieIGameTransition::onExit(const std::shared_ptr<ieEvent>& event)
@@ -78,6 +107,10 @@ void ieIGameTransition::onExit(const std::shared_ptr<ieEvent>& event)
     std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
     std::shared_ptr<ieEvent> eventOnStageRemoved = std::make_shared<ieEvent>(kEVENT_ON_REMOVED, stage);
     ieIGameTransition::dispatchEvent(eventOnStageRemoved);
+    
+    m_shader->setTexture(0, E_SHADER_SAMPLER_01);
+    
+    ieIGameTransition::removeEventListener(kEVENT_ON_PRESENT_FRAME, m_functionOnPresentFrame);
 }
 
 void ieIGameTransition::onUpdate(const std::shared_ptr<ieEvent>& event)
@@ -98,6 +131,36 @@ void ieIGameTransition::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 void ieIGameTransition::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
     ieStage::onExitFrame(event);
+}
+
+void ieIGameTransition::onPresentFrame(const std::shared_ptr<ieEvent>& event)
+{
     assert(m_graphicsContext != nullptr);
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, m_graphicsContext->getFrameBuffer());
+    glBindRenderbuffer(GL_RENDERBUFFER, m_graphicsContext->getRenderBuffer());
+    glViewport(0, 0, m_window->getWidth(), m_window->getHeight());
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    
+    assert(m_shader != nullptr);
+    assert(m_shape != nullptr);
+    
+    m_shader->bind();
+    m_shape->bind(m_shader->getAttributes());
+    
+    m_shape->draw();
+    
+    m_shader->unbind();
+    m_shape->unbind(m_shader->getAttributes());
+    
+#if defined(__IOS__)
+    
+    const GLenum discards[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT} ;
+    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, discards);
+    
+#elif defined(__WIN32__)
+    
+#endif
+
     m_graphicsContext->draw();
 }

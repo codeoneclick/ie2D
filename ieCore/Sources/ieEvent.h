@@ -15,6 +15,7 @@ static const std::string kEVENT_ON_UPDATE = "EVENT_ON_UPDATE";
 static const std::string kEVENT_ON_DRAW = "EVENT_ON_DRAW";
 static const std::string kEVENT_ON_ENTER_FRAME = "EVENT_ON_ENTER_FRAME";
 static const std::string kEVENT_ON_EXIT_FRAME = "EVENT_ON_EXIT_FRAME";
+static const std::string kEVENT_ON_PRESENT_FRAME = "EVENT_ON_PRESENT_FRAME";
 static const std::string kEVENT_ON_TRANSITION_REGISTER = "EVENT_ON_TRANSITION_REGISTER";
 static const std::string kEVENT_ON_TRANSITION_UNREGISTER = "EVENT_ON_TRANSITION_UNREGISTER";
 static const std::string kEVENT_ON_TRANSITION_ENTER = "EVENT_ON_TRANSITION_ENTER";

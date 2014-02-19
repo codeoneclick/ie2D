@@ -33,12 +33,12 @@ private:
     ieEventDispatcherFunctionShared m_functionOnAdded;
     ieEventDispatcherFunctionShared m_functionOnRemoved;
     
+    std::shared_ptr<ieShape> m_shape;
+    std::shared_ptr<ieShader> m_shader;
+    
 protected:
     
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
-    
-    std::shared_ptr<ieShape> m_shape;
-    std::shared_ptr<ieShader> m_shader;
     
     glm::vec2 m_size;
     

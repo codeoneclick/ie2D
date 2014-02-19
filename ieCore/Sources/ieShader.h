@@ -15,7 +15,9 @@
 
 #define STRING_SHADER(SHADER)  #SHADER
 
-#include "ieShaderCommon.h"
+#include "ieShaderColor.h"
+#include "ieShaderTexture.h"
+#include "ieShaderScreen.h"
 
 class ieShaderUniform;
 

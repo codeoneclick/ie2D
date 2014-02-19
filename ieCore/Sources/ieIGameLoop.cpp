@@ -99,5 +99,7 @@ void ieIGameLoop::draw(void)
         m_currentTransition->dispatchEvent(eventOnDraw);
         std::shared_ptr<ieEvent> eventOnExitFrame = std::make_shared<ieEvent>(kEVENT_ON_EXIT_FRAME, m_currentTransition);
         m_currentTransition->dispatchEvent(eventOnExitFrame);
+        std::shared_ptr<ieEvent> eventOnPresentFrame = std::make_shared<ieEvent>(kEVENT_ON_PRESENT_FRAME, m_currentTransition);
+        m_currentTransition->dispatchEvent(eventOnPresentFrame);
     }
 }

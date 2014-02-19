@@ -52,6 +52,7 @@ void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
     ieMaterial::bind();
     m_shape->bind(m_shader->getAttributes());
+    m_shader->setVector4Custom(glm::vec4(0.0f, 1.0f, 0.0, 1.0f), "COLOR");
     std::cout<<"ieDisplayObject::onEnterFrame"<<std::endl;
 }
 
@@ -72,8 +73,10 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_resourceAccessor = std::static_pointer_cast<ieResourceAccessor>(event->getObjectWithKey("resourceAccessor"));
     assert(m_resourceAccessor != nullptr);
     
-    m_shader = m_resourceAccessor->getShader(shaderCommonVertex, shaderCommonFragment, shared_from_this());
+    m_shader = m_resourceAccessor->getShader(shaderColorVertex, shaderColorFragment, shared_from_this());
     ieMaterial::setShader(m_shader);
+    ieMaterial::setBlending(false);
+    ieMaterial::setCulling(false);
     m_shape = std::make_shared<ieShape>();
 }
 

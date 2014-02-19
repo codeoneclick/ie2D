@@ -8,6 +8,7 @@
 
 #include "ieMaterial.h"
 #include "ieShader.h"
+#include "ieTexture.h"
 
 class ieMaterialCachedParameters
 {
@@ -28,7 +29,7 @@ protected:
     bool m_isDepthMask;
     
     std::shared_ptr<ieShader> m_shader;
-    std::array<ui32, E_SHADER_SAMPLER_MAX> m_textures;
+    std::array<std::shared_ptr<ieTexture>, E_SHADER_SAMPLER_MAX> m_textures;
     
 public:
     
@@ -39,8 +40,8 @@ public:
 ieMaterialCachedParameters::ieMaterialCachedParameters(void) :
 m_shader(nullptr)
 {
-    std::for_each(m_textures.begin(), m_textures.end(), [](ui32& iterator){
-        iterator = 0;
+    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<ieTexture>& iterator){
+        iterator = nullptr;
     });
 }
 
@@ -163,7 +164,7 @@ void ieMaterial::setShader(const std::shared_ptr<ieShader>& shader)
     m_parameters->m_shader = shader;
 }
 
-void ieMaterial::setTexture(ui32 texture,
+void ieMaterial::setTexture(const std::shared_ptr<ieTexture>& texture,
                             E_SHADER_SAMPLER sampler)
 {
     assert(m_parameters != nullptr);
@@ -178,7 +179,11 @@ void ieMaterial::bind(void)
     
     for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
     {
-        m_parameters->m_shader->setTexture(m_parameters->m_textures[i], static_cast<E_SHADER_SAMPLER>(i));
+        if(m_parameters->m_textures[i] != nullptr)
+        {
+            m_parameters->m_shader->setTexture(m_parameters->m_textures[i]->getTexture(),
+                                               static_cast<E_SHADER_SAMPLER>(i));
+        }
     }
     
     if(m_parameters->m_isDepthTest &&

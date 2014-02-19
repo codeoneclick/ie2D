@@ -17,10 +17,19 @@ private:
     
 protected:
     
+    ui32 m_texture;
+    ui32 m_width;
+    ui32 m_height;
+    
 public:
     
     ieTexture(const std::string& filename);
+    ieTexture(ui32 texture, ui32 width, ui32 height);
     ~ieTexture(void);
+    
+    const ui32 getTexture(void) const;
+    const ui32 getWidth(void) const;
+    const ui32 getHeight(void) const;
 };
 
 #endif

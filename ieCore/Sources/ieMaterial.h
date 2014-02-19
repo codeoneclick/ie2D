@@ -13,6 +13,7 @@
 #include "ieEnums.h"
 
 class ieShader;
+class ieTexture;
 class ieMaterialCachedParameters;
 
 class ieMaterial
@@ -51,7 +52,7 @@ public:
     void setDepthMask(bool value);
     
     void setShader(const std::shared_ptr<ieShader>& shader);
-    void setTexture(ui32 texture,
+    void setTexture(const std::shared_ptr<ieTexture>& texture,
                     E_SHADER_SAMPLER sampler);
     void bind(void);
     void unbind(void);
