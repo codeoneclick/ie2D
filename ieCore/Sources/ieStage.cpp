@@ -9,7 +9,8 @@
 #include "ieStage.h"
 #include "ieEvent.h"
 
-ieStage::ieStage(void)
+ieStage::ieStage(const glm::vec4& frame) :
+ieDisplayObjectContainer(frame)
 {
 
 }
@@ -37,7 +38,7 @@ void ieStage::onDraw(const std::shared_ptr<ieEvent>& event)
 void ieStage::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glViewport(0, 0, m_size.x, m_size.y);
+    glViewport(0, 0, m_frame.z, m_frame.w);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
@@ -60,11 +61,6 @@ void ieStage::onExitFrame(const std::shared_ptr<ieEvent>& event)
 
 void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObjectContainer::onAdded(event);
-    
-    m_size = glm::vec2(event->getValueWithKey("width").getValue<ui32>(),
-                       event->getValueWithKey("height").getValue<ui32>());
-    
     glGenTextures(1, &m_colorAttachment);
     glBindTexture(GL_TEXTURE_2D, m_colorAttachment);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -72,8 +68,8 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-                 m_size.x,
-                 m_size.y,
+                 m_frame.z,
+                 m_frame.w,
                  0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
     glGenTextures(1, &m_depthAttachment);
@@ -85,13 +81,13 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     
 #if defined(__NDK__)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-                 m_size.x,
-                 m_size.y,
+                 m_frame.z,
+                 m_frame.w,
                  0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 #else
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-                 m_size.x,
-                 m_size.y,
+                 m_frame.z,
+                 m_frame.w,
                  0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 #endif
     
@@ -109,6 +105,9 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_DITHER);
     glDepthFunc(GL_LEQUAL);
+    
+    ieDisplayObject::setStage(std::static_pointer_cast<ieStage>(shared_from_this()));
+    ieDisplayObjectContainer::onAdded(event);
     
     std::cout<<"ieStage::onAdded"<<std::endl;
 }

@@ -27,11 +27,11 @@ static const char* shaderColorVertex = STRING_SHADER
 
 static const char* shaderColorFragment = STRING_SHADER
 (
- uniform lowp vec4 COLOR;
+ uniform lowp vec4 VECTOR_COLOR;
  
  void main(void)
 {
-    gl_FragColor = COLOR;
+    gl_FragColor = VECTOR_COLOR;
 }
  );
 

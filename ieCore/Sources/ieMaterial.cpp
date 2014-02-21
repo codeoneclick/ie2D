@@ -9,6 +9,7 @@
 #include "ieMaterial.h"
 #include "ieShader.h"
 #include "ieTexture.h"
+#include "ieColor.h"
 
 class ieMaterialCachedParameters
 {
@@ -29,6 +30,7 @@ protected:
     bool m_isDepthMask;
     
     std::shared_ptr<ieShader> m_shader;
+    ieColor m_color;
     std::array<std::shared_ptr<ieTexture>, E_SHADER_SAMPLER_MAX> m_textures;
     
 public:
@@ -38,7 +40,8 @@ public:
 };
 
 ieMaterialCachedParameters::ieMaterialCachedParameters(void) :
-m_shader(nullptr)
+m_shader(nullptr),
+m_color(255, 255, 255, 255)
 {
     std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<ieTexture>& iterator){
         iterator = nullptr;

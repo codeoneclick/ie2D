@@ -16,6 +16,7 @@
 class ieBitmapData;
 class ieShape;
 class ieShader;
+class ieStage;
 class ieResourceAccessor;
 
 class ieDisplayObject :
@@ -35,12 +36,13 @@ private:
     
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
+    std::shared_ptr<ieStage> m_stage;
     
 protected:
     
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     
-    glm::vec2 m_size;
+    glm::vec4 m_frame;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
@@ -50,9 +52,11 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
+    void setStage(const std::shared_ptr<ieStage> stage);
+    
 public:
     
-    ieDisplayObject(void);
+    ieDisplayObject(const glm::vec4& frame);
     virtual ~ieDisplayObject(void);
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,

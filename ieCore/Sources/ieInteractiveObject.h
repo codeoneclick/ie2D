@@ -19,7 +19,7 @@ protected:
     
 public:
     
-    ieInteractiveObject(void);
+    ieInteractiveObject(const glm::vec4& frame);
     ~ieInteractiveObject(void);
 };
 

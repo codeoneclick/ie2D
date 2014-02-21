@@ -9,7 +9,8 @@
 #include "ieDisplayObjectContainer.h"
 #include "ieEvent.h"
 
-ieDisplayObjectContainer::ieDisplayObjectContainer(void)
+ieDisplayObjectContainer::ieDisplayObjectContainer(const glm::vec4& frame) :
+ieInteractiveObject(frame)
 {
 
 }

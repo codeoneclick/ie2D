@@ -15,6 +15,9 @@ class ieDisplayObjectContainer : public ieInteractiveObject
 {
 private:
     
+    std::shared_ptr<ieDisplayObjectContainer> m_parent;
+    std::set<std::shared_ptr<ieDisplayObjectContainer>> m_childs;
+    
 protected:
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
@@ -27,7 +30,7 @@ protected:
     
 public:
     
-    ieDisplayObjectContainer(void);
+    ieDisplayObjectContainer(const glm::vec4& frame);
     ~ieDisplayObjectContainer(void);
     
 };

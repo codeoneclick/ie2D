@@ -14,6 +14,7 @@
 
 class ieShader;
 class ieTexture;
+class ieColor;
 class ieMaterialCachedParameters;
 
 class ieMaterial
@@ -54,6 +55,8 @@ public:
     void setShader(const std::shared_ptr<ieShader>& shader);
     void setTexture(const std::shared_ptr<ieTexture>& texture,
                     E_SHADER_SAMPLER sampler);
+    void setColor(const ieColor& color);
+    
     void bind(void);
     void unbind(void);
 };

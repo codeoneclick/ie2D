@@ -8,7 +8,8 @@
 
 #include "ieInteractiveObject.h"
 
-ieInteractiveObject::ieInteractiveObject(void)
+ieInteractiveObject::ieInteractiveObject(const glm::vec4& frame) :
+ieDisplayObject(frame)
 {
     
 }

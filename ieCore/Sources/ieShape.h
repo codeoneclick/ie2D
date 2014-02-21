@@ -25,7 +25,7 @@ protected:
     
 public:
     
-    ieShape(void);
+    ieShape(const glm::vec4& frame);
     ~ieShape(void);
     
     std::shared_ptr<ieVertexBuffer> getVertexBuffer(void) const;

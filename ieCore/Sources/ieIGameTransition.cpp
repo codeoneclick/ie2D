@@ -17,6 +17,7 @@
 
 ieIGameTransition::ieIGameTransition(const std::string& name,
                                    const std::shared_ptr<ieIOGLWindow>& window) :
+ieStage(glm::vec4(0.0f, 0.0f, window->getWidth(), window->getHeight())),
 m_window(window),
 m_name(name),
 m_shader(nullptr),
@@ -62,7 +63,7 @@ void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
     
     m_shader = m_resourceAccessor->getShader(shaderScreenVertex, shaderScreenFragment, shared_from_this());
-    m_shape = std::make_shared<ieShape>();
+    m_shape = std::make_shared<ieShape>(glm::vec4(-1.0f, -1.0f, 1.0f, 1.0f));
     
     m_material = std::make_shared<ieMaterial>();
     m_material->setBlending(false);
@@ -87,10 +88,6 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, stage);
     assert(m_window != nullptr);
-    ieValue width(m_window->getWidth());
-    eventOnStageAdded->addValueWithKey(width, "width");
-    ieValue height(m_window->getHeight());
-    eventOnStageAdded->addValueWithKey(height, "height");
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
     

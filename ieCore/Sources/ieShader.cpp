@@ -22,6 +22,7 @@ extern const struct ieUniforms
     std::string m_viewMatrix;
     std::string m_projectionMatrix;
     std::string m_cameraPosition;
+    std::string m_color;
     
 } ieUniforms;
 
@@ -50,7 +51,8 @@ const struct ieUniforms ieUniforms =
     "MATRIX_World",
     "MATRIX_View",
     "MATRIX_Projection",
-    "VECTOR_CameraPosition"
+    "VECTOR_CameraPosition",
+    "VECTOR_COLOR"
 };
 
 const struct ieSamplers ieSamplers =
@@ -261,6 +263,7 @@ m_fsSourceCode(fsSourceCode)
     m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_shader, ieUniforms.m_viewMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_shader, ieUniforms.m_projectionMatrix.c_str());
     m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_shader, ieUniforms.m_cameraPosition.c_str());
+    m_uniforms[E_SHADER_UNIFORM_VECTOR_COLOR] = glGetUniformLocation(m_shader, ieUniforms.m_color.c_str());
     
     m_samplers[E_SHADER_SAMPLER_01] = glGetUniformLocation(m_shader, ieSamplers.m_sampler_01.c_str());
     m_samplers[E_SHADER_SAMPLER_02] = glGetUniformLocation(m_shader, ieSamplers.m_sampler_02.c_str());
@@ -274,7 +277,6 @@ m_fsSourceCode(fsSourceCode)
     m_attributes[E_SHADER_ATTRIBUTE_POSITION] = glGetAttribLocation(m_shader, ieAttributes.m_position.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_TEXCOORD] = glGetAttribLocation(m_shader, ieAttributes.m_texcoord.c_str());
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = glGetAttribLocation(m_shader, ieAttributes.m_color.c_str());
-    
 }
 
 ieShader::~ieShader(void)

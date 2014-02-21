@@ -33,7 +33,7 @@ protected:
     
 public:
     
-    ieStage(void);
+    ieStage(const glm::vec4& frame);
     virtual ~ieStage(void);
 };
 
