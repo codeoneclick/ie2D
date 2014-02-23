@@ -16,9 +16,9 @@ ieShape::ieShape(const glm::vec4& frame)
     ieVertex* vertexData = m_vertexBuffer->lock();
     vertexData[0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
     vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 0.0f));
-    vertexData[1].m_position = glm::vec3(frame.x, frame.y, 0.0f);
+    vertexData[1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
     vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f));
-    vertexData[2].m_position = glm::vec3(frame.z, frame.w, 0.0f);
+    vertexData[2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
     vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 0.0f));
     vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
     vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 1.0f));

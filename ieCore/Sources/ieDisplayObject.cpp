@@ -10,6 +10,7 @@
 #include "ieEvent.h"
 #include "ieShape.h"
 #include "ieShader.h"
+#include "ieStage.h"
 #include "ieResourceAccessor.h"
 
 ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
@@ -84,7 +85,12 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     ieMaterial::setShader(m_shader);
     ieMaterial::setBlending(false);
     ieMaterial::setCulling(false);
-    m_shape = std::make_shared<ieShape>(glm::vec4(-1.0f, -1.0f, 1.0f, 1.0f));
+    
+    glm::vec4 frame = glm::vec4(((m_frame.x * 2.0f) / m_stage->m_frame.z) - 1.0f,
+                                ((m_frame.y * 2.0f) / m_stage->m_frame.w) - 1.0f,
+                                ((m_frame.z * 2.0f) / m_stage->m_frame.z) - 1.0f,
+                                ((m_frame.w * 2.0f) / m_stage->m_frame.w) - 1.0f);
+    m_shape = std::make_shared<ieShape>(frame);
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
