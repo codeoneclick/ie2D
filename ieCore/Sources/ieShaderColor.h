@@ -31,7 +31,7 @@ static const char* shaderColorFragment = STRING_SHADER
  
  void main(void)
 {
-    gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);//VECTOR_COLOR;
+    gl_FragColor = VECTOR_COLOR;
 }
  );
 
