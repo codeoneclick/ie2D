@@ -37,8 +37,8 @@ I_WO_Material::~I_WO_Material(void)
 CMaterialCachedParameters::CMaterialCachedParameters(void) :
 m_shader(nullptr)
 {
-    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<CTexture> _iterator){
-        _iterator = nullptr;
+    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<CTexture> iterator){
+        iterator = nullptr;
     });
 }
 

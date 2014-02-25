@@ -106,9 +106,7 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     glDisable(GL_DITHER);
     glDepthFunc(GL_LEQUAL);
     
-    ieDisplayObject::setStage(std::static_pointer_cast<ieStage>(shared_from_this()));
     ieDisplayObjectContainer::onAdded(event);
-    
     std::cout<<"ieStage::onAdded"<<std::endl;
 }
 

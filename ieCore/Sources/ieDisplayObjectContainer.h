@@ -15,7 +15,6 @@ class ieDisplayObjectContainer : public ieInteractiveObject
 {
 private:
     
-    std::shared_ptr<ieDisplayObject> m_parent;
     std::set<std::shared_ptr<ieDisplayObject>> m_uniqueChilds;
     std::vector<std::shared_ptr<ieDisplayObject>> m_childs;
     

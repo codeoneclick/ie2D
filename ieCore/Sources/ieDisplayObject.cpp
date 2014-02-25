@@ -18,7 +18,8 @@ m_shape(nullptr),
 m_shader(nullptr),
 m_resourceAccessor(nullptr),
 m_stage(nullptr),
-m_frame(frame)
+m_frame(frame),
+m_parent(nullptr)
 {
     m_description = "ieDisplayObject";
     
@@ -39,12 +40,6 @@ ieDisplayObject::~ieDisplayObject(void)
     ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
 }
 
-void ieDisplayObject::setStage(const std::shared_ptr<ieStage> stage)
-{
-    assert(stage != nullptr);
-    m_stage = stage;
-}
-
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     
@@ -52,22 +47,24 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    ieMaterial::bind();
+    m_shape->bind(m_shader->getAttributes());
+    m_shader->setVector4(m_color, E_SHADER_UNIFORM_VECTOR_COLOR);
+    
     m_shape->draw();
     std::cout<<"ieDisplayObject::onDraw"<<std::endl;
+    
+    ieMaterial::unbind();
+    m_shape->unbind(m_shader->getAttributes());
 }
 
 void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
-    ieMaterial::bind();
-    m_shape->bind(m_shader->getAttributes());
-    m_shader->setVector4(glm::vec4(0.0f, 1.0f, 0.0, 1.0f), E_SHADER_UNIFORM_VECTOR_COLOR);
     std::cout<<"ieDisplayObject::onEnterFrame"<<std::endl;
 }
 
 void ieDisplayObject::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
-    ieMaterial::unbind();
-    m_shape->unbind(m_shader->getAttributes());
     std::cout<<"ieDisplayObject::onExitFrame"<<std::endl;
 }
 
@@ -81,6 +78,9 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_resourceAccessor = std::static_pointer_cast<ieResourceAccessor>(event->getObjectWithKey("resourceAccessor"));
     assert(m_resourceAccessor != nullptr);
     
+    m_stage = std::static_pointer_cast<ieStage>(event->getObjectWithKey("stage"));
+    assert(m_stage != nullptr);
+    
     m_shader = m_resourceAccessor->getShader(shaderColorVertex, shaderColorFragment, shared_from_this());
     ieMaterial::setShader(m_shader);
     ieMaterial::setBlending(false);
@@ -91,6 +91,9 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
                                 ((m_frame.z * 2.0f) / m_stage->m_frame.z) - 1.0f,
                                 ((m_frame.w * 2.0f) / m_stage->m_frame.w) - 1.0f);
     m_shape = std::make_shared<ieShape>(frame);
+    static f32 r = 0.0;
+    m_color = glm::vec4(r, 1.0f, 1.0f, 1.0f);
+    r++;
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)

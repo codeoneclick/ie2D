@@ -89,7 +89,9 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, stage);
     assert(m_window != nullptr);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
+    eventOnStageAdded->addObjectWithKey(stage, "stage");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
+    
     
     assert(m_graphicsContext != nullptr);
     std::shared_ptr<ieTexture> texture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());

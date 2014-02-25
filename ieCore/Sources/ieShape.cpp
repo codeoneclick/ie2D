@@ -33,6 +33,7 @@ ieShape::ieShape(const glm::vec4& frame)
     indexData[4] = 2;
     indexData[5] = 3;
     m_indexBuffer->unlock();
+    std::cout<<"ieShape construct"<<std::endl;
 }
 
 ieShape::~ieShape(void)

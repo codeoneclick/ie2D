@@ -35,6 +35,9 @@
     workflow->registerTransition(transition);
     workflow->goToTransition("demo");
     
+    std::shared_ptr<ieDisplayObjectContainer> sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(0, 0, 100, 100));
+    transition->addChild(sprite);
+    
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
     path.append("_e01_move_18.png");
