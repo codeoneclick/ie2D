@@ -17,14 +17,14 @@ private:
     
 protected:
     
-    glm::mat4 m_projection;
+    glm::mat4x4 m_projection;
     
 public:
     
     ieCamera(ui32 screenWidth, ui32 screenHeight);
     ~ieCamera(void);
     
-    glm::mat4 getProjection(void) const;
+    glm::mat4x4 getProjection(void) const;
 };
 
-#endif /* defined(__ieCore__ieCamera__) */
+#endif

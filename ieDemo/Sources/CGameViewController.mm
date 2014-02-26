@@ -37,20 +37,20 @@
     workflow->goToTransition("demo");
     
     std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 0, 255, 255);
-    std::shared_ptr<ieDisplayObjectContainer> sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(200, 200, 200, 200));
+    std::shared_ptr<ieDisplayObjectContainer> sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(10, 10, 200, 200));
     transition->addChild(sprite);
     sprite->setColor(color_01);
     
     std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
-    std::shared_ptr<ieDisplayObjectContainer> sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(10, 10, 100, 100));
+    std::shared_ptr<ieDisplayObjectContainer> sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
     transition->addChild(sprite2);
     sprite2->setColor(color_02);
     
-    //std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
-    //path.append("/");
-    //path.append("_e01_move_18.png");
+    std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
+    path.append("/");
+    path.append("_e01_move_18.png");
     
-    //ieImage *image = new ieImage(path);
+    ieImage *image = new ieImage(path);
 }
 
 - (void)didReceiveMemoryWarning

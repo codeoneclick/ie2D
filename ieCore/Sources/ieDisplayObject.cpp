@@ -23,7 +23,8 @@ m_resourceAccessor(nullptr),
 m_stage(nullptr),
 m_camera(nullptr),
 m_frame(frame),
-m_parent(nullptr)
+m_parent(nullptr),
+m_modelview(1.0f)
 {
     m_description = "ieDisplayObject";
     
@@ -69,12 +70,20 @@ void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
 
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
-    
+    glm::mat4x4 translation = glm::translate(glm::mat4x4(1.0f), glm::vec3(m_frame.x + m_frame.z * 0.5f,
+                                                                          m_frame.y + m_frame.w * 0.5f, 0.0f));
+    glm::mat4x4 rotation = glm::rotate(glm::mat4x4(1.0f), glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4x4 scale = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
+    m_modelview = translation * rotation * scale;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    assert(m_camera != nullptr);
     ieMaterial::bind();
+    
+    m_shader->setMatrix4x4(m_modelview, E_SHADER_UNIFORM_MODELVIEW);
+    m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
     m_shape->bind(m_shader->getAttributes());
     m_shape->draw();
     std::cout<<"ieDisplayObject::onDraw"<<std::endl;
@@ -115,7 +124,7 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     ieMaterial::setCulling(false);
     ieMaterial::setDepthTest(false);
     
-    m_shape = std::make_shared<ieShape>(ieDisplayObject::convertToOGLFrame(m_frame));
+    m_shape = std::make_shared<ieShape>(glm::vec4(-0.5f, 0.5f, 0.5f, -0.5f));
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)

@@ -14,7 +14,7 @@ ieCamera::ieCamera(ui32 screenWidth, ui32 screenHeight)
     m_projection = glm::ortho(0.0f,
                               static_cast<f32>(screenWidth),
                               static_cast<f32>(screenHeight),
-                              0.0f);
+                              0.0f, -1.0f, 1.0f);
 }
 
 ieCamera::~ieCamera(void)
@@ -22,7 +22,7 @@ ieCamera::~ieCamera(void)
     
 }
 
-glm::mat4 ieCamera::getProjection(void) const
+glm::mat4x4 ieCamera::getProjection(void) const
 {
     return m_projection;
 }

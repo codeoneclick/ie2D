@@ -39,6 +39,7 @@ private:
     
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
+    glm::mat4x4 m_modelview;
     
     friend class ieDisplayObjectContainer;
     
