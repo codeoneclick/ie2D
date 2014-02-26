@@ -11,13 +11,17 @@
 #include "ieShape.h"
 #include "ieShader.h"
 #include "ieStage.h"
+#include "ieCamera.h"
 #include "ieResourceAccessor.h"
+#include "ieVertexBuffer.h"
+#include "ieColor.h"
 
 ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
 m_shape(nullptr),
 m_shader(nullptr),
 m_resourceAccessor(nullptr),
 m_stage(nullptr),
+m_camera(nullptr),
 m_frame(frame),
 m_parent(nullptr)
 {
@@ -40,6 +44,29 @@ ieDisplayObject::~ieDisplayObject(void)
     ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
 }
 
+glm::vec4 ieDisplayObject::convertToOGLFrame(const glm::vec4& frame) const
+{
+    glm::vec4 oglFrame(0.0f);
+    oglFrame.x = (m_frame.x / m_stage->m_frame.z) * 2.0f - 1.0f;
+    oglFrame.y = ((m_stage->m_frame.w - m_frame.y) / m_stage->m_frame.w) * 2.0f - 1.0f;
+    oglFrame.z = ((m_frame.x + m_frame.z) / m_stage->m_frame.z) * 2.0f - 1.0f;
+    oglFrame.w = ((m_stage->m_frame.w - (m_frame.y + m_frame.w)) / m_stage->m_frame.w) * 2.0f - 1.0f;
+    return oglFrame;
+}
+
+void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
+{
+    ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
+    for(ui32 i = 0; i < m_shape->getVertexBuffer()->getSize(); ++i)
+    {
+        vertexData[i].m_color = glm::ivec4(color->getRedChannel(),
+                                           color->getGreenChannel(),
+                                           color->getBlueChannel(),
+                                           color->getAlphaChannel());
+    }
+    m_shape->getVertexBuffer()->unlock();
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     
@@ -49,8 +76,6 @@ void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
     ieMaterial::bind();
     m_shape->bind(m_shader->getAttributes());
-    m_shader->setVector4(m_color, E_SHADER_UNIFORM_VECTOR_COLOR);
-    
     m_shape->draw();
     std::cout<<"ieDisplayObject::onDraw"<<std::endl;
     
@@ -81,19 +106,16 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_stage = std::static_pointer_cast<ieStage>(event->getObjectWithKey("stage"));
     assert(m_stage != nullptr);
     
-    m_shader = m_resourceAccessor->getShader(shaderColorVertex, shaderColorFragment, shared_from_this());
+    m_camera = std::static_pointer_cast<ieCamera>(event->getObjectWithKey("camera"));
+    assert(m_camera != nullptr);
+    
+    m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, shared_from_this());
     ieMaterial::setShader(m_shader);
     ieMaterial::setBlending(false);
     ieMaterial::setCulling(false);
+    ieMaterial::setDepthTest(false);
     
-    glm::vec4 frame = glm::vec4(((m_frame.x * 2.0f) / m_stage->m_frame.z) - 1.0f,
-                                ((m_frame.y * 2.0f) / m_stage->m_frame.w) - 1.0f,
-                                ((m_frame.z * 2.0f) / m_stage->m_frame.z) - 1.0f,
-                                ((m_frame.w * 2.0f) / m_stage->m_frame.w) - 1.0f);
-    m_shape = std::make_shared<ieShape>(frame);
-    static f32 r = 0.0;
-    m_color = glm::vec4(r, 1.0f, 1.0f, 1.0f);
-    r++;
+    m_shape = std::make_shared<ieShape>(ieDisplayObject::convertToOGLFrame(m_frame));
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)

@@ -68,7 +68,7 @@ void ieVertexBuffer::bind(const i32* attributes)
     if(attribute >= 0)
     {
         glEnableVertexAttribArray(attribute);
-        glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, sizeof(ieVertex), (GLvoid*)offsetof(ieVertex, m_position));
+        glVertexAttribPointer(attribute, 2, GL_FLOAT, GL_FALSE, sizeof(ieVertex), (GLvoid*)offsetof(ieVertex, m_position));
     }
     attribute = attributes[E_SHADER_ATTRIBUTE_TEXCOORD];
     if(attribute >= 0)

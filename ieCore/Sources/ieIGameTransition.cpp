@@ -13,6 +13,7 @@
 #include "ieResourceAccessor.h"
 #include "ieShader.h"
 #include "ieShape.h"
+#include "ieCamera.h"
 #include "ieTexture.h"
 
 ieIGameTransition::ieIGameTransition(const std::string& name,
@@ -22,7 +23,8 @@ m_window(window),
 m_name(name),
 m_shader(nullptr),
 m_shape(nullptr),
-m_material(nullptr)
+m_material(nullptr),
+m_screenTexture(nullptr)
 {
 #if defined (__IOS__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_IOS);
@@ -41,6 +43,7 @@ m_material(nullptr)
     m_functionOnPresentFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onPresentFrame, this, std::placeholders::_1));
     
     m_resourceAccessor = std::make_shared<ieResourceAccessor>();
+    m_camera = std::make_shared<ieCamera>(m_window->getWidth(), m_window->getHeight());
     
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_REGISTER, m_functionOnTransitionRegister);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_UNREGISTER, m_functionOnTransitionUnregister);
@@ -62,7 +65,7 @@ void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
     
-    m_shader = m_resourceAccessor->getShader(shaderScreenVertex, shaderScreenFragment, shared_from_this());
+    m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, shared_from_this());
     m_shape = std::make_shared<ieShape>(glm::vec4(-1.0f, -1.0f, 1.0f, 1.0f));
     
     m_material = std::make_shared<ieMaterial>();
@@ -90,14 +93,10 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     assert(m_window != nullptr);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(stage, "stage");
+    eventOnStageAdded->addObjectWithKey(m_camera, "camera");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
     
-    
-    assert(m_graphicsContext != nullptr);
-    std::shared_ptr<ieTexture> texture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());
-    assert(m_shader != nullptr);
-    m_shader->setTexture(texture->getTexture(), E_SHADER_SAMPLER_01);
-    
+    m_screenTexture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());
     ieIGameTransition::addEventListener(kEVENT_ON_PRESENT_FRAME, m_functionOnPresentFrame);
 }
 
@@ -145,6 +144,7 @@ void ieIGameTransition::onPresentFrame(const std::shared_ptr<ieEvent>& event)
     assert(m_shape != nullptr);
     
     m_shader->bind();
+    m_shader->setTexture(m_screenTexture->getTexture(), E_SHADER_SAMPLER_01);
     m_shape->bind(m_shader->getAttributes());
     
     m_shape->draw();

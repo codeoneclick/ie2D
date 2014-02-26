@@ -17,6 +17,8 @@ class ieBitmapData;
 class ieShape;
 class ieShader;
 class ieStage;
+class ieCamera;
+class ieColor;
 class ieResourceAccessor;
 class ieDisplayObjectContainer;
 
@@ -38,16 +40,15 @@ private:
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
     
-    glm::vec4 m_color;
-    
     friend class ieDisplayObjectContainer;
     
 protected:
     
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     std::shared_ptr<ieStage> m_stage;
+    std::shared_ptr<ieCamera> m_camera;
     glm::vec4 m_frame;
-    
+    std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
@@ -58,6 +59,8 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
+    glm::vec4 convertToOGLFrame(const glm::vec4& frame) const;
+    
 public:
     
     ieDisplayObject(const glm::vec4& frame);
@@ -67,6 +70,8 @@ public:
                      const glm::ivec4& sourceRectangle,
                      const glm::ivec2& destinationPoint,
                      std::shared_ptr<ieBitmapFilter> filter);
+    
+    void setColor(const std::shared_ptr<ieColor>& color);
     
     void colorTransform(const glm::ivec4& sourceRectangle,
                         const std::shared_ptr<ieColorTransformation>& colorTransformation);

@@ -13,7 +13,7 @@
 
 struct ieVertex
 {
-    glm::vec3    m_position;
+    glm::vec2    m_position;
     glm::u16vec2 m_texcoord;
     glm::u8vec4  m_color;
 };

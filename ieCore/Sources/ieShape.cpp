@@ -12,16 +12,20 @@
 
 ieShape::ieShape(const glm::vec4& frame)
 {
-    m_vertexBuffer = std::make_shared<ieVertexBuffer>(4, GL_STATIC_DRAW);
+    m_vertexBuffer = std::make_shared<ieVertexBuffer>(4, GL_STREAM_DRAW);
     ieVertex* vertexData = m_vertexBuffer->lock();
-    vertexData[0].m_position = glm::vec3(frame.x, frame.y, 0.0f);
+    vertexData[0].m_position = glm::vec2(frame.x, frame.y);
     vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 0.0f));
-    vertexData[1].m_position = glm::vec3(frame.x, frame.w, 0.0f);
+    vertexData[0].m_color = glm::ivec4(255, 255, 255, 255);
+    vertexData[1].m_position = glm::vec2(frame.x, frame.w);
     vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(0.0f, 1.0f));
-    vertexData[2].m_position = glm::vec3(frame.z, frame.y, 0.0f);
+    vertexData[1].m_color = glm::ivec4(255, 255, 255, 255);
+    vertexData[2].m_position = glm::vec2(frame.z, frame.y);
     vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 0.0f));
-    vertexData[3].m_position = glm::vec3(frame.z, frame.w, 0.0f);
+    vertexData[2].m_color = glm::ivec4(255, 255, 255, 255);
+    vertexData[3].m_position = glm::vec2(frame.z, frame.w);
     vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(1.0f, 1.0f));
+    vertexData[3].m_color = glm::ivec4(255, 255, 255, 255);
     m_vertexBuffer->unlock();
     
     m_indexBuffer = std::make_shared<ieIndexBuffer>(6, GL_STATIC_DRAW);

@@ -9,6 +9,7 @@
 #include "ieDisplayObjectContainer.h"
 #include "ieResourceAccessor.h"
 #include "ieStage.h"
+#include "ieCamera.h"
 #include "ieEvent.h"
 
 ieDisplayObjectContainer::ieDisplayObjectContainer(const glm::vec4& frame) :
@@ -82,6 +83,7 @@ void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObject>& 
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, child);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(m_stage, "stage");
+    eventOnStageAdded->addObjectWithKey(m_camera, "camera");
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 
@@ -96,6 +98,7 @@ void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObject>
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, child);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(m_stage, "stage");
+    eventOnStageAdded->addObjectWithKey(m_camera, "camera");
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 

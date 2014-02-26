@@ -47,6 +47,7 @@
 		2109422418B15D1700C86176 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421218B15D1600C86176 /* uncompr.c */; };
 		2109422518B15D1700C86176 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421518B15D1600C86176 /* zutil.c */; };
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
+		2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
 		2159B9B21887444200BA098A /* CInputContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489C179D767400C51AC4 /* CInputContext_ios.cpp */; };
 		2159B9B31887444200BA098A /* CInputContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B2A3F1182185FB00E1E262 /* CInputContext_osx.cpp */; };
 		2159B9B41887444200BA098A /* CInputContext_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A436489D179D767400C51AC4 /* CInputContext_win32.cpp */; };
@@ -589,7 +590,7 @@
 		2109421418B15D1600C86176 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		2109421518B15D1600C86176 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		2109421618B15D1600C86176 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
-		2109425318B2B27F00C86176 /* ieShaderTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderTexture.h; path = Sources/ieShaderTexture.h; sourceTree = "<group>"; };
+		2109425318B2B27F00C86176 /* ieShaderV2T2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2C4.h; path = Sources/ieShaderV2T2C4.h; sourceTree = "<group>"; };
 		210EFD0C175266EC00DDB182 /* CMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMesh.cpp; path = Sources/CMesh.cpp; sourceTree = "<group>"; };
 		210EFD0D175266EC00DDB182 /* CMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMesh.h; path = Sources/CMesh.h; sourceTree = "<group>"; };
 		210EFD171752672500DDB182 /* CMeshCommiter_MDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshCommiter_MDL.cpp; path = Sources/CMeshCommiter_MDL.cpp; sourceTree = "<group>"; };
@@ -615,8 +616,9 @@
 		21457FEA181C4BEA0071839E /* IGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGraph.h; path = Sources/IGraph.h; sourceTree = "<group>"; };
 		21457FED181C4C060071839E /* IScreenSpaceTextureAccessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IScreenSpaceTextureAccessor.cpp; path = Sources/IScreenSpaceTextureAccessor.cpp; sourceTree = "<group>"; };
 		21457FEE181C4C060071839E /* IScreenSpaceTextureAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IScreenSpaceTextureAccessor.h; path = Sources/IScreenSpaceTextureAccessor.h; sourceTree = "<group>"; };
-		2151C6BC18B4B31E00A33707 /* ieShaderScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderScreen.h; path = Sources/ieShaderScreen.h; sourceTree = "<group>"; };
-		2151C6BD18B4B35000A33707 /* ieShaderColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderColor.h; path = Sources/ieShaderColor.h; sourceTree = "<group>"; };
+		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
+		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
+		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
 		2173173E1821A7F600FF3D1E /* COGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = COGLWindow_osx.cpp; path = Sources/COGLWindow_osx.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		217BB29D1815A48700DB8ECC /* CQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CQuad.cpp; path = Sources/CQuad.cpp; sourceTree = "<group>"; };
@@ -1592,10 +1594,14 @@
 				21EE971518A0265200A65E68 /* ieColorTransformation.cpp */,
 				21EE971918A0279800A65E68 /* ieColor.h */,
 				21EE971818A0279800A65E68 /* ieColor.cpp */,
+				21C343DB18A8D5AF0041EF47 /* ieMaterial.h */,
+				21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */,
 				21EBB4FC18A23CC4003CB322 /* ieVertexBuffer.h */,
 				21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */,
 				21EBB4FF18A23CD2003CB322 /* ieIndexBuffer.h */,
 				21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */,
+				2151C78318BDE58C00A33707 /* ieCamera.h */,
+				2151C78218BDE58C00A33707 /* ieCamera.cpp */,
 			);
 			name = ieCore;
 			sourceTree = "<group>";
@@ -1657,11 +1663,8 @@
 			children = (
 				21C343D818A8D59B0041EF47 /* ieShader.h */,
 				21C343D718A8D59B0041EF47 /* ieShader.cpp */,
-				21C343DB18A8D5AF0041EF47 /* ieMaterial.h */,
-				21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */,
-				2151C6BD18B4B35000A33707 /* ieShaderColor.h */,
-				2109425318B2B27F00C86176 /* ieShaderTexture.h */,
-				2151C6BC18B4B31E00A33707 /* ieShaderScreen.h */,
+				2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */,
+				2109425318B2B27F00C86176 /* ieShaderV2T2C4.h */,
 			);
 			name = ieShaders;
 			sourceTree = "<group>";
@@ -2438,6 +2441,7 @@
 				210940CB18B1563700C86176 /* pngpread.c in Sources */,
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
+				2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */,
 				21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */,
 				2109421C18B15D1600C86176 /* gzlib.c in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,

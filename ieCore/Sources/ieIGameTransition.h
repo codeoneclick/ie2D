@@ -30,6 +30,7 @@ private:
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
     std::shared_ptr<ieMaterial> m_material;
+    std::shared_ptr<ieTexture> m_screenTexture;
     
 protected:
     

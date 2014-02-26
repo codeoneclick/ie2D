@@ -18,12 +18,8 @@ extern const struct ieAttributes
 
 extern const struct ieUniforms
 {
-    std::string m_worldMatrix;
-    std::string m_viewMatrix;
-    std::string m_projectionMatrix;
-    std::string m_cameraPosition;
-    std::string m_color;
-    
+    std::string m_modelview;
+    std::string m_projection;
 } ieUniforms;
 
 extern const struct ieSamplers
@@ -41,30 +37,27 @@ extern const struct ieSamplers
 
 const struct ieAttributes ieAttributes =
 {
-    "IN_Position",
-    "IN_TexCoord",
-    "IN_Color"
+    "attribute_position",
+    "attribute_texcoord",
+    "attribute_color"
 };
 
 const struct ieUniforms ieUniforms =
 {
-    "MATRIX_World",
-    "MATRIX_View",
-    "MATRIX_Projection",
-    "VECTOR_CameraPosition",
-    "VECTOR_COLOR"
+    "uniform_modelview",
+    "uniform_projection"
 };
 
 const struct ieSamplers ieSamplers =
 {
-    "SAMPLER_01",
-    "SAMPLER_02",
-    "SAMPLER_03",
-    "SAMPLER_04",
-    "SAMPLER_05",
-    "SAMPLER_06",
-    "SAMPLER_07",
-    "SAMPLER_08"
+    "uniform_sampler_01",
+    "uniform_sampler_02",
+    "uniform_sampler_03",
+    "uniform_sampler_04",
+    "uniform_sampler_05",
+    "uniform_sampler_06",
+    "uniform_sampler_07",
+    "uniform_sampler_08"
 };
 
 class ieShaderUniform
@@ -259,11 +252,8 @@ m_fsSourceCode(fsSourceCode)
         m_values[i] = nullptr;
     }
     
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_WORLD] = glGetUniformLocation(m_shader, ieUniforms.m_worldMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_VIEW] = glGetUniformLocation(m_shader, ieUniforms.m_viewMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_MATRIX_PROJECTION] = glGetUniformLocation(m_shader, ieUniforms.m_projectionMatrix.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_CAMERA_POSITION] = glGetUniformLocation(m_shader, ieUniforms.m_cameraPosition.c_str());
-    m_uniforms[E_SHADER_UNIFORM_VECTOR_COLOR] = glGetUniformLocation(m_shader, ieUniforms.m_color.c_str());
+    m_uniforms[E_SHADER_UNIFORM_MODELVIEW] = glGetUniformLocation(m_shader, ieUniforms.m_modelview.c_str());
+    m_uniforms[E_SHADER_UNIFORM_PROJECTION] = glGetUniformLocation(m_shader, ieUniforms.m_projection.c_str());
     
     m_samplers[E_SHADER_SAMPLER_01] = glGetUniformLocation(m_shader, ieSamplers.m_sampler_01.c_str());
     m_samplers[E_SHADER_SAMPLER_02] = glGetUniformLocation(m_shader, ieSamplers.m_sampler_02.c_str());
