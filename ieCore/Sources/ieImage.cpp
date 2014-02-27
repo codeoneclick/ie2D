@@ -20,7 +20,6 @@ m_height(0)
     fread(header, 1, 8, imagefile);
     if (png_sig_cmp(header, 0, 8))
     {
-        assert(false);
         std::cout<<"error: "<<"filename"<<"is not a PNG."<<std::endl;
         fclose(imagefile);
         return;
@@ -73,7 +72,7 @@ m_height(0)
     i32 rowbytes = png_get_rowbytes(pngstruct, pnginfo);
     rowbytes += 3 - ((rowbytes - 1) % 4);
     
-    m_data = (png_byte *)malloc(rowbytes * m_height * sizeof(png_byte) + 15);
+    m_data = new png_byte[rowbytes * m_height * sizeof(png_byte) + 15];
     if (m_data == nullptr)
     {
         std::cout<<"error: could not allocate memory for PNG image data."<<std::endl;
@@ -82,12 +81,12 @@ m_height(0)
         return;
     }
     
-    png_bytep *rowpointers = (png_bytep *)malloc(m_height * sizeof(png_bytep));
+    png_bytep *rowpointers = new png_bytep[m_height * sizeof(png_bytep)];
     if (rowpointers == nullptr)
     {
         std::cout<<"error: could not allocate memory for PNG row pointers."<<std::endl;
         png_destroy_read_struct(&pngstruct, &pnginfo, &pngendinfo);
-        free(m_data);
+        delete[] m_data;
         fclose(imagefile);
         return;
     }
@@ -97,13 +96,13 @@ m_height(0)
     }
     png_read_image(pngstruct, rowpointers);
     png_destroy_read_struct(&pngstruct, &pnginfo, &pngendinfo);
-    free(rowpointers);
+    delete[] rowpointers;
     fclose(imagefile);
 }
 
 ieImage::~ieImage(void)
 {
-    
+    delete[] m_data;
 }
 
 const png_byte* ieImage::getData(void) const
