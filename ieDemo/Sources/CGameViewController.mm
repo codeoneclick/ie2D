@@ -15,6 +15,7 @@
 #include "ieStage.h"
 #include "ieImage.h"
 #include "ieColor.h"
+#include "ieSprite.h"
 
 @interface CGameViewController ()
 
@@ -41,16 +42,16 @@
     transition->addChild(sprite);
     sprite->setColor(color_01);
     
-    std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
+    /*std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
     std::shared_ptr<ieDisplayObjectContainer> sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
     transition->addChild(sprite2);
-    sprite2->setColor(color_02);
+    sprite2->setColor(color_02);*/
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
     path.append("_e01_move_18.png");
-    
-    ieImage *image = new ieImage(path);
+    std::shared_ptr<ieSprite> sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 100, 100), path);
+    transition->addChild(sprite3);
 }
 
 - (void)didReceiveMemoryWarning

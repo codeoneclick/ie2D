@@ -24,7 +24,9 @@ m_stage(nullptr),
 m_camera(nullptr),
 m_frame(frame),
 m_parent(nullptr),
-m_modelview(1.0f)
+m_modelview(1.0f),
+m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
+m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
     m_description = "ieDisplayObject";
     
@@ -45,16 +47,6 @@ ieDisplayObject::~ieDisplayObject(void)
     ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
 }
 
-glm::vec4 ieDisplayObject::convertToOGLFrame(const glm::vec4& frame) const
-{
-    glm::vec4 oglFrame(0.0f);
-    oglFrame.x = (m_frame.x / m_stage->m_frame.z) * 2.0f - 1.0f;
-    oglFrame.y = ((m_stage->m_frame.w - m_frame.y) / m_stage->m_frame.w) * 2.0f - 1.0f;
-    oglFrame.z = ((m_frame.x + m_frame.z) / m_stage->m_frame.z) * 2.0f - 1.0f;
-    oglFrame.w = ((m_stage->m_frame.w - (m_frame.y + m_frame.w)) / m_stage->m_frame.w) * 2.0f - 1.0f;
-    return oglFrame;
-}
-
 void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
 {
     ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
@@ -72,7 +64,7 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     glm::mat4x4 translation = glm::translate(glm::mat4x4(1.0f), glm::vec3(m_frame.x + m_frame.z * 0.5f,
                                                                           m_frame.y + m_frame.w * 0.5f, 0.0f));
-    glm::mat4x4 rotation = glm::rotate(glm::mat4x4(1.0f), glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4x4 rotation = glm::rotate(glm::mat4x4(1.0f), glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4x4 scale = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
     m_modelview = translation * rotation * scale;
 }
@@ -118,13 +110,39 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_camera = std::static_pointer_cast<ieCamera>(event->getObjectWithKey("camera"));
     assert(m_camera != nullptr);
     
-    m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, shared_from_this());
-    ieMaterial::setShader(m_shader);
-    ieMaterial::setBlending(false);
+    ieMaterial::setBlending(true);
+    ieMaterial::setBlendingFunctionSource(GL_SRC_ALPHA);
+    ieMaterial::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     ieMaterial::setCulling(false);
     ieMaterial::setDepthTest(false);
     
+    switch (m_drawMode) {
+        case E_DRAW_OBJECT_MODE_V2C4:
+        {
+            m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, shared_from_this());
+            ieMaterial::setShader(m_shader);
+        }
+            break;
+            
+        case E_DRAW_OBJECT_MODE_V2T2C4:
+        {
+            m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, shared_from_this());
+            ieMaterial::setShader(m_shader);
+        }
+            break;
+            
+        case E_DRAW_OBJECT_MODE_CUSTOM:
+        {
+            std::cout<<"custom draw mode"<<std::endl;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
     m_shape = std::make_shared<ieShape>(glm::vec4(-0.5f, 0.5f, 0.5f, -0.5f));
+    ieDisplayObject::setColor(m_color);
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)

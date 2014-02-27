@@ -31,7 +31,7 @@ protected:
 public:
     
     ieDisplayObjectContainer(const glm::vec4& frame);
-    ~ieDisplayObjectContainer(void);
+    virtual ~ieDisplayObjectContainer(void);
     
     void addChild(const std::shared_ptr<ieDisplayObject>& child);
     void addChildAt(const std::shared_ptr<ieDisplayObject>& child, i32 index);

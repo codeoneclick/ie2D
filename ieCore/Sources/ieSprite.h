@@ -9,6 +9,36 @@
 #ifndef __ieCore__ieSprite__
 #define __ieCore__ieSprite__
 
-#include <iostream>
+#include "ieDisplayObjectContainer.h"
 
-#endif /* defined(__ieCore__ieSprite__) */
+class ieColor;
+class ieTexture;
+class ieSprite : public ieDisplayObjectContainer
+{
+private:
+    
+protected:
+    
+    virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
+    virtual void onDraw(const std::shared_ptr<ieEvent>& event);
+    virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);
+    virtual void onExitFrame(const std::shared_ptr<ieEvent>& event);
+    
+    virtual void onAdded(const std::shared_ptr<ieEvent>& event);
+    virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
+    
+    std::string m_imageName;
+    std::shared_ptr<ieTexture> m_texture;
+    
+public:
+    ieSprite(const glm::vec4& frame,
+             const std::shared_ptr<ieColor>& color);
+    ieSprite(const glm::vec4& frame,
+             const std::string& imageName,
+             const std::shared_ptr<ieColor>& color = nullptr);
+    
+    virtual ~ieSprite(void);
+    
+};
+
+#endif

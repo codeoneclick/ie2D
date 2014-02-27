@@ -67,7 +67,6 @@ void ieDisplayObjectContainer::onAdded(const std::shared_ptr<ieEvent>& event)
 void ieDisplayObjectContainer::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
     ieDisplayObject::onRemoved(event);
-    ieDisplayObject::onAdded(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onRemoved(event);
     });

@@ -67,8 +67,7 @@ m_height(0)
     
     png_get_IHDR(pngstruct, pnginfo, &m_width, &m_height, &bitdepth, &colortype,
                  NULL, NULL, NULL);
-    i32 rgb = PNG_COLOR_TYPE_RGB;
-    i32 rgba = PNG_COLOR_TYPE_RGB_ALPHA;
+
     png_read_update_info(pngstruct, pnginfo);
     i32 rowbytes = png_get_rowbytes(pngstruct, pnginfo);
     rowbytes += 3 - ((rowbytes - 1) % 4);

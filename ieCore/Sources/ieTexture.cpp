@@ -7,6 +7,7 @@
 //
 
 #include "ieTexture.h"
+#include "ieImage.h"
 
 ieTexture::ieTexture(const std::string& filename) :
 ieResource(E_RESOURCE_TYPE_TEXTURE),
@@ -14,7 +15,17 @@ m_texture(0),
 m_width(0),
 m_height(0)
 {
-    
+    std::shared_ptr<ieImage> image = std::make_shared<ieImage>(filename);
+    m_width = image->getWidth();
+    m_height = image->getHeight();
+    glGenTextures(1, &m_texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&image->getData()[0]);
 }
 
 ieTexture::ieTexture(ui32 texture, ui32 width, ui32 height) :

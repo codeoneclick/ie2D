@@ -51,6 +51,7 @@ protected:
     glm::vec4 m_frame;
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
+    E_DRAW_OBJECT_MODE m_drawMode;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
@@ -59,8 +60,6 @@ protected:
     
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
-    
-    glm::vec4 convertToOGLFrame(const glm::vec4& frame) const;
     
 public:
     
