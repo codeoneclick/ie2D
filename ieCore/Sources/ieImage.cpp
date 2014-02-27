@@ -67,6 +67,7 @@ m_height(0)
     
     png_get_IHDR(pngstruct, pnginfo, &m_width, &m_height, &bitdepth, &colortype,
                  NULL, NULL, NULL);
+    m_format = colortype;
 
     png_read_update_info(pngstruct, pnginfo);
     i32 rowbytes = png_get_rowbytes(pngstruct, pnginfo);
@@ -121,4 +122,26 @@ const ui32 ieImage::getHeight(void) const
 {
     assert(m_height != 0);
     return m_height;
+}
+
+const ui32 ieImage::getFormat(void) const
+{
+    ui32 format = GL_RGB;
+    switch (m_format) {
+        case PNG_COLOR_TYPE_RGB:
+        {
+            format = GL_RGB;
+        }
+            break;
+        case PNG_COLOR_TYPE_RGB_ALPHA:
+        {
+            format = GL_RGBA;
+        }
+            break;
+            
+        default:
+            assert(false);
+            break;
+    }
+    return format;
 }

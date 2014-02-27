@@ -49,6 +49,9 @@ protected:
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
     glm::vec4 m_frame;
+    glm::vec2 m_position;
+    f32 m_rotation;
+    
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
     E_DRAW_OBJECT_MODE m_drawMode;
@@ -65,6 +68,12 @@ public:
     
     ieDisplayObject(const glm::vec4& frame);
     virtual ~ieDisplayObject(void);
+    
+    void setPosition(const glm::vec2& position);
+    glm::vec2 getPosition(void) const;
+    
+    void setRotation(f32 rotation);
+    f32 getRotation(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

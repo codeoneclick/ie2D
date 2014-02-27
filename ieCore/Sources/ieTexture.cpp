@@ -9,6 +9,8 @@
 #include "ieTexture.h"
 #include "ieImage.h"
 
+#define TO_RGB(r,g,b) (unsigned short)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3))
+
 ieTexture::ieTexture(const std::string& filename) :
 ieResource(E_RESOURCE_TYPE_TEXTURE),
 m_texture(0),
@@ -24,8 +26,9 @@ m_height(0)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&image->getData()[0]);
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, image->getFormat(), m_width, m_height, 0,
+                 image->getFormat(), GL_UNSIGNED_BYTE, (GLvoid*)&image->getData()[0]);
 }
 
 ieTexture::ieTexture(ui32 texture, ui32 width, ui32 height) :

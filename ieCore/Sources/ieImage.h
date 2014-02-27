@@ -18,6 +18,7 @@ private:
 protected:
     
     png_byte* m_data;
+    ui32 m_format;
     ui32 m_width;
     ui32 m_height;
     
@@ -29,6 +30,7 @@ public:
     const png_byte* getData(void) const;
     const ui32 getWidth(void) const;
     const ui32 getHeight(void) const;
+    const ui32 getFormat(void) const;
     
 };
 

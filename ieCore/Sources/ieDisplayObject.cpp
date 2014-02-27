@@ -25,6 +25,8 @@ m_camera(nullptr),
 m_frame(frame),
 m_parent(nullptr),
 m_modelview(1.0f),
+m_position(glm::vec2(0.0f, 0.0f)),
+m_rotation(0.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
@@ -60,13 +62,50 @@ void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
     m_shape->getVertexBuffer()->unlock();
 }
 
+void ieDisplayObject::setPosition(const glm::vec2& position)
+{
+    m_position = position;
+}
+
+glm::vec2 ieDisplayObject::getPosition(void) const
+{
+    return m_position;
+}
+
+void ieDisplayObject::setRotation(f32 rotation)
+{
+    m_rotation = rotation;
+}
+
+f32 ieDisplayObject::getRotation(void) const
+{
+    return m_rotation;
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
-    glm::mat4x4 translation = glm::translate(glm::mat4x4(1.0f), glm::vec3(m_frame.x + m_frame.z * 0.5f,
-                                                                          m_frame.y + m_frame.w * 0.5f, 0.0f));
-    glm::mat4x4 rotation = glm::rotate(glm::mat4x4(1.0f), glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    glm::mat4x4 scale = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
-    m_modelview = translation * rotation * scale;
+    std::shared_ptr<ieDisplayObjectContainer> parent = m_parent;
+    glm::mat4x4 parentMatrix(1.0f);
+    while(parent != nullptr)
+    {
+        glm::vec2 position = parent->m_position;
+        f32 rotation = parent->m_rotation;
+        glm::vec4 frame = parent->m_frame;
+        glm::mat4x4 forwardTranslationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(position.x + frame.z * 0.5f,
+                                                                                           position.y + frame.w * 0.5f, 0.0f));
+        glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+        glm::mat4x4 backwardTranslationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(-frame.z * 0.5f,
+                                                                                            -frame.w * 0.5f, 0.0f));
+        parentMatrix = parentMatrix * forwardTranslationMatrix * rotationMatrix * backwardTranslationMatrix;
+        
+        parent = parent->m_parent;
+    }
+    
+    glm::mat4x4 translationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(m_position.x + m_frame.z * 0.5f,
+                                                                                m_position.y + m_frame.w * 0.5f, 0.0f));
+    glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4x4 scaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
+    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)

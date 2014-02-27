@@ -11,18 +11,21 @@
 
 static const char* ieShaderV2T2C4_vert = STRING_SHADER
 (
- attribute vec4 attribute_position;
+ attribute vec2 attribute_position;
  attribute vec2 attribute_texcoord;
  attribute vec4 attribute_color;
  
  varying vec2 varying_texcoord;
  varying vec4 varying_color;
  
+ uniform mat4 uniform_projection;
+ uniform mat4 uniform_modelview;
+ 
  void main(void)
 {
     varying_texcoord = attribute_texcoord / 32767.0  - 1.0;
     varying_color = attribute_color / 255.0;
-    gl_Position = attribute_position;
+    gl_Position = uniform_projection * uniform_modelview * vec4(attribute_position, 0.0, 1.0);
 }
 );
 

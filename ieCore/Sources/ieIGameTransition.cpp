@@ -144,6 +144,8 @@ void ieIGameTransition::onPresentFrame(const std::shared_ptr<ieEvent>& event)
     assert(m_shape != nullptr);
     
     m_shader->bind();
+    m_shader->setMatrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_MODELVIEW);
+    m_shader->setMatrix4x4(glm::mat4x4(1.0f), E_SHADER_UNIFORM_PROJECTION);
     m_shader->setTexture(m_screenTexture->getTexture(), E_SHADER_SAMPLER_01);
     m_shape->bind(m_shader->getAttributes());
     
