@@ -15,11 +15,15 @@ class ieStage : public ieDisplayObjectContainer
 {
 private:
     
+    ieEventDispatcherFunctionShared m_functionOnResize;
+    
 protected:
     
     ui32 m_frameBuffer;
     ui32 m_colorAttachment;
     ui32 m_depthAttachment;
+    
+    void createFBO(ui32 width, ui32 height);
     
     virtual void onResize(const std::shared_ptr<ieEvent>& event);
     

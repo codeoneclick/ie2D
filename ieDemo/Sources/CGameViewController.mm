@@ -7,7 +7,7 @@
 //
 
 #include "CGameViewController.h"
-#include "ieIGameWorkflow.h"
+#include "ieGameController.h"
 #include "ieIGameTransition.h"
 #include "ieIOGLWindow.h"
 #include "ieDisplayObject.h"
@@ -20,6 +20,7 @@
 @interface CGameViewController ()
 
 @property (weak, nonatomic) IBOutlet ieHWND *m_hwnd;
+@property (unsafe_unretained, nonatomic) ieGameController* gameController;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite;
 
 @end
@@ -29,14 +30,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setFrame:CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
+    CGRect screenFrame = CGRectMake(0.0f, 0.0f, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
     
-    ieIGameWorkflow* workflow = new ieIGameWorkflow();
+    [self.view setFrame:screenFrame];
+    [self.m_hwnd setFrame:screenFrame];
     
+    self.view.autoresizingMask = UIViewAutoresizingNone;
+    self.m_hwnd.autoresizingMask = UIViewAutoresizingNone;
+    
+    self.gameController = new ieGameController();
     std::shared_ptr<ieIOGLWindow> window = std::make_shared<ieIOGLWindow>((__bridge void*)_m_hwnd);
     std::shared_ptr<ieIGameTransition> transition = std::make_shared<ieIGameTransition>("demo", window);
-    workflow->registerTransition(transition);
-    workflow->goToTransition("demo");
+    self.gameController->registerTransition(transition);
+    self.gameController->goToTransition("demo");
     
     std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 0, 255, 255);
     self.sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(10, 10, 50, 50));
@@ -77,6 +83,32 @@
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown &&
             interfaceOrientation != UIInterfaceOrientationPortrait);
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{
+    CGSize size = CGSizeZero;
+    if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
+    {
+        size = CGSizeMake(MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
+    } else {
+        size = CGSizeMake(MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
+    }
+    self.gameController->onResize(size.width, size.height);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.view.hidden = YES;
+    }];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
+{
+    self.view.hidden = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.alpha = 1.0f;
+    }];
 }
 
 - (void)viewDidUnload

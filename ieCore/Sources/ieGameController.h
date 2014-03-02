@@ -1,20 +1,20 @@
 //
-//  ieIGameWorkflow.h
+//  ieGameController.h
 //  ieCore
 //
 //  Created by sergey.sergeev on 2/5/14.
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef __ieCore__ieIGameWorkflow__
-#define __ieCore__ieIGameWorkflow__
+#ifndef __ieCore__ieGameController__
+#define __ieCore__ieGameController__
 
 #include "ieCommon.h"
 
 class ieIGameTransition;
 class ieIGameLoop;
 
-class ieIGameWorkflow
+class ieGameController
 {
 private:
     
@@ -26,13 +26,15 @@ protected:
 
 public:
     
-    ieIGameWorkflow(void);
-    virtual ~ieIGameWorkflow(void);
+    ieGameController(void);
+    virtual ~ieGameController(void);
     
     void registerTransition(const std::shared_ptr<ieIGameTransition>& transition);
     void unregisterTransition(const std::shared_ptr<ieIGameTransition>& transition);
     
     void goToTransition(const std::string& name);
+    
+    void onResize(ui32 width, ui32 height);
 };
 
 #endif

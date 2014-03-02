@@ -19,6 +19,8 @@
 
 @interface ieHWND : UIView
 
+@property (nonatomic, assign) UIInterfaceOrientation orientation;
+
 @end
 
 #elif defined(__OSX__)

@@ -38,6 +38,8 @@ protected:
     std::shared_ptr<ieIOGLWindow> m_window;
     std::shared_ptr<ieIGraphicsContext> m_graphicsContext;
     
+    virtual void onResize(const std::shared_ptr<ieEvent>& event);
+    
     virtual void onRegistered(const std::shared_ptr<ieEvent>& event);
     virtual void onUnregistered(const std::shared_ptr<ieEvent>& event);
     

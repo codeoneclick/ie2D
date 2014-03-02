@@ -48,6 +48,9 @@
 		2109422518B15D1700C86176 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421518B15D1600C86176 /* zutil.c */; };
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
 		2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
+		2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3118C278EE009A13AC /* json_reader.cpp */; };
+		2156BB3718C278EE009A13AC /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3318C278EE009A13AC /* json_value.cpp */; };
+		2156BB3818C278EE009A13AC /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3518C278EE009A13AC /* json_writer.cpp */; };
 		2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217317491821AE6700FF3D1E /* OpenGL.framework */; };
 		21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343D718A8D59B0041EF47 /* ieShader.cpp */; };
 		21C343DC18A8D5AF0041EF47 /* ieMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */; };
@@ -71,7 +74,7 @@
 		21EBB4FD18A23CC4003CB322 /* ieVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */; };
 		21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */; };
 		21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */; };
-		21EBB51218A26921003CB322 /* ieIGameWorkflow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */; };
+		21EBB51218A26921003CB322 /* ieGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51018A26921003CB322 /* ieGameController.cpp */; };
 		21EBB51518A26937003CB322 /* ieIGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51318A26937003CB322 /* ieIGameTransition.cpp */; };
 		21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51718A2716F003CB322 /* ieResource.cpp */; };
 		21EBB51C18A2719E003CB322 /* ieResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51A18A2719E003CB322 /* ieResourceAccessor.cpp */; };
@@ -458,6 +461,22 @@
 		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
 		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
 		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
+		2156BB2518C278EE009A13AC /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		2156BB2618C278EE009A13AC /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		2156BB2718C278EE009A13AC /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		2156BB2818C278EE009A13AC /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		2156BB2918C278EE009A13AC /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		2156BB2A18C278EE009A13AC /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		2156BB2B18C278EE009A13AC /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		2156BB2C18C278EE009A13AC /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		2156BB2E18C278EE009A13AC /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		2156BB2F18C278EE009A13AC /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		2156BB3018C278EE009A13AC /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		2156BB3118C278EE009A13AC /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		2156BB3218C278EE009A13AC /* json_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_tool.h; sourceTree = "<group>"; };
+		2156BB3318C278EE009A13AC /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		2156BB3418C278EE009A13AC /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		2156BB3518C278EE009A13AC /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		21853415181EFC6200315CBB /* libieCore-osx_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieCore-osx_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C343D718A8D59B0041EF47 /* ieShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieShader.cpp; path = Sources/ieShader.cpp; sourceTree = "<group>"; };
@@ -500,8 +519,8 @@
 		21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGraphicsContext.cpp; path = Sources/ieIGraphicsContext.cpp; sourceTree = "<group>"; };
 		21EBB50718A26616003CB322 /* ieIGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGraphicsContext.h; path = Sources/ieIGraphicsContext.h; sourceTree = "<group>"; };
 		21EBB50D18A2679F003CB322 /* ieIOGLWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIOGLWindow.h; path = Sources/ieIOGLWindow.h; sourceTree = "<group>"; };
-		21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieIGameWorkflow.cpp; path = Sources/ieIGameWorkflow.cpp; sourceTree = "<group>"; };
-		21EBB51118A26921003CB322 /* ieIGameWorkflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGameWorkflow.h; path = Sources/ieIGameWorkflow.h; sourceTree = "<group>"; };
+		21EBB51018A26921003CB322 /* ieGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieGameController.cpp; path = Sources/ieGameController.cpp; sourceTree = "<group>"; };
+		21EBB51118A26921003CB322 /* ieGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieGameController.h; path = Sources/ieGameController.h; sourceTree = "<group>"; };
 		21EBB51318A26937003CB322 /* ieIGameTransition.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieIGameTransition.cpp; path = Sources/ieIGameTransition.cpp; sourceTree = "<group>"; };
 		21EBB51418A26937003CB322 /* ieIGameTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIGameTransition.h; path = Sources/ieIGameTransition.h; sourceTree = "<group>"; };
 		21EBB51718A2716F003CB322 /* ieResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieResource.cpp; path = Sources/ieResource.cpp; sourceTree = "<group>"; };
@@ -1167,6 +1186,54 @@
 			path = "Libraries/zlib-1.2.8";
 			sourceTree = "<group>";
 		};
+		2156BB2218C278EE009A13AC /* jsoncpp-0.6.0 */ = {
+			isa = PBXGroup;
+			children = (
+				2156BB2318C278EE009A13AC /* include */,
+				2156BB2D18C278EE009A13AC /* src */,
+			);
+			name = "jsoncpp-0.6.0";
+			path = "Libraries/jsoncpp-0.6.0";
+			sourceTree = "<group>";
+		};
+		2156BB2318C278EE009A13AC /* include */ = {
+			isa = PBXGroup;
+			children = (
+				2156BB2418C278EE009A13AC /* json */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		2156BB2418C278EE009A13AC /* json */ = {
+			isa = PBXGroup;
+			children = (
+				2156BB2518C278EE009A13AC /* autolink.h */,
+				2156BB2618C278EE009A13AC /* config.h */,
+				2156BB2718C278EE009A13AC /* features.h */,
+				2156BB2818C278EE009A13AC /* forwards.h */,
+				2156BB2918C278EE009A13AC /* json.h */,
+				2156BB2A18C278EE009A13AC /* reader.h */,
+				2156BB2B18C278EE009A13AC /* value.h */,
+				2156BB2C18C278EE009A13AC /* writer.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		2156BB2D18C278EE009A13AC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2156BB2E18C278EE009A13AC /* json_batchallocator.h */,
+				2156BB2F18C278EE009A13AC /* json_internalarray.inl */,
+				2156BB3018C278EE009A13AC /* json_internalmap.inl */,
+				2156BB3118C278EE009A13AC /* json_reader.cpp */,
+				2156BB3218C278EE009A13AC /* json_tool.h */,
+				2156BB3318C278EE009A13AC /* json_value.cpp */,
+				2156BB3418C278EE009A13AC /* json_valueiterator.inl */,
+				2156BB3518C278EE009A13AC /* json_writer.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		21EBB4B4189FD549003CB322 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,8 +1328,8 @@
 		21EBB50F18A267BD003CB322 /* ieTransition */ = {
 			isa = PBXGroup;
 			children = (
-				21EBB51118A26921003CB322 /* ieIGameWorkflow.h */,
-				21EBB51018A26921003CB322 /* ieIGameWorkflow.cpp */,
+				21EBB51118A26921003CB322 /* ieGameController.h */,
+				21EBB51018A26921003CB322 /* ieGameController.cpp */,
 				21EBB51418A26937003CB322 /* ieIGameTransition.h */,
 				21EBB51318A26937003CB322 /* ieIGameTransition.cpp */,
 				21EBB52A18A299A5003CB322 /* ieIGameLoop.h */,
@@ -1355,6 +1422,7 @@
 		A42081941733ABB20004729E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2156BB2218C278EE009A13AC /* jsoncpp-0.6.0 */,
 				210940F318B1595100C86176 /* glm-0.9.5.2 */,
 				21093F4018B1563600C86176 /* gcdpp-0.0.1 */,
 				210941FC18B15D1600C86176 /* zlib-1.2.8 */,
@@ -1447,6 +1515,7 @@
 				21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */,
 				210940C718B1563700C86176 /* png.c in Sources */,
 				21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */,
+				2156BB3818C278EE009A13AC /* json_writer.cpp in Sources */,
 				21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */,
 				21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */,
 				2109421F18B15D1700C86176 /* infback.c in Sources */,
@@ -1465,10 +1534,12 @@
 				21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */,
 				2109421C18B15D1600C86176 /* gzlib.c in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
+				2156BB3718C278EE009A13AC /* json_value.cpp in Sources */,
 				210940D218B1563700C86176 /* pngtrans.c in Sources */,
 				21EBB52E18A29ABB003CB322 /* ieGameLoop_ios.cpp in Sources */,
 				2109421D18B15D1600C86176 /* gzread.c in Sources */,
 				2109422418B15D1700C86176 /* uncompr.c in Sources */,
+				2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */,
 				210940D318B1563700C86176 /* pngwio.c in Sources */,
 				210940D518B1563700C86176 /* pngwtran.c in Sources */,
 				21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */,
@@ -1500,7 +1571,7 @@
 				21EBB4FA18A23C9A003CB322 /* ieShape.cpp in Sources */,
 				2109421718B15D1600C86176 /* adler32.c in Sources */,
 				210940D618B1563700C86176 /* pngwutil.c in Sources */,
-				21EBB51218A26921003CB322 /* ieIGameWorkflow.cpp in Sources */,
+				21EBB51218A26921003CB322 /* ieGameController.cpp in Sources */,
 				210940D418B1563700C86176 /* pngwrite.c in Sources */,
 				21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */,
 				21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */,
@@ -1655,11 +1726,11 @@
 					"\"$(SRCROOT)/Libraries/glm-0.9.5.2\"",
 					"\"$(SRCROOT)/Libraries/zlib-1.2.8\"",
 					"\"$(SRCROOT)/Libraries/libpng-1.6.9\"",
-					"\"$(SRCROOT)/Libraries/lodepng-1.3\"",
 					"\"$(SRCROOT)/Libraries/pugixml-1.2\"",
 					"\"$(SRCROOT)/Libraries/gcdpp-0.0.1/include\"",
 					"\"$(SRCROOT)/Libraries/ogles-2.0/include\"",
 					"\"$(SRCROOT)/Libraries/pvrtextool-3.2/include\"",
+					"\"$(SRCROOT)/Libraries/jsoncpp-0.6.0/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1714,11 +1785,11 @@
 					"\"$(SRCROOT)/Libraries/glm-0.9.5.2\"",
 					"\"$(SRCROOT)/Libraries/zlib-1.2.8\"",
 					"\"$(SRCROOT)/Libraries/libpng-1.6.9\"",
-					"\"$(SRCROOT)/Libraries/lodepng-1.3\"",
 					"\"$(SRCROOT)/Libraries/pugixml-1.2\"",
 					"\"$(SRCROOT)/Libraries/gcdpp-0.0.1/include\"",
 					"\"$(SRCROOT)/Libraries/ogles-2.0/include\"",
 					"\"$(SRCROOT)/Libraries/pvrtextool-3.2/include\"",
+					"\"$(SRCROOT)/Libraries/jsoncpp-0.6.0/include\"",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

@@ -60,6 +60,13 @@ std::string ieIGameTransition::getName(void) const
     return m_name;
 }
 
+void ieIGameTransition::onResize(const std::shared_ptr<ieEvent>& event)
+{
+    ieStage::onResize(event);
+    m_camera->onResize(m_window->getWidth(), m_window->getHeight());
+    m_screenTexture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());
+}
+
 void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
 {
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);

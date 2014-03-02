@@ -31,13 +31,18 @@ m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
     m_description = "ieDisplayObject";
-    
-    m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onUpdate, this, std::placeholders::_1));
-    m_functionOnDraw = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onDraw, this, std::placeholders::_1));
-    m_functionOnEnterFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onEnterFrame, this, std::placeholders::_1));
-    m_functionOnExitFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onExitFrame, this, std::placeholders::_1));
-    m_functionOnAdded = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onAdded, this, std::placeholders::_1));
-    m_functionOnRemoved = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onRemoved, this, std::placeholders::_1));
+    m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onUpdate,
+                                                                               this, std::placeholders::_1));
+    m_functionOnDraw = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onDraw,
+                                                                             this, std::placeholders::_1));
+    m_functionOnEnterFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onEnterFrame,
+                                                                                   this, std::placeholders::_1));
+    m_functionOnExitFrame = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onExitFrame,
+                                                                                  this, std::placeholders::_1));
+    m_functionOnAdded = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onAdded,
+                                                                              this, std::placeholders::_1));
+    m_functionOnRemoved = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onRemoved,
+                                                                                this, std::placeholders::_1));
     
     ieDisplayObject::addEventListener(kEVENT_ON_ADDED, m_functionOnAdded);
     ieDisplayObject::addEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);

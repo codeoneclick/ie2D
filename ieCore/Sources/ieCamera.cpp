@@ -11,6 +11,11 @@
 ieCamera::ieCamera(ui32 screenWidth, ui32 screenHeight)
 {
     m_description = "ieCamera";
+    ieCamera::onResize(screenWidth, screenHeight);
+}
+
+void ieCamera::onResize(ui32 screenWidth, ui32 screenHeight)
+{
     m_projection = glm::ortho(0.0f,
                               static_cast<f32>(screenWidth),
                               static_cast<f32>(screenHeight),

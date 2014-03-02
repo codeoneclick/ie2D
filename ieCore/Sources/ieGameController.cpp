@@ -1,17 +1,17 @@
 //
-//  ieIGameWorkflow.cpp
+//  ieGameController.cpp
 //  ieCore
 //
 //  Created by sergey.sergeev on 2/5/14.
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#include "ieIGameWorkflow.h"
+#include "ieGameController.h"
 #include "ieIGameTransition.h"
 #include "ieIGameLoop.h"
 #include "ieEvent.h"
 
-ieIGameWorkflow::ieIGameWorkflow(void) :
+ieGameController::ieGameController(void) :
 m_currentTransition(nullptr)
 {
 #if defined (__IOS__)
@@ -23,12 +23,12 @@ m_currentTransition(nullptr)
 #endif
 }
 
-ieIGameWorkflow::~ieIGameWorkflow(void)
+ieGameController::~ieGameController(void)
 {
     m_transitions.clear();
 }
 
-void ieIGameWorkflow::registerTransition(const std::shared_ptr<ieIGameTransition>& transition)
+void ieGameController::registerTransition(const std::shared_ptr<ieIGameTransition>& transition)
 {
     assert(m_transitions.find(transition->getName()) == m_transitions.end());
     m_transitions.insert(std::make_pair(transition->getName(), transition));
@@ -36,7 +36,7 @@ void ieIGameWorkflow::registerTransition(const std::shared_ptr<ieIGameTransition
     transition->dispatchEvent(eventOnTransitionRegister);
 }
 
-void ieIGameWorkflow::unregisterTransition(const std::shared_ptr<ieIGameTransition>& transition)
+void ieGameController::unregisterTransition(const std::shared_ptr<ieIGameTransition>& transition)
 {
     assert(m_transitions.find(transition->getName()) != m_transitions.end());
     m_transitions.erase(m_transitions.find(transition->getName()));
@@ -44,9 +44,9 @@ void ieIGameWorkflow::unregisterTransition(const std::shared_ptr<ieIGameTransiti
     transition->dispatchEvent(eventOnTransitionUnregister);
 }
 
-void ieIGameWorkflow::goToTransition(const std::string& name)
+void ieGameController::goToTransition(const std::string& name)
 {
-    std::cout<<"ieIGameWorkflow::goToTransition"<<std::endl;
+    std::cout<<"ieGameController::goToTransition"<<std::endl;
     assert(m_transitions.find(name) != m_transitions.end());
     if(m_currentTransition != nullptr)
     {
@@ -57,6 +57,14 @@ void ieIGameWorkflow::goToTransition(const std::string& name)
     m_gameLoop->setCurrentTransition(m_currentTransition);
     std::shared_ptr<ieEvent> eventOnTransitionEnter = std::make_shared<ieEvent>(kEVENT_ON_TRANSITION_ENTER, m_currentTransition);
     m_currentTransition->dispatchEvent(eventOnTransitionEnter);
+}
+
+void ieGameController::onResize(ui32 width, ui32 height)
+{
+    std::shared_ptr<ieEvent> eventOnResize = std::make_shared<ieEvent>(kEVENT_ON_RESIZE, m_currentTransition);
+    eventOnResize->addValueWithKey(width, "width");
+    eventOnResize->addValueWithKey(height, "height");
+    m_currentTransition->dispatchEvent(eventOnResize);
 }
 
 

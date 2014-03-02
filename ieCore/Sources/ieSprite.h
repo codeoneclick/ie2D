@@ -27,14 +27,14 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
-    std::string m_imageName;
+    std::string m_filename;
     std::shared_ptr<ieTexture> m_texture;
     
 public:
     ieSprite(const glm::vec4& frame,
              const std::shared_ptr<ieColor>& color);
     ieSprite(const glm::vec4& frame,
-             const std::string& imageName,
+             const std::string& filename,
              const std::shared_ptr<ieColor>& color = nullptr);
     
     virtual ~ieSprite(void);

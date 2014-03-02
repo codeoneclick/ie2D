@@ -17,7 +17,7 @@
     CGameViewController *vc = [CGameViewController new];
     UINavigationController* navigationViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     [navigationViewController setNavigationBarHidden:YES animated:NO];
-    self.window.backgroundColor = [UIColor blackColor];
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window setRootViewController:navigationViewController];
     [self.window makeKeyAndVisible];
     return YES;

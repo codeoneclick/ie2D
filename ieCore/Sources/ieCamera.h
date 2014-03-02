@@ -24,6 +24,8 @@ public:
     ieCamera(ui32 screenWidth, ui32 screenHeight);
     ~ieCamera(void);
     
+    void onResize(ui32 screenWidth, ui32 screenHeight);
+    
     glm::mat4x4 getProjection(void) const;
 };
 

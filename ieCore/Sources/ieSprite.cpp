@@ -19,18 +19,18 @@ m_texture(nullptr)
 {
     m_description = "ieSprite";
     m_color = color;
-    m_imageName = "";
+    m_filename = "";
 }
 
 ieSprite::ieSprite(const glm::vec4& frame,
-                   const std::string& imageName,
+                   const std::string& filename,
                    const std::shared_ptr<ieColor>& color) :
 ieDisplayObjectContainer(frame),
 m_texture(nullptr)
 {
     m_description = "ieSprite";
     m_color = color != nullptr ? color : std::make_shared<ieColor>(255, 255, 255, 255);
-    m_imageName = imageName;
+    m_filename = filename;
     m_drawMode = E_DRAW_OBJECT_MODE_V2T2C4;
 }
 
@@ -66,7 +66,7 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObjectContainer::onAdded(event);
     if(m_drawMode == E_DRAW_OBJECT_MODE_V2T2C4)
     {
-        m_texture = m_resourceAccessor->getTexture(m_imageName);
+        m_texture = m_resourceAccessor->getTexture(m_filename);
     }
 }
 

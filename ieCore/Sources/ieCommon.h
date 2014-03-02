@@ -38,6 +38,7 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <png.h>
+#include <json/json.h>
 
 #if defined(__IOS__)
 
@@ -54,7 +55,7 @@
 #include <android_native_app_glue.h>
 #include <android/asset_manager.h>
 
-#include <EGL/egl.h>
+#include <EGL/egl.hx>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 
