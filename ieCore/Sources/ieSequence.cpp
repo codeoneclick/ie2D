@@ -19,6 +19,10 @@ ieResource(E_RESOURCE_TYPE_SEQUENSE)
     {
         std::cout<<reader.getFormatedErrorMessages()<<std::endl;
     }
+    Json::Value animationSequences = root["animationSequences"];
+    Json::Value animationObjects = root["animationObjects"];
+    Json::Value textureAtlas = root["textureAtlas"];
+    
 }
 
 ieSequence::~ieSequence(void)

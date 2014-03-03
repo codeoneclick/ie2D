@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2109422718B1605200C86176 /* _e01_move_18.png in Resources */ = {isa = PBXBuildFile; fileRef = 2109422618B1605200C86176 /* _e01_move_18.png */; };
 		210AA7CF18A3F0CF00CD24F8 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 210AA7CE18A3F0CF00CD24F8 /* main.mm */; };
+		212B8C8D18C4E60200372655 /* 4.json in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8A18C4E60200372655 /* 4.json */; };
+		212B8C8E18C4E60200372655 /* 41.png in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8B18C4E60200372655 /* 41.png */; };
+		212B8C8F18C4E60200372655 /* sector_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8C18C4E60200372655 /* sector_02.png */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
@@ -48,6 +51,9 @@
 /* Begin PBXFileReference section */
 		2109422618B1605200C86176 /* _e01_move_18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = _e01_move_18.png; path = ../ieBundle/_e01_move_18.png; sourceTree = "<group>"; };
 		210AA7CE18A3F0CF00CD24F8 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Sources/main.mm; sourceTree = "<group>"; };
+		212B8C8A18C4E60200372655 /* 4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 4.json; path = ../ieBundle/4.json; sourceTree = "<group>"; };
+		212B8C8B18C4E60200372655 /* 41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 41.png; path = ../ieBundle/41.png; sourceTree = "<group>"; };
+		212B8C8C18C4E60200372655 /* sector_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sector_02.png; path = ../ieBundle/sector_02.png; sourceTree = "<group>"; };
 		21D070C1181D9D460019D264 /* ieDemo_d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ieDemo_d.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -148,6 +154,9 @@
 		21D07279181DB33E0019D264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				212B8C8A18C4E60200372655 /* 4.json */,
+				212B8C8B18C4E60200372655 /* 41.png */,
+				212B8C8C18C4E60200372655 /* sector_02.png */,
 				2109422618B1605200C86176 /* _e01_move_18.png */,
 			);
 			name = Resources;
@@ -242,8 +251,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212B8C8E18C4E60200372655 /* 41.png in Resources */,
+				212B8C8F18C4E60200372655 /* sector_02.png in Resources */,
 				21FC83B21887D5E4006AB4B4 /* CGameViewController.xib in Resources */,
 				21FC83BD1887D681006AB4B4 /* ieDemo.plist in Resources */,
+				212B8C8D18C4E60200372655 /* 4.json in Resources */,
 				2109422718B1605200C86176 /* _e01_move_18.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

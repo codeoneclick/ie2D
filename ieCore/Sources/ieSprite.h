@@ -13,6 +13,7 @@
 
 class ieColor;
 class ieTexture;
+class ieSequence;
 class ieSprite : public ieDisplayObjectContainer
 {
 private:
@@ -27,8 +28,10 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
-    std::string m_filename;
+    std::string m_imageFilename;
+    std::string m_sequenceFilename;
     std::shared_ptr<ieTexture> m_texture;
+    std::shared_ptr<ieSequence> m_sequence;
     
 public:
     ieSprite(const glm::vec4& frame,

@@ -15,11 +15,12 @@
 ieSprite::ieSprite(const glm::vec4& frame,
                    const std::shared_ptr<ieColor>& color) :
 ieDisplayObjectContainer(frame),
-m_texture(nullptr)
+m_texture(nullptr),
+m_imageFilename(""),
+m_sequenceFilename("")
 {
     m_description = "ieSprite";
     m_color = color;
-    m_filename = "";
 }
 
 ieSprite::ieSprite(const glm::vec4& frame,
@@ -30,7 +31,18 @@ m_texture(nullptr)
 {
     m_description = "ieSprite";
     m_color = color != nullptr ? color : std::make_shared<ieColor>(255, 255, 255, 255);
-    m_filename = filename;
+    if(filename.find(".png") != std::string::npos)
+    {
+        m_imageFilename = filename;
+        m_sequenceFilename = "";
+    } else if(filename.find(".json") != std::string::npos ||
+              filename.find(".xml") != std::string::npos)
+    {
+        m_sequenceFilename = filename;
+        m_imageFilename = "";
+    } else {
+        assert(false);
+    }
     m_drawMode = E_DRAW_OBJECT_MODE_V2T2C4;
 }
 
@@ -66,7 +78,16 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObjectContainer::onAdded(event);
     if(m_drawMode == E_DRAW_OBJECT_MODE_V2T2C4)
     {
-        m_texture = m_resourceAccessor->getTexture(m_filename);
+        if(m_imageFilename.length() != 0 &&
+           m_imageFilename.find(".png") != std::string::npos)
+        {
+            m_texture = m_resourceAccessor->getTexture(m_imageFilename);
+        }  else if(m_sequenceFilename.length() != 0 &&
+                   (m_sequenceFilename.find(".json") != std::string::npos ||
+                    m_sequenceFilename.find(".xml") != std::string::npos))
+        {
+            m_sequence = m_resourceAccessor->getSequence(m_sequenceFilename);
+        }
     }
 }
 
