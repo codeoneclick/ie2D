@@ -51,6 +51,7 @@ protected:
     glm::vec4 m_frame;
     glm::vec2 m_position;
     f32 m_rotation;
+    glm::vec2 m_scale;
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
@@ -76,6 +77,9 @@ public:
     
     void setRotation(f32 rotation);
     f32 getRotation(void) const;
+    
+    void setScale(const glm::vec2& scale);
+    glm::vec2 getScale(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

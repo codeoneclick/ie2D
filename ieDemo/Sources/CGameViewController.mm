@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet ieHWND *m_hwnd;
 @property (unsafe_unretained, nonatomic) ieGameController* gameController;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite2;
 
 @end
 
@@ -52,10 +53,10 @@
     self.sprite->setPosition(glm::vec2(200, 200));
     
     std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
-    std::shared_ptr<ieDisplayObjectContainer> sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
-    self.sprite->addChild(sprite2);
-    sprite2->setColor(color_02);
-    sprite2->setPosition(glm::vec2(100, 100));
+    self.sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
+    self.sprite->addChild(self.sprite2);
+    self.sprite2->setColor(color_02);
+    self.sprite2->setPosition(glm::vec2(100, 100));
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
@@ -120,7 +121,17 @@
 - (void)onTick:(NSTimer*)sender
 {
     static f32 rotation = 0.0f;
+    static f32 scale = 0.5f;
+    static f32 inc = 0.1f;
     self.sprite->setRotation(rotation);
+    self.sprite->setScale(glm::vec2(scale, scale));
+    self.sprite2->setScale(glm::vec2(scale, scale));
+    self.sprite2->setRotation(rotation);
+    scale += inc;
+    if(scale > 2.0f || scale < 0.5f)
+    {
+        inc *= -1.0f;
+    }
     rotation += 5.5f;
 }
 

@@ -87,6 +87,8 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                (m_sequenceFilename.find(".json") != std::string::npos ||
                 m_sequenceFilename.find(".xml") != std::string::npos))
     {
+        std::shared_ptr<ieColor> color = std::make_shared<ieColor>(255, 255, 255, 0);
+        ieSprite::setColor(color);
         m_sequence = m_resourceAccessor->getSequence(m_sequenceFilename);
         size_t found = m_sequenceFilename.find_last_of("/\\");
         std::string path = m_sequenceFilename.substr(0, found);
@@ -98,7 +100,6 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
         assert(sequenceFrame != m_sequence->getSequenceFrames().end());
         std::for_each((*sequenceFrame).second.m_states.begin(), (*sequenceFrame).second.m_states.end(),  [this, path](const std::pair<std::string, ieSequenceFrameState>& iterator)
         {
-            static f32 offset = 0;
             std::string stateId = iterator.first;
             auto sequenceAnimatedElement = m_sequence->getSequenceAnimatedElements().find(stateId);
             assert(sequenceAnimatedElement != m_sequence->getSequenceAnimatedElements().end());
@@ -116,9 +117,28 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                                         (sequenceElement->second.m_position.x + sequenceElement->second.m_size.x) / static_cast<f32>(m_texture->getWidth()),
                                         1.0f - sequenceElement->second.m_position.y / static_cast<f32>(m_texture->getHeight()));
             sprite->setTextureFrame(frame);
+            
+            f32 scaleX = sqrtf(iterator.second.m_matrix[0][0] * iterator.second.m_matrix[0][0] +
+                               iterator.second.m_matrix[1][0] * iterator.second.m_matrix[1][0]);
+            f32 scaleY = sqrtf(iterator.second.m_matrix[0][1] * iterator.second.m_matrix[0][1] +
+                               iterator.second.m_matrix[1][1] * iterator.second.m_matrix[1][1]);
+            
+            scaleX *= iterator.second.m_matrix[0][0] > 0.0f ? 1.0f : -1.0f;
+            scaleY *= iterator.second.m_matrix[1][1] > 0.0f ? 1.0f : -1.0f;
+            
+            f32 sign = atanf(-iterator.second.m_matrix[1][0] / iterator.second.m_matrix[0][0]);
+            f32 rad  = acosf(iterator.second.m_matrix[0][0] / scaleX);
+            f32 deg  = glm::degrees(rad);
+            
+            if (deg > 90 && sign > 0)
+            {
+                deg = (360 - deg);
+            }
+            
             glm::vec2 position = glm::vec2(iterator.second.m_matrix[3][0], iterator.second.m_matrix[3][1]);
             sprite->setPosition(position);
-            offset += 150;
+            sprite->setRotation(deg);
+            sprite->setScale(glm::vec2(scaleX, scaleY));
         });
         
         /*std::for_each(m_sequence->getSequenceElements().begin(), m_sequence->getSequenceElements().end(), [this, path](const std::pair<std::string, ieSequenceElement>& iterator){

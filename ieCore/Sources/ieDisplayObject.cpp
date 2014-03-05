@@ -27,6 +27,7 @@ m_parent(nullptr),
 m_modelview(1.0f),
 m_position(glm::vec2(0.0f, 0.0f)),
 m_rotation(0.0f),
+m_scale(2.0f, 2.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
@@ -97,6 +98,16 @@ f32 ieDisplayObject::getRotation(void) const
     return m_rotation;
 }
 
+void ieDisplayObject::setScale(const glm::vec2& scale)
+{
+    m_scale = scale;
+}
+
+glm::vec2 ieDisplayObject::getScale(void) const
+{
+    return m_scale;
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     std::shared_ptr<ieDisplayObjectContainer> parent = m_parent;
@@ -120,7 +131,8 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
                                                                                 m_position.y + m_frame.w * 0.5f, 0.0f));
     glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4x4 scaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
-    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix;
+    glm::mat4x4 customScaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_scale.x, m_scale.y, 1.0f));
+    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix * customScaleMatrix;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
