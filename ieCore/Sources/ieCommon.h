@@ -27,6 +27,7 @@
 #include <iostream>
 #include <assert.h>
 #include <functional>
+#include <unordered_map>
 
 #define GLM_FORCE_RADIANS
 

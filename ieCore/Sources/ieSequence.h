@@ -11,16 +11,54 @@
 
 #include "ieResource.h"
 
+typedef struct
+{
+    ui32 m_id;
+    std::string m_imageFilename;
+    ui32 m_width;
+    ui32 m_height;
+} ieSequenceTexture;
+
+typedef struct
+{
+    ui32 m_sequenceTextureId;
+    std::string m_name;
+    glm::ivec2 m_position;
+    glm::ivec2 m_size;
+} ieSequenceElement;
+
+typedef struct
+{
+    i32 index;
+    glm::mat4x4 m_matrix;
+} ieSequenceFrameState;
+
+typedef struct
+{
+    std::unordered_map<std::string, ieSequenceFrameState> m_states;
+} ieSequenceFrame;
+
 class ieSequence : public ieResource
 {
 private:
     
 protected:
     
+    std::unordered_map<ui32, ieSequenceTexture> m_sequenceTextures;
+    std::unordered_map<std::string, ieSequenceElement> m_sequenceElements;
+    std::unordered_map<ui32, ieSequenceFrame> m_sequenceFrames;
+    std::unordered_map<std::string, std::string> m_sequenceAnimatedElements;
+    
 public:
     
     ieSequence(const std::string& filename);
     ~ieSequence(void);
+    
+    const std::unordered_map<ui32, ieSequenceTexture>& getSequenceTextures(void) const;
+    const std::unordered_map<std::string, ieSequenceElement>& getSequenceElements(void) const;
+    const std::unordered_map<ui32, ieSequenceFrame>& getSequenceFrames(void) const;
+    const std::unordered_map<std::string, std::string>& getSequenceAnimatedElements(void) const;
+    
 };
 
 #endif

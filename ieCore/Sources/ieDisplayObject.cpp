@@ -54,6 +54,16 @@ ieDisplayObject::~ieDisplayObject(void)
     ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
 }
 
+void ieDisplayObject::setTextureFrame(const glm::vec4 &frame)
+{
+    ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
+    vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.x, frame.y));
+    vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.x, frame.w));
+    vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.y));
+    vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.w));
+    m_shape->getVertexBuffer()->unlock();
+}
+
 void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
 {
     ieVertex *vertexData = m_shape->getVertexBuffer()->lock();

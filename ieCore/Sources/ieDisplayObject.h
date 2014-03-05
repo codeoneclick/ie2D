@@ -64,6 +64,8 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
+    void setTextureFrame(const glm::vec4& frame);
+    
 public:
     
     ieDisplayObject(const glm::vec4& frame);
