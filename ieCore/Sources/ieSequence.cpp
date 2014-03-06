@@ -76,6 +76,8 @@ ieResource(E_RESOURCE_TYPE_SEQUENSE)
             sequenceElement.m_position.y = elements[j]["y"].asInt();
             sequenceElement.m_size.x = elements[j]["width"].asInt();
             sequenceElement.m_size.y = elements[j]["height"].asInt();
+            sequenceElement.m_pivot.x = elements[j]["pivotX"].asInt();
+            sequenceElement.m_pivot.y = elements[j]["pivotY"].asInt();
             m_sequenceElements.insert(std::make_pair(sequenceElement.m_name, sequenceElement));
         }
     }
@@ -112,10 +114,14 @@ ieResource(E_RESOURCE_TYPE_SEQUENSE)
             {
                 assert(false);
             }
-            sequenceFrameState.m_matrix = glm::mat4x4(static_cast<f32>(atof(transform[0].c_str())), static_cast<f32>(atof(transform[1].c_str())), 0.0f, 0.0f,
-                                                      static_cast<f32>(atof(transform[2].c_str())), static_cast<f32>(atof(transform[3].c_str())), 0.0f, 0.0f,
-                                                      0.0f, 0.0f, 1.0f, 0.0f,
-                                                      static_cast<f32>(atof(transform[4].c_str())), static_cast<f32>(atof(transform[5].c_str())), 0.0f, 1.0f);
+
+            sequenceFrameState.m_matrix.a = static_cast<f32>(atof(transform[0].c_str()));
+            sequenceFrameState.m_matrix.b = static_cast<f32>(atof(transform[1].c_str()));
+            sequenceFrameState.m_matrix.c = static_cast<f32>(atof(transform[2].c_str()));
+            sequenceFrameState.m_matrix.d = static_cast<f32>(atof(transform[3].c_str()));
+            sequenceFrameState.m_matrix.tx = static_cast<f32>(atof(transform[4].c_str()));
+            sequenceFrameState.m_matrix.ty = static_cast<f32>(atof(transform[5].c_str()));
+            
             sequenceFrame.m_states.insert(std::make_pair(stateId, sequenceFrameState));
         }
         ui32 frameNumber = animationFrames[i]["frameNumber"].asUInt();

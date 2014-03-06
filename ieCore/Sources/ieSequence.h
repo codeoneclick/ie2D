@@ -25,12 +25,23 @@ typedef struct
     std::string m_name;
     glm::ivec2 m_position;
     glm::ivec2 m_size;
+    glm::ivec2 m_pivot;
 } ieSequenceElement;
 
 typedef struct
 {
+    f32 a;
+    f32 b;
+    f32 c;
+    f32 d;
+    f32 tx;
+    f32 ty;
+} ieSequenceFrameTransformation;
+
+typedef struct
+{
     i32 index;
-    glm::mat4x4 m_matrix;
+    ieSequenceFrameTransformation m_matrix;
 } ieSequenceFrameState;
 
 typedef struct

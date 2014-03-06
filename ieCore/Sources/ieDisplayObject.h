@@ -52,6 +52,7 @@ protected:
     glm::vec2 m_position;
     f32 m_rotation;
     glm::vec2 m_scale;
+    glm::vec2 m_pivot;
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
@@ -66,6 +67,7 @@ protected:
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
     void setTextureFrame(const glm::vec4& frame);
+    void setShapeFrame(const glm::vec4& frame);
     
 public:
     
@@ -80,6 +82,9 @@ public:
     
     void setScale(const glm::vec2& scale);
     glm::vec2 getScale(void) const;
+    
+    void setPivot(const glm::vec2& pivot);
+    glm::vec2 getPivot(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

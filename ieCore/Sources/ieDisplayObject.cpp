@@ -27,7 +27,8 @@ m_parent(nullptr),
 m_modelview(1.0f),
 m_position(glm::vec2(0.0f, 0.0f)),
 m_rotation(0.0f),
-m_scale(2.0f, 2.0f),
+m_scale(1.0f, 1.0f),
+m_pivot(0.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
@@ -62,6 +63,16 @@ void ieDisplayObject::setTextureFrame(const glm::vec4 &frame)
     vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.x, frame.w));
     vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.y));
     vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.w));
+    m_shape->getVertexBuffer()->unlock();
+}
+
+void ieDisplayObject::setShapeFrame(const glm::vec4 &frame)
+{
+    ieVertex* vertexData = m_shape->getVertexBuffer()->lock();
+    vertexData[0].m_position = glm::vec2(frame.x, frame.y);
+    vertexData[1].m_position = glm::vec2(frame.x, frame.w);
+    vertexData[2].m_position = glm::vec2(frame.z, frame.y);
+    vertexData[3].m_position = glm::vec2(frame.z, frame.w);
     m_shape->getVertexBuffer()->unlock();
 }
 
@@ -108,6 +119,16 @@ glm::vec2 ieDisplayObject::getScale(void) const
     return m_scale;
 }
 
+void ieDisplayObject::setPivot(const glm::vec2 &pivot)
+{
+    m_pivot = pivot;
+}
+
+glm::vec2 ieDisplayObject::getPivot(void) const
+{
+    return m_pivot;
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     std::shared_ptr<ieDisplayObjectContainer> parent = m_parent;
@@ -132,7 +153,8 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
     glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4x4 scaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
     glm::mat4x4 customScaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_scale.x, m_scale.y, 1.0f));
-    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix * customScaleMatrix;
+    glm::mat4x4 translationPivotMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(-m_pivot.x, -m_pivot.y, 0.0f));
+    m_modelview = parentMatrix * translationMatrix * rotationMatrix * translationPivotMatrix * customScaleMatrix* scaleMatrix;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)

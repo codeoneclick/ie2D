@@ -60,7 +60,7 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("4.json");
+    path.append("dragon.json");
     std::shared_ptr<ieSprite> sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 400, 400), path);
     transition->addChild(sprite3);
     sprite3->setPosition(glm::vec2(250, 250));

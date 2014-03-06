@@ -17,6 +17,8 @@
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
 		21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D0724F181DAEA00019D264 /* QuartzCore.framework */; };
 		21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D07251181DAEA60019D264 /* OpenGLES.framework */; };
+		21DE956018C90D1C0075488D /* dragon.json in Resources */ = {isa = PBXBuildFile; fileRef = 21DE955E18C90D1C0075488D /* dragon.json */; };
+		21DE956118C90D1C0075488D /* dragon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DE955F18C90D1C0075488D /* dragon1.png */; };
 		21FC83AD1887D5E4006AB4B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21FC83941887D5E4006AB4B4 /* AppDelegate.mm */; };
 		21FC83B11887D5E4006AB4B4 /* CGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 21FC839C1887D5E4006AB4B4 /* CGameViewController.mm */; };
 		21FC83B21887D5E4006AB4B4 /* CGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FC839D1887D5E4006AB4B4 /* CGameViewController.xib */; };
@@ -61,6 +63,8 @@
 		21D070DD181D9D460019D264 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21D0724F181DAEA00019D264 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		21D07251181DAEA60019D264 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		21DE955E18C90D1C0075488D /* dragon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = dragon.json; path = ../ieBundle/dragon.json; sourceTree = "<group>"; };
+		21DE955F18C90D1C0075488D /* dragon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dragon1.png; path = ../ieBundle/dragon1.png; sourceTree = "<group>"; };
 		21FC83931887D5E4006AB4B4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Sources/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		21FC83941887D5E4006AB4B4 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Sources/AppDelegate.mm; sourceTree = SOURCE_ROOT; };
 		21FC839B1887D5E4006AB4B4 /* CGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGameViewController.h; path = Sources/CGameViewController.h; sourceTree = SOURCE_ROOT; };
@@ -154,6 +158,8 @@
 		21D07279181DB33E0019D264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21DE955E18C90D1C0075488D /* dragon.json */,
+				21DE955F18C90D1C0075488D /* dragon1.png */,
 				212B8C8A18C4E60200372655 /* 4.json */,
 				212B8C8B18C4E60200372655 /* 41.png */,
 				212B8C8C18C4E60200372655 /* sector_02.png */,
@@ -253,6 +259,8 @@
 			files = (
 				212B8C8E18C4E60200372655 /* 41.png in Resources */,
 				212B8C8F18C4E60200372655 /* sector_02.png in Resources */,
+				21DE956118C90D1C0075488D /* dragon1.png in Resources */,
+				21DE956018C90D1C0075488D /* dragon.json in Resources */,
 				21FC83B21887D5E4006AB4B4 /* CGameViewController.xib in Resources */,
 				21FC83BD1887D681006AB4B4 /* ieDemo.plist in Resources */,
 				212B8C8D18C4E60200372655 /* 4.json in Resources */,
