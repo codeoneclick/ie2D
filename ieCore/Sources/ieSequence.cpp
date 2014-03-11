@@ -35,7 +35,8 @@ static void split(const std::string& value, const std::string& delimeter, std::v
 }
 
 ieSequence::ieSequence(const std::string& filename) :
-ieResource(E_RESOURCE_TYPE_SEQUENSE)
+ieResource(E_RESOURCE_TYPE_SEQUENSE),
+m_animationFrameCount(0)
 {
     Json::Value root;
     Json::Reader reader;
@@ -161,4 +162,9 @@ const std::unordered_map<ui32, ieSequenceFrame>& ieSequence::getSequenceFrames(v
 const std::unordered_map<std::string, std::string>& ieSequence::getSequenceAnimatedElements(void) const
 {
     return m_sequenceAnimatedElements;
+}
+
+ui32 ieSequence::getAnimationFrameCount(void) const
+{
+    return m_animationFrameCount;
 }

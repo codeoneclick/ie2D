@@ -48,11 +48,14 @@ protected:
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
+    
     glm::vec4 m_frame;
     glm::vec2 m_position;
     f32 m_rotation;
     glm::vec2 m_scale;
     glm::vec2 m_pivot;
+    
+    glm::vec4 m_textureCoords;
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
@@ -66,8 +69,7 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
-    void setTextureFrame(const glm::vec4& frame);
-    void setShapeFrame(const glm::vec4& frame);
+    void setTextureCoords(const glm::vec4& textureCoords);
     
 public:
     

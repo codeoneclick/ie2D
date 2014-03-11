@@ -29,6 +29,7 @@ m_position(glm::vec2(0.0f, 0.0f)),
 m_rotation(0.0f),
 m_scale(1.0f, 1.0f),
 m_pivot(0.0f),
+m_textureCoords(0.0f, 0.0f, 1.0f, 1.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
 {
@@ -56,24 +57,18 @@ ieDisplayObject::~ieDisplayObject(void)
     ieDisplayObject::removeEventListener(kEVENT_ON_REMOVED, m_functionOnRemoved);
 }
 
-void ieDisplayObject::setTextureFrame(const glm::vec4 &frame)
+void ieDisplayObject::setTextureCoords(const glm::vec4 &textureCoords)
 {
-    ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
-    vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.x, frame.y));
-    vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.x, frame.w));
-    vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.y));
-    vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(frame.z, frame.w));
-    m_shape->getVertexBuffer()->unlock();
-}
-
-void ieDisplayObject::setShapeFrame(const glm::vec4 &frame)
-{
-    ieVertex* vertexData = m_shape->getVertexBuffer()->lock();
-    vertexData[0].m_position = glm::vec2(frame.x, frame.y);
-    vertexData[1].m_position = glm::vec2(frame.x, frame.w);
-    vertexData[2].m_position = glm::vec2(frame.z, frame.y);
-    vertexData[3].m_position = glm::vec2(frame.z, frame.w);
-    m_shape->getVertexBuffer()->unlock();
+    m_textureCoords = textureCoords;
+    if(m_shape != nullptr && m_shape->getVertexBuffer() != nullptr)
+    {
+        ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
+        vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(textureCoords.x, textureCoords.y));
+        vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(textureCoords.x, textureCoords.w));
+        vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(textureCoords.z, textureCoords.y));
+        vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(textureCoords.z, textureCoords.w));
+        m_shape->getVertexBuffer()->unlock();
+    }
 }
 
 void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
@@ -122,6 +117,17 @@ glm::vec2 ieDisplayObject::getScale(void) const
 void ieDisplayObject::setPivot(const glm::vec2 &pivot)
 {
     m_pivot = pivot;
+    if(m_shape != nullptr && m_shape->getVertexBuffer() != nullptr)
+    {
+        glm::vec2 size = glm::vec2(m_frame.z - m_pivot.x, m_frame.w - m_pivot.y);
+        glm::vec2 position = glm::vec2(size.x - m_frame.z, size.y - m_frame.w);
+        ieVertex* vertexData = m_shape->getVertexBuffer()->lock();
+        vertexData[0].m_position = glm::vec2(position.x, size.x);
+        vertexData[1].m_position = glm::vec2(position.x, position.y);
+        vertexData[2].m_position = glm::vec2(size.y, size.x);
+        vertexData[3].m_position = glm::vec2(size.y, position.y);
+        m_shape->getVertexBuffer()->unlock();
+    }
 }
 
 glm::vec2 ieDisplayObject::getPivot(void) const
@@ -137,24 +143,27 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
     {
         glm::vec2 position = parent->m_position;
         f32 rotation = parent->m_rotation;
-        glm::vec4 frame = parent->m_frame;
-        glm::mat4x4 forwardTranslationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(position.x + frame.z * 0.5f,
-                                                                                           position.y + frame.w * 0.5f, 0.0f));
-        glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-        glm::mat4x4 backwardTranslationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(-frame.z * 0.5f,
-                                                                                            -frame.w * 0.5f, 0.0f));
-        parentMatrix = parentMatrix * forwardTranslationMatrix * rotationMatrix * backwardTranslationMatrix;
-        
+        glm::mat4x4 translationMatrix = glm::translate(glm::mat4x4(1.0f),
+                                                       glm::vec3(position.x,
+                                                                 position.y, 0.0f));
+        glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f),
+                                                 glm::radians(rotation),
+                                                 glm::vec3(0.0f, 0.0f, 1.0f));
+        parentMatrix = parentMatrix * translationMatrix * rotationMatrix;
         parent = parent->m_parent;
     }
     
-    glm::mat4x4 translationMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(m_position.x + m_frame.z * 0.5f,
-                                                                                m_position.y + m_frame.w * 0.5f, 0.0f));
-    glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f), glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-    glm::mat4x4 scaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_frame.z, m_frame.w, 1.0));
-    glm::mat4x4 customScaleMatrix = glm::scale(glm::mat4x4(1.0f), glm::vec3(m_scale.x, m_scale.y, 1.0f));
-    glm::mat4x4 translationPivotMatrix = glm::translate(glm::mat4x4(1.0f), glm::vec3(-m_pivot.x, -m_pivot.y, 0.0f));
-    m_modelview = parentMatrix * translationMatrix * rotationMatrix * translationPivotMatrix * customScaleMatrix* scaleMatrix;
+    glm::mat4x4 translationMatrix = glm::translate(glm::mat4x4(1.0f),
+                                                   glm::vec3(m_position.x,
+                                                             m_position.y, 0.0f));
+    glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f),
+                                             glm::radians(m_rotation),
+                                             glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4x4 scaleMatrix = glm::scale(glm::mat4x4(1.0f),
+                                         glm::vec3(m_scale.x,
+                                                   m_scale.y, 1.0f));
+    
+    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
@@ -229,7 +238,13 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
             break;
     }
     
-    m_shape = std::make_shared<ieShape>(glm::vec4(-0.5f, 0.5f, 0.5f, -0.5f));
+    glm::vec2 size = glm::vec2(m_frame.z - m_pivot.x, m_frame.w - m_pivot.y);
+    glm::vec2 position = glm::vec2(size.x - m_frame.z, size.y - m_frame.w);
+    m_shape = std::make_shared<ieShape>(glm::vec4(position.x,
+                                                  size.y,
+                                                  size.x,
+                                                  position.y));
+    ieDisplayObject::setTextureCoords(m_textureCoords);
     ieDisplayObject::setColor(m_color);
 }
 

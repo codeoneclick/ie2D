@@ -59,6 +59,7 @@ protected:
     std::unordered_map<std::string, ieSequenceElement> m_sequenceElements;
     std::unordered_map<ui32, ieSequenceFrame> m_sequenceFrames;
     std::unordered_map<std::string, std::string> m_sequenceAnimatedElements;
+    ui32 m_animationFrameCount;
     
 public:
     
@@ -69,7 +70,7 @@ public:
     const std::unordered_map<std::string, ieSequenceElement>& getSequenceElements(void) const;
     const std::unordered_map<ui32, ieSequenceFrame>& getSequenceFrames(void) const;
     const std::unordered_map<std::string, std::string>& getSequenceAnimatedElements(void) const;
-    
+    ui32 getAnimationFrameCount(void) const;
 };
 
 #endif

@@ -45,15 +45,16 @@
     self.gameController->registerTransition(transition);
     self.gameController->goToTransition("demo");
     
-    std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 0, 255, 255);
+    std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 255, 0, 255);
     self.sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(10, 10, 50, 50));
+    self.sprite->setPivot(glm::vec2(25, 25));
     transition->addChild(self.sprite);
     self.sprite->setColor(color_01);
-    //self.sprite->setRotation(15);
     self.sprite->setPosition(glm::vec2(200, 200));
     
     std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
     self.sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
+    self.sprite2->setPivot(glm::vec2(50, 50));
     self.sprite->addChild(self.sprite2);
     self.sprite2->setColor(color_02);
     self.sprite2->setPosition(glm::vec2(100, 100));
