@@ -111,12 +111,12 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                                                                                                   iterator.second.m_size.y),
                                                                                         path + "/" + imageFilename);
                           
-                          glm::vec4 textureCoords =
+                          glm::vec4 texCoord =
                           glm::vec4(static_cast<f32>(iterator.second.m_position.x) / static_cast<f32>(m_texture->getWidth()),
                                     1.0f - static_cast<f32>(iterator.second.m_position.y + iterator.second.m_size.y) / static_cast<f32>(m_texture->getHeight()),
                                     static_cast<f32>(iterator.second.m_position.x + iterator.second.m_size.x) / static_cast<f32>(m_texture->getWidth()),
                                     1.0f - static_cast<f32>(iterator.second.m_position.y) / static_cast<f32>(m_texture->getHeight()));
-                          sprite->setTextureCoords(textureCoords);
+                          sprite->m_texCoord = texCoord;
                           sprite->setPivot(glm::vec2(iterator.second.m_pivot.x,
                                                      iterator.second.m_pivot.y));
                           m_uniqueSpriteElements.insert(std::make_pair(iterator.first, sprite));

@@ -43,19 +43,24 @@ private:
     
     friend class ieDisplayObjectContainer;
     
+    glm::vec4 createShapePositionAttributes(void);
+    void updateShapePositionAttributes(void);
+    void updateShapeTexcoordAttributes(void);
+    void updateShapeColorAttributes(void);
+    
 protected:
     
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
     
-    glm::vec4 m_frame;
     glm::vec2 m_position;
     f32 m_rotation;
     glm::vec2 m_scale;
-    glm::vec2 m_pivot;
     
-    glm::vec4 m_textureCoords;
+    glm::vec4 m_frame;
+    glm::vec2 m_pivot;
+    glm::vec4 m_texCoord;
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
@@ -68,8 +73,6 @@ protected:
     
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
-    
-    void setTextureCoords(const glm::vec4& textureCoords);
     
 public:
     
@@ -88,12 +91,15 @@ public:
     void setPivot(const glm::vec2& pivot);
     glm::vec2 getPivot(void) const;
     
+    void setColor(const std::shared_ptr<ieColor>& color);
+    std::shared_ptr<ieColor> getColor(void) const;
+    
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,
                      const glm::ivec2& destinationPoint,
                      std::shared_ptr<ieBitmapFilter> filter);
     
-    void setColor(const std::shared_ptr<ieColor>& color);
+    
     
     void colorTransform(const glm::ivec4& sourceRectangle,
                         const std::shared_ptr<ieColorTransformation>& colorTransformation);
