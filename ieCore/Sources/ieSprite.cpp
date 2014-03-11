@@ -98,10 +98,34 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                           m_texture = m_resourceAccessor->getTexture(path + "/" + iterator.second.m_imageFilename);
                       });
         
+        std::for_each(m_sequence->getSequenceElements().begin(),
+                      m_sequence->getSequenceElements().end(),
+                      [this, path](const std::pair<std::string, ieSequenceElement>& iterator)
+                      {
+                          ui32 sequenceTextureId = iterator.second.m_sequenceTextureId;
+                          auto sequenceTexture = m_sequence->getSequenceTextures().find(sequenceTextureId);
+                          assert(sequenceTexture != m_sequence->getSequenceTextures().end());
+                          std::string imageFilename = sequenceTexture->second.m_imageFilename;
+                          std::shared_ptr<ieSprite> sprite = std::make_shared<ieSprite>(glm::vec4(0, 0,
+                                                                                                  iterator.second.m_size.x,
+                                                                                                  iterator.second.m_size.y),
+                                                                                        path + "/" + imageFilename);
+                          
+                          glm::vec4 textureCoords =
+                          glm::vec4(static_cast<f32>(iterator.second.m_position.x) / static_cast<f32>(m_texture->getWidth()),
+                                    1.0f - static_cast<f32>(iterator.second.m_position.y + iterator.second.m_size.y) / static_cast<f32>(m_texture->getHeight()),
+                                    static_cast<f32>(iterator.second.m_position.x + iterator.second.m_size.x) / static_cast<f32>(m_texture->getWidth()),
+                                    1.0f - static_cast<f32>(iterator.second.m_position.y) / static_cast<f32>(m_texture->getHeight()));
+                          sprite->setTextureCoords(textureCoords);
+                          sprite->setPivot(glm::vec2(iterator.second.m_pivot.x,
+                                                     iterator.second.m_pivot.y));
+                          m_uniqueSpriteElements.insert(std::make_pair(iterator.first, sprite));
+                      });
+        
         auto sequenceFrame = m_sequence->getSequenceFrames().find(1);
         assert(sequenceFrame != m_sequence->getSequenceFrames().end());
         
-        std::vector<std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec4, glm::vec2, f32, glm::vec2>> sprites;
+        std::vector<std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>> sprites;
         std::for_each((*sequenceFrame).second.m_states.begin(),
                       (*sequenceFrame).second.m_states.end(),
                       [this, path, &sprites](const std::pair<std::string, ieSequenceFrameState>& iterator)
@@ -110,32 +134,20 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                           auto sequenceAnimatedElement = m_sequence->getSequenceAnimatedElements().find(stateId);
                           assert(sequenceAnimatedElement != m_sequence->getSequenceAnimatedElements().end());
                           std::string sequenceElementId = sequenceAnimatedElement->second;
-                          auto sequenceElement = m_sequence->getSequenceElements().find(sequenceElementId);
-                          assert(sequenceElement != m_sequence->getSequenceElements().end());
-                          ui32 sequenceTextureId = sequenceElement->second.m_sequenceTextureId;
-                          auto sequenceTexture = m_sequence->getSequenceTextures().find(sequenceTextureId);
-                          assert(sequenceTexture != m_sequence->getSequenceTextures().end());
-                          std::string imageFilename = sequenceTexture->second.m_imageFilename;
-                          std::shared_ptr<ieSprite> sprite = std::make_shared<ieSprite>(glm::vec4(0, 0,
-                                                                                                  sequenceElement->second.m_size.x,
-                                                                                                  sequenceElement->second.m_size.y),
-                                                                                        path + "/" + imageFilename);
-                          glm::vec4 textureCoords =
-                          glm::vec4(static_cast<f32>(sequenceElement->second.m_position.x) / static_cast<f32>(m_texture->getWidth()),
-                                    1.0f - static_cast<f32>(sequenceElement->second.m_position.y + sequenceElement->second.m_size.y) / static_cast<f32>(m_texture->getHeight()),
-                                    static_cast<f32>(sequenceElement->second.m_position.x + sequenceElement->second.m_size.x) / static_cast<f32>(m_texture->getWidth()),
-                                    1.0f - static_cast<f32>(sequenceElement->second.m_position.y) / static_cast<f32>(m_texture->getHeight()));
                           
-                          f32 scaleX = sqrtf((iterator.second.m_matrix.a * iterator.second.m_matrix.a) +
-                                             (iterator.second.m_matrix.c * iterator.second.m_matrix.c));
-                          f32 scaleY = sqrtf((iterator.second.m_matrix.b * iterator.second.m_matrix.b) +
-                                             (iterator.second.m_matrix.d * iterator.second.m_matrix.d));
+                          auto spriteElement = m_uniqueSpriteElements.find(sequenceElementId);
+                          assert(spriteElement != m_uniqueSpriteElements.end());
                           
-                          scaleX *= iterator.second.m_matrix.a > 0.0f ? 1.0f : -1.0f;
-                          scaleY *= iterator.second.m_matrix.d > 0.0f ? 1.0f : -1.0f;
+                          glm::vec2 scale = glm::vec2(sqrtf((iterator.second.m_matrix.a * iterator.second.m_matrix.a) +
+                                                            (iterator.second.m_matrix.c * iterator.second.m_matrix.c)),
+                                                      sqrtf((iterator.second.m_matrix.b * iterator.second.m_matrix.b) +
+                                                            (iterator.second.m_matrix.d * iterator.second.m_matrix.d)));
+                          
+                          scale.x *= iterator.second.m_matrix.a > 0.0f ? 1.0f : -1.0f;
+                          scale.y *= iterator.second.m_matrix.d > 0.0f ? 1.0f : -1.0f;
                           
                           f32 sign = atanf(-iterator.second.m_matrix.c / iterator.second.m_matrix.a);
-                          f32 radians  = acosf(iterator.second.m_matrix.a / scaleX);
+                          f32 radians  = acosf(iterator.second.m_matrix.a / scale.x);
                           f32 degrees  = glm::degrees(radians);
                           f32 rotation = 0.0f;
                           
@@ -150,26 +162,34 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                           rotation = glm::degrees(rotation);
                           glm::vec2 position = glm::vec2(iterator.second.m_matrix.tx,
                                                          iterator.second.m_matrix.ty);
-                          sprites.push_back(std::make_tuple(sprite, iterator.second.index, textureCoords, position, rotation, glm::vec2(scaleX, scaleY)));
-                          sprite->setPivot(glm::vec2(sequenceElement->second.m_pivot.x,
-                                                     sequenceElement->second.m_pivot.y));
+                          sprites.push_back(std::make_tuple(spriteElement->second,
+                                                            iterator.second.index,
+                                                            position,
+                                                            rotation,
+                                                            scale));
+                          m_addedSpriteElements.insert(std::make_pair(stateId,
+                                                                      spriteElement->second));
+                          m_spriteElementsTransformations.insert(std::make_pair(stateId,
+                                                                                std::make_tuple(iterator.second.index,
+                                                                                                position,
+                                                                                                rotation,
+                                                                                                scale)));
                       });
         
         std::sort(sprites.begin(), sprites.end(), []
-                  (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec4, glm::vec2, f32, glm::vec2>& iterator_01,
-                   const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec4, glm::vec2, f32, glm::vec2>& iterator_02)
+                  (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator_01,
+                   const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator_02)
                   {
                       return std::get<1>(iterator_01) < std::get<1>(iterator_02);
                   });
         
         std::for_each(sprites.begin(), sprites.end(),  [this]
-                      (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec4, glm::vec2, f32, glm::vec2>& iterator)
+                      (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator)
                       {
                           ieSprite::addChild(std::get<0>(iterator));
-                          std::get<0>(iterator)->setTextureCoords(std::get<2>(iterator));
-                          std::get<0>(iterator)->setPosition(std::get<3>(iterator));
-                          std::get<0>(iterator)->setRotation(std::get<4>(iterator));
-                          std::get<0>(iterator)->setScale(std::get<5>(iterator));
+                          std::get<0>(iterator)->setPosition(std::get<2>(iterator));
+                          std::get<0>(iterator)->setRotation(std::get<3>(iterator));
+                          std::get<0>(iterator)->setScale(std::get<4>(iterator));
                       });
     }
 }

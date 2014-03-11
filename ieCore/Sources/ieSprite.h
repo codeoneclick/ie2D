@@ -33,6 +33,10 @@ protected:
     std::shared_ptr<ieTexture> m_texture;
     std::shared_ptr<ieSequence> m_sequence;
     
+    std::unordered_map<std::string, std::shared_ptr<ieSprite>> m_uniqueSpriteElements;
+    std::unordered_map<std::string, std::shared_ptr<ieSprite>> m_addedSpriteElements;
+    std::unordered_map<std::string, std::tuple<ui32, glm::vec2, f32, glm::vec2>> m_spriteElementsTransformations;
+    
 public:
     ieSprite(const glm::vec4& frame,
              const std::shared_ptr<ieColor>& color);
