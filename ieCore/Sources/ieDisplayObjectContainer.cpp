@@ -177,7 +177,12 @@ void ieDisplayObjectContainer::setChildIndex(const std::shared_ptr<ieDisplayObje
     auto iterator = std::find(m_childs.begin(), m_childs.end(), child);
     assert(iterator != m_childs.end());
     m_childs.erase(iterator);
-    ieDisplayObjectContainer::addChildAt((*iterator), index);
+    m_uniqueChilds.erase(child);
+    
+    assert(m_uniqueChilds.count(child) == 0);
+    assert(index <= m_childs.size());
+    m_uniqueChilds.insert(child);
+    m_childs.insert(m_childs.begin() + index, child);
 }
 
 void ieDisplayObjectContainer::swapChildren(const std::shared_ptr<ieDisplayObject>& child_01,

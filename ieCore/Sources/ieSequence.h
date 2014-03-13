@@ -40,7 +40,7 @@ typedef struct
 
 typedef struct
 {
-    i32 index;
+    i32 m_index;
     ieSequenceFrameTransformation m_matrix;
 } ieSequenceFrameState;
 
@@ -48,6 +48,13 @@ typedef struct
 {
     std::unordered_map<std::string, ieSequenceFrameState> m_states;
 } ieSequenceFrame;
+
+typedef const std::pair<std::string, ieSequenceElement>& ieSequenceElementPair;
+typedef const std::pair<ui32, ieSequenceTexture>& ieSequenceTexturePair;
+typedef const std::pair<std::string, ieSequenceFrameState>& ieSequenceFrameStatePair;
+typedef std::unordered_map<ui32, ieSequenceTexture>::const_iterator ieSequenceTextureIterator;
+typedef std::unordered_map<ui32, ieSequenceFrame>::const_iterator ieSequenceFrameIterator;
+typedef std::unordered_map<std::string, std::string>::const_iterator ieSequenceAnimatedElementIterator;
 
 class ieSequence : public ieResource
 {

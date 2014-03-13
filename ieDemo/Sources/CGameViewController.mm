@@ -23,6 +23,7 @@
 @property (unsafe_unretained, nonatomic) ieGameController* gameController;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite2;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite3;
 
 @end
 
@@ -61,10 +62,10 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("dragon.json");
-    std::shared_ptr<ieSprite> sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 400, 400), path);
-    transition->addChild(sprite3);
-    sprite3->setPosition(glm::vec2(250, 250));
+    path.append("4.json");
+    self.sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 400, 400), path);
+    transition->addChild(self.sprite3);
+    self.sprite3->setPosition(glm::vec2(250, 250));
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -134,6 +135,14 @@
         inc *= -1.0f;
     }
     rotation += 5.5f;
+    
+    static ui32 index = 0;
+    self.sprite3->gotoAndStop(index);
+    index++;
+    if(index >= 89)
+    {
+        index = 0;
+    }
 }
 
 @end

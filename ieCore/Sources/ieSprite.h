@@ -11,6 +11,23 @@
 
 #include "ieDisplayObjectContainer.h"
 
+class ieSprite;
+
+typedef struct
+{
+    ui32 m_index;
+    glm::vec2 m_position;
+    f32 m_rotation;
+    glm::vec2 m_scale;
+    f32 m_alpha;
+} ieSpriteElementTransformation;
+
+typedef std::shared_ptr<ieSprite> ieSharedSprite;
+typedef const std::pair<std::string, ieSharedSprite>& ieSpriteElementPair;
+typedef std::unordered_map<std::string, ieSharedSprite>::const_iterator ieSpriteElementIterator;
+typedef std::unordered_map<std::string, ieSpriteElementTransformation> ieSpriteAnimationFrame;
+typedef const std::pair<std::string, ieSpriteElementTransformation>& ieSpriteAnimationFramePair;
+
 class ieColor;
 class ieTexture;
 class ieSequence;
@@ -33,9 +50,12 @@ protected:
     std::shared_ptr<ieTexture> m_texture;
     std::shared_ptr<ieSequence> m_sequence;
     
-    std::unordered_map<std::string, std::shared_ptr<ieSprite>> m_uniqueSpriteElements;
-    std::unordered_map<std::string, std::shared_ptr<ieSprite>> m_addedSpriteElements;
-    std::unordered_map<std::string, std::tuple<ui32, glm::vec2, f32, glm::vec2>> m_spriteElementsTransformations;
+    std::unordered_map<std::string, ieSharedSprite> m_uniqueSpriteElements;
+    std::unordered_map<std::string, ieSharedSprite> m_activeSpriteElements;
+    std::vector<ieSpriteAnimationFrame> m_spriteAnimationFrames;
+    
+    ieSharedSprite getUniqueSprite(const std::string& name);
+    ieSharedSprite getActiveSprite(const std::string& name);
     
 public:
     ieSprite(const glm::vec4& frame,
@@ -46,6 +66,7 @@ public:
     
     virtual ~ieSprite(void);
     
+    void gotoAndStop(ui32 index);
 };
 
 #endif

@@ -103,7 +103,7 @@ m_animationFrameCount(0)
                 return;
             }
             std::string temp = state.substr(0, begin - 1);
-            sequenceFrameState.index = atoi(temp.c_str());
+            sequenceFrameState.m_index = atoi(temp.c_str());
             temp = state.substr(end + 2, state.length() - end - 2);
             temp = state.substr(begin + 1, end - begin - 1);
 
@@ -136,6 +136,9 @@ m_animationFrameCount(0)
         std::string animatedElementId = animationObjects[sequenceAnimatedElementsMembers[i]].asString();
         m_sequenceAnimatedElements.insert(std::make_pair(stateId, animatedElementId));
     }
+    
+    m_animationFrameCount = root["animationFrameCount"].asUInt();
+    
     std::cout<<"done"<<std::endl;
 }
 
