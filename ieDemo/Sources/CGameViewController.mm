@@ -16,6 +16,7 @@
 #include "ieImage.h"
 #include "ieColor.h"
 #include "ieSprite.h"
+#include "ieMovieClip.h"
 
 @interface CGameViewController ()
 
@@ -24,6 +25,7 @@
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite2;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite3;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieMovieClip> sprite4;
 
 @end
 
@@ -67,6 +69,13 @@
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(250, 250));
     self.sprite3->setScale(glm::vec2(1.0f, 1.0f));
+    
+    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    path.append("/");
+    path.append("4.json");
+    self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
+    transition->addChild(self.sprite4);
+    self.sprite4->setPosition(glm::vec2(100, 100));
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -138,9 +147,9 @@
     rotation += 5.5f;
     
     static ui32 index = 0;
-    self.sprite3->gotoAndStop(index);
+    self.sprite4->gotoAndStop(index);
     index++;
-    if(index >= 8)
+    if(index >= 60)
     {
         index = 0;
     }

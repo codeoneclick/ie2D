@@ -29,8 +29,6 @@
 #include <functional>
 #include <unordered_map>
 
-#define GLM_FORCE_RADIANS
-
 #include <glm/glm.hpp>
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -75,7 +73,57 @@ typedef unsigned long long ui64;
 typedef float f32;
 
 
-#define MAX(a,b) (((a) > (b)) ? (a) : (b))
-#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+#define ieMax(a,b) (((a) > (b)) ? (a) : (b))
+#define ieMin(a,b) (((a) < (b)) ? (a) : (b))
+
+namespace ieCommon
+{
+    static inline std::string getFilename(const std::string& value)
+    {
+        std::string filename = "";
+        size_t found = value.find_last_of("/\\");
+        
+        assert(found != std::string::npos &&
+               found + 1 < value.length());
+        
+        if(found != std::string::npos &&
+           found + 1 < value.length())
+        {
+            filename = value.substr(found + 1, value.length() - 1);
+        }
+        return filename;
+    };
+    
+    static inline std::string getPath(const std::string& value)
+    {
+        std::string path = "";
+        size_t found = value.find_last_of("/\\");
+        
+        assert(found != std::string::npos);
+        
+        if(found != std::string::npos)
+        {
+            path = value.substr(0, found);
+        }
+        return path;
+    };
+    
+    static inline std::string getExtension(const std::string& value)
+    {
+        std::string extension = "";
+        size_t found = value.find_last_of(".");
+        
+        assert(found != std::string::npos &&
+               found + 1 < value.length());
+        
+        if(found != std::string::npos &&
+           found + 1 < value.length())
+        {
+            extension = value.substr(found + 1, value.length() - 1);
+        }
+        return extension;
+
+    };
+};
 
 #endif

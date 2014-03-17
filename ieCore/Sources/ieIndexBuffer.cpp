@@ -40,7 +40,7 @@ void ieIndexBuffer::unlock(ui32 size)
     assert(m_data != nullptr);
     assert(m_size != 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * (size > 0 ? MIN(size, m_size) : m_size), m_data, m_mode);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ui16) * (size > 0 ? ieMin(size, m_size) : m_size), m_data, m_mode);
 }
 
 void ieIndexBuffer::bind(void) const

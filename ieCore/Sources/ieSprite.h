@@ -16,11 +16,8 @@ class ieSprite;
 typedef struct
 {
     ui32 m_index;
-    glm::vec2 m_position;
-    f32 m_rotation;
-    glm::vec2 m_scale;
     f32 m_alpha;
-    glm::mat4 m_matrix;
+    glm::mat4 m_matrixTransformation;
 } ieSpriteElementTransformation;
 
 typedef struct
@@ -33,7 +30,7 @@ typedef struct
 
 typedef std::shared_ptr<ieSprite> ieSharedSprite;
 typedef const std::pair<std::string, ieSharedSprite>& ieSpriteElementPair;
-typedef std::unordered_map<std::string, ieSharedSprite>::const_iterator ieSpriteElementIterator;
+typedef const std::unordered_map<std::string, ieSharedSprite>::const_iterator& ieSpriteElementIterator;
 typedef std::unordered_map<std::string, ieSpriteElementTransformation> ieSpriteAnimationFrame;
 typedef const std::pair<std::string, ieSpriteElementTransformation>& ieSpriteAnimationFramePair;
 
@@ -44,6 +41,9 @@ class ieSprite : public ieDisplayObjectContainer
 {
 private:
     
+    std::string m_imageFilename;
+    std::shared_ptr<ieTexture> m_texture;
+    
 protected:
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
@@ -53,18 +53,22 @@ protected:
     
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
-    
-    std::string m_imageFilename;
+
     std::string m_sequenceFilename;
-    std::shared_ptr<ieTexture> m_texture;
     std::shared_ptr<ieSequence> m_sequence;
     
     std::unordered_map<std::string, ieSpriteElementUniqueSettings> m_spriteElementUniqueSettings;
     std::unordered_map<std::string, ieSharedSprite> m_activeSpriteElements;
     std::vector<ieSpriteAnimationFrame> m_spriteAnimationFrames;
     
+    glm::ivec2 getSpriteElementTextureSize(const std::string& imageFilename);
+    void createSpriteElements(void);
+    void createSpriteAnimationFrame(ui32 index, ieSpriteAnimationFrame& previosSpriteAnimationFrame);
+    
     ieSharedSprite createUniqueSprite(const std::string& name);
     ieSharedSprite getActiveSprite(const std::string& name);
+    
+    virtual void gotoAndStop(ui32 index);
     
 public:
     ieSprite(const glm::vec4& frame,
@@ -74,8 +78,6 @@ public:
              const std::shared_ptr<ieColor>& color = nullptr);
     
     virtual ~ieSprite(void);
-    
-    void gotoAndStop(ui32 index);
 };
 
 #endif

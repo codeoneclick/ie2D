@@ -58,7 +58,7 @@ void ieVertexBuffer::unlock(ui32 size)
     assert(m_size != 0);
     
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(ieVertex) * (size > 0 ? MIN(size, m_size) : m_size) , m_data, m_mode);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(ieVertex) * (size > 0 ? ieMin(size, m_size) : m_size) , m_data, m_mode);
 }
 
 void ieVertexBuffer::bind(const i32* attributes)

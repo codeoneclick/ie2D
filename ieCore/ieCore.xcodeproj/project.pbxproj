@@ -1476,7 +1476,7 @@
 		A42081531733A9370004729E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Sergey Sergeev";
 			};
 			buildConfigurationList = A42081561733A9370004729E /* Build configuration list for PBXProject "ieCore" */;
@@ -1700,7 +1700,6 @@
 		21D07148181DA5630019D264 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1713,8 +1712,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					__IOS__,
+					"__IOS__=1",
 					"DEBUG=1",
+					"GLM_FORCE_RADIANS=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1746,10 +1746,7 @@
 				);
 				LLVM_VECTORIZE_LOOPS = NO;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SKIP_INSTALL = YES;
 				SYMROOT = "$(BUILD_DIR)";
@@ -1760,7 +1757,6 @@
 		21D07149181DA5630019D264 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1774,7 +1770,10 @@
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = __IOS__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__IOS__=1",
+					"GLM_FORCE_RADIANS=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1805,10 +1804,7 @@
 				);
 				LLVM_VECTORIZE_LOOPS = YES;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SYMROOT = "$(BUILD_DIR)";
