@@ -39,7 +39,7 @@ private:
     
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
-    glm::mat4x4 m_modelview;
+    glm::mat4x4 m_localTransformation;
     
     friend class ieDisplayObjectContainer;
     
@@ -62,9 +62,12 @@ protected:
     glm::vec2 m_pivot;
     glm::vec4 m_texCoord;
     
+    glm::mat4 m_externalTransformation;
+    
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
     E_DRAW_OBJECT_MODE m_drawMode;
+    bool m_visible;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
@@ -93,6 +96,9 @@ public:
     
     void setColor(const std::shared_ptr<ieColor>& color);
     std::shared_ptr<ieColor> getColor(void) const;
+    
+    void setVisible(bool value);
+    bool isVisible(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

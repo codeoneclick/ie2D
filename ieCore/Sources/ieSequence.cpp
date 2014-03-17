@@ -105,6 +105,7 @@ m_animationFrameCount(0)
             std::string temp = state.substr(0, begin - 1);
             sequenceFrameState.m_index = atoi(temp.c_str());
             temp = state.substr(end + 2, state.length() - end - 2);
+            sequenceFrameState.m_alpha = atof(temp.c_str());
             temp = state.substr(begin + 1, end - begin - 1);
 
             std::vector<std::string> transform;

@@ -62,10 +62,11 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("4.json");
-    self.sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 400, 400), path);
+    path.append("dragon.json");
+    self.sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(250, 250));
+    self.sprite3->setScale(glm::vec2(1.0f, 1.0f));
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -139,7 +140,7 @@
     static ui32 index = 0;
     self.sprite3->gotoAndStop(index);
     index++;
-    if(index >= 89)
+    if(index >= 8)
     {
         index = 0;
     }

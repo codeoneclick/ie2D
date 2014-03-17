@@ -41,6 +41,7 @@ typedef struct
 typedef struct
 {
     i32 m_index;
+    f32 m_alpha;
     ieSequenceFrameTransformation m_matrix;
 } ieSequenceFrameState;
 

@@ -20,7 +20,16 @@ typedef struct
     f32 m_rotation;
     glm::vec2 m_scale;
     f32 m_alpha;
+    glm::mat4 m_matrix;
 } ieSpriteElementTransformation;
+
+typedef struct
+{
+    std::string m_imageFilename;
+    glm::vec2 m_size;
+    glm::vec2 m_pivot;
+    glm::vec4 m_texCoord;
+} ieSpriteElementUniqueSettings;
 
 typedef std::shared_ptr<ieSprite> ieSharedSprite;
 typedef const std::pair<std::string, ieSharedSprite>& ieSpriteElementPair;
@@ -50,11 +59,11 @@ protected:
     std::shared_ptr<ieTexture> m_texture;
     std::shared_ptr<ieSequence> m_sequence;
     
-    std::unordered_map<std::string, ieSharedSprite> m_uniqueSpriteElements;
+    std::unordered_map<std::string, ieSpriteElementUniqueSettings> m_spriteElementUniqueSettings;
     std::unordered_map<std::string, ieSharedSprite> m_activeSpriteElements;
     std::vector<ieSpriteAnimationFrame> m_spriteAnimationFrames;
     
-    ieSharedSprite getUniqueSprite(const std::string& name);
+    ieSharedSprite createUniqueSprite(const std::string& name);
     ieSharedSprite getActiveSprite(const std::string& name);
     
 public:

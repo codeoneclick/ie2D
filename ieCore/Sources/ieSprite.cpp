@@ -110,19 +110,19 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                           ieSequenceTextureIterator sequenceTextureIterator = m_sequence->getSequenceTextures().find(sequenceTextureId);
                           assert(sequenceTextureIterator != m_sequence->getSequenceTextures().end());
                           std::string imageFilename = sequenceTextureIterator->second.m_imageFilename;
-                          ieSharedSprite sprite = std::make_shared<ieSprite>(glm::vec4(0, 0,
-                                                                                       sequenceElement.m_size.x,
-                                                                                       sequenceElement.m_size.y),
-                                                                             path + "/" + imageFilename);
+                          
                           glm::vec4 texCoord =
                           glm::vec4(static_cast<f32>(sequenceElement.m_position.x) / static_cast<f32>(m_texture->getWidth()),
                                     1.0f - static_cast<f32>(sequenceElement.m_position.y + sequenceElement.m_size.y) / static_cast<f32>(m_texture->getHeight()),
                                     static_cast<f32>(sequenceElement.m_position.x + sequenceElement.m_size.x) / static_cast<f32>(m_texture->getWidth()),
                                     1.0f - static_cast<f32>(sequenceElement.m_position.y) / static_cast<f32>(m_texture->getHeight()));
-                          sprite->m_texCoord = texCoord;
-                          sprite->setPivot(glm::vec2(sequenceElement.m_pivot.x,
-                                                     sequenceElement.m_pivot.y));
-                          m_uniqueSpriteElements.insert(std::make_pair(sequenceElementName, sprite));
+                          
+                          ieSpriteElementUniqueSettings spriteElementUniqueSettings;
+                          spriteElementUniqueSettings.m_imageFilename = path + "/" + imageFilename;
+                          spriteElementUniqueSettings.m_size = sequenceElement.m_size;
+                          spriteElementUniqueSettings.m_pivot = sequenceElement.m_pivot;
+                          spriteElementUniqueSettings.m_texCoord = texCoord;
+                          m_spriteElementUniqueSettings.insert(std::make_pair(sequenceElementName, spriteElementUniqueSettings));
                       });
         
         ieSpriteAnimationFrame spriteAnimationFrame;
@@ -150,9 +150,6 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                               assert(sequenceAnimatedElementIterator != m_sequence->getSequenceAnimatedElements().end());
                               std::string sequenceElementId = sequenceAnimatedElementIterator->second;
                               
-                              ieSharedSprite uniqueSprite = ieSprite::getUniqueSprite(sequenceElementId);
-                              assert(uniqueSprite != nullptr);
-                              
                               glm::vec2 scale = glm::vec2(sqrtf((sequenceFrameState.m_matrix.a * sequenceFrameState.m_matrix.a) +
                                                                 (sequenceFrameState.m_matrix.c * sequenceFrameState.m_matrix.c)),
                                                           sqrtf((sequenceFrameState.m_matrix.b * sequenceFrameState.m_matrix.b) +
@@ -179,79 +176,20 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
                                                              sequenceFrameState.m_matrix.ty);
                               ieSpriteElementTransformation spriteElementTransformation;
                               spriteElementTransformation.m_index = sequenceFrameState.m_index;
+                              spriteElementTransformation.m_alpha = sequenceFrameState.m_alpha;
                               spriteElementTransformation.m_position = position;
                               spriteElementTransformation.m_rotation = rotation;
                               spriteElementTransformation.m_scale = scale;
+                              spriteElementTransformation.m_matrix = glm::mat4(sequenceFrameState.m_matrix.a, sequenceFrameState.m_matrix.b, 0.0f, 0.0f,
+                                                                               sequenceFrameState.m_matrix.c, sequenceFrameState.m_matrix.d, 0.0f, 0.0f,
+                                                                               0.0f, 0.0f, 1.0f, 0.0f,
+                                                                               sequenceFrameState.m_matrix.tx, sequenceFrameState.m_matrix.ty, 0.0f, 1.0f);
                               currentSpriteAnimationFrame.insert(std::make_pair(stateId, spriteElementTransformation));
                           });
             spriteAnimationFrame = currentSpriteAnimationFrame;
             m_spriteAnimationFrames[index] = spriteAnimationFrame;
         }
         ieSprite::gotoAndStop(0);
-        /*auto sequenceFrame = m_sequence->getSequenceFrames().find(1);
-        assert(sequenceFrame != m_sequence->getSequenceFrames().end());
-        
-        std::vector<std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>> sprites;
-        std::for_each((*sequenceFrame).second.m_states.begin(),
-                      (*sequenceFrame).second.m_states.end(),
-                      [this, path, &sprites](const std::pair<std::string, ieSequenceFrameState>& iterator)
-                      {
-                          std::string stateId = iterator.first;
-                          auto sequenceAnimatedElement = m_sequence->getSequenceAnimatedElements().find(stateId);
-                          assert(sequenceAnimatedElement != m_sequence->getSequenceAnimatedElements().end());
-                          std::string sequenceElementId = sequenceAnimatedElement->second;
-                          
-                          auto spriteElement = m_uniqueSpriteElements.find(sequenceElementId);
-                          assert(spriteElement != m_uniqueSpriteElements.end());
-                          
-                          glm::vec2 scale = glm::vec2(sqrtf((iterator.second.m_matrix.a * iterator.second.m_matrix.a) +
-                                                            (iterator.second.m_matrix.c * iterator.second.m_matrix.c)),
-                                                      sqrtf((iterator.second.m_matrix.b * iterator.second.m_matrix.b) +
-                                                            (iterator.second.m_matrix.d * iterator.second.m_matrix.d)));
-                          
-                          scale.x *= iterator.second.m_matrix.a > 0.0f ? 1.0f : -1.0f;
-                          scale.y *= iterator.second.m_matrix.d > 0.0f ? 1.0f : -1.0f;
-                          
-                          f32 sign = atanf(-iterator.second.m_matrix.c / iterator.second.m_matrix.a);
-                          f32 radians  = acosf(iterator.second.m_matrix.a / scale.x);
-                          f32 degrees  = glm::degrees(radians);
-                          f32 rotation = 0.0f;
-                          
-                          if (degrees > 90.0f && sign > 0)
-                          {
-                              rotation = glm::radians(360.0f - degrees);
-                          } else if (degrees < 90.0f && sign < 0) {
-                              rotation = glm::radians(360.0f - degrees);
-                          } else {
-                              rotation = radians;
-                          }
-                          rotation = glm::degrees(rotation);
-                          glm::vec2 position = glm::vec2(iterator.second.m_matrix.tx,
-                                                         iterator.second.m_matrix.ty);
-                          sprites.push_back(std::make_tuple(spriteElement->second,
-                                                            iterator.second.m_index,
-                                                            position,
-                                                            rotation,
-                                                            scale));
-                          m_activeSpriteElements.insert(std::make_pair(stateId,
-                                                                      spriteElement->second));
-                      });
-        
-        std::sort(sprites.begin(), sprites.end(), []
-                  (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator_01,
-                   const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator_02)
-                  {
-                      return std::get<1>(iterator_01) < std::get<1>(iterator_02);
-                  });
-        
-        std::for_each(sprites.begin(), sprites.end(),  [this]
-                      (const std::tuple<std::shared_ptr<ieSprite>, ui32, glm::vec2, f32, glm::vec2>& iterator)
-                      {
-                          ieSprite::addChild(std::get<0>(iterator));
-                          std::get<0>(iterator)->setPosition(std::get<2>(iterator));
-                          std::get<0>(iterator)->setRotation(std::get<3>(iterator));
-                          std::get<0>(iterator)->setScale(std::get<4>(iterator));
-                      });*/
     }
 }
 
@@ -260,11 +198,20 @@ void ieSprite::onRemoved(const std::shared_ptr<ieEvent>& event)
     ieDisplayObjectContainer::onRemoved(event);
 }
 
-ieSharedSprite ieSprite::getUniqueSprite(const std::string& name)
+ieSharedSprite ieSprite::createUniqueSprite(const std::string& name)
 {
-    const auto& iterator = m_uniqueSpriteElements.find(name);
-    assert(iterator != m_uniqueSpriteElements.end());
-    return iterator != m_uniqueSpriteElements.end() ? iterator->second : nullptr;
+    const auto& iterator = m_spriteElementUniqueSettings.find(name);
+    assert(iterator != m_spriteElementUniqueSettings.end());
+    
+    ieSpriteElementUniqueSettings spriteElementUniqueSettings = iterator->second;
+    
+    ieSharedSprite sprite = std::make_shared<ieSprite>(glm::vec4(0, 0,
+                                                                 spriteElementUniqueSettings.m_size.x,
+                                                                 spriteElementUniqueSettings.m_size.y),
+                                                       spriteElementUniqueSettings.m_imageFilename);
+    sprite->m_texCoord = spriteElementUniqueSettings.m_texCoord;
+    sprite->setPivot(spriteElementUniqueSettings.m_pivot);
+    return sprite;
 }
 
 ieSharedSprite ieSprite::getActiveSprite(const std::string& name)
@@ -289,14 +236,13 @@ void ieSprite::gotoAndStop(ui32 index)
                               ieSequenceAnimatedElementIterator sequenceAnimatedElementIterator = m_sequence->getSequenceAnimatedElements().find(stateId);
                               assert(sequenceAnimatedElementIterator != m_sequence->getSequenceAnimatedElements().end());
                               std::string sequenceElementId = sequenceAnimatedElementIterator->second;
-                              ieSharedSprite uniqueSprite = ieSprite::getUniqueSprite(sequenceElementId);
+                              ieSharedSprite uniqueSprite = ieSprite::createUniqueSprite(sequenceElementId);
                               ieSprite::addChild(uniqueSprite);
                               m_activeSpriteElements.insert(std::make_pair(stateId, uniqueSprite));
                               activeSprite = uniqueSprite;
                           }
-                          activeSprite->setPosition(spriteElementTransformation.m_position);
-                          activeSprite->setRotation(spriteElementTransformation.m_rotation);
-                          activeSprite->setScale(spriteElementTransformation.m_scale);
+                          activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
+                          activeSprite->m_externalTransformation = spriteElementTransformation.m_matrix;
                       });
         std::for_each(spriteAnimationFrame.begin(),
                       spriteAnimationFrame.end(),

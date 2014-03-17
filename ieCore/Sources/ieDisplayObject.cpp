@@ -24,14 +24,16 @@ m_stage(nullptr),
 m_camera(nullptr),
 m_frame(frame),
 m_parent(nullptr),
-m_modelview(1.0f),
+m_localTransformation(1.0f),
+m_externalTransformation(1.0f),
 m_position(glm::vec2(0.0f, 0.0f)),
 m_rotation(0.0f),
 m_scale(1.0f, 1.0f),
 m_pivot(0.0f),
 m_texCoord(0.0f, 0.0f, 1.0f, 1.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
-m_drawMode(E_DRAW_OBJECT_MODE_V2C4)
+m_drawMode(E_DRAW_OBJECT_MODE_V2C4),
+m_visible(true)
 {
     m_description = "ieDisplayObject";
     m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onUpdate,
@@ -156,21 +158,33 @@ glm::vec2 ieDisplayObject::getPivot(void) const
     return m_pivot;
 }
 
+void ieDisplayObject::setVisible(bool value)
+{
+    m_visible = value;
+}
+
+bool ieDisplayObject::isVisible(void) const
+{
+    return m_visible;
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     std::shared_ptr<ieDisplayObjectContainer> parent = m_parent;
     glm::mat4x4 parentMatrix(1.0f);
     while(parent != nullptr)
     {
-        glm::vec2 position = parent->m_position;
-        f32 rotation = parent->m_rotation;
-        glm::mat4x4 translationMatrix = glm::translate(glm::mat4x4(1.0f),
-                                                       glm::vec3(position.x,
-                                                                 position.y, 0.0f));
-        glm::mat4x4 rotationMatrix = glm::rotate(glm::mat4x4(1.0f),
-                                                 glm::radians(rotation),
-                                                 glm::vec3(0.0f, 0.0f, 1.0f));
-        parentMatrix = parentMatrix * translationMatrix * rotationMatrix;
+        glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f),
+                                                     glm::vec3(parent->m_position.x,
+                                                               parent->m_position.y, 0.0f));
+        glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f),
+                                               glm::radians(parent->m_rotation),
+                                               glm::vec3(0.0f, 0.0f, 1.0f));
+        glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f),
+                                           glm::vec3(parent->m_scale.x,
+                                                     parent->m_scale.y,
+                                                     0.0f));
+        parentMatrix = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix;
         parent = parent->m_parent;
     }
     
@@ -184,22 +198,25 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
                                          glm::vec3(m_scale.x,
                                                    m_scale.y, 1.0f));
     
-    m_modelview = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix;
+    m_localTransformation = parentMatrix * translationMatrix * rotationMatrix * scaleMatrix * m_externalTransformation;
 }
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    assert(m_camera != nullptr);
-    ieMaterial::bind();
-    
-    m_shader->setMatrix4x4(m_modelview, E_SHADER_UNIFORM_MODELVIEW);
-    m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
-    m_shape->bind(m_shader->getAttributes());
-    m_shape->draw();
-    std::cout<<"ieDisplayObject::onDraw"<<std::endl;
-    
-    ieMaterial::unbind();
-    m_shape->unbind(m_shader->getAttributes());
+    if(m_visible)
+    {
+        assert(m_camera != nullptr);
+        ieMaterial::bind();
+        
+        m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
+        m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
+        m_shape->bind(m_shader->getAttributes());
+        m_shape->draw();
+        std::cout<<"ieDisplayObject::onDraw"<<std::endl;
+        
+        ieMaterial::unbind();
+        m_shape->unbind(m_shader->getAttributes());
+    }
 }
 
 void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
