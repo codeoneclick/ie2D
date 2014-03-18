@@ -190,18 +190,25 @@ void ieSprite::createSpriteAnimationFrame(ui32 index, ieSpriteAnimationFrame& pr
                       std::string stateId = sequenceFrameStatePair.first;
                       ieSequenceFrameState sequenceFrameState = sequenceFrameStatePair.second;
                       ieSequenceAnimatedElementIterator sequenceAnimatedElementIterator = m_sequence->getSequenceAnimatedElements().find(stateId);
-                      assert(sequenceAnimatedElementIterator != m_sequence->getSequenceAnimatedElements().end());
-                      std::string sequenceElementId = sequenceAnimatedElementIterator->second;
                       
-                      ieSpriteElementTransformation spriteElementTransformation;
-                      spriteElementTransformation.m_index = sequenceFrameState.m_index;
-                      spriteElementTransformation.m_alpha = sequenceFrameState.m_alpha;
-                      spriteElementTransformation.m_matrixTransformation =
-                      glm::mat4(sequenceFrameState.m_matrix.a, sequenceFrameState.m_matrix.b, 0, 0,
-                                sequenceFrameState.m_matrix.c, sequenceFrameState.m_matrix.d, 0, 0,
-                                0, 0, 1, 0,
-                                sequenceFrameState.m_matrix.tx, sequenceFrameState.m_matrix.ty, 0, 1);
-                      currentSpriteAnimationFrame.insert(std::make_pair(stateId, spriteElementTransformation));
+                      std::string sequenceElementId;
+                      if(sequenceAnimatedElementIterator == m_sequence->getSequenceAnimatedElements().end())
+                      {
+                          ieSequenceAnimatedElementIterator sequenceAnimatedElementMaskIterator = m_sequence->getSequenceAnimatedElementsMasks().find(stateId);
+                          assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
+                          sequenceElementId = sequenceAnimatedElementMaskIterator->second;
+                      } else {
+                          sequenceElementId = sequenceAnimatedElementIterator->second;
+                          ieSpriteElementTransformation spriteElementTransformation;
+                          spriteElementTransformation.m_index = sequenceFrameState.m_index;
+                          spriteElementTransformation.m_alpha = sequenceFrameState.m_alpha;
+                          spriteElementTransformation.m_matrixTransformation =
+                          glm::mat4(sequenceFrameState.m_matrix.a, sequenceFrameState.m_matrix.b, 0, 0,
+                                    sequenceFrameState.m_matrix.c, sequenceFrameState.m_matrix.d, 0, 0,
+                                    0, 0, 1, 0,
+                                    sequenceFrameState.m_matrix.tx, sequenceFrameState.m_matrix.ty, 0, 1);
+                          currentSpriteAnimationFrame.insert(std::make_pair(stateId, spriteElementTransformation));
+                      }
                   });
     previosSpriteAnimationFrame = currentSpriteAnimationFrame;
     m_spriteAnimationFrames[index] = previosSpriteAnimationFrame;
@@ -218,19 +225,29 @@ void ieSprite::gotoAndStop(ui32 index)
                           std::string stateId = spriteAnimationFramePair.first;
                           ieSpriteElementTransformation spriteElementTransformation = spriteAnimationFramePair.second;
                           ieSharedSprite activeSprite = ieSprite::getActiveSprite(stateId);
+                          bool isContinue = false;
                           if(activeSprite == nullptr)
                           {
                               ieSequenceAnimatedElementIterator sequenceAnimatedElementIterator = m_sequence->getSequenceAnimatedElements().find(stateId);
-                              assert(sequenceAnimatedElementIterator != m_sequence->getSequenceAnimatedElements().end());
-                              std::string sequenceElementId = sequenceAnimatedElementIterator->second;
-                              ieSharedSprite uniqueSprite = ieSprite::createUniqueSprite(sequenceElementId);
-                              ieSprite::addChild(uniqueSprite);
-                              m_activeSpriteElements.insert(std::make_pair(stateId, uniqueSprite));
-                              activeSprite = uniqueSprite;
+                              if(sequenceAnimatedElementIterator == m_sequence->getSequenceAnimatedElements().end())
+                              {
+                                  ieSequenceAnimatedElementIterator sequenceAnimatedElementMaskIterator = m_sequence->getSequenceAnimatedElementsMasks().find(stateId);
+                                  assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
+                                  isContinue = true;
+                              } else {
+                                  std::string sequenceElementId = sequenceAnimatedElementIterator->second;
+                                  ieSharedSprite uniqueSprite = ieSprite::createUniqueSprite(sequenceElementId);
+                                  ieSprite::addChild(uniqueSprite);
+                                  m_activeSpriteElements.insert(std::make_pair(stateId, uniqueSprite));
+                                  activeSprite = uniqueSprite;
+                              }
                           }
-                          activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
-                          activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
-                          activeSprite->setZIndex(spriteElementTransformation.m_index);
+                          if(!isContinue)
+                          {
+                              activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
+                              activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
+                              activeSprite->setZIndex(spriteElementTransformation.m_index);
+                          }
                       });
         ieSprite::sortChildrens();
     }

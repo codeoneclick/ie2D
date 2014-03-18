@@ -223,7 +223,6 @@ void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
         m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
         m_shape->bind(m_shader->getAttributes());
         m_shape->draw();
-        std::cout<<"ieDisplayObject::onDraw"<<std::endl;
         
         ieMaterial::unbind();
         m_shape->unbind(m_shader->getAttributes());
@@ -232,12 +231,12 @@ void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
-    std::cout<<"ieDisplayObject::onEnterFrame"<<std::endl;
+    
 }
 
 void ieDisplayObject::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
-    std::cout<<"ieDisplayObject::onExitFrame"<<std::endl;
+    
 }
 
 void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)

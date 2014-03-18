@@ -48,6 +48,7 @@ m_animationFrameCount(0)
     }
     Json::Value animationSequences = root["animationSequences"];
     Json::Value animationObjects = root["animationObjects"];
+    Json::Value animationMasks = root["animationMasks"];
     Json::Value textures = root["textureAtlas"];
     Json::Value animationFrames = root["animationConfigFrames"];
     
@@ -138,9 +139,15 @@ m_animationFrameCount(0)
         m_sequenceAnimatedElements.insert(std::make_pair(stateId, animatedElementId));
     }
     
-    m_animationFrameCount = root["animationFrameCount"].asUInt();
+    Json::Value::Members sequenceAnimatedMasksMembers = animationMasks.getMemberNames();
+    for(ui32 i = 0; i < sequenceAnimatedMasksMembers.size(); ++i)
+    {
+        std::string stateId = sequenceAnimatedMasksMembers[i];
+        std::string animatedElementId = animationMasks[sequenceAnimatedMasksMembers[i]].asString();
+        m_sequenceAnimatedElementsMasks.insert(std::make_pair(stateId, animatedElementId));
+    }
     
-    std::cout<<"done"<<std::endl;
+    m_animationFrameCount = root["animationFrameCount"].asUInt();
 }
 
 ieSequence::~ieSequence(void)
@@ -166,6 +173,11 @@ const std::unordered_map<ui32, ieSequenceFrame>& ieSequence::getSequenceFrames(v
 const std::unordered_map<std::string, std::string>& ieSequence::getSequenceAnimatedElements(void) const
 {
     return m_sequenceAnimatedElements;
+}
+
+const std::unordered_map<std::string, std::string>& ieSequence::getSequenceAnimatedElementsMasks(void) const
+{
+    return m_sequenceAnimatedElementsMasks;
 }
 
 ui32 ieSequence::getAnimationFrameCount(void) const

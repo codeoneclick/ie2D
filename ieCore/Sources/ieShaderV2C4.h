@@ -19,21 +19,22 @@ static const char* ieShaderV2C4_vert = STRING_SHADER
  
  varying vec4 varying_color;
  
- void main(void)
+void main(void)
 {
     gl_Position = uniform_projection * uniform_modelview * vec4(attribute_position, 0.0, 1.0);
     varying_color = attribute_color / 255.0;
 }
- );
+);
+
 
 static const char* ieShaderV2C4_frag = STRING_SHADER
 (
  varying lowp vec4 varying_color;
  
- void main(void)
+void main(void)
 {
     gl_FragColor = varying_color;
 }
- );
+);
 
 #endif

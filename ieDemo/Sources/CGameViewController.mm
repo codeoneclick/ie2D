@@ -72,7 +72,7 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("4.json");
+    path.append("animation_01.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(100, 100));
@@ -82,7 +82,7 @@
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0.1 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:0 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -149,7 +149,7 @@
     static ui32 index = 0;
     self.sprite4->gotoAndStop(index);
     index++;
-    if(index >= 60)
+    if(index >= 73)
     {
         index = 0;
     }
