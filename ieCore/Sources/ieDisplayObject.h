@@ -61,6 +61,7 @@ protected:
     glm::vec4 m_frame;
     glm::vec2 m_pivot;
     glm::vec4 m_texCoord;
+    ui32 m_zIndex;
     
     glm::mat4 m_externalTransformation;
     
@@ -96,6 +97,9 @@ public:
     
     void setColor(const std::shared_ptr<ieColor>& color);
     std::shared_ptr<ieColor> getColor(void) const;
+    
+    ui32 getZIndex(void);
+    void setZIndex(ui32 zIndex);
     
     void setVisible(bool value);
     bool isVisible(void) const;

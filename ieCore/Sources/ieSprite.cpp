@@ -230,15 +230,8 @@ void ieSprite::gotoAndStop(ui32 index)
                           }
                           activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
                           activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
+                          activeSprite->setZIndex(spriteElementTransformation.m_index);
                       });
-        std::for_each(spriteAnimationFrame.begin(),
-                      spriteAnimationFrame.end(),
-                      [this](ieSpriteAnimationFramePair spriteAnimationFramePair){
-                          std::string stateId = spriteAnimationFramePair.first;
-                          ieSpriteElementTransformation spriteElementTransformation = spriteAnimationFramePair.second;
-                          ieSharedSprite activeSprite = ieSprite::getActiveSprite(stateId);
-                          assert(activeSprite != nullptr);
-                          ieSprite::setChildIndex(activeSprite, spriteElementTransformation.m_index);
-                      });
+        ieSprite::sortChildrens();
     }
 }

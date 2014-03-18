@@ -33,7 +33,8 @@ m_pivot(0.0f),
 m_texCoord(0.0f, 0.0f, 1.0f, 1.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_drawMode(E_DRAW_OBJECT_MODE_V2C4),
-m_visible(true)
+m_visible(true),
+m_zIndex(0)
 {
     m_description = "ieDisplayObject";
     m_functionOnUpdate = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieDisplayObject::onUpdate,
@@ -156,6 +157,16 @@ void ieDisplayObject::setPivot(const glm::vec2 &pivot)
 glm::vec2 ieDisplayObject::getPivot(void) const
 {
     return m_pivot;
+}
+
+ui32 ieDisplayObject::getZIndex(void)
+{
+    return m_zIndex;
+}
+
+void ieDisplayObject::setZIndex(ui32 zIndex)
+{
+    m_zIndex = zIndex;
 }
 
 void ieDisplayObject::setVisible(bool value)

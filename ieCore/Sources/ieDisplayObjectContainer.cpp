@@ -72,7 +72,7 @@ void ieDisplayObjectContainer::onRemoved(const std::shared_ptr<ieEvent>& event)
     });
 }
 
-void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObject>& child)
+void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObjectContainer>& child)
 {
     assert(m_uniqueChilds.count(child) == 0);
     m_uniqueChilds.insert(child);
@@ -86,7 +86,7 @@ void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObject>& 
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 
-void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObject>& child, i32 index)
+void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObjectContainer>& child, i32 index)
 {
     assert(m_uniqueChilds.count(child) == 0);
     assert(index <= m_childs.size());
@@ -101,23 +101,23 @@ void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObject>
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 
-bool ieDisplayObjectContainer::contains(const std::shared_ptr<ieDisplayObject>& child) const
+bool ieDisplayObjectContainer::contains(const std::shared_ptr<ieDisplayObjectContainer>& child) const
 {
     return m_uniqueChilds.count(child) != 0;
 }
 
-std::shared_ptr<ieDisplayObject> ieDisplayObjectContainer::getChildAt(i32 index) const
+std::shared_ptr<ieDisplayObjectContainer> ieDisplayObjectContainer::getChildAt(i32 index) const
 {
     assert(index < m_childs.size());
     return m_childs.at(index);
 }
 
-std::shared_ptr<ieDisplayObject> ieDisplayObjectContainer::getChildByName(const std::string& name) const
+std::shared_ptr<ieDisplayObjectContainer> ieDisplayObjectContainer::getChildByName(const std::string& name) const
 {
     return nullptr;
 }
 
-i32 ieDisplayObjectContainer::getChildIndex(const std::shared_ptr<ieDisplayObject>& child) const
+i32 ieDisplayObjectContainer::getChildIndex(const std::shared_ptr<ieDisplayObjectContainer>& child) const
 {
     for(ui32 i = 0; i < m_childs.size(); ++i)
     {
@@ -129,12 +129,12 @@ i32 ieDisplayObjectContainer::getChildIndex(const std::shared_ptr<ieDisplayObjec
     return -1;
 }
 
-std::vector<std::shared_ptr<ieDisplayObject>> ieDisplayObjectContainer::getObjectsUnderPoint(const glm::vec2& point) const
+std::vector<std::shared_ptr<ieDisplayObjectContainer>> ieDisplayObjectContainer::getObjectsUnderPoint(const glm::vec2& point) const
 {
-    return std::vector<std::shared_ptr<ieDisplayObject>>();
+    return std::vector<std::shared_ptr<ieDisplayObjectContainer>>();
 }
 
-void ieDisplayObjectContainer::removeChild(const std::shared_ptr<ieDisplayObject>& child)
+void ieDisplayObjectContainer::removeChild(const std::shared_ptr<ieDisplayObjectContainer>& child)
 {
     m_uniqueChilds.erase(child);
     auto iterator = std::find(m_childs.begin(), m_childs.end(), child);
@@ -171,7 +171,7 @@ void ieDisplayObjectContainer::removeChildren(i32 startIndex, i32 endIndex)
     }
 }
 
-void ieDisplayObjectContainer::setChildIndex(const std::shared_ptr<ieDisplayObject>& child, i32 index)
+void ieDisplayObjectContainer::setChildIndex(const std::shared_ptr<ieDisplayObjectContainer>& child, i32 index)
 {
     assert(m_uniqueChilds.count(child) != 0);
     auto iterator = std::find(m_childs.begin(), m_childs.end(), child);
@@ -185,8 +185,8 @@ void ieDisplayObjectContainer::setChildIndex(const std::shared_ptr<ieDisplayObje
     m_childs.insert(m_childs.begin() + index, child);
 }
 
-void ieDisplayObjectContainer::swapChildren(const std::shared_ptr<ieDisplayObject>& child_01,
-                  const std::shared_ptr<ieDisplayObject>& child_02)
+void ieDisplayObjectContainer::swapChildren(const std::shared_ptr<ieDisplayObjectContainer>& child_01,
+                                            const std::shared_ptr<ieDisplayObjectContainer>& child_02)
 {
     //#TODO
 }
@@ -194,4 +194,12 @@ void ieDisplayObjectContainer::swapChildren(const std::shared_ptr<ieDisplayObjec
 void ieDisplayObjectContainer::swapChildrenAt(i32 index_01, i32 index_02)
 {
     //#TODO
+}
+
+void ieDisplayObjectContainer::sortChildrens(void)
+{
+    std::sort(m_childs.begin(), m_childs.end(), [](const std::shared_ptr<ieDisplayObjectContainer>& value_01,
+                                                   const std::shared_ptr<ieDisplayObjectContainer>& value_02){
+        return value_01->getZIndex() < value_02->getZIndex();
+    });
 }
