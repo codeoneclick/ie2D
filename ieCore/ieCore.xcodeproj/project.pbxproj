@@ -47,6 +47,7 @@
 		2109422418B15D1700C86176 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421218B15D1600C86176 /* uncompr.c */; };
 		2109422518B15D1700C86176 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421518B15D1600C86176 /* zutil.c */; };
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
+		2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */; };
 		2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
 		2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3118C278EE009A13AC /* json_reader.cpp */; };
 		2156BB3718C278EE009A13AC /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3318C278EE009A13AC /* json_value.cpp */; };
@@ -458,6 +459,8 @@
 		2109421618B15D1600C86176 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		2109425318B2B27F00C86176 /* ieShaderV2T2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2C4.h; path = Sources/ieShaderV2T2C4.h; sourceTree = "<group>"; };
 		2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieMask.cpp; path = Sources/ieMask.cpp; sourceTree = "<group>"; };
+		2129065C18DC7BDD00AD4AE2 /* ieMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMask.h; path = Sources/ieMask.h; sourceTree = "<group>"; };
 		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
 		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
 		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
@@ -1278,6 +1281,8 @@
 		21EBB4B7189FD648003CB322 /* ieDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				2129065C18DC7BDD00AD4AE2 /* ieMask.h */,
+				2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */,
 				21EBB4C4189FD7B5003CB322 /* ieIBitmapDrawable.h */,
 				21EBB4C3189FD7B5003CB322 /* ieIBitmapDrawable.cpp */,
 				21EBB4C7189FD851003CB322 /* ieBitmapData.h */,
@@ -1553,6 +1558,7 @@
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
 				2109422218B15D1700C86176 /* inftrees.c in Sources */,
 				210940C418B1563700C86176 /* gcdppTask_t.cpp in Sources */,
+				2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */,
 				210941FA18B1597500C86176 /* pugixml.cpp in Sources */,
 				210940CD18B1563700C86176 /* pngrio.c in Sources */,
 				2109421918B15D1600C86176 /* crc32.c in Sources */,

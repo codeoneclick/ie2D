@@ -125,6 +125,9 @@ m_animationFrameCount(0)
             sequenceFrameState.m_matrix.tx = static_cast<f32>(atof(transform[4].c_str()));
             sequenceFrameState.m_matrix.ty = static_cast<f32>(atof(transform[5].c_str()));
             
+            std::string maskName = sequenceFrameStateJSON[stateId]["m"].asString();
+            sequenceFrameState.m_maskName = maskName;
+            
             sequenceFrame.m_states.insert(std::make_pair(stateId, sequenceFrameState));
         }
         ui32 frameNumber = animationFrames[i]["frameNumber"].asUInt();
@@ -146,7 +149,6 @@ m_animationFrameCount(0)
         std::string animatedElementId = animationMasks[sequenceAnimatedMasksMembers[i]].asString();
         m_sequenceAnimatedElementsMasks.insert(std::make_pair(stateId, animatedElementId));
     }
-    
     m_animationFrameCount = root["animationFrameCount"].asUInt();
 }
 

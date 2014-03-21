@@ -42,6 +42,7 @@ typedef struct
 {
     i32 m_index;
     f32 m_alpha;
+    std::string m_maskName;
     ieSequenceFrameTransformation m_matrix;
 } ieSequenceFrameState;
 
