@@ -17,6 +17,7 @@
 
 #include "ieShaderV2C4.h"
 #include "ieShaderV2T2C4.h"
+#include "ieShaderV2T2M.h"
 
 class ieShaderUniform;
 

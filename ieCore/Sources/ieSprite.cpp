@@ -11,12 +11,17 @@
 #include "ieTexture.h"
 #include "ieShader.h"
 #include "ieSequence.h"
+#include "ieMask.h"
+#include "ieEvent.h"
+#include "ieStage.h"
+#include "ieCamera.h"
 #include "ieResourceAccessor.h"
 
 ieSprite::ieSprite(const glm::vec4& frame,
                    const std::shared_ptr<ieColor>& color) :
 ieDisplayObjectContainer(frame),
 m_texture(nullptr),
+m_mask(nullptr),
 m_imageFilename(""),
 m_sequenceFilename("")
 {
@@ -55,6 +60,25 @@ ieSprite::~ieSprite(void)
     m_activeSpriteElements.clear();
 }
 
+void ieSprite::setMask(const std::shared_ptr<ieMask> &mask)
+{
+    if(m_mask == nullptr &&
+       mask != nullptr &&
+       m_mask != mask)
+    {
+        std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, mask);
+        eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
+        eventOnStageAdded->addObjectWithKey(m_stage, "stage");
+        eventOnStageAdded->addObjectWithKey(m_camera, "camera");
+        mask->dispatchEvent(eventOnStageAdded);
+    } else  if(m_mask != nullptr &&
+               mask == nullptr) {
+        std::shared_ptr<ieEvent> eventOnStageRemoved = std::make_shared<ieEvent>(kEVENT_ON_REMOVED, m_mask);
+        m_mask->dispatchEvent(eventOnStageRemoved);
+    }
+    m_mask = mask;
+}
+
 void ieSprite::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     ieDisplayObjectContainer::onUpdate(event);
@@ -62,9 +86,17 @@ void ieSprite::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieSprite::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    if(m_mask != nullptr) {
+        m_mask->enable();
+        m_mask->onDraw(event);
+    }
     ieMaterial::bind();
     ieMaterial::setTexture(m_texture, E_SHADER_SAMPLER_01);
     ieDisplayObjectContainer::onDraw(event);
+    
+    if(m_mask != nullptr) {
+        m_mask->disable();
+    }
 }
 
 void ieSprite::onEnterFrame(const std::shared_ptr<ieEvent>& event)
@@ -130,6 +162,66 @@ ieSharedSprite ieSprite::getActiveSprite(const std::string& name)
     return iterator != m_activeSpriteElements.end() ? iterator->second : nullptr;
 }
 
+ieSharedMask ieSprite::createUniqueMask(const std::string &name)
+{
+    const auto& iterator = m_spriteElementUniqueSettings.find(name);
+    assert(iterator != m_spriteElementUniqueSettings.end());
+    
+    ieSpriteElementUniqueSettings spriteElementUniqueSettings = iterator->second;
+    
+    ieSharedMask mask = std::make_shared<ieMask>(glm::vec4(0, 0,
+                                                           spriteElementUniqueSettings.m_size.x,
+                                                           spriteElementUniqueSettings.m_size.y),
+                                                 spriteElementUniqueSettings.m_imageFilename);
+    mask->m_texCoord = spriteElementUniqueSettings.m_texCoord;
+    mask->setPivot(spriteElementUniqueSettings.m_pivot);
+    return mask;
+}
+
+ieSharedMask ieSprite::getActiveMaskWithStateId(const std::string &name)
+{
+    const auto& iterator = m_activeMaskElementsWithStateIds.find(name);
+    ieSharedMask mask = nullptr;
+    if(iterator == m_activeMaskElementsWithStateIds.end())
+    {
+        ieSequenceAnimatedElementIterator sequenceAnimatedElementMaskIterator = m_sequence->getSequenceAnimatedElementsMasks().find(name);
+        assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
+        std::string maskId = sequenceAnimatedElementMaskIterator->second;
+        mask = ieSprite::createUniqueMask(maskId);
+        m_activeMaskElementsWithStateIds.insert(std::make_pair(name, mask));
+        m_activeMaskElementsWithElementsIds.insert(std::make_pair(maskId, mask));
+    } else {
+        mask = iterator->second;
+    }
+    return mask;
+}
+
+ieSharedMask ieSprite::getActiveMaskWithElementId(const std::string &name)
+{
+    const auto& iterator = m_activeMaskElementsWithElementsIds.find(name);
+    ieSharedMask mask = nullptr;
+    if(iterator == m_activeMaskElementsWithElementsIds.end())
+    {
+        mask = ieSprite::createUniqueMask(name);
+        m_activeMaskElementsWithElementsIds.insert(std::make_pair(name, mask));
+        
+        std::string maskStateId = "";
+        std::for_each(m_sequence->getSequenceAnimatedElementsMasks().begin(),
+                      m_sequence->getSequenceAnimatedElementsMasks().end(), [this, name, &maskStateId](std::pair<std::string,
+                                                                                   std::string> maskAssociation){
+                          if(maskAssociation.second == name)
+                          {
+                              maskStateId = maskAssociation.first;
+                          }
+                      });
+        assert(maskStateId.length() != 0);
+        m_activeMaskElementsWithStateIds.insert(std::make_pair(maskStateId, mask));
+    } else {
+        mask = iterator->second;
+    }
+    return mask;
+}
+
 glm::ivec2 ieSprite::getSpriteElementTextureSize(const std::string& imageFilename)
 {
     std::shared_ptr<ieTexture> spriteElementTexture = m_resourceAccessor->getTexture(imageFilename);
@@ -190,7 +282,6 @@ void ieSprite::createSpriteAnimationFrame(ui32 index, ieSpriteAnimationFrame& pr
                       std::string stateId = sequenceFrameStatePair.first;
                       ieSequenceFrameState sequenceFrameState = sequenceFrameStatePair.second;
                       ieSequenceAnimatedElementIterator sequenceAnimatedElementIterator = m_sequence->getSequenceAnimatedElements().find(stateId);
-                      
                       std::string sequenceElementId;
                       if(sequenceAnimatedElementIterator == m_sequence->getSequenceAnimatedElements().end())
                       {
@@ -199,16 +290,17 @@ void ieSprite::createSpriteAnimationFrame(ui32 index, ieSpriteAnimationFrame& pr
                           sequenceElementId = sequenceAnimatedElementMaskIterator->second;
                       } else {
                           sequenceElementId = sequenceAnimatedElementIterator->second;
-                          ieSpriteElementTransformation spriteElementTransformation;
-                          spriteElementTransformation.m_index = sequenceFrameState.m_index;
-                          spriteElementTransformation.m_alpha = sequenceFrameState.m_alpha;
-                          spriteElementTransformation.m_matrixTransformation =
-                          glm::mat4(sequenceFrameState.m_matrix.a, sequenceFrameState.m_matrix.b, 0, 0,
-                                    sequenceFrameState.m_matrix.c, sequenceFrameState.m_matrix.d, 0, 0,
-                                    0, 0, 1, 0,
-                                    sequenceFrameState.m_matrix.tx, sequenceFrameState.m_matrix.ty, 0, 1);
-                          currentSpriteAnimationFrame.insert(std::make_pair(stateId, spriteElementTransformation));
                       }
+                      ieSpriteElementTransformation spriteElementTransformation;
+                      spriteElementTransformation.m_index = sequenceFrameState.m_index;
+                      spriteElementTransformation.m_alpha = sequenceFrameState.m_alpha;
+                      spriteElementTransformation.m_maskName = sequenceFrameState.m_maskName;
+                      spriteElementTransformation.m_matrixTransformation =
+                      glm::mat4(sequenceFrameState.m_matrix.a, sequenceFrameState.m_matrix.b, 0, 0,
+                                sequenceFrameState.m_matrix.c, sequenceFrameState.m_matrix.d, 0, 0,
+                                0, 0, 1, 0,
+                                sequenceFrameState.m_matrix.tx, sequenceFrameState.m_matrix.ty, 0, 1);
+                      currentSpriteAnimationFrame.insert(std::make_pair(stateId, spriteElementTransformation));
                   });
     previosSpriteAnimationFrame = currentSpriteAnimationFrame;
     m_spriteAnimationFrames[index] = previosSpriteAnimationFrame;
@@ -226,6 +318,7 @@ void ieSprite::gotoAndStop(ui32 index)
                           ieSpriteElementTransformation spriteElementTransformation = spriteAnimationFramePair.second;
                           ieSharedSprite activeSprite = ieSprite::getActiveSprite(stateId);
                           bool isContinue = false;
+                          
                           if(activeSprite == nullptr)
                           {
                               ieSequenceAnimatedElementIterator sequenceAnimatedElementIterator = m_sequence->getSequenceAnimatedElements().find(stateId);
@@ -233,6 +326,10 @@ void ieSprite::gotoAndStop(ui32 index)
                               {
                                   ieSequenceAnimatedElementIterator sequenceAnimatedElementMaskIterator = m_sequence->getSequenceAnimatedElementsMasks().find(stateId);
                                   assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
+                                  std::string sequenceElementId = sequenceAnimatedElementMaskIterator->second;
+                                  ieSharedMask mask = ieSprite::getActiveMaskWithElementId(sequenceElementId);
+                                  mask->setVisible(spriteElementTransformation.m_alpha != 0.0f);
+                                  mask->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                                   isContinue = true;
                               } else {
                                   std::string sequenceElementId = sequenceAnimatedElementIterator->second;
@@ -244,6 +341,13 @@ void ieSprite::gotoAndStop(ui32 index)
                           }
                           if(!isContinue)
                           {
+                              if(spriteElementTransformation.m_maskName.length() != 0)
+                              {
+                                  ieSharedMask mask = ieSprite::getActiveMaskWithStateId(spriteElementTransformation.m_maskName);
+                                  activeSprite->setMask(mask);
+                              } else {
+                                  activeSprite->setMask(nullptr);
+                              }
                               activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
                               activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                               activeSprite->setZIndex(spriteElementTransformation.m_index);

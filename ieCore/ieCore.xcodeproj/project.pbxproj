@@ -487,6 +487,7 @@
 		21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieMaterial.cpp; path = Sources/ieMaterial.cpp; sourceTree = "<group>"; };
 		21C343DB18A8D5AF0041EF47 /* ieMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMaterial.h; path = Sources/ieMaterial.h; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libieCore-ios_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieCore-ios_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D3D98E18DF82DC005F65EC /* ieShaderV2T2M.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2M.h; path = Sources/ieShaderV2T2M.h; sourceTree = "<group>"; };
 		21EBB4B9189FD683003CB322 /* ieCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieCommon.h; path = Sources/ieCommon.h; sourceTree = "<group>"; };
 		21EBB4BA189FD6B4003CB322 /* ieObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieObject.cpp; path = Sources/ieObject.cpp; sourceTree = "<group>"; };
 		21EBB4BB189FD6B4003CB322 /* ieObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieObject.h; path = Sources/ieObject.h; sourceTree = "<group>"; };
@@ -1326,6 +1327,7 @@
 				21C343D718A8D59B0041EF47 /* ieShader.cpp */,
 				2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */,
 				2109425318B2B27F00C86176 /* ieShaderV2T2C4.h */,
+				21D3D98E18DF82DC005F65EC /* ieShaderV2T2M.h */,
 			);
 			name = ieShaders;
 			sourceTree = "<group>";

@@ -39,14 +39,8 @@ private:
     
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
-    glm::mat4x4 m_localTransformation;
     
     friend class ieDisplayObjectContainer;
-    
-    glm::vec4 createShapePositionAttributes(void);
-    void updateShapePositionAttributes(void);
-    void updateShapeTexcoordAttributes(void);
-    void updateShapeColorAttributes(void);
     
 protected:
     
@@ -64,6 +58,7 @@ protected:
     ui32 m_zIndex;
     
     glm::mat4 m_externalTransformation;
+    glm::mat4 m_localTransformation;
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
@@ -77,6 +72,11 @@ protected:
     
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
+    
+    glm::vec4 createShapePositionAttributes(void);
+    void updateShapePositionAttributes(const std::shared_ptr<ieShape>& shape);
+    void updateShapeTexcoordAttributes(const std::shared_ptr<ieShape>& shape);
+    void updateShapeColorAttributes(const std::shared_ptr<ieShape>& shape);
     
 public:
     

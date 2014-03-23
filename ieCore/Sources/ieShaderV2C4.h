@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Sergey Sergeev. All rights reserved.
 //
 
-#ifndef ieCore_ieShaderColor_h
-#define ieCore_ieShaderColor_h
+#ifndef ieCore_ieShaderV2C4_h
+#define ieCore_ieShaderV2C4_h
 
 static const char* ieShaderV2C4_vert = STRING_SHADER
 (

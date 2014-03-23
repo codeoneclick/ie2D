@@ -13,8 +13,8 @@
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieResourceAccessor.h"
-#include "ieVertexBuffer.h"
 #include "ieColor.h"
+#include "ieVertexBuffer.h"
 
 ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
 m_shape(nullptr),
@@ -67,38 +67,38 @@ glm::vec4 ieDisplayObject::createShapePositionAttributes(void)
     return glm::vec4(position.x, size.y, size.x, position.y);
 }
 
-void ieDisplayObject::updateShapePositionAttributes(void)
+void ieDisplayObject::updateShapePositionAttributes(const std::shared_ptr<ieShape>& shape)
 {
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
-    ieVertex* vertexData = m_shape->getVertexBuffer()->lock();
+    ieVertex* vertexData = shape->getVertexBuffer()->lock();
     vertexData[0].m_position = glm::vec2(frame.x, frame.z);
     vertexData[1].m_position = glm::vec2(frame.x, frame.w);
     vertexData[2].m_position = glm::vec2(frame.y, frame.z);
     vertexData[3].m_position = glm::vec2(frame.y, frame.w);
-    m_shape->getVertexBuffer()->unlock();
+    shape->getVertexBuffer()->unlock();
 }
 
-void ieDisplayObject::updateShapeTexcoordAttributes(void)
+void ieDisplayObject::updateShapeTexcoordAttributes(const std::shared_ptr<ieShape>& shape)
 {
-    ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
+    ieVertex *vertexData = shape->getVertexBuffer()->lock();
     vertexData[0].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(m_texCoord.x, m_texCoord.y));
     vertexData[1].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(m_texCoord.x, m_texCoord.w));
     vertexData[2].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(m_texCoord.z, m_texCoord.y));
     vertexData[3].m_texcoord = ieVertexBuffer::compressVec2(glm::vec2(m_texCoord.z, m_texCoord.w));
-    m_shape->getVertexBuffer()->unlock();
+    shape->getVertexBuffer()->unlock();
 }
 
-void ieDisplayObject::updateShapeColorAttributes(void)
+void ieDisplayObject::updateShapeColorAttributes(const std::shared_ptr<ieShape>& shape)
 {
-    ieVertex *vertexData = m_shape->getVertexBuffer()->lock();
-    for(ui32 i = 0; i < m_shape->getVertexBuffer()->getSize(); ++i)
+    ieVertex *vertexData = shape->getVertexBuffer()->lock();
+    for(ui32 i = 0; i < shape->getVertexBuffer()->getSize(); ++i)
     {
         vertexData[i].m_color = glm::ivec4(m_color->getRedChannel(),
                                            m_color->getGreenChannel(),
                                            m_color->getBlueChannel(),
                                            m_color->getAlphaChannel());
     }
-    m_shape->getVertexBuffer()->unlock();
+    shape->getVertexBuffer()->unlock();
 }
 
 void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
@@ -106,7 +106,7 @@ void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
     m_color = color;
     if (m_shape != nullptr)
     {
-        ieDisplayObject::updateShapeColorAttributes();
+        ieDisplayObject::updateShapeColorAttributes(m_shape);
     }
 }
 
@@ -150,7 +150,7 @@ void ieDisplayObject::setPivot(const glm::vec2 &pivot)
     m_pivot = pivot;
     if(m_shape != nullptr)
     {
-        ieDisplayObject::updateShapePositionAttributes();
+        ieDisplayObject::updateShapePositionAttributes(m_shape);
     }
 }
 
@@ -287,8 +287,8 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     }
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);
-    ieDisplayObject::updateShapeTexcoordAttributes();
-    ieDisplayObject::updateShapeColorAttributes();
+    ieDisplayObject::updateShapeTexcoordAttributes(m_shape);
+    ieDisplayObject::updateShapeColorAttributes(m_shape);
 }
 
 void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)

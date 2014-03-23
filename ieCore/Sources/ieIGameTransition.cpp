@@ -145,7 +145,9 @@ void ieIGameTransition::onPresentFrame(const std::shared_ptr<ieEvent>& event)
     glBindFramebuffer(GL_FRAMEBUFFER, m_graphicsContext->getFrameBuffer());
     glBindRenderbuffer(GL_RENDERBUFFER, m_graphicsContext->getRenderBuffer());
     glViewport(0, 0, m_window->getWidth(), m_window->getHeight());
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT |
+            GL_DEPTH_BUFFER_BIT |
+            GL_STENCIL_BUFFER_BIT);
     
     assert(m_shader != nullptr);
     assert(m_shape != nullptr);

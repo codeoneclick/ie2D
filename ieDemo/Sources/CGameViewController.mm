@@ -72,7 +72,7 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("animation_01.json");
+    path.append("animation_02.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(100, 100));
@@ -149,7 +149,7 @@
     static ui32 index = 0;
     self.sprite4->gotoAndStop(index);
     index++;
-    if(index >= 73)
+    if(index >= 450)
     {
         index = 0;
     }

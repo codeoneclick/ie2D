@@ -12,11 +12,13 @@
 #include "ieDisplayObjectContainer.h"
 
 class ieSprite;
+class ieMask;
 
 typedef struct
 {
     ui32 m_index;
     f32 m_alpha;
+    std::string m_maskName;
     glm::mat4 m_matrixTransformation;
 } ieSpriteElementTransformation;
 
@@ -28,6 +30,7 @@ typedef struct
     glm::vec4 m_texCoord;
 } ieSpriteElementUniqueSettings;
 
+typedef std::shared_ptr<ieMask> ieSharedMask;
 typedef std::shared_ptr<ieSprite> ieSharedSprite;
 typedef const std::pair<std::string, ieSharedSprite>& ieSpriteElementPair;
 typedef const std::unordered_map<std::string, ieSharedSprite>::const_iterator& ieSpriteElementIterator;
@@ -43,6 +46,7 @@ private:
     
     std::string m_imageFilename;
     std::shared_ptr<ieTexture> m_texture;
+    std::shared_ptr<ieMask> m_mask;
     
 protected:
     
@@ -59,6 +63,8 @@ protected:
     
     std::unordered_map<std::string, ieSpriteElementUniqueSettings> m_spriteElementUniqueSettings;
     std::unordered_map<std::string, ieSharedSprite> m_activeSpriteElements;
+    std::unordered_map<std::string, ieSharedMask> m_activeMaskElementsWithElementsIds;
+    std::unordered_map<std::string, ieSharedMask> m_activeMaskElementsWithStateIds;
     std::vector<ieSpriteAnimationFrame> m_spriteAnimationFrames;
     
     glm::ivec2 getSpriteElementTextureSize(const std::string& imageFilename);
@@ -67,6 +73,12 @@ protected:
     
     ieSharedSprite createUniqueSprite(const std::string& name);
     ieSharedSprite getActiveSprite(const std::string& name);
+    
+    ieSharedMask createUniqueMask(const std::string& name);
+    ieSharedMask getActiveMaskWithStateId(const std::string& name);
+    ieSharedMask getActiveMaskWithElementId(const std::string& name);
+    
+    virtual void setMask(const std::shared_ptr<ieMask>& mask);
     
     virtual void gotoAndStop(ui32 index);
     

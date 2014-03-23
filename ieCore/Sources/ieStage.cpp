@@ -36,7 +36,7 @@ void ieStage::createFBO(ui32 width, ui32 height)
     }
     if(m_depthAttachment != 0)
     {
-        glDeleteTextures(1, &m_depthAttachment);
+        glDeleteRenderbuffers(1, &m_depthAttachment);
     }
     
     glGenTextures(1, &m_colorAttachment);
@@ -50,29 +50,15 @@ void ieStage::createFBO(ui32 width, ui32 height)
                  height,
                  0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     
-    glGenTextures(1, &m_depthAttachment);
-    glBindTexture(GL_TEXTURE_2D, m_depthAttachment);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
-#if defined(__NDK__)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-                 width,
-                 height,
-                 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-#else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-                 width,
-                 height,
-                 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
-#endif
+    glGenRenderbuffers(1, &m_depthAttachment);
+    glBindRenderbuffer(GL_RENDERBUFFER, m_depthAttachment);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8_OES, width, height);
     
     glGenFramebuffers(1, &m_frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_colorAttachment, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthAttachment, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthAttachment);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthAttachment);
     assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 }
 
@@ -101,7 +87,9 @@ void ieStage::onEnterFrame(const std::shared_ptr<ieEvent>& event)
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glViewport(0, 0, m_frame.z, m_frame.w);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT |
+            GL_DEPTH_BUFFER_BIT |
+            GL_STENCIL_BUFFER_BIT);
     
     ieDisplayObjectContainer::onEnterFrame(event);
 }
