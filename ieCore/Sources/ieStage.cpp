@@ -9,6 +9,7 @@
 #include "ieStage.h"
 #include "ieEvent.h"
 #include "ieObject.h"
+#include "ieBatchMgr.h"
 
 ieStage::ieStage(const glm::vec4& frame) :
 ieDisplayObjectContainer(frame),
@@ -79,7 +80,11 @@ void ieStage::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieStage::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    assert(m_batchMgr != nullptr);
+    m_batchMgr->begin();
     ieDisplayObjectContainer::onDraw(event);
+    m_batchMgr->end();
+    m_batchMgr->draw();
 }
 
 void ieStage::onEnterFrame(const std::shared_ptr<ieEvent>& event)

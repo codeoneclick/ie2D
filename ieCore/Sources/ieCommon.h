@@ -126,4 +126,13 @@ namespace ieCommon
     };
 };
 
+namespace glm
+{
+    static inline glm::vec2 transform(const glm::vec2 &vertex, const glm::mat4& matrix)
+    {
+        glm::vec4 value = matrix * glm::vec4(vertex, 0.0, 1.0);
+        return glm::vec2(value.x, value.y);
+    }
+};
+
 #endif

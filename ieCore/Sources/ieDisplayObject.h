@@ -20,12 +20,13 @@ class ieStage;
 class ieCamera;
 class ieColor;
 class ieResourceAccessor;
+class ieBatchMgr;
 class ieDisplayObjectContainer;
 
 class ieDisplayObject :
 public ieIBitmapDrawable,
 public ieEventDispatcher,
-public ieMaterial
+public virtual ieMaterial
 {
 private:
     
@@ -45,6 +46,7 @@ private:
 protected:
     
     std::shared_ptr<ieResourceAccessor> m_resourceAccessor;
+    std::shared_ptr<ieBatchMgr> m_batchMgr;
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
     
@@ -103,6 +105,8 @@ public:
     
     void setVisible(bool value);
     bool isVisible(void) const;
+    
+    std::shared_ptr<ieDisplayObjectContainer> getParent(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

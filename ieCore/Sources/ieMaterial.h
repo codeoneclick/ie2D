@@ -32,6 +32,8 @@ public:
     ieMaterial(void);
     ~ieMaterial(void);
     
+    std::string getBatchGUID(void) const;
+    
     bool isCulling(void) const;
     GLenum getCullingMode(void) const;
     
@@ -53,12 +55,14 @@ public:
     void setDepthMask(bool value);
     
     void setShader(const std::shared_ptr<ieShader>& shader);
+    std::shared_ptr<ieShader> getShader(void) const;
+    
     void setTexture(const std::shared_ptr<ieTexture>& texture,
                     E_SHADER_SAMPLER sampler);
     void setColor(const ieColor& color);
     
-    void bind(void);
-    void unbind(void);
+    void bind(void) const;
+    void unbind(void) const;
 };
 
 #endif

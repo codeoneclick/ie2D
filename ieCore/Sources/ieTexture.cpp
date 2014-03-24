@@ -20,6 +20,9 @@ m_height(0)
     std::shared_ptr<ieImage> image = std::make_shared<ieImage>(filename);
     m_width = image->getWidth();
     m_height = image->getHeight();
+    
+    m_guid = filename;
+    
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -37,7 +40,7 @@ m_texture(texture),
 m_width(width),
 m_height(height)
 {
-    
+    //TODO#: generate GUID.
 }
 
 ieTexture::~ieTexture(void)

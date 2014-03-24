@@ -28,8 +28,11 @@ ieMask::~ieMask(void)
     
 }
 
-void ieMask::enable(void)
+void ieMask::begin(const std::shared_ptr<ieDisplayObjectContainer>& parent)
 {
+    m_parent = parent;
+    ieMask::onUpdate(nullptr);
+    
     glEnable(GL_STENCIL_TEST);
     glClear(GL_STENCIL_BUFFER_BIT);
     
@@ -38,7 +41,7 @@ void ieMask::enable(void)
     glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP);
 }
 
-void ieMask::disable(void)
+void ieMask::end(void)
 {
     glDisable(GL_STENCIL_TEST);
 }
@@ -79,8 +82,6 @@ void ieMask::onExitFrame(const std::shared_ptr<ieEvent>& event)
 
 void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::addEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    
     m_resourceAccessor = std::static_pointer_cast<ieResourceAccessor>(event->getObjectWithKey("resourceAccessor"));
     assert(m_resourceAccessor != nullptr);
     
@@ -90,13 +91,13 @@ void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
     m_camera = std::static_pointer_cast<ieCamera>(event->getObjectWithKey("camera"));
     assert(m_camera != nullptr);
     
-    ieMaterial::setBlending(true);
+    ieMaterial::setBlending(false);
     ieMaterial::setBlendingFunctionSource(GL_SRC_ALPHA);
     ieMaterial::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     ieMaterial::setCulling(false);
     ieMaterial::setDepthTest(false);
     
-    m_shader = m_resourceAccessor->getShader(ieShaderV2T2M_vert, ieShaderV2T2M_frag, shared_from_this());
+    m_shader = m_resourceAccessor->getShader(ieShaderV2T2M_vert, ieShaderV2T2M_frag, ieObject::shared_from_this());
     ieMaterial::setShader(m_shader);
     
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
@@ -107,9 +108,7 @@ void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
 
 void ieMask::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::removeEventListener(kEVENT_ON_UPDATE, m_functionOnUpdate);
-    
-    m_shader->removeOwner(shared_from_this());
+    m_shader->removeOwner(ieObject::shared_from_this());
     m_shader = nullptr;
     m_shape = nullptr;
     ieMaterial::setShader(nullptr);

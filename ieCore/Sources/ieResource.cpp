@@ -10,7 +10,8 @@
 
 ieResource::ieResource(E_RESOURCE_TYPE resourceType) :
 m_resourceType(resourceType),
-m_isLoaded(false)
+m_isLoaded(false),
+m_guid("")
 {
     
 }
@@ -33,4 +34,9 @@ void ieResource::removeOwner(const std::shared_ptr<ieObject>& owner)
 const ui32 ieResource::getOwnersCount(void) const
 {
     return m_owners.size();
+}
+
+std::string ieResource::getGUID(void) const
+{
+    return m_guid;
 }

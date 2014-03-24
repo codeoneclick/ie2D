@@ -48,6 +48,8 @@
 		2109422518B15D1700C86176 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421518B15D1600C86176 /* zutil.c */; };
 		2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */; };
 		2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */; };
+		2129066E18E04D7300AD4AE2 /* ieBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066C18E04D7300AD4AE2 /* ieBatch.cpp */; };
+		2129067118E04D8200AD4AE2 /* ieBatchMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */; };
 		2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
 		2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3118C278EE009A13AC /* json_reader.cpp */; };
 		2156BB3718C278EE009A13AC /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3318C278EE009A13AC /* json_value.cpp */; };
@@ -461,6 +463,10 @@
 		2111AA2F181EFEB0007FE7A8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieMask.cpp; path = Sources/ieMask.cpp; sourceTree = "<group>"; };
 		2129065C18DC7BDD00AD4AE2 /* ieMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMask.h; path = Sources/ieMask.h; sourceTree = "<group>"; };
+		2129066C18E04D7300AD4AE2 /* ieBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBatch.cpp; path = Sources/ieBatch.cpp; sourceTree = "<group>"; };
+		2129066D18E04D7300AD4AE2 /* ieBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBatch.h; path = Sources/ieBatch.h; sourceTree = "<group>"; };
+		2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBatchMgr.cpp; path = Sources/ieBatchMgr.cpp; sourceTree = "<group>"; };
+		2129067018E04D8200AD4AE2 /* ieBatchMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBatchMgr.h; path = Sources/ieBatchMgr.h; sourceTree = "<group>"; };
 		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
 		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
 		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
@@ -1307,6 +1313,10 @@
 				21EBB50718A26616003CB322 /* ieIGraphicsContext.h */,
 				21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */,
 				21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */,
+				2129066D18E04D7300AD4AE2 /* ieBatch.h */,
+				2129066C18E04D7300AD4AE2 /* ieBatch.cpp */,
+				2129067018E04D8200AD4AE2 /* ieBatchMgr.h */,
+				2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */,
 			);
 			name = ieDisplay;
 			sourceTree = "<group>";
@@ -1528,12 +1538,14 @@
 				2109421F18B15D1700C86176 /* infback.c in Sources */,
 				210940CE18B1563700C86176 /* pngrtran.c in Sources */,
 				2109422018B15D1700C86176 /* inffast.c in Sources */,
+				2129066E18E04D7300AD4AE2 /* ieBatch.cpp in Sources */,
 				21EBB4DD189FEED3003CB322 /* ieDisplayObject.cpp in Sources */,
 				210940C218B1563700C86176 /* gcdppQueue_t.cpp in Sources */,
 				21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */,
 				21C343DC18A8D5AF0041EF47 /* ieMaterial.cpp in Sources */,
 				21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */,
 				2109421E18B15D1700C86176 /* gzwrite.c in Sources */,
+				2129067118E04D8200AD4AE2 /* ieBatchMgr.cpp in Sources */,
 				210940CB18B1563700C86176 /* pngpread.c in Sources */,
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,

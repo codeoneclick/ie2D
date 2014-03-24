@@ -13,6 +13,7 @@
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieResourceAccessor.h"
+#include "ieBatchMgr.h"
 #include "ieColor.h"
 #include "ieVertexBuffer.h"
 
@@ -20,6 +21,7 @@ ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
 m_shape(nullptr),
 m_shader(nullptr),
 m_resourceAccessor(nullptr),
+m_batchMgr(nullptr),
 m_stage(nullptr),
 m_camera(nullptr),
 m_frame(frame),
@@ -179,6 +181,11 @@ bool ieDisplayObject::isVisible(void) const
     return m_visible;
 }
 
+std::shared_ptr<ieDisplayObjectContainer> ieDisplayObject::getParent(void) const
+{
+    return m_parent;
+}
+
 void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     std::shared_ptr<ieDisplayObjectContainer> parent = m_parent;
@@ -216,16 +223,22 @@ void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
     if(m_visible)
     {
-        assert(m_camera != nullptr);
-        ieMaterial::bind();
-        
-        m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
-        m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
-        m_shape->bind(m_shader->getAttributes());
-        m_shape->draw();
-        
-        ieMaterial::unbind();
-        m_shape->unbind(m_shader->getAttributes());
+        if(false)
+        {
+            assert(m_batchMgr != nullptr);
+            m_batchMgr->batch(this, m_shape, m_localTransformation);
+        } else {
+            assert(m_camera != nullptr);
+            ieMaterial::bind();
+            
+            m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
+            m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
+            m_shape->bind(m_shader->getAttributes());
+            m_shape->draw();
+            
+            ieMaterial::unbind();
+            m_shape->unbind(m_shader->getAttributes());
+        }
     }
 }
 
@@ -249,6 +262,9 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_resourceAccessor = std::static_pointer_cast<ieResourceAccessor>(event->getObjectWithKey("resourceAccessor"));
     assert(m_resourceAccessor != nullptr);
     
+    m_batchMgr = std::static_pointer_cast<ieBatchMgr>(event->getObjectWithKey("batchMgr"));
+    assert(m_batchMgr != nullptr);
+    
     m_stage = std::static_pointer_cast<ieStage>(event->getObjectWithKey("stage"));
     assert(m_stage != nullptr);
     
@@ -264,14 +280,14 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     switch (m_drawMode) {
         case E_DRAW_OBJECT_MODE_V2C4:
         {
-            m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, shared_from_this());
+            m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, ieObject::shared_from_this());
             ieMaterial::setShader(m_shader);
         }
             break;
             
         case E_DRAW_OBJECT_MODE_V2T2C4:
         {
-            m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, shared_from_this());
+            m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, ieObject::shared_from_this());
             ieMaterial::setShader(m_shader);
         }
             break;
@@ -298,7 +314,7 @@ void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
     ieDisplayObject::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
     
-    m_shader->removeOwner(shared_from_this());
+    m_shader->removeOwner(ieObject::shared_from_this());
     m_shader = nullptr;
     m_shape = nullptr;
     ieMaterial::setShader(nullptr);

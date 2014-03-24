@@ -20,7 +20,6 @@ private:
     
     std::string m_imageFilename;
     std::shared_ptr<ieTexture> m_texture;
-    ieEventDispatcherFunctionShared m_functionOnUpdate;
     
     friend class ieSprite;
     
@@ -41,8 +40,8 @@ public:
     
     ~ieMask(void);
     
-    void enable(void);
-    void disable(void);
+    void begin(const std::shared_ptr<ieDisplayObjectContainer>& parent);
+    void end(void);
 };
 
 #endif

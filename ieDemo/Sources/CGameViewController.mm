@@ -72,7 +72,7 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("animation_02.json");
+    path.append("animation_01.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(100, 100));
@@ -128,7 +128,6 @@
 {
     [super viewDidUnload];
 }
-
 
 - (void)onTick:(NSTimer*)sender
 {

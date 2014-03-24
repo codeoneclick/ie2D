@@ -21,6 +21,7 @@ protected:
     E_RESOURCE_TYPE m_resourceType;
     bool m_isLoaded;
     std::set<std::shared_ptr<ieObject>> m_owners;
+    std::string m_guid;
     
 public:
     
@@ -31,6 +32,8 @@ public:
     void removeOwner(const std::shared_ptr<ieObject>& owner);
     
     const ui32 getOwnersCount(void) const;
+    
+    std::string getGUID(void) const;
 };
 
 #endif

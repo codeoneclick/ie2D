@@ -11,6 +11,7 @@
 #include "ieEvent.h"
 #include "ieIOGLWindow.h"
 #include "ieResourceAccessor.h"
+#include "ieBatchMgr.h"
 #include "ieShader.h"
 #include "ieShape.h"
 #include "ieCamera.h"
@@ -44,6 +45,7 @@ m_screenTexture(nullptr)
     
     m_resourceAccessor = std::make_shared<ieResourceAccessor>();
     m_camera = std::make_shared<ieCamera>(m_window->getWidth(), m_window->getHeight());
+    m_batchMgr = std::make_shared<ieBatchMgr>(m_camera);
     
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_REGISTER, m_functionOnTransitionRegister);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_UNREGISTER, m_functionOnTransitionUnregister);
@@ -72,7 +74,7 @@ void ieIGameTransition::onRegistered(const std::shared_ptr<ieEvent>& event)
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::addEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
     
-    m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, shared_from_this());
+    m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, ieObject::shared_from_this());
     m_shape = std::make_shared<ieShape>(glm::vec4(-1.0f, -1.0f, 1.0f, 1.0f));
     
     m_material = std::make_shared<ieMaterial>();
@@ -87,7 +89,7 @@ void ieIGameTransition::onUnregistered(const std::shared_ptr<ieEvent>& event)
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_ENTER, m_functionOnTransitionEnter);
     ieIGameTransition::removeEventListener(kEVENT_ON_TRANSITION_EXIT, m_functionOnTransitionExit);
     
-    m_shader->removeOwner(shared_from_this());
+    m_shader->removeOwner(ieObject::shared_from_this());
     m_shader = nullptr;
     m_shape = nullptr;
     m_material = nullptr;
@@ -95,12 +97,13 @@ void ieIGameTransition::onUnregistered(const std::shared_ptr<ieEvent>& event)
 
 void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
 {
-    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
+    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(ieObject::shared_from_this());
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, stage);
     assert(m_window != nullptr);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(stage, "stage");
     eventOnStageAdded->addObjectWithKey(m_camera, "camera");
+    eventOnStageAdded->addObjectWithKey(m_batchMgr, "batchMgr");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
     
     m_screenTexture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());
@@ -109,7 +112,7 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
 
 void ieIGameTransition::onExit(const std::shared_ptr<ieEvent>& event)
 {
-    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(shared_from_this());
+    std::shared_ptr<ieStage> stage = std::static_pointer_cast<ieStage>(ieObject::shared_from_this());
     std::shared_ptr<ieEvent> eventOnStageRemoved = std::make_shared<ieEvent>(kEVENT_ON_REMOVED, stage);
     ieIGameTransition::dispatchEvent(eventOnStageRemoved);
     

@@ -8,6 +8,7 @@
 
 #include "ieDisplayObjectContainer.h"
 #include "ieResourceAccessor.h"
+#include "ieBatchMgr.h"
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieEvent.h"
@@ -77,12 +78,13 @@ void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObjectCon
     assert(m_uniqueChilds.count(child) == 0);
     m_uniqueChilds.insert(child);
     m_childs.push_back(child);
-    child->m_parent = std::static_pointer_cast<ieDisplayObjectContainer>(shared_from_this());
+    child->m_parent = std::static_pointer_cast<ieDisplayObjectContainer>(ieObject::shared_from_this());
     
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, child);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(m_stage, "stage");
     eventOnStageAdded->addObjectWithKey(m_camera, "camera");
+    eventOnStageAdded->addObjectWithKey(m_batchMgr, "batchMgr");
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 
@@ -92,7 +94,7 @@ void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObjectC
     assert(index <= m_childs.size());
     m_uniqueChilds.insert(child);
     m_childs.insert(m_childs.begin() + index, child);
-    child->m_parent = std::static_pointer_cast<ieDisplayObjectContainer>(shared_from_this());
+    child->m_parent = std::static_pointer_cast<ieDisplayObjectContainer>(ieObject::shared_from_this());
     
     std::shared_ptr<ieEvent> eventOnStageAdded = std::make_shared<ieEvent>(kEVENT_ON_ADDED, child);
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");

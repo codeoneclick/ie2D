@@ -243,6 +243,9 @@ m_fsSourceCode(fsSourceCode)
     ui32 fragmentShader = ieShader::compile(m_fsSourceCode, GL_FRAGMENT_SHADER);
     m_shader = ieShader::link(vertexShader, fragmentShader);
     
+    m_guid = m_guid.append(m_vsSourceCode);
+    m_guid = m_guid.append(m_fsSourceCode);
+    
     m_attributes[E_SHADER_ATTRIBUTE_POSITION] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_TEXCOORD] = -1;
     m_attributes[E_SHADER_ATTRIBUTE_COLOR] = -1;

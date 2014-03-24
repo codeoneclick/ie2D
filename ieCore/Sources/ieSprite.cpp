@@ -87,7 +87,7 @@ void ieSprite::onUpdate(const std::shared_ptr<ieEvent>& event)
 void ieSprite::onDraw(const std::shared_ptr<ieEvent>& event)
 {
     if(m_mask != nullptr) {
-        m_mask->enable();
+        m_mask->begin(ieSprite::getParent());
         m_mask->onDraw(event);
     }
     ieMaterial::bind();
@@ -95,7 +95,7 @@ void ieSprite::onDraw(const std::shared_ptr<ieEvent>& event)
     ieDisplayObjectContainer::onDraw(event);
     
     if(m_mask != nullptr) {
-        m_mask->disable();
+        m_mask->end();
     }
 }
 

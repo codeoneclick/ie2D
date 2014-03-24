@@ -77,6 +77,24 @@ ieMaterial::~ieMaterial(void)
     
 }
 
+std::string ieMaterial::getBatchGUID(void) const
+{
+    std::string guid = "";
+    for(ui32 i = 0; i < E_SHADER_SAMPLER_MAX; ++i)
+    {
+        if(m_parameters->m_textures[i] != nullptr)
+        {
+           guid = guid.append(m_parameters->m_textures[i]->getGUID());
+        }
+    }
+    guid = guid.append(m_parameters->m_shader->getGUID());
+    guid = m_parameters->m_isCulling ? guid.append("CULLING:YES") : guid.append("CULLING:NO");
+    guid = m_parameters->m_isBlending ? guid.append("BLENDING:YES") : guid.append("BLENDING:NO");
+    guid = m_parameters->m_isDepthMask ? guid.append("DEPTH_MASK:YES") : guid.append("DEPTH_MASK:NO");
+    guid = m_parameters->m_isDepthTest ? guid.append("DEPTH_TEST:YES") : guid.append("DEPTH:TEST:NO");
+    return guid;
+}
+
 bool ieMaterial::isCulling(void) const
 {
     assert(m_parameters != nullptr);
@@ -167,6 +185,11 @@ void ieMaterial::setShader(const std::shared_ptr<ieShader>& shader)
     m_parameters->m_shader = shader;
 }
 
+std::shared_ptr<ieShader> ieMaterial::getShader(void) const
+{
+    return m_parameters->m_shader;
+}
+
 void ieMaterial::setTexture(const std::shared_ptr<ieTexture>& texture,
                             E_SHADER_SAMPLER sampler)
 {
@@ -174,7 +197,7 @@ void ieMaterial::setTexture(const std::shared_ptr<ieTexture>& texture,
     m_parameters->m_textures.at(sampler) = texture;
 }
 
-void ieMaterial::bind(void)
+void ieMaterial::bind(void) const
 {
     assert(m_parameters != nullptr);
     assert(m_parameters->m_shader != nullptr);
@@ -240,7 +263,7 @@ void ieMaterial::bind(void)
     }
 }
 
-void ieMaterial::unbind(void)
+void ieMaterial::unbind(void) const
 {
     assert(m_parameters != nullptr);
     assert(m_parameters->m_shader != nullptr);
