@@ -41,13 +41,12 @@ m_texture(nullptr)
     {
         m_imageFilename = filename;
         m_sequenceFilename = "";
-        m_drawMode = E_DRAW_OBJECT_MODE_V2T2C4;
     } else if(filename.find(".json") != std::string::npos ||
               filename.find(".xml") != std::string::npos)
     {
         m_sequenceFilename = filename;
         m_imageFilename = "";
-        m_drawMode = E_DRAW_OBJECT_MODE_V2C4;
+        ieDisplayObject::setActive(false);
     } else {
         assert(false);
     }
@@ -116,6 +115,7 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
        m_imageFilename.find(".png") != std::string::npos)
     {
         m_texture = m_resourceAccessor->getTexture(m_imageFilename);
+        ieDisplayObject::setupShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag);
     }  else if(m_sequenceFilename.length() != 0 &&
                (m_sequenceFilename.find(".json") != std::string::npos ||
                 m_sequenceFilename.find(".xml") != std::string::npos))
@@ -129,6 +129,9 @@ void ieSprite::onAdded(const std::shared_ptr<ieEvent>& event)
         m_spriteAnimationFrames.resize(1);
         ieSprite::createSpriteAnimationFrame(0, spriteAnimationFrame);
         ieSprite::gotoAndStop(0);
+        ieDisplayObject::setupShader(ieShaderV2C4_vert, ieShaderV2C4_frag);
+    } else {
+        ieDisplayObject::setupShader(ieShaderV2C4_vert, ieShaderV2C4_frag);
     }
 }
 
@@ -328,7 +331,7 @@ void ieSprite::gotoAndStop(ui32 index)
                                   assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
                                   std::string sequenceElementId = sequenceAnimatedElementMaskIterator->second;
                                   ieSharedMask mask = ieSprite::getActiveMaskWithElementId(sequenceElementId);
-                                  mask->setVisible(spriteElementTransformation.m_alpha != 0.0f);
+                                  mask->setActive(spriteElementTransformation.m_alpha != 0.0f);
                                   mask->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                                   isContinue = true;
                               } else {
@@ -348,7 +351,7 @@ void ieSprite::gotoAndStop(ui32 index)
                               } else {
                                   activeSprite->setMask(nullptr);
                               }
-                              activeSprite->setVisible(spriteElementTransformation.m_alpha != 0.0f);
+                              activeSprite->setActive(spriteElementTransformation.m_alpha != 0.0f);
                               activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                               activeSprite->setZIndex(spriteElementTransformation.m_index);
                           }

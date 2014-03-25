@@ -22,9 +22,9 @@
 
 @property (weak, nonatomic) IBOutlet ieHWND *m_hwnd;
 @property (unsafe_unretained, nonatomic) ieGameController* gameController;
-@property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite;
-@property (unsafe_unretained, nonatomic) std::shared_ptr<ieDisplayObjectContainer> sprite2;
-@property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite3;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite2;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieMovieClip> sprite3;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieMovieClip> sprite4;
 
 @end
@@ -49,40 +49,40 @@
     self.gameController->goToTransition("demo");
     
     std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 255, 0, 255);
-    self.sprite = std::make_shared<ieDisplayObjectContainer>(glm::vec4(10, 10, 50, 50));
+    self.sprite = std::make_shared<ieSprite>(glm::vec4(10, 10, 50, 50), color_01);
     self.sprite->setPivot(glm::vec2(25, 25));
     transition->addChild(self.sprite);
-    self.sprite->setColor(color_01);
     self.sprite->setPosition(glm::vec2(200, 200));
     
     std::shared_ptr<ieColor> color_02 = std::make_shared<ieColor>(0, 0, 255, 255);
-    self.sprite2 = std::make_shared<ieDisplayObjectContainer>(glm::vec4(250, 250, 100, 100));
+    self.sprite2 = std::make_shared<ieSprite>(glm::vec4(250, 250, 100, 100), color_02);
     self.sprite2->setPivot(glm::vec2(50, 50));
     self.sprite->addChild(self.sprite2);
-    self.sprite2->setColor(color_02);
     self.sprite2->setPosition(glm::vec2(100, 100));
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("dragon.json");
-    self.sprite3 = std::make_shared<ieSprite>(glm::vec4(250, 250, 100, 100), path);
+    path.append("animation_02.json");
+    self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(250, 250));
-    self.sprite3->setScale(glm::vec2(1.0f, 1.0f));
+    self.sprite3->setScale(glm::vec2(0.5f, 0.5f));
+    self.sprite3->setBatched(false);
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("animation_01.json");
+    path.append("dragon.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
-    self.sprite4->setPosition(glm::vec2(100, 100));
+    self.sprite4->setPosition(glm::vec2(350, 150));
+    self.sprite4->setBatched(true);
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:0.1 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -147,8 +147,9 @@
     
     static ui32 index = 0;
     self.sprite4->gotoAndStop(index);
+    self.sprite3->gotoAndStop(index);
     index++;
-    if(index >= 450)
+    if(index >= 8)
     {
         index = 0;
     }

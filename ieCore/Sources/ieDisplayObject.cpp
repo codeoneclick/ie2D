@@ -34,8 +34,9 @@ m_scale(1.0f, 1.0f),
 m_pivot(0.0f),
 m_texCoord(0.0f, 0.0f, 1.0f, 1.0f),
 m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
-m_drawMode(E_DRAW_OBJECT_MODE_V2C4),
 m_visible(true),
+m_active(true),
+m_batched(false),
 m_zIndex(0)
 {
     m_description = "ieDisplayObject";
@@ -171,6 +172,16 @@ void ieDisplayObject::setZIndex(ui32 zIndex)
     m_zIndex = zIndex;
 }
 
+void ieDisplayObject::setActive(bool value)
+{
+    m_active = value;
+}
+
+bool ieDisplayObject::isActive(void) const
+{
+    return m_active;
+}
+
 void ieDisplayObject::setVisible(bool value)
 {
     m_visible = value;
@@ -179,6 +190,27 @@ void ieDisplayObject::setVisible(bool value)
 bool ieDisplayObject::isVisible(void) const
 {
     return m_visible;
+}
+
+void ieDisplayObject::setBatched(bool value)
+{
+    m_batched = value;
+}
+
+bool ieDisplayObject::isBatched(void) const
+{
+    return m_batched;
+}
+
+void ieDisplayObject::setupShader(const std::string& vsSourceCode,
+                                  const std::string& fsSourceCode)
+{
+    if(m_shader != nullptr)
+    {
+        m_shader->removeOwner(ieObject::shared_from_this());
+    }
+    m_shader = m_resourceAccessor->getShader(vsSourceCode, fsSourceCode, ieObject::shared_from_this());
+    ieMaterial::setShader(m_shader);
 }
 
 std::shared_ptr<ieDisplayObjectContainer> ieDisplayObject::getParent(void) const
@@ -221,9 +253,9 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    if(m_visible)
+    if(m_visible && m_active)
     {
-        if(false)
+        if(m_batched)
         {
             assert(m_batchMgr != nullptr);
             m_batchMgr->batch(this, m_shape, m_localTransformation);
@@ -276,31 +308,8 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     ieMaterial::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     ieMaterial::setCulling(false);
     ieMaterial::setDepthTest(false);
+    ieMaterial::setDepthMask(false);
     
-    switch (m_drawMode) {
-        case E_DRAW_OBJECT_MODE_V2C4:
-        {
-            m_shader = m_resourceAccessor->getShader(ieShaderV2C4_vert, ieShaderV2C4_frag, ieObject::shared_from_this());
-            ieMaterial::setShader(m_shader);
-        }
-            break;
-            
-        case E_DRAW_OBJECT_MODE_V2T2C4:
-        {
-            m_shader = m_resourceAccessor->getShader(ieShaderV2T2C4_vert, ieShaderV2T2C4_frag, ieObject::shared_from_this());
-            ieMaterial::setShader(m_shader);
-        }
-            break;
-            
-        case E_DRAW_OBJECT_MODE_CUSTOM:
-        {
-            std::cout<<"custom draw mode"<<std::endl;
-        }
-            break;
-            
-        default:
-            break;
-    }
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);
     ieDisplayObject::updateShapeTexcoordAttributes(m_shape);

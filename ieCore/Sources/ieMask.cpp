@@ -33,17 +33,25 @@ void ieMask::begin(const std::shared_ptr<ieDisplayObjectContainer>& parent)
     m_parent = parent;
     ieMask::onUpdate(nullptr);
     
-    glEnable(GL_STENCIL_TEST);
-    glClear(GL_STENCIL_BUFFER_BIT);
-    
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-    glStencilFunc(GL_NEVER, 1, 1);
-    glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP);
+    if(m_active &&
+       m_visible)
+    {
+        glEnable(GL_STENCIL_TEST);
+        glClear(GL_STENCIL_BUFFER_BIT);
+        
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glStencilFunc(GL_NEVER, 0xFF, 0xFF);
+        glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP);
+    }
 }
 
 void ieMask::end(void)
 {
-    glDisable(GL_STENCIL_TEST);
+    if(m_active &&
+       m_visible)
+    {
+        glDisable(GL_STENCIL_TEST);
+    }
 }
 
 void ieMask::onUpdate(const std::shared_ptr<ieEvent>& event)
@@ -53,21 +61,25 @@ void ieMask::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieMask::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    assert(m_camera != nullptr);
-    
-    ieMaterial::bind();
-    
-    m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
-    m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
-    m_shape->bind(m_shader->getAttributes());
-    m_shape->draw();
-    m_shape->unbind(m_shader->getAttributes());
-    
-    ieMaterial::unbind();
-    
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-    glStencilFunc(GL_EQUAL, 1, 1);
-    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    if(m_active &&
+       m_visible)
+    {
+        assert(m_camera != nullptr);
+        
+        ieMaterial::bind();
+        
+        m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
+        m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
+        m_shape->bind(m_shader->getAttributes());
+        m_shape->draw();
+        m_shape->unbind(m_shader->getAttributes());
+        
+        ieMaterial::unbind();
+        
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glStencilFunc(GL_EQUAL, 0xFF, 0xFF);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    }
 }
 
 void ieMask::onEnterFrame(const std::shared_ptr<ieEvent>& event)

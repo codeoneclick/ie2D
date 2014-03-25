@@ -10,6 +10,8 @@
 #include "ieEvent.h"
 #include "ieObject.h"
 #include "ieBatchMgr.h"
+#include "ieShader.h"
+#include "ieColor.h"
 
 ieStage::ieStage(const glm::vec4& frame) :
 ieDisplayObjectContainer(frame),
@@ -17,12 +19,13 @@ m_frameBuffer(0),
 m_colorAttachment(0),
 m_depthAttachment(0)
 {
-     m_functionOnResize = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onResize, this, std::placeholders::_1));
+    m_functionOnResize = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onResize, this, std::placeholders::_1));
+    m_color = std::make_shared<ieColor>(0, 0, 0, 255);
 }
 
 ieStage::~ieStage(void)
 {
-
+    
 }
 
 void ieStage::createFBO(ui32 width, ui32 height)
@@ -91,7 +94,7 @@ void ieStage::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glViewport(0, 0, m_frame.z, m_frame.w);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.5, 0.5, 0.5, 1.0);
     glClear(GL_COLOR_BUFFER_BIT |
             GL_DEPTH_BUFFER_BIT |
             GL_STENCIL_BUFFER_BIT);
@@ -117,7 +120,7 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
 {
     ieStage::createFBO(m_frame.z, m_frame.w);
     ieDisplayObjectContainer::onAdded(event);
-    std::cout<<"ieStage::onAdded"<<std::endl;
+    ieDisplayObject::setupShader(ieShaderV2C4_vert, ieShaderV2C4_frag);
     ieStage::addEventListener(kEVENT_ON_RESIZE, m_functionOnResize);
 }
 

@@ -91,7 +91,7 @@ std::string ieMaterial::getBatchGUID(void) const
     guid = m_parameters->m_isCulling ? guid.append("CULLING:YES") : guid.append("CULLING:NO");
     guid = m_parameters->m_isBlending ? guid.append("BLENDING:YES") : guid.append("BLENDING:NO");
     guid = m_parameters->m_isDepthMask ? guid.append("DEPTH_MASK:YES") : guid.append("DEPTH_MASK:NO");
-    guid = m_parameters->m_isDepthTest ? guid.append("DEPTH_TEST:YES") : guid.append("DEPTH:TEST:NO");
+    guid = m_parameters->m_isDepthTest ? guid.append("DEPTH_TEST:YES") : guid.append("DEPTH_TEST:NO");
     return guid;
 }
 

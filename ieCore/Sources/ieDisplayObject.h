@@ -41,6 +41,7 @@ private:
     std::shared_ptr<ieShape> m_shape;
     std::shared_ptr<ieShader> m_shader;
     
+    friend class ieMask;
     friend class ieDisplayObjectContainer;
     
 protected:
@@ -64,8 +65,10 @@ protected:
     
     std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
-    E_DRAW_OBJECT_MODE m_drawMode;
+    
     bool m_visible;
+    bool m_batched;
+    bool m_active;
     
     virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
     virtual void onDraw(const std::shared_ptr<ieEvent>& event);
@@ -80,9 +83,16 @@ protected:
     void updateShapeTexcoordAttributes(const std::shared_ptr<ieShape>& shape);
     void updateShapeColorAttributes(const std::shared_ptr<ieShape>& shape);
     
-public:
+    void setupShader(const std::string& vsSourceCode,
+                     const std::string& fsSourceCode);
+    
+    void setActive(bool value);
+    bool isActive(void) const;
     
     ieDisplayObject(const glm::vec4& frame);
+    
+public:
+    
     virtual ~ieDisplayObject(void);
     
     void setPosition(const glm::vec2& position);
@@ -103,8 +113,11 @@ public:
     ui32 getZIndex(void);
     void setZIndex(ui32 zIndex);
     
-    void setVisible(bool value);
+    virtual void setVisible(bool value);
     bool isVisible(void) const;
+    
+    virtual void setBatched(bool value);
+    bool isBatched(void) const;
     
     std::shared_ptr<ieDisplayObjectContainer> getParent(void) const;
     

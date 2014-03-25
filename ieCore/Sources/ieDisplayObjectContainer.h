@@ -28,13 +28,17 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
+    ieDisplayObjectContainer(const glm::vec4& frame);
+    
 public:
     
-    ieDisplayObjectContainer(const glm::vec4& frame);
     virtual ~ieDisplayObjectContainer(void);
     
     void addChild(const std::shared_ptr<ieDisplayObjectContainer>& child);
     void addChildAt(const std::shared_ptr<ieDisplayObjectContainer>& child, i32 index);
+    
+    void setVisible(bool value);
+    void setBatched(bool value);
     
     bool contains(const std::shared_ptr<ieDisplayObjectContainer>& child) const;
     
