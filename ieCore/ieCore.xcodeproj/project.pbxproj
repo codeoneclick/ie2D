@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		21093F3F18B0C41800C86176 /* ieTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F3D18B0C41800C86176 /* ieTexture.cpp */; };
-		210940BF18B1563700C86176 /* gcdppImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F4B18B1563600C86176 /* gcdppImpl.cpp */; };
-		210940C018B1563700C86176 /* gcdppMainQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F4C18B1563600C86176 /* gcdppMainQueue_t.cpp */; };
-		210940C118B1563700C86176 /* gcdppQueue_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F4D18B1563600C86176 /* gcdppQueue_i.cpp */; };
-		210940C218B1563700C86176 /* gcdppQueue_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F4E18B1563600C86176 /* gcdppQueue_t.cpp */; };
-		210940C318B1563700C86176 /* gcdppTask_i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F4F18B1563600C86176 /* gcdppTask_i.cpp */; };
-		210940C418B1563700C86176 /* gcdppTask_t.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F5018B1563600C86176 /* gcdppTask_t.cpp */; };
 		210940C718B1563700C86176 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405118B1563700C86176 /* png.c */; };
 		210940C818B1563700C86176 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405518B1563700C86176 /* pngerror.c */; };
 		210940C918B1563700C86176 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405618B1563700C86176 /* pngget.c */; };
@@ -50,6 +44,81 @@
 		2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */; };
 		2129066E18E04D7300AD4AE2 /* ieBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066C18E04D7300AD4AE2 /* ieBatch.cpp */; };
 		2129067118E04D8200AD4AE2 /* ieBatchMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */; };
+		212906B818E3321200AD4AE2 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3118C278EE009A13AC /* json_reader.cpp */; };
+		212906B918E3321200AD4AE2 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3318C278EE009A13AC /* json_value.cpp */; };
+		212906BA18E3321200AD4AE2 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3518C278EE009A13AC /* json_writer.cpp */; };
+		212906BB18E3323100AD4AE2 /* glm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2109411118B1595100C86176 /* glm.cpp */; };
+		212906BC18E3324C00AD4AE2 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 210941FD18B15D1600C86176 /* adler32.c */; };
+		212906BD18E3324C00AD4AE2 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 210941FE18B15D1600C86176 /* compress.c */; };
+		212906BE18E3324C00AD4AE2 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 210941FF18B15D1600C86176 /* crc32.c */; };
+		212906BF18E3324C00AD4AE2 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420118B15D1600C86176 /* deflate.c */; };
+		212906C018E3324C00AD4AE2 /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420318B15D1600C86176 /* gzclose.c */; };
+		212906C118E3324C00AD4AE2 /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420518B15D1600C86176 /* gzlib.c */; };
+		212906C218E3324C00AD4AE2 /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420618B15D1600C86176 /* gzread.c */; };
+		212906C318E3324C00AD4AE2 /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420718B15D1600C86176 /* gzwrite.c */; };
+		212906C418E3324C00AD4AE2 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420818B15D1600C86176 /* infback.c */; };
+		212906C518E3324C00AD4AE2 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420918B15D1600C86176 /* inffast.c */; };
+		212906C618E3324C00AD4AE2 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420C18B15D1600C86176 /* inflate.c */; };
+		212906C718E3324C00AD4AE2 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109420E18B15D1600C86176 /* inftrees.c */; };
+		212906C818E3324C00AD4AE2 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421018B15D1600C86176 /* trees.c */; };
+		212906C918E3324C00AD4AE2 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421218B15D1600C86176 /* uncompr.c */; };
+		212906CA18E3324C00AD4AE2 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109421518B15D1600C86176 /* zutil.c */; };
+		212906CB18E3326400AD4AE2 /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405118B1563700C86176 /* png.c */; };
+		212906CC18E3326400AD4AE2 /* pngerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405518B1563700C86176 /* pngerror.c */; };
+		212906CD18E3326400AD4AE2 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405618B1563700C86176 /* pngget.c */; };
+		212906CE18E3326400AD4AE2 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405818B1563700C86176 /* pngmem.c */; };
+		212906CF18E3326400AD4AE2 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405918B1563700C86176 /* pngpread.c */; };
+		212906D018E3326400AD4AE2 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405B18B1563700C86176 /* pngread.c */; };
+		212906D118E3326400AD4AE2 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405C18B1563700C86176 /* pngrio.c */; };
+		212906D218E3326400AD4AE2 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405D18B1563700C86176 /* pngrtran.c */; };
+		212906D318E3326400AD4AE2 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405E18B1563700C86176 /* pngrutil.c */; };
+		212906D418E3326400AD4AE2 /* pngset.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109405F18B1563700C86176 /* pngset.c */; };
+		212906D518E3326400AD4AE2 /* pngtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109406218B1563700C86176 /* pngtrans.c */; };
+		212906D618E3326400AD4AE2 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109406318B1563700C86176 /* pngwio.c */; };
+		212906D718E3326400AD4AE2 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109406418B1563700C86176 /* pngwrite.c */; };
+		212906D818E3326400AD4AE2 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109406518B1563700C86176 /* pngwtran.c */; };
+		212906D918E3326400AD4AE2 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2109406618B1563700C86176 /* pngwutil.c */; };
+		212906DA18E3327100AD4AE2 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 210941F818B1597500C86176 /* pugixml.cpp */; };
+		212906DB18E332A500AD4AE2 /* ieResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51718A2716F003CB322 /* ieResource.cpp */; };
+		212906DC18E332A500AD4AE2 /* ieImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51D18A271C6003CB322 /* ieImage.cpp */; };
+		212906DD18E332A500AD4AE2 /* ieTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21093F3D18B0C41800C86176 /* ieTexture.cpp */; };
+		212906DE18E332A500AD4AE2 /* ieSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52018A271DF003CB322 /* ieSequence.cpp */; };
+		212906DF18E332A500AD4AE2 /* ieResourceAccessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51A18A2719E003CB322 /* ieResourceAccessor.cpp */; };
+		212906E018E332A500AD4AE2 /* ieGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51018A26921003CB322 /* ieGameController.cpp */; };
+		212906E118E332A500AD4AE2 /* ieIGameTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB51318A26937003CB322 /* ieIGameTransition.cpp */; };
+		212906E218E332A500AD4AE2 /* ieIGameLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52918A299A5003CB322 /* ieIGameLoop.cpp */; };
+		212906E318E332A500AD4AE2 /* ieGameLoop_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52C18A29ABB003CB322 /* ieGameLoop_ios.cpp */; };
+		212906E418E332A500AD4AE2 /* ieShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343D718A8D59B0041EF47 /* ieShader.cpp */; };
+		212906E518E332A500AD4AE2 /* ieBitmapFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */; };
+		212906E618E332A500AD4AE2 /* ieMask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129065B18DC7BDD00AD4AE2 /* ieMask.cpp */; };
+		212906E718E332A500AD4AE2 /* ieIBitmapDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C3189FD7B5003CB322 /* ieIBitmapDrawable.cpp */; };
+		212906E818E332A500AD4AE2 /* ieBitmapData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C6189FD851003CB322 /* ieBitmapData.cpp */; };
+		212906E918E332A500AD4AE2 /* ieDisplayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C9189FD880003CB322 /* ieDisplayObject.cpp */; };
+		212906EA18E332A500AD4AE2 /* ieInteractiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4CC189FD923003CB322 /* ieInteractiveObject.cpp */; };
+		212906EB18E332A500AD4AE2 /* ieDisplayObjectContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4CF189FD971003CB322 /* ieDisplayObjectContainer.cpp */; };
+		212906EC18E332A500AD4AE2 /* ieSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D2189FDA46003CB322 /* ieSprite.cpp */; };
+		212906ED18E332A500AD4AE2 /* ieMovieClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D5189FDA6E003CB322 /* ieMovieClip.cpp */; };
+		212906EE18E332A500AD4AE2 /* ieStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4E6189FFA91003CB322 /* ieStage.cpp */; };
+		212906EF18E332A500AD4AE2 /* ieShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4F818A23C9A003CB322 /* ieShape.cpp */; };
+		212906F018E332A500AD4AE2 /* ieOGLWindow_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52618A2863B003CB322 /* ieOGLWindow_ios.cpp */; };
+		212906F118E332A500AD4AE2 /* ieIGraphicsContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */; };
+		212906F218E332A500AD4AE2 /* ieGraphicsContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */; };
+		212906F318E332A500AD4AE2 /* ieBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066C18E04D7300AD4AE2 /* ieBatch.cpp */; };
+		212906F418E332A500AD4AE2 /* ieBatchMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */; };
+		212906F518E332A500AD4AE2 /* ieIEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4BD189FD711003CB322 /* ieIEventDispatcher.cpp */; };
+		212906F618E332A500AD4AE2 /* ieEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C0189FD727003CB322 /* ieEventDispatcher.cpp */; };
+		212906F718E332A500AD4AE2 /* ieEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4D8189FDAFA003CB322 /* ieEvent.cpp */; };
+		212906F818E332A500AD4AE2 /* ieObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4BA189FD6B4003CB322 /* ieObject.cpp */; };
+		212906F918E332A500AD4AE2 /* ieColorTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971518A0265200A65E68 /* ieColorTransformation.cpp */; };
+		212906FA18E332A500AD4AE2 /* ieColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971818A0279800A65E68 /* ieColor.cpp */; };
+		212906FB18E332A500AD4AE2 /* ieMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21C343DA18A8D5AF0041EF47 /* ieMaterial.cpp */; };
+		212906FC18E332A500AD4AE2 /* ieVertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FB18A23CC4003CB322 /* ieVertexBuffer.cpp */; };
+		212906FD18E332A500AD4AE2 /* ieIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */; };
+		212906FE18E332A500AD4AE2 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
+		212906FF18E3334C00AD4AE2 /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2109407618B1563700C86176 /* libEGL.dylib */; };
+		2129070018E3334C00AD4AE2 /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2109407818B1563700C86176 /* libGLESv2.dylib */; };
+		2129071218E3391800AD4AE2 /* ieOGLWindow_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129071118E3391800AD4AE2 /* ieOGLWindow_osx.cpp */; };
+		2129071418E3395500AD4AE2 /* ieGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */; };
 		2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2151C78218BDE58C00A33707 /* ieCamera.cpp */; };
 		2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3118C278EE009A13AC /* json_reader.cpp */; };
 		2156BB3718C278EE009A13AC /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2156BB3318C278EE009A13AC /* json_value.cpp */; };
@@ -467,6 +536,8 @@
 		2129066D18E04D7300AD4AE2 /* ieBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBatch.h; path = Sources/ieBatch.h; sourceTree = "<group>"; };
 		2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBatchMgr.cpp; path = Sources/ieBatchMgr.cpp; sourceTree = "<group>"; };
 		2129067018E04D8200AD4AE2 /* ieBatchMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBatchMgr.h; path = Sources/ieBatchMgr.h; sourceTree = "<group>"; };
+		2129071118E3391800AD4AE2 /* ieOGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieOGLWindow_osx.cpp; path = Sources/ieOGLWindow_osx.cpp; sourceTree = "<group>"; };
+		2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieGraphicsContext_osx.cpp; path = Sources/ieGraphicsContext_osx.cpp; sourceTree = "<group>"; };
 		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
 		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
 		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
@@ -569,6 +640,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212906FF18E3334C00AD4AE2 /* libEGL.dylib in Frameworks */,
+				2129070018E3334C00AD4AE2 /* libGLESv2.dylib in Frameworks */,
 				2173174A1821AE6700FF3D1E /* OpenGL.framework in Frameworks */,
 				2111AA30181EFEB0007FE7A8 /* Cocoa.framework in Frameworks */,
 			);
@@ -1310,9 +1383,11 @@
 				21EBB4F818A23C9A003CB322 /* ieShape.cpp */,
 				21EBB50D18A2679F003CB322 /* ieIOGLWindow.h */,
 				21EBB52618A2863B003CB322 /* ieOGLWindow_ios.cpp */,
+				2129071118E3391800AD4AE2 /* ieOGLWindow_osx.cpp */,
 				21EBB50718A26616003CB322 /* ieIGraphicsContext.h */,
 				21EBB50618A26616003CB322 /* ieIGraphicsContext.cpp */,
 				21EBB52318A2860B003CB322 /* ieGraphicsContext_ios.cpp */,
+				2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */,
 				2129066D18E04D7300AD4AE2 /* ieBatch.h */,
 				2129066C18E04D7300AD4AE2 /* ieBatch.cpp */,
 				2129067018E04D8200AD4AE2 /* ieBatchMgr.h */,
@@ -1519,6 +1594,77 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				212906DB18E332A500AD4AE2 /* ieResource.cpp in Sources */,
+				212906DC18E332A500AD4AE2 /* ieImage.cpp in Sources */,
+				212906DD18E332A500AD4AE2 /* ieTexture.cpp in Sources */,
+				212906DE18E332A500AD4AE2 /* ieSequence.cpp in Sources */,
+				212906DF18E332A500AD4AE2 /* ieResourceAccessor.cpp in Sources */,
+				212906E018E332A500AD4AE2 /* ieGameController.cpp in Sources */,
+				212906E118E332A500AD4AE2 /* ieIGameTransition.cpp in Sources */,
+				212906E218E332A500AD4AE2 /* ieIGameLoop.cpp in Sources */,
+				212906E318E332A500AD4AE2 /* ieGameLoop_ios.cpp in Sources */,
+				212906E418E332A500AD4AE2 /* ieShader.cpp in Sources */,
+				212906E518E332A500AD4AE2 /* ieBitmapFilter.cpp in Sources */,
+				212906E618E332A500AD4AE2 /* ieMask.cpp in Sources */,
+				212906E718E332A500AD4AE2 /* ieIBitmapDrawable.cpp in Sources */,
+				212906E818E332A500AD4AE2 /* ieBitmapData.cpp in Sources */,
+				212906E918E332A500AD4AE2 /* ieDisplayObject.cpp in Sources */,
+				212906EA18E332A500AD4AE2 /* ieInteractiveObject.cpp in Sources */,
+				212906EB18E332A500AD4AE2 /* ieDisplayObjectContainer.cpp in Sources */,
+				212906EC18E332A500AD4AE2 /* ieSprite.cpp in Sources */,
+				212906ED18E332A500AD4AE2 /* ieMovieClip.cpp in Sources */,
+				212906EE18E332A500AD4AE2 /* ieStage.cpp in Sources */,
+				212906EF18E332A500AD4AE2 /* ieShape.cpp in Sources */,
+				212906F018E332A500AD4AE2 /* ieOGLWindow_ios.cpp in Sources */,
+				212906F118E332A500AD4AE2 /* ieIGraphicsContext.cpp in Sources */,
+				212906F218E332A500AD4AE2 /* ieGraphicsContext_ios.cpp in Sources */,
+				212906F318E332A500AD4AE2 /* ieBatch.cpp in Sources */,
+				212906F418E332A500AD4AE2 /* ieBatchMgr.cpp in Sources */,
+				212906F518E332A500AD4AE2 /* ieIEventDispatcher.cpp in Sources */,
+				212906F618E332A500AD4AE2 /* ieEventDispatcher.cpp in Sources */,
+				212906F718E332A500AD4AE2 /* ieEvent.cpp in Sources */,
+				212906F818E332A500AD4AE2 /* ieObject.cpp in Sources */,
+				212906F918E332A500AD4AE2 /* ieColorTransformation.cpp in Sources */,
+				212906FA18E332A500AD4AE2 /* ieColor.cpp in Sources */,
+				212906FB18E332A500AD4AE2 /* ieMaterial.cpp in Sources */,
+				212906FC18E332A500AD4AE2 /* ieVertexBuffer.cpp in Sources */,
+				212906FD18E332A500AD4AE2 /* ieIndexBuffer.cpp in Sources */,
+				212906FE18E332A500AD4AE2 /* ieCamera.cpp in Sources */,
+				212906DA18E3327100AD4AE2 /* pugixml.cpp in Sources */,
+				212906CB18E3326400AD4AE2 /* png.c in Sources */,
+				212906CC18E3326400AD4AE2 /* pngerror.c in Sources */,
+				212906CD18E3326400AD4AE2 /* pngget.c in Sources */,
+				212906CE18E3326400AD4AE2 /* pngmem.c in Sources */,
+				212906CF18E3326400AD4AE2 /* pngpread.c in Sources */,
+				212906D018E3326400AD4AE2 /* pngread.c in Sources */,
+				212906D118E3326400AD4AE2 /* pngrio.c in Sources */,
+				212906D218E3326400AD4AE2 /* pngrtran.c in Sources */,
+				212906D318E3326400AD4AE2 /* pngrutil.c in Sources */,
+				212906D418E3326400AD4AE2 /* pngset.c in Sources */,
+				212906D518E3326400AD4AE2 /* pngtrans.c in Sources */,
+				212906D618E3326400AD4AE2 /* pngwio.c in Sources */,
+				212906D718E3326400AD4AE2 /* pngwrite.c in Sources */,
+				212906D818E3326400AD4AE2 /* pngwtran.c in Sources */,
+				212906D918E3326400AD4AE2 /* pngwutil.c in Sources */,
+				212906BC18E3324C00AD4AE2 /* adler32.c in Sources */,
+				212906BD18E3324C00AD4AE2 /* compress.c in Sources */,
+				212906BE18E3324C00AD4AE2 /* crc32.c in Sources */,
+				212906BF18E3324C00AD4AE2 /* deflate.c in Sources */,
+				212906C018E3324C00AD4AE2 /* gzclose.c in Sources */,
+				212906C118E3324C00AD4AE2 /* gzlib.c in Sources */,
+				212906C218E3324C00AD4AE2 /* gzread.c in Sources */,
+				212906C318E3324C00AD4AE2 /* gzwrite.c in Sources */,
+				212906C418E3324C00AD4AE2 /* infback.c in Sources */,
+				212906C518E3324C00AD4AE2 /* inffast.c in Sources */,
+				212906C618E3324C00AD4AE2 /* inflate.c in Sources */,
+				212906C718E3324C00AD4AE2 /* inftrees.c in Sources */,
+				212906C818E3324C00AD4AE2 /* trees.c in Sources */,
+				212906C918E3324C00AD4AE2 /* uncompr.c in Sources */,
+				212906CA18E3324C00AD4AE2 /* zutil.c in Sources */,
+				212906BB18E3323100AD4AE2 /* glm.cpp in Sources */,
+				212906B818E3321200AD4AE2 /* json_reader.cpp in Sources */,
+				212906B918E3321200AD4AE2 /* json_value.cpp in Sources */,
+				212906BA18E3321200AD4AE2 /* json_writer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,82 +1673,78 @@
 			buildActionMask = 2147483647;
 			files = (
 				2109422518B15D1700C86176 /* zutil.c in Sources */,
+				2109421F18B15D1700C86176 /* infback.c in Sources */,
+				2109422418B15D1700C86176 /* uncompr.c in Sources */,
+				2109422018B15D1700C86176 /* inffast.c in Sources */,
+				2109421E18B15D1700C86176 /* gzwrite.c in Sources */,
+				2109421D18B15D1600C86176 /* gzread.c in Sources */,
+				2109421C18B15D1600C86176 /* gzlib.c in Sources */,
+				2109422318B15D1700C86176 /* trees.c in Sources */,
+				2109421B18B15D1600C86176 /* gzclose.c in Sources */,
+				2109422218B15D1700C86176 /* inftrees.c in Sources */,
+				2109421918B15D1600C86176 /* crc32.c in Sources */,
+				2109421A18B15D1600C86176 /* deflate.c in Sources */,
+				2109421718B15D1600C86176 /* adler32.c in Sources */,
+				2109422118B15D1700C86176 /* inflate.c in Sources */,
+				2109421818B15D1600C86176 /* compress.c in Sources */,
+				210940C718B1563700C86176 /* png.c in Sources */,
+				210940D218B1563700C86176 /* pngtrans.c in Sources */,
+				210940D318B1563700C86176 /* pngwio.c in Sources */,
+				210940D018B1563700C86176 /* pngset.c in Sources */,
+				210940CB18B1563700C86176 /* pngpread.c in Sources */,
+				210940D518B1563700C86176 /* pngwtran.c in Sources */,
+				210940CE18B1563700C86176 /* pngrtran.c in Sources */,
+				210940CD18B1563700C86176 /* pngrio.c in Sources */,
+				210940C818B1563700C86176 /* pngerror.c in Sources */,
+				210940CF18B1563700C86176 /* pngrutil.c in Sources */,
+				210940CA18B1563700C86176 /* pngmem.c in Sources */,
+				210940D618B1563700C86176 /* pngwutil.c in Sources */,
+				210940D418B1563700C86176 /* pngwrite.c in Sources */,
+				210940CC18B1563700C86176 /* pngread.c in Sources */,
+				210940C918B1563700C86176 /* pngget.c in Sources */,
+				2156BB3818C278EE009A13AC /* json_writer.cpp in Sources */,
+				2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */,
+				2156BB3718C278EE009A13AC /* json_value.cpp in Sources */,
+				210941FA18B1597500C86176 /* pugixml.cpp in Sources */,
+				210941F418B1595200C86176 /* glm.cpp in Sources */,
 				21EBB51518A26937003CB322 /* ieIGameTransition.cpp in Sources */,
 				21EBB4DB189FEED3003CB322 /* ieIBitmapDrawable.cpp in Sources */,
 				21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */,
-				210940C718B1563700C86176 /* png.c in Sources */,
 				21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */,
-				2156BB3818C278EE009A13AC /* json_writer.cpp in Sources */,
 				21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */,
 				21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */,
-				2109421F18B15D1700C86176 /* infback.c in Sources */,
-				210940CE18B1563700C86176 /* pngrtran.c in Sources */,
-				2109422018B15D1700C86176 /* inffast.c in Sources */,
 				2129066E18E04D7300AD4AE2 /* ieBatch.cpp in Sources */,
 				21EBB4DD189FEED3003CB322 /* ieDisplayObject.cpp in Sources */,
-				210940C218B1563700C86176 /* gcdppQueue_t.cpp in Sources */,
 				21EBB50818A26616003CB322 /* ieIGraphicsContext.cpp in Sources */,
 				21C343DC18A8D5AF0041EF47 /* ieMaterial.cpp in Sources */,
 				21EBB51918A2716F003CB322 /* ieResource.cpp in Sources */,
-				2109421E18B15D1700C86176 /* gzwrite.c in Sources */,
 				2129067118E04D8200AD4AE2 /* ieBatchMgr.cpp in Sources */,
-				210940CB18B1563700C86176 /* pngpread.c in Sources */,
 				21EBB4DE189FEED3003CB322 /* ieInteractiveObject.cpp in Sources */,
 				21EBB4DF189FEED3003CB322 /* ieDisplayObjectContainer.cpp in Sources */,
 				2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */,
 				21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */,
-				2109421C18B15D1600C86176 /* gzlib.c in Sources */,
+				2129071418E3395500AD4AE2 /* ieGraphicsContext_osx.cpp in Sources */,
+				2129071218E3391800AD4AE2 /* ieOGLWindow_osx.cpp in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
-				2156BB3718C278EE009A13AC /* json_value.cpp in Sources */,
-				210940D218B1563700C86176 /* pngtrans.c in Sources */,
 				21EBB52E18A29ABB003CB322 /* ieGameLoop_ios.cpp in Sources */,
-				2109421D18B15D1600C86176 /* gzread.c in Sources */,
-				2109422418B15D1700C86176 /* uncompr.c in Sources */,
-				2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */,
-				210940D318B1563700C86176 /* pngwio.c in Sources */,
-				210940D518B1563700C86176 /* pngwtran.c in Sources */,
 				21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */,
 				21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */,
 				21EBB4FD18A23CC4003CB322 /* ieVertexBuffer.cpp in Sources */,
 				21EBB4E1189FEED3003CB322 /* ieMovieClip.cpp in Sources */,
-				210940D018B1563700C86176 /* pngset.c in Sources */,
-				2109422318B15D1700C86176 /* trees.c in Sources */,
-				210940C118B1563700C86176 /* gcdppQueue_i.cpp in Sources */,
-				2109421B18B15D1600C86176 /* gzclose.c in Sources */,
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
-				2109422218B15D1700C86176 /* inftrees.c in Sources */,
-				210940C418B1563700C86176 /* gcdppTask_t.cpp in Sources */,
 				2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */,
-				210941FA18B1597500C86176 /* pugixml.cpp in Sources */,
-				210940CD18B1563700C86176 /* pngrio.c in Sources */,
-				2109421918B15D1600C86176 /* crc32.c in Sources */,
 				21EBB52B18A299A5003CB322 /* ieIGameLoop.cpp in Sources */,
-				210940BF18B1563700C86176 /* gcdppImpl.cpp in Sources */,
 				21EBB52218A271DF003CB322 /* ieSequence.cpp in Sources */,
 				21EBB51C18A2719E003CB322 /* ieResourceAccessor.cpp in Sources */,
-				210941F418B1595200C86176 /* glm.cpp in Sources */,
-				210940CF18B1563700C86176 /* pngrutil.c in Sources */,
-				210940CA18B1563700C86176 /* pngmem.c in Sources */,
-				2109421A18B15D1600C86176 /* deflate.c in Sources */,
-				210940C018B1563700C86176 /* gcdppMainQueue_t.cpp in Sources */,
-				210940C818B1563700C86176 /* pngerror.c in Sources */,
 				21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */,
 				21EBB51F18A271C6003CB322 /* ieImage.cpp in Sources */,
 				21EBB4FA18A23C9A003CB322 /* ieShape.cpp in Sources */,
-				2109421718B15D1600C86176 /* adler32.c in Sources */,
-				210940D618B1563700C86176 /* pngwutil.c in Sources */,
 				21EBB51218A26921003CB322 /* ieGameController.cpp in Sources */,
-				210940D418B1563700C86176 /* pngwrite.c in Sources */,
 				21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */,
 				21EBB4E3189FEED3003CB322 /* ieEventDispatcher.cpp in Sources */,
 				21093F3F18B0C41800C86176 /* ieTexture.cpp in Sources */,
-				210940CC18B1563700C86176 /* pngread.c in Sources */,
-				2109422118B15D1700C86176 /* inflate.c in Sources */,
 				21EBB4E4189FEED3003CB322 /* ieEvent.cpp in Sources */,
-				2109421818B15D1600C86176 /* compress.c in Sources */,
 				21EBB4E5189FEED3003CB322 /* ieObject.cpp in Sources */,
-				210940C918B1563700C86176 /* pngget.c in Sources */,
-				210940C318B1563700C86176 /* gcdppTask_i.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1617,8 +1759,8 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
-				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1631,6 +1773,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					__OSX__,
+					"GLM_FORCE_RADIANS=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1639,26 +1782,26 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/Libraries\"",
-					"\"$(SRCROOT)/Libraries/curl/include\"",
-					"\"$(SRCROOT)/Libraries/gcdpp/include\"",
-					"\"$(SRCROOT)/Libraries/jsoncpp/include\"",
-					"\"$(SRCROOT)/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/Libraries/jsoncpp-0.6.0/include\"",
+					"\"$(SRCROOT)/Libraries/ogles-2.0/include\"",
+					"\"$(SRCROOT)/Libraries/pvrtextool-3.2/include\"",
+					"\"$(SRCROOT)/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/Libraries/pugixml-1.2\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Libraries/ogles2/mac-osx_x86/lib\\\"",
-					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieCore/Libraries/ogles2/mac-osx_x86/lib",
+					"\\\"$(SRCROOT)/Libraries/ogles-2.0/mac-osx_x86/lib\\\"",
+					"/Users/codeoneclick/Documents/Hobby/ie2D/ieCore/Libraries/ogles-2.0/mac-osx_x86/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
 				SYMROOT = "$(BUILD_DIR)";
 				TARGETED_DEVICE_FAMILY = "";
 			};
@@ -1672,8 +1815,8 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
-				CONFIGURATION_TEMP_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1684,7 +1827,10 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = __OSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__OSX__,
+					"GLM_FORCE_RADIANS=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1692,26 +1838,26 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/Libraries\"",
-					"\"$(SRCROOT)/Libraries/curl/include\"",
-					"\"$(SRCROOT)/Libraries/gcdpp/include\"",
-					"\"$(SRCROOT)/Libraries/jsoncpp/include\"",
-					"\"$(SRCROOT)/Libraries/ogles2/include\"",
+					"\"$(SRCROOT)/Libraries/jsoncpp-0.6.0/include\"",
+					"\"$(SRCROOT)/Libraries/ogles-2.0/include\"",
+					"\"$(SRCROOT)/Libraries/pvrtextool-3.2/include\"",
+					"\"$(SRCROOT)/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/Libraries/pugixml-1.2\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/Libraries/ogles2/mac-osx_x86/lib\\\"",
-					"/Users/codeoneclick/Documents/Hobby/indieEngine/ieCore/Libraries/ogles2/mac-osx_x86/lib",
+					"\\\"$(SRCROOT)/Libraries/ogles-2.0/mac-osx_x86/lib\\\"",
+					"/Users/codeoneclick/Documents/Hobby/ie2D/ieCore/Libraries/ogles-2.0/mac-osx_x86/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
 				SYMROOT = "$(BUILD_DIR)";
 				TARGETED_DEVICE_FAMILY = "";
 			};
@@ -1725,6 +1871,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMPRESS_PNG_FILES = NO;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DSTROOT = /tmp/ieCore.dst;
@@ -1768,6 +1915,7 @@
 				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)_d";
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include;
 				SKIP_INSTALL = YES;
 				SYMROOT = "$(BUILD_DIR)";
 				VALID_ARCHS = "armv7 armv7s";
@@ -1782,6 +1930,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMPRESS_PNG_FILES = NO;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_TEMP_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				DSTROOT = /tmp/ieCore.dst;
@@ -1826,6 +1975,7 @@
 				OBJROOT = "$(BUILD_DIR)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include;
 				SKIP_INSTALL = YES;
 				SYMROOT = "$(BUILD_DIR)";
 				VALID_ARCHS = "armv7 armv7s";

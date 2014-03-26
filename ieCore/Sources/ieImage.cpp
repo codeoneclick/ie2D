@@ -69,7 +69,7 @@ m_height(0)
     m_format = colortype;
 
     png_read_update_info(pngstruct, pnginfo);
-    i32 rowbytes = png_get_rowbytes(pngstruct, pnginfo);
+    png_size_t rowbytes = png_get_rowbytes(pngstruct, pnginfo);
     rowbytes += 3 - ((rowbytes - 1) % 4);
     
     m_data = new png_byte[rowbytes * m_height * sizeof(png_byte) + 15];
