@@ -130,6 +130,10 @@
 		21D07238181DA6E60019D264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B417423E540063AB07 /* QuartzCore.framework */; };
 		21D07239181DA6EB0019D264 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F204B217423E4D0063AB07 /* OpenGLES.framework */; };
 		21D0723A181DA6F10019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A420815E1733A9370004729E /* UIKit.framework */; };
+		21D3D9A318E35209005F65EC /* ieOGLWindow_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129071118E3391800AD4AE2 /* ieOGLWindow_osx.cpp */; };
+		21D3D9A418E35209005F65EC /* ieGraphicsContext_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */; };
+		21D3D9A918E368F8005F65EC /* ieGameLoop_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D3D9A818E368F8005F65EC /* ieGameLoop_osx.cpp */; };
+		21D3D9AA18E36BAA005F65EC /* ieGameLoop_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21D3D9A818E368F8005F65EC /* ieGameLoop_osx.cpp */; };
 		21EBB4DB189FEED3003CB322 /* ieIBitmapDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C3189FD7B5003CB322 /* ieIBitmapDrawable.cpp */; };
 		21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C6189FD851003CB322 /* ieBitmapData.cpp */; };
 		21EBB4DD189FEED3003CB322 /* ieDisplayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EBB4C9189FD880003CB322 /* ieDisplayObject.cpp */; };
@@ -537,7 +541,7 @@
 		2129066F18E04D8200AD4AE2 /* ieBatchMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieBatchMgr.cpp; path = Sources/ieBatchMgr.cpp; sourceTree = "<group>"; };
 		2129067018E04D8200AD4AE2 /* ieBatchMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieBatchMgr.h; path = Sources/ieBatchMgr.h; sourceTree = "<group>"; };
 		2129071118E3391800AD4AE2 /* ieOGLWindow_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieOGLWindow_osx.cpp; path = Sources/ieOGLWindow_osx.cpp; sourceTree = "<group>"; };
-		2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieGraphicsContext_osx.cpp; path = Sources/ieGraphicsContext_osx.cpp; sourceTree = "<group>"; };
+		2129071318E3395500AD4AE2 /* ieGraphicsContext_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieGraphicsContext_osx.cpp; path = Sources/ieGraphicsContext_osx.cpp; sourceTree = "<group>"; };
 		2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2C4.h; path = Sources/ieShaderV2C4.h; sourceTree = "<group>"; };
 		2151C78218BDE58C00A33707 /* ieCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieCamera.cpp; path = Sources/ieCamera.cpp; sourceTree = "<group>"; };
 		2151C78318BDE58C00A33707 /* ieCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieCamera.h; path = Sources/ieCamera.h; sourceTree = "<group>"; };
@@ -565,6 +569,7 @@
 		21C343DB18A8D5AF0041EF47 /* ieMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieMaterial.h; path = Sources/ieMaterial.h; sourceTree = "<group>"; };
 		21D0712A181DA5620019D264 /* libieCore-ios_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieCore-ios_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D3D98E18DF82DC005F65EC /* ieShaderV2T2M.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2M.h; path = Sources/ieShaderV2T2M.h; sourceTree = "<group>"; };
+		21D3D9A818E368F8005F65EC /* ieGameLoop_osx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieGameLoop_osx.cpp; path = Sources/ieGameLoop_osx.cpp; sourceTree = "<group>"; };
 		21EBB4B9189FD683003CB322 /* ieCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieCommon.h; path = Sources/ieCommon.h; sourceTree = "<group>"; };
 		21EBB4BA189FD6B4003CB322 /* ieObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieObject.cpp; path = Sources/ieObject.cpp; sourceTree = "<group>"; };
 		21EBB4BB189FD6B4003CB322 /* ieObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieObject.h; path = Sources/ieObject.h; sourceTree = "<group>"; };
@@ -1427,6 +1432,7 @@
 				21EBB52A18A299A5003CB322 /* ieIGameLoop.h */,
 				21EBB52918A299A5003CB322 /* ieIGameLoop.cpp */,
 				21EBB52C18A29ABB003CB322 /* ieGameLoop_ios.cpp */,
+				21D3D9A818E368F8005F65EC /* ieGameLoop_osx.cpp */,
 			);
 			name = ieTransition;
 			sourceTree = "<group>";
@@ -1594,6 +1600,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D3D9AA18E36BAA005F65EC /* ieGameLoop_osx.cpp in Sources */,
+				21D3D9A318E35209005F65EC /* ieOGLWindow_osx.cpp in Sources */,
+				21D3D9A418E35209005F65EC /* ieGraphicsContext_osx.cpp in Sources */,
 				212906DB18E332A500AD4AE2 /* ieResource.cpp in Sources */,
 				212906DC18E332A500AD4AE2 /* ieImage.cpp in Sources */,
 				212906DD18E332A500AD4AE2 /* ieTexture.cpp in Sources */,
@@ -1730,6 +1739,7 @@
 				21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */,
 				21EBB4E8189FFA91003CB322 /* ieStage.cpp in Sources */,
 				21EBB4FD18A23CC4003CB322 /* ieVertexBuffer.cpp in Sources */,
+				21D3D9A918E368F8005F65EC /* ieGameLoop_osx.cpp in Sources */,
 				21EBB4E1189FEED3003CB322 /* ieMovieClip.cpp in Sources */,
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
 				2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */,
@@ -1798,7 +1808,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
@@ -1854,7 +1867,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OBJROOT = "$(BUILD_DIR)";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;

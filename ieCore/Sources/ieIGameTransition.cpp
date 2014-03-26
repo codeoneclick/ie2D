@@ -31,6 +31,8 @@ m_screenTexture(nullptr)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_IOS);
 #elif defined(__WIN32__)
 	m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_WIN32);
+#elif defined(__OSX__)
+    m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_OSX);
 #elif defined(__NDK__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_NDK);
 #endif

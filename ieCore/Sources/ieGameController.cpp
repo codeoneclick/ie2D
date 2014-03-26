@@ -17,9 +17,11 @@ m_currentTransition(nullptr)
 #if defined (__IOS__)
     m_gameLoop = ieIGameLoop::createGameLoop(E_PLATFORM_API_IOS);
 #elif defined(__WIN32__)
-    
+    m_gameLoop = ieIGameLoop::createGameLoop(E_PLATFORM_API_WIN32);
+#elif defined(__OSX__)
+    m_gameLoop = ieIGameLoop::createGameLoop(E_PLATFORM_API_OSX);
 #elif defined(__NDK__)
-    
+    m_gameLoop = ieIGameLoop::createGameLoop(E_PLATFORM_API_NDK);
 #endif
 }
 

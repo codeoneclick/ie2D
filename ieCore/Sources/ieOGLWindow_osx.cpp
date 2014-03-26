@@ -10,13 +10,13 @@
 
 #if defined(__OSX__)
 
-@interface IOGLWindow()
+@interface ieHWND()
 
 @property(nonatomic, assign) CVDisplayLinkRef m_displayLink;
 
 @end
 
-@implementation IOGLWindow
+@implementation ieHWND
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -38,7 +38,7 @@
     return self;
 }
 
-- (void) prepareOpenGL
+- (void)prepareOpenGL
 {
 	[super prepareOpenGL];
 	[[self openGLContext] makeCurrentContext];
@@ -47,5 +47,35 @@
 }
 
 @end
+
+ieIOGLWindow::ieIOGLWindow(void* hwnd) :
+m_hwnd(hwnd)
+{
+    assert(m_hwnd != nullptr);
+}
+
+ieIOGLWindow::~ieIOGLWindow(void)
+{
+    
+}
+
+const void* ieIOGLWindow::getHWND(void) const
+{
+    return m_hwnd;
+}
+
+ui32 ieIOGLWindow::getWidth(void)
+{
+    assert(m_hwnd != nullptr);
+    const NSView *hwnd = (__bridge NSView*)m_hwnd;
+    return static_cast<ui32>(hwnd.frame.size.width);
+}
+
+ui32 ieIOGLWindow::getHeight(void)
+{
+    assert(m_hwnd != nullptr);
+    const NSView* hwnd = (__bridge NSView*)m_hwnd;
+    return static_cast<ui32>(hwnd.frame.size.height);
+}
 
 #endif

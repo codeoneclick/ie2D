@@ -22,7 +22,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2129071018E3349100AD4AE2 /* libieCore-osx_d.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2129070D18E3348400AD4AE2 /* libieCore-osx_d.a */; };
+		21D3D99E18E35029005F65EC /* libieCore-osx_d.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D99B18E3501D005F65EC /* libieCore-osx_d.a */; };
+		21D3D9A118E3504B005F65EC /* libEGL.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D99F18E3504B005F65EC /* libEGL.dylib */; };
+		21D3D9A218E3504B005F65EC /* libGLESv2.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D9A018E3504B005F65EC /* libGLESv2.dylib */; };
+		21D3D9A718E35B3C005F65EC /* AppKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D9A618E35B3C005F65EC /* AppKit.framework */; };
+		21D3D9AC18E36F34005F65EC /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21D3D99F18E3504B005F65EC /* libEGL.dylib */; };
+		21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21D3D9A018E3504B005F65EC /* libGLESv2.dylib */; };
 		538D611A8FAAD3FCF5BC5A71 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C5B89D9BFC5D52D34817F202 /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5D30746E3C44968AB32C2DC9 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = DC632F1DDE85584624762C93 /* QtCore.framework */; };
@@ -41,33 +46,50 @@
 			remoteGlobalIDString = 0F4A822A2887842BDD0A357F;
 			remoteInfo = "Qt Preprocess";
 		};
-		2129070A18E3348400AD4AE2 /* PBXContainerItemProxy */ = {
+		21D3D99818E3501D005F65EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2129070318E3347700AD4AE2 /* ieCore.xcodeproj */;
+			containerPortal = 21D3D99118E3500D005F65EC /* ieCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21D0712A181DA5620019D264;
 			remoteInfo = "ieCore-ios";
 		};
-		2129070C18E3348400AD4AE2 /* PBXContainerItemProxy */ = {
+		21D3D99A18E3501D005F65EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2129070318E3347700AD4AE2 /* ieCore.xcodeproj */;
+			containerPortal = 21D3D99118E3500D005F65EC /* ieCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21853415181EFC6200315CBB;
 			remoteInfo = "ieCore-osx";
 		};
-		2129070E18E3348900AD4AE2 /* PBXContainerItemProxy */ = {
+		21D3D99C18E35024005F65EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2129070318E3347700AD4AE2 /* ieCore.xcodeproj */;
+			containerPortal = 21D3D99118E3500D005F65EC /* ieCore.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 21853414181EFC6200315CBB;
 			remoteInfo = "ieCore-osx";
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		21D3D9AB18E36F14005F65EC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				21D3D9AC18E36F34005F65EC /* libEGL.dylib in CopyFiles */,
+				21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		027C91393FA3BC49B9F63B1B /* moc_ieMapEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = moc_ieMapEditor.cpp; sourceTree = "<absolute>"; };
 		09BF715167B7A0149FD2FBB8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Sources/main.cpp; sourceTree = "<absolute>"; };
-		2129070318E3347700AD4AE2 /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
+		21D3D99118E3500D005F65EC /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
+		21D3D99F18E3504B005F65EC /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<group>"; };
+		21D3D9A018E3504B005F65EC /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
+		21D3D9A618E35B3C005F65EC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		37F3E7ABD1ED08576F6EE918 /* ieMapEditor.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = ieMapEditor.cpp; path = Sources/ieMapEditor.cpp; sourceTree = "<absolute>"; };
 		3CB7D36C73D2CDDDDCDE4ECF /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = /Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtWidgets.framework; sourceTree = "<absolute>"; };
 		53D52318DF50DD37E309AB20 /* ui_ieMapEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui_ieMapEditor.h; sourceTree = "<absolute>"; };
@@ -86,11 +108,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2129071018E3349100AD4AE2 /* libieCore-osx_d.a in Link Binary With Libraries */,
+				21D3D9A118E3504B005F65EC /* libEGL.dylib in Link Binary With Libraries */,
+				21D3D9A218E3504B005F65EC /* libGLESv2.dylib in Link Binary With Libraries */,
+				21D3D99E18E35029005F65EC /* libieCore-osx_d.a in Link Binary With Libraries */,
 				9A290DBD886EF4A9C2FD8254 /* QtWidgets.framework in Link Binary With Libraries */,
 				538D611A8FAAD3FCF5BC5A71 /* QtGui.framework in Link Binary With Libraries */,
 				5D30746E3C44968AB32C2DC9 /* QtCore.framework in Link Binary With Libraries */,
 				8771A8C96E9C391044035D99 /* OpenGL.framework in Link Binary With Libraries */,
+				21D3D9A718E35B3C005F65EC /* AppKit.framework in Link Binary With Libraries */,
 				E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */,
 			);
 			name = "Link Binary With Libraries";
@@ -110,16 +135,16 @@
 		2129070218E3345000AD4AE2 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				2129070318E3347700AD4AE2 /* ieCore.xcodeproj */,
+				21D3D99118E3500D005F65EC /* ieCore.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		2129070618E3348400AD4AE2 /* Products */ = {
+		21D3D99418E3501D005F65EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2129070B18E3348400AD4AE2 /* libieCore-ios_d.a */,
-				2129070D18E3348400AD4AE2 /* libieCore-osx_d.a */,
+				21D3D99918E3501D005F65EC /* libieCore-ios_d.a */,
+				21D3D99B18E3501D005F65EC /* libieCore-osx_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +195,9 @@
 		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21D3D9A618E35B3C005F65EC /* AppKit.framework */,
+				21D3D99F18E3504B005F65EC /* libEGL.dylib */,
+				21D3D9A018E3504B005F65EC /* libGLESv2.dylib */,
 				3CB7D36C73D2CDDDDCDE4ECF /* QtWidgets.framework */,
 				C5B89D9BFC5D52D34817F202 /* QtGui.framework */,
 				DC632F1DDE85584624762C93 /* QtCore.framework */,
@@ -210,11 +238,12 @@
 			buildPhases = (
 				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
 				D1C883685E82D5676953459A /* Link Binary With Libraries */,
+				21D3D9AB18E36F14005F65EC /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2129070F18E3348900AD4AE2 /* PBXTargetDependency */,
+				21D3D99D18E35024005F65EC /* PBXTargetDependency */,
 				53836EC49579156A7C2ABFAE /* PBXTargetDependency */,
 			);
 			name = ieMapEditor;
@@ -241,8 +270,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2129070618E3348400AD4AE2 /* Products */;
-					ProjectRef = 2129070318E3347700AD4AE2 /* ieCore.xcodeproj */;
+					ProductGroup = 21D3D99418E3501D005F65EC /* Products */;
+					ProjectRef = 21D3D99118E3500D005F65EC /* ieCore.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -254,18 +283,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2129070B18E3348400AD4AE2 /* libieCore-ios_d.a */ = {
+		21D3D99918E3501D005F65EC /* libieCore-ios_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libieCore-ios_d.a";
-			remoteRef = 2129070A18E3348400AD4AE2 /* PBXContainerItemProxy */;
+			remoteRef = 21D3D99818E3501D005F65EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2129070D18E3348400AD4AE2 /* libieCore-osx_d.a */ = {
+		21D3D99B18E3501D005F65EC /* libieCore-osx_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libieCore-osx_d.a";
-			remoteRef = 2129070C18E3348400AD4AE2 /* PBXContainerItemProxy */;
+			remoteRef = 21D3D99A18E3501D005F65EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -308,10 +337,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2129070F18E3348900AD4AE2 /* PBXTargetDependency */ = {
+		21D3D99D18E35024005F65EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ieCore-osx";
-			targetProxy = 2129070E18E3348900AD4AE2 /* PBXContainerItemProxy */;
+			targetProxy = 21D3D99C18E35024005F65EC /* PBXContainerItemProxy */;
 		};
 		53836EC49579156A7C2ABFAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -479,7 +508,17 @@
 					"\"$(SRCROOT)/../ieCore/Libraries/pvrtextool-3.2/include\"",
 					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/include\"",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-F/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = ieMapEditor;
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = macosx;
@@ -516,7 +555,17 @@
 					"\"$(SRCROOT)/../ieCore/Libraries/pvrtextool-3.2/include\"",
 					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/include\"",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-F/Applications/Qt/5.2.0/5.2.0/clang_64/lib",
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = ieMapEditor;
 				QT_LIBRARY_SUFFIX = _debug;
 				SDKROOT = macosx;
