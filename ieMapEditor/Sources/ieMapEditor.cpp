@@ -3,6 +3,7 @@
 
 #include "ieIOGLWindow.h"
 #include "ieIGameTransition.h"
+#include "ieMovieClip.h"
 
 #if defined(__OSX__)
 
@@ -35,6 +36,16 @@ void ieMapEditor::execute(void)
     
     m_gameController->registerTransition(transition);
     m_gameController->goToTransition("demo");
+    
+    std::shared_ptr<ieMovieClip> sprite;
+    std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
+    path.append("/");
+    path.append("dragon.json");
+    sprite = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
+    transition->addChild(sprite);
+    sprite->setPosition(glm::vec2(250, 250));
+    sprite->setScale(glm::vec2(0.5f, 0.5f));
+    sprite->setBatched(true);
     
 #endif
 }

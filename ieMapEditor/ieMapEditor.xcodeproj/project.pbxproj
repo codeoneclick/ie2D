@@ -26,8 +26,10 @@
 		21D3D9A118E3504B005F65EC /* libEGL.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D99F18E3504B005F65EC /* libEGL.dylib */; };
 		21D3D9A218E3504B005F65EC /* libGLESv2.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D9A018E3504B005F65EC /* libGLESv2.dylib */; };
 		21D3D9A718E35B3C005F65EC /* AppKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21D3D9A618E35B3C005F65EC /* AppKit.framework */; };
-		21D3D9AC18E36F34005F65EC /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21D3D99F18E3504B005F65EC /* libEGL.dylib */; };
-		21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21D3D9A018E3504B005F65EC /* libGLESv2.dylib */; };
+		21D3D9AC18E36F34005F65EC /* libEGL.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 21D3D99F18E3504B005F65EC /* libEGL.dylib */; };
+		21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 21D3D9A018E3504B005F65EC /* libGLESv2.dylib */; };
+		21D3D9B218E373C1005F65EC /* dragon.json in Resources */ = {isa = PBXBuildFile; fileRef = 21D3D9AF18E37379005F65EC /* dragon.json */; };
+		21D3D9B318E373C1005F65EC /* dragon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D3D9B018E37379005F65EC /* dragon1.png */; };
 		538D611A8FAAD3FCF5BC5A71 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C5B89D9BFC5D52D34817F202 /* QtGui.framework */; };
 		5690CEAF73F573032D29A200 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09BF715167B7A0149FD2FBB8 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		5D30746E3C44968AB32C2DC9 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = DC632F1DDE85584624762C93 /* QtCore.framework */; };
@@ -70,15 +72,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		21D3D9AB18E36F14005F65EC /* CopyFiles */ = {
+		21D3D9AB18E36F14005F65EC /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				21D3D9AC18E36F34005F65EC /* libEGL.dylib in CopyFiles */,
-				21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in CopyFiles */,
+				21D3D9AC18E36F34005F65EC /* libEGL.dylib in Copy Files */,
+				21D3D9AD18E36F34005F65EC /* libGLESv2.dylib in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -90,6 +93,8 @@
 		21D3D99F18E3504B005F65EC /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = "../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib/libEGL.dylib"; sourceTree = "<group>"; };
 		21D3D9A018E3504B005F65EC /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = "../ieCore/Libraries/ogles-2.0/mac-osx_x86/lib/libGLESv2.dylib"; sourceTree = "<group>"; };
 		21D3D9A618E35B3C005F65EC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		21D3D9AF18E37379005F65EC /* dragon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = dragon.json; path = ../ieBundle/dragon.json; sourceTree = "<group>"; };
+		21D3D9B018E37379005F65EC /* dragon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dragon1.png; path = ../ieBundle/dragon1.png; sourceTree = "<group>"; };
 		37F3E7ABD1ED08576F6EE918 /* ieMapEditor.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = ieMapEditor.cpp; path = Sources/ieMapEditor.cpp; sourceTree = "<absolute>"; };
 		3CB7D36C73D2CDDDDCDE4ECF /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = /Applications/Qt/5.2.0/5.2.0/clang_64/lib/QtWidgets.framework; sourceTree = "<absolute>"; };
 		53D52318DF50DD37E309AB20 /* ui_ieMapEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ui_ieMapEditor.h; sourceTree = "<absolute>"; };
@@ -147,6 +152,15 @@
 				21D3D99B18E3501D005F65EC /* libieCore-osx_d.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		21D3D9AE18E3734E005F65EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21D3D9AF18E37379005F65EC /* dragon.json */,
+				21D3D9B018E37379005F65EC /* dragon1.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
@@ -215,6 +229,7 @@
 				25B08E2869634E9BCBA333A2 /* Generated Sources */,
 				74B182DB50CB5611B5C1C297 /* Supporting Files */,
 				12E908B8A1C3C07C115504F5 /* Sources [uic] */,
+				21D3D9AE18E3734E005F65EC /* Resources */,
 				AF39DD055C3EF8226FBE929D /* Frameworks */,
 				FE0A091FDBFB3E9C31B7A1BD /* Products */,
 			);
@@ -238,7 +253,8 @@
 			buildPhases = (
 				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
 				D1C883685E82D5676953459A /* Link Binary With Libraries */,
-				21D3D9AB18E36F14005F65EC /* CopyFiles */,
+				21D3D9AB18E36F14005F65EC /* Copy Files */,
+				21D3D9B118E373B8005F65EC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -298,6 +314,18 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		21D3D9B118E373B8005F65EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D3D9B218E373C1005F65EC /* dragon.json in Resources */,
+				21D3D9B318E373C1005F65EC /* dragon1.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		5E618435888B9D49F8540165 /* Qt Qmake */ = {
