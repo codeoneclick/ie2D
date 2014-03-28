@@ -202,6 +202,18 @@ bool ieDisplayObject::isBatched(void) const
     return m_batched;
 }
 
+void ieDisplayObject::setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, const glm::ivec2& textureSize)
+{
+    m_texCoord = glm::vec4(static_cast<f32>(texCoordsFrame.x) / static_cast<f32>(textureSize.x),
+                           1 - static_cast<f32>(texCoordsFrame.y + texCoordsFrame.w) / static_cast<f32>(textureSize.y),
+                           static_cast<f32>(texCoordsFrame.x + texCoordsFrame.z) / static_cast<f32>(textureSize.x),
+                           1 - static_cast<f32>(texCoordsFrame.y) / static_cast<f32>(textureSize.y));
+    if(m_shape != nullptr)
+    {
+        ieDisplayObject::updateShapeTexcoordAttributes(m_shape);
+    }
+}
+
 void ieDisplayObject::setupShader(const std::string& vsSourceCode,
                                   const std::string& fsSourceCode)
 {

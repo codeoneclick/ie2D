@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21BBF99C18E577F70060CCC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF99B18E577F70060CCC1 /* Foundation.framework */; };
+		21BBF9D418E579220060CCC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF99B18E577F70060CCC1 /* Foundation.framework */; };
+		21BBF9DF18E57DD40060CCC1 /* ieTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF9DD18E57DD40060CCC1 /* ieTile.cpp */; };
+		21BBF9E218E57DED0060CCC1 /* ieTileset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21BBF9E018E57DED0060CCC1 /* ieTileset.cpp */; };
+		21BBF9E418E580BF0060CCC1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E318E580BF0060CCC1 /* OpenGLES.framework */; };
+		21BBF9E618E580D30060CCC1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E518E580D30060CCC1 /* QuartzCore.framework */; };
+		21BBF9E818E580E00060CCC1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E718E580E00060CCC1 /* Cocoa.framework */; };
+		21BBF9EA18E580E60060CCC1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E918E580E60060CCC1 /* OpenGL.framework */; };
+		21BBFA0818E584EA0060CCC1 /* libieCore-ios_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */; };
+		21BBFA0B18E584F40060CCC1 /* libieCore-osx_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21BBFA0218E584D90060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21D0712A181DA5620019D264;
+			remoteInfo = "ieCore-ios";
+		};
+		21BBFA0418E584D90060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21853415181EFC6200315CBB;
+			remoteInfo = "ieCore-osx";
+		};
+		21BBFA0618E584DF0060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21D07129181DA5620019D264;
+			remoteInfo = "ieCore-ios";
+		};
+		21BBFA0918E584F00060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21853414181EFC6200315CBB;
+			remoteInfo = "ieCore-osx";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21BBF99618E577F70060CCC1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BBF9D518E579220060CCC1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		21BBF99818E577F70060CCC1 /* libieEngine-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieEngine-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BBF99B18E577F70060CCC1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		21BBF9A918E577F80060CCC1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		21BBF9AC18E577F80060CCC1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		21BBF9D918E579220060CCC1 /* libieEngine-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieEngine-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21BBF9DD18E57DD40060CCC1 /* ieTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieTile.cpp; path = Sources/ieTile.cpp; sourceTree = "<group>"; };
+		21BBF9DE18E57DD40060CCC1 /* ieTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieTile.h; path = Sources/ieTile.h; sourceTree = "<group>"; };
+		21BBF9E018E57DED0060CCC1 /* ieTileset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieTileset.cpp; path = Sources/ieTileset.cpp; sourceTree = "<group>"; };
+		21BBF9E118E57DED0060CCC1 /* ieTileset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieTileset.h; path = Sources/ieTileset.h; sourceTree = "<group>"; };
+		21BBF9E318E580BF0060CCC1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		21BBF9E518E580D30060CCC1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		21BBF9E718E580E00060CCC1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		21BBF9E918E580E60060CCC1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21BBF99518E577F70060CCC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BBFA0818E584EA0060CCC1 /* libieCore-ios_d.a in Frameworks */,
+				21BBF99C18E577F70060CCC1 /* Foundation.framework in Frameworks */,
+				21BBF9E418E580BF0060CCC1 /* OpenGLES.framework in Frameworks */,
+				21BBF9E618E580D30060CCC1 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BBF9D318E579220060CCC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BBFA0B18E584F40060CCC1 /* libieCore-osx_d.a in Frameworks */,
+				21BBF9EA18E580E60060CCC1 /* OpenGL.framework in Frameworks */,
+				21BBF9E818E580E00060CCC1 /* Cocoa.framework in Frameworks */,
+				21BBF9D418E579220060CCC1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21BBF98F18E577F70060CCC1 = {
+			isa = PBXGroup;
+			children = (
+				21BBF99D18E577F70060CCC1 /* Libraries */,
+				21BBF9C118E5785C0060CCC1 /* Sources */,
+				21BBF99A18E577F70060CCC1 /* Frameworks */,
+				21BBF99918E577F70060CCC1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		21BBF99918E577F70060CCC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21BBF99818E577F70060CCC1 /* libieEngine-ios.a */,
+				21BBF9D918E579220060CCC1 /* libieEngine-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21BBF99A18E577F70060CCC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21BBF9E918E580E60060CCC1 /* OpenGL.framework */,
+				21BBF9E718E580E00060CCC1 /* Cocoa.framework */,
+				21BBF9E518E580D30060CCC1 /* QuartzCore.framework */,
+				21BBF9E318E580BF0060CCC1 /* OpenGLES.framework */,
+				21BBF99B18E577F70060CCC1 /* Foundation.framework */,
+				21BBF9A918E577F80060CCC1 /* XCTest.framework */,
+				21BBF9AC18E577F80060CCC1 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		21BBF99D18E577F70060CCC1 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */,
+			);
+			name = Libraries;
+			path = ieEngine;
+			sourceTree = "<group>";
+		};
+		21BBF9C118E5785C0060CCC1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				21BBF9DE18E57DD40060CCC1 /* ieTile.h */,
+				21BBF9DD18E57DD40060CCC1 /* ieTile.cpp */,
+				21BBF9E118E57DED0060CCC1 /* ieTileset.h */,
+				21BBF9E018E57DED0060CCC1 /* ieTileset.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		21BBF9FE18E584D90060CCC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */,
+				21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21BBF99718E577F70060CCC1 /* ieEngine-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21BBF9BB18E577F80060CCC1 /* Build configuration list for PBXNativeTarget "ieEngine-ios" */;
+			buildPhases = (
+				21BBF99418E577F70060CCC1 /* Sources */,
+				21BBF99518E577F70060CCC1 /* Frameworks */,
+				21BBF99618E577F70060CCC1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21BBFA0718E584DF0060CCC1 /* PBXTargetDependency */,
+			);
+			name = "ieEngine-ios";
+			productName = ieEngine;
+			productReference = 21BBF99818E577F70060CCC1 /* libieEngine-ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		21BBF9D018E579220060CCC1 /* ieEngine-osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21BBF9D618E579220060CCC1 /* Build configuration list for PBXNativeTarget "ieEngine-osx" */;
+			buildPhases = (
+				21BBF9D118E579220060CCC1 /* Sources */,
+				21BBF9D318E579220060CCC1 /* Frameworks */,
+				21BBF9D518E579220060CCC1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21BBFA0A18E584F00060CCC1 /* PBXTargetDependency */,
+			);
+			name = "ieEngine-osx";
+			productName = ieEngine;
+			productReference = 21BBF9D918E579220060CCC1 /* libieEngine-osx.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21BBF99018E577F70060CCC1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = sergey.sergeev;
+			};
+			buildConfigurationList = 21BBF99318E577F70060CCC1 /* Build configuration list for PBXProject "ieEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 21BBF98F18E577F70060CCC1;
+			productRefGroup = 21BBF99918E577F70060CCC1 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 21BBF9FE18E584D90060CCC1 /* Products */;
+					ProjectRef = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				21BBF99718E577F70060CCC1 /* ieEngine-ios */,
+				21BBF9D018E579220060CCC1 /* ieEngine-osx */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libieCore-ios_d.a";
+			remoteRef = 21BBFA0218E584D90060CCC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libieCore-osx_d.a";
+			remoteRef = 21BBFA0418E584D90060CCC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21BBF99418E577F70060CCC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BBF9E218E57DED0060CCC1 /* ieTileset.cpp in Sources */,
+				21BBF9DF18E57DD40060CCC1 /* ieTile.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21BBF9D118E579220060CCC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21BBFA0718E584DF0060CCC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ieCore-ios";
+			targetProxy = 21BBFA0618E584DF0060CCC1 /* PBXContainerItemProxy */;
+		};
+		21BBFA0A18E584F00060CCC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ieCore-osx";
+			targetProxy = 21BBFA0918E584F00060CCC1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		21BBF9B918E577F80060CCC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		21BBF9BA18E577F80060CCC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		21BBF9BC18E577F80060CCC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ieEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					__IOS__,
+					"GLM_FORCE_RADIANS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ieCore/Sources\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/pugixml-1.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/jsoncpp-0.6.0/include\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		21BBF9BD18E577F80060CCC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ieEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__IOS__,
+					"GLM_FORCE_RADIANS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ieCore/Sources\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/pugixml-1.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/jsoncpp-0.6.0/include\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		21BBF9D718E579220060CCC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ieEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					__OSX__,
+					"GLM_FORCE_RADIANS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ieCore/Sources\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/pugixml-1.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/jsoncpp-0.6.0/include\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/include\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "ieEngine-osx";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		21BBF9D818E579220060CCC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ieEngine.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__OSX__,
+					"GLM_FORCE_RADIANS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../ieCore/Sources\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/glm-0.9.5.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/zlib-1.2.8\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/libpng-1.6.9\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/pugixml-1.2\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/jsoncpp-0.6.0/include\"",
+					"\"$(SRCROOT)/../ieCore/Libraries/ogles-2.0/include\"",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "ieEngine-osx";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21BBF99318E577F70060CCC1 /* Build configuration list for PBXProject "ieEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BBF9B918E577F80060CCC1 /* Debug */,
+				21BBF9BA18E577F80060CCC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21BBF9BB18E577F80060CCC1 /* Build configuration list for PBXNativeTarget "ieEngine-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BBF9BC18E577F80060CCC1 /* Debug */,
+				21BBF9BD18E577F80060CCC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21BBF9D618E579220060CCC1 /* Build configuration list for PBXNativeTarget "ieEngine-osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21BBF9D718E579220060CCC1 /* Debug */,
+				21BBF9D818E579220060CCC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21BBF99018E577F70060CCC1 /* Project object */;
+}

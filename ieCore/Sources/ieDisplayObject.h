@@ -119,6 +119,8 @@ public:
     virtual void setBatched(bool value);
     bool isBatched(void) const;
     
+    void setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, const glm::ivec2& textureSize);
+    
     std::shared_ptr<ieDisplayObjectContainer> getParent(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,

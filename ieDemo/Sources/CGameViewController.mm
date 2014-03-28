@@ -17,6 +17,8 @@
 #include "ieColor.h"
 #include "ieSprite.h"
 #include "ieMovieClip.h"
+#include "ieTile.h"
+#include "ieTileset.h"
 
 @interface CGameViewController ()
 
@@ -26,6 +28,7 @@
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieSprite> sprite2;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieMovieClip> sprite3;
 @property (unsafe_unretained, nonatomic) std::shared_ptr<ieMovieClip> sprite4;
+@property (unsafe_unretained, nonatomic) std::shared_ptr<ieTile> tile;
 
 @end
 
@@ -76,6 +79,17 @@
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(350, 150));
     self.sprite4->setBatched(true);
+    
+    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    path.append("/");
+    path.append("isometric_map.png");
+    std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(64, 64));
+    for(ui32 i = 0; i < tileset->getTilesCount(); ++i)
+    {
+        std::shared_ptr<ieTile> tile = tileset->getTileAtIndex(i);
+        transition->addChild(tile);
+        tile->setPosition(glm::vec2(i * 64, 64));
+    }
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
