@@ -82,13 +82,18 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("isometric_map.png");
-    std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(64, 64));
+    path.append("leather_armor.png");
+    std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(128, 128));
+    ui32 indexX = 0;
+    ui32 indexY = 0;
     for(ui32 i = 0; i < tileset->getTilesCount(); ++i)
     {
         std::shared_ptr<ieTile> tile = tileset->getTileAtIndex(i);
         transition->addChild(tile);
-        tile->setPosition(glm::vec2(i * 64, 64));
+        tile->setPosition(glm::vec2(indexX * 128, indexY * 128 + 128));
+        indexX++;
+        indexY = indexX >= 6 ? indexY + 1 : indexY;
+        indexX = indexX >= 6 ? 0 : indexX;
     }
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];

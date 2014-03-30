@@ -25,7 +25,7 @@ ieSprite(frame, imageFilename)
 
 ieTile::~ieTile(void)
 {
-    
+
 }
 
 void ieTile::onUpdate(const std::shared_ptr<ieEvent>& event)
@@ -53,6 +53,9 @@ void ieTile::onAdded(const std::shared_ptr<ieEvent>& event)
     ieSprite::onAdded(event);
     glm::ivec2 textureSize = ieSprite::getSpriteElementTextureSize(m_tilesetImageName);
     ieDisplayObject::setTexCoordsFromFrame(m_tileTexCoordFrame, textureSize);
+    /*static ui32 index = 0;
+    ieSprite::saveToFile("image" + std::to_string(index) + ".png");
+    index++;*/
 }
 
 void ieTile::onRemoved(const std::shared_ptr<ieEvent>& event)

@@ -78,6 +78,8 @@ protected:
     ieSharedMask getActiveMaskWithStateId(const std::string& name);
     ieSharedMask getActiveMaskWithElementId(const std::string& name);
     
+    void saveToFile(const std::string& imageFilename);
+    
     virtual void setMask(const std::shared_ptr<ieMask>& mask);
     
     virtual void gotoAndStop(ui32 index);

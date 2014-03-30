@@ -15,38 +15,30 @@
 		21BBF9E618E580D30060CCC1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E518E580D30060CCC1 /* QuartzCore.framework */; };
 		21BBF9E818E580E00060CCC1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E718E580E00060CCC1 /* Cocoa.framework */; };
 		21BBF9EA18E580E60060CCC1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9E918E580E60060CCC1 /* OpenGL.framework */; };
-		21BBFA0818E584EA0060CCC1 /* libieCore-ios_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */; };
-		21BBFA0B18E584F40060CCC1 /* libieCore-osx_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */; };
+		21D6C08D18E8B143001C598C /* libieCore-ios_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D6C08818E8B134001C598C /* libieCore-ios_d.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		21BBFA0218E584D90060CCC1 /* PBXContainerItemProxy */ = {
+		21D6C08718E8B134001C598C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			containerPortal = 21D6C08018E8B128001C598C /* ieCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21D0712A181DA5620019D264;
 			remoteInfo = "ieCore-ios";
 		};
-		21BBFA0418E584D90060CCC1 /* PBXContainerItemProxy */ = {
+		21D6C08918E8B134001C598C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			containerPortal = 21D6C08018E8B128001C598C /* ieCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 21853415181EFC6200315CBB;
 			remoteInfo = "ieCore-osx";
 		};
-		21BBFA0618E584DF0060CCC1 /* PBXContainerItemProxy */ = {
+		21D6C08B18E8B13A001C598C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+			containerPortal = 21D6C08018E8B128001C598C /* ieCore.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 21D07129181DA5620019D264;
 			remoteInfo = "ieCore-ios";
-		};
-		21BBFA0918E584F00060CCC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 21853414181EFC6200315CBB;
-			remoteInfo = "ieCore-osx";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -85,7 +77,7 @@
 		21BBF9E518E580D30060CCC1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		21BBF9E718E580E00060CCC1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		21BBF9E918E580E60060CCC1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
-		21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
+		21D6C08018E8B128001C598C /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21BBFA0818E584EA0060CCC1 /* libieCore-ios_d.a in Frameworks */,
+				21D6C08D18E8B143001C598C /* libieCore-ios_d.a in Frameworks */,
 				21BBF99C18E577F70060CCC1 /* Foundation.framework in Frameworks */,
 				21BBF9E418E580BF0060CCC1 /* OpenGLES.framework in Frameworks */,
 				21BBF9E618E580D30060CCC1 /* QuartzCore.framework in Frameworks */,
@@ -104,7 +96,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21BBFA0B18E584F40060CCC1 /* libieCore-osx_d.a in Frameworks */,
 				21BBF9EA18E580E60060CCC1 /* OpenGL.framework in Frameworks */,
 				21BBF9E818E580E00060CCC1 /* Cocoa.framework in Frameworks */,
 				21BBF9D418E579220060CCC1 /* Foundation.framework in Frameworks */,
@@ -150,7 +141,7 @@
 		21BBF99D18E577F70060CCC1 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */,
+				21D6C08018E8B128001C598C /* ieCore.xcodeproj */,
 			);
 			name = Libraries;
 			path = ieEngine;
@@ -167,11 +158,11 @@
 			name = Sources;
 			sourceTree = "<group>";
 		};
-		21BBF9FE18E584D90060CCC1 /* Products */ = {
+		21D6C08318E8B134001C598C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */,
-				21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */,
+				21D6C08818E8B134001C598C /* libieCore-ios_d.a */,
+				21D6C08A18E8B134001C598C /* libieCore-osx_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,7 +181,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				21BBFA0718E584DF0060CCC1 /* PBXTargetDependency */,
+				21D6C08C18E8B13A001C598C /* PBXTargetDependency */,
 			);
 			name = "ieEngine-ios";
 			productName = ieEngine;
@@ -208,7 +199,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				21BBFA0A18E584F00060CCC1 /* PBXTargetDependency */,
 			);
 			name = "ieEngine-osx";
 			productName = ieEngine;
@@ -236,8 +226,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 21BBF9FE18E584D90060CCC1 /* Products */;
-					ProjectRef = 21BBF9FB18E584D40060CCC1 /* ieCore.xcodeproj */;
+					ProductGroup = 21D6C08318E8B134001C598C /* Products */;
+					ProjectRef = 21D6C08018E8B128001C598C /* ieCore.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -249,18 +239,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		21BBFA0318E584D90060CCC1 /* libieCore-ios_d.a */ = {
+		21D6C08818E8B134001C598C /* libieCore-ios_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libieCore-ios_d.a";
-			remoteRef = 21BBFA0218E584D90060CCC1 /* PBXContainerItemProxy */;
+			remoteRef = 21D6C08718E8B134001C598C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		21BBFA0518E584D90060CCC1 /* libieCore-osx_d.a */ = {
+		21D6C08A18E8B134001C598C /* libieCore-osx_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libieCore-osx_d.a";
-			remoteRef = 21BBFA0418E584D90060CCC1 /* PBXContainerItemProxy */;
+			remoteRef = 21D6C08918E8B134001C598C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -285,15 +275,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		21BBFA0718E584DF0060CCC1 /* PBXTargetDependency */ = {
+		21D6C08C18E8B13A001C598C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ieCore-ios";
-			targetProxy = 21BBFA0618E584DF0060CCC1 /* PBXContainerItemProxy */;
-		};
-		21BBFA0A18E584F00060CCC1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ieCore-osx";
-			targetProxy = 21BBFA0918E584F00060CCC1 /* PBXContainerItemProxy */;
+			targetProxy = 21D6C08B18E8B13A001C598C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -371,6 +356,7 @@
 		21BBF9BC18E577F80060CCC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMPRESS_PNG_FILES = NO;
 				DSTROOT = /tmp/ieEngine.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -399,6 +385,7 @@
 		21BBF9BD18E577F80060CCC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMPRESS_PNG_FILES = NO;
 				DSTROOT = /tmp/ieEngine.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";

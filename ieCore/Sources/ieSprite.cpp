@@ -9,6 +9,7 @@
 #include "ieSprite.h"
 #include "ieColor.h"
 #include "ieTexture.h"
+#include "ieImage.h"
 #include "ieShader.h"
 #include "ieSequence.h"
 #include "ieMask.h"
@@ -16,6 +17,13 @@
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieResourceAccessor.h"
+
+#if defined(__IOS__)
+
+#include <UIKit/UIKit.h>
+#include <QuartzCore/QuartzCore.h>
+
+#endif
 
 ieSprite::ieSprite(const glm::vec4& frame,
                    const std::shared_ptr<ieColor>& color) :
@@ -163,6 +171,39 @@ ieSharedSprite ieSprite::getActiveSprite(const std::string& name)
 {
     const auto& iterator = m_activeSpriteElements.find(name);
     return iterator != m_activeSpriteElements.end() ? iterator->second : nullptr;
+}
+
+void ieSprite::saveToFile(const std::string &imageFilename)
+{
+#if defined(__IOS__)
+    
+    const ui8 *imageData = m_texture->getImage()->getData();
+    ui32 imageDataLength = m_texture->getImage()->getWidth() *
+    m_texture->getImage()->getHeight() * 4;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, imageData, imageDataLength, NULL);
+    
+    ui32 bitsPerComponent = 8;
+    ui32 bitsPerPixel = 32;
+    ui32 bytesPerRow = 4 * m_texture->getWidth();
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    CGImageRef imageRef = CGImageCreate(m_texture->getImage()->getWidth(),
+                                        m_texture->getImage()->getHeight(),
+                                        bitsPerComponent,
+                                        bitsPerPixel,
+                                        bytesPerRow,
+                                        colorSpaceRef,
+                                        bitmapInfo,
+                                        provider, NULL, NO, renderingIntent);
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
+                          [NSString stringWithCString:imageFilename.c_str()
+                                             encoding:[NSString defaultCStringEncoding]]];
+    [UIImagePNGRepresentation(image) writeToFile:imageFilePath atomically:YES];
+    
+#endif
 }
 
 ieSharedMask ieSprite::createUniqueMask(const std::string &name)

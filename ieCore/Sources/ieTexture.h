@@ -11,6 +11,7 @@
 
 #include "ieResource.h"
 
+class ieImage;
 class ieTexture : public ieResource
 {
 private:
@@ -20,6 +21,7 @@ protected:
     ui32 m_texture;
     ui32 m_width;
     ui32 m_height;
+    std::shared_ptr<ieImage> m_image;
     
 public:
     
@@ -30,6 +32,7 @@ public:
     const ui32 getTexture(void) const;
     const ui32 getWidth(void) const;
     const ui32 getHeight(void) const;
+    std::shared_ptr<ieImage> getImage(void) const;
 };
 
 #endif
