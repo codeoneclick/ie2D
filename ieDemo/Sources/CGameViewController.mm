@@ -74,11 +74,12 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("dragon.json");
+    path.append("animation_02.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(350, 150));
-    self.sprite4->setBatched(true);
+    self.sprite4->setBatched(false);
+    self.sprite4->setVisible(true);
     
     /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
@@ -101,7 +102,7 @@
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0.33 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:0.0 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -164,13 +165,19 @@
     }
     rotation += 5.5f;
     
-    static ui32 index = 0;
-    self.sprite4->gotoAndStop(index);
-    self.sprite3->gotoAndStop(index);
-    index++;
-    if(index >= 3)
+    static ui32 index1 = 0;
+    static ui32 index2 = 0;
+    self.sprite4->gotoAndStop(index1);
+    self.sprite3->gotoAndStop(index2);
+    index1++;
+    index2++;
+    if(index1 >= 465)
     {
-        index = 0;
+        index1 = 0;
+    }
+    if(index2 >= 3)
+    {
+        index2 = 0;
     }
 }
 

@@ -292,6 +292,30 @@ glm::ivec2 ieSprite::getSpriteElementTextureSize(const std::string& imageFilenam
                       spriteElementTextureHeight);
 }
 
+ieSpriteElementTransformation ieSprite::getPreviosState(const std::string& name, i32 index)
+{
+    if(index >= static_cast<i32>(m_sequence->getAnimationFrameCount()))
+    {
+        index = m_sequence->getAnimationFrameCount() - 1;
+    }
+    if(index < 0)
+    {
+        ieSpriteElementTransformation transformation;
+        transformation.m_alpha = 0.0;
+        transformation.m_index = 0;
+        transformation.m_maskName = "";
+        transformation.m_matrixTransformation = glm::mat4(1.0);
+        return transformation;
+    }
+    ieSpriteAnimationFrame spriteAnimationFrame = m_spriteAnimationFrames[index];
+    if(spriteAnimationFrame.find(name) != spriteAnimationFrame.end())
+    {
+        return spriteAnimationFrame.find(name)->second;
+    }
+    ieSpriteElementTransformation transformation = ieSprite::getPreviosState(name, --index);
+    return transformation;
+}
+
 void ieSprite::createSpriteElements(void)
 {
     std::for_each(m_sequence->getSequenceElements().begin(),
@@ -370,6 +394,15 @@ void ieSprite::gotoAndStop(ui32 index)
 {
     if(index < m_sequence->getAnimationFrameCount())
     {
+        std::for_each(m_activeSpriteElements.begin(),
+                      m_activeSpriteElements.end(),
+                      [this, index](ieSpriteElementPair spriteElementPair)
+                      {
+                          i32 previosIndex = index - 1;
+                          ieSpriteElementTransformation transformation = ieSprite::getPreviosState(spriteElementPair.first, previosIndex);
+                          spriteElementPair.second->setActive(transformation.m_alpha != 0.0);
+                      });
+        
         ieSpriteAnimationFrame spriteAnimationFrame = m_spriteAnimationFrames[index];
         std::for_each(spriteAnimationFrame.begin(),
                       spriteAnimationFrame.end(),
@@ -388,7 +421,7 @@ void ieSprite::gotoAndStop(ui32 index)
                                   assert(sequenceAnimatedElementMaskIterator != m_sequence->getSequenceAnimatedElementsMasks().end());
                                   std::string sequenceElementId = sequenceAnimatedElementMaskIterator->second;
                                   ieSharedMask mask = ieSprite::getActiveMaskWithElementId(sequenceElementId);
-                                  mask->setActive(spriteElementTransformation.m_alpha != 0.0f);
+                                  mask->setActive(spriteElementTransformation.m_alpha != 0.0);
                                   mask->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                                   isContinue = true;
                               } else {
@@ -408,7 +441,7 @@ void ieSprite::gotoAndStop(ui32 index)
                               } else {
                                   activeSprite->setMask(nullptr);
                               }
-                              activeSprite->setActive(spriteElementTransformation.m_alpha != 0.0f);
+                              activeSprite->setActive(spriteElementTransformation.m_alpha != 0.0);
                               activeSprite->m_externalTransformation = spriteElementTransformation.m_matrixTransformation;
                               activeSprite->setZIndex(spriteElementTransformation.m_index);
                           }

@@ -77,6 +77,7 @@ protected:
     ieSharedMask createUniqueMask(const std::string& name);
     ieSharedMask getActiveMaskWithStateId(const std::string& name);
     ieSharedMask getActiveMaskWithElementId(const std::string& name);
+    ieSpriteElementTransformation getPreviosState(const std::string& name, i32 index);
     
     void saveToFile(const std::string& imageFilename);
     
