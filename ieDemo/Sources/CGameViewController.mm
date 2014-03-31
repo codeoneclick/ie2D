@@ -65,12 +65,12 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("animation_02.json");
+    path.append("human_01.json");
     self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(250, 250));
-    self.sprite3->setScale(glm::vec2(0.5f, 0.5f));
-    self.sprite3->setBatched(false);
+    self.sprite3->setScale(glm::vec2(1.5f, 1.5f));
+    self.sprite3->setBatched(true);
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
@@ -80,7 +80,7 @@
     self.sprite4->setPosition(glm::vec2(350, 150));
     self.sprite4->setBatched(true);
     
-    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
     path.append("leather_armor.png");
     std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(128, 128));
@@ -94,14 +94,14 @@
         indexX++;
         indexY = indexX >= 6 ? indexY + 1 : indexY;
         indexX = indexX >= 6 ? 0 : indexX;
-    }
+    }*/
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0.1 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:0.33 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -168,7 +168,7 @@
     self.sprite4->gotoAndStop(index);
     self.sprite3->gotoAndStop(index);
     index++;
-    if(index >= 8)
+    if(index >= 3)
     {
         index = 0;
     }

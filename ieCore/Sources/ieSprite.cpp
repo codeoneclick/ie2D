@@ -175,28 +175,43 @@ ieSharedSprite ieSprite::getActiveSprite(const std::string& name)
 
 void ieSprite::saveToFile(const std::string &imageFilename)
 {
+    m_stage->drawOffscreenStart(m_frame.z, m_frame.w);
+    bool isBatched = ieSprite::isBatched();
+    glm::vec2 position = ieSprite::getPosition();
+    ieSprite::setBatched(false);
+    ieSprite::setPosition(glm::vec2(0.0, 0.0));
+    ieSprite::onUpdate(nullptr);
+    ieSprite::onDraw(nullptr);
+    ieSprite::setBatched(isBatched);
+    ieSprite::setPosition(position);
+    ieSprite::onUpdate(nullptr);
+    
+    ui32 rawdataSize = static_cast<ui32>(m_frame.z) * static_cast<ui32>(m_frame.w) * 4;
+    ui8 *rawdata = new ui8[rawdataSize];
+    glReadPixels(0, 0, m_frame.z, m_frame.w, GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+    m_stage->drawOffscreenEnd();
+
 #if defined(__IOS__)
     
-    const ui8 *imageData = m_texture->getImage()->getData();
-    ui32 imageDataLength = m_texture->getImage()->getWidth() *
-    m_texture->getImage()->getHeight() * 4;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, imageData, imageDataLength, NULL);
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
     
     ui32 bitsPerComponent = 8;
     ui32 bitsPerPixel = 32;
-    ui32 bytesPerRow = 4 * m_texture->getWidth();
+    ui32 bytesPerRow = 4 * m_frame.z;
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
     CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
     CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-    CGImageRef imageRef = CGImageCreate(m_texture->getImage()->getWidth(),
-                                        m_texture->getImage()->getHeight(),
+    CGImageRef imageRef = CGImageCreate(m_frame.z,
+                                        m_frame.w,
                                         bitsPerComponent,
                                         bitsPerPixel,
                                         bytesPerRow,
                                         colorSpaceRef,
                                         bitmapInfo,
                                         provider, NULL, NO, renderingIntent);
-    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    UIImage *image = [UIImage imageWithCGImage:imageRef
+                                         scale: 1.0
+                                   orientation:UIImageOrientationDown];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
                           [NSString stringWithCString:imageFilename.c_str()
@@ -204,6 +219,7 @@ void ieSprite::saveToFile(const std::string &imageFilename)
     [UIImagePNGRepresentation(image) writeToFile:imageFilePath atomically:YES];
     
 #endif
+    delete[] rawdata;
 }
 
 ieSharedMask ieSprite::createUniqueMask(const std::string &name)

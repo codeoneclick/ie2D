@@ -23,6 +23,10 @@ protected:
     ui32 m_colorAttachment;
     ui32 m_depthAttachment;
     
+    ui32 m_offscreenFrameBuffer;
+    ui32 m_offscreenColorAttachment;
+    ui32 m_offscreenDepthAttachment;
+    
     void createFBO(ui32 width, ui32 height);
     
     virtual void onResize(const std::shared_ptr<ieEvent>& event);
@@ -39,6 +43,9 @@ public:
     
     ieStage(const glm::vec4& frame);
     virtual ~ieStage(void);
+    
+    void drawOffscreenStart(ui32 width, ui32 height);
+    void drawOffscreenEnd(void);
 };
 
 #endif

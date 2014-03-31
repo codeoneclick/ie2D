@@ -12,6 +12,7 @@
 #include "ieBatchMgr.h"
 #include "ieShader.h"
 #include "ieColor.h"
+#include "ieCamera.h"
 
 ieStage::ieStage(const glm::vec4& frame) :
 ieDisplayObjectContainer(frame),
@@ -128,6 +129,59 @@ void ieStage::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
     ieDisplayObjectContainer::onRemoved(event);
     ieStage::removeEventListener(kEVENT_ON_RESIZE, m_functionOnResize);
+}
+
+void ieStage::drawOffscreenStart(ui32 width, ui32 height)
+{
+    glGenTextures(1, &m_offscreenColorAttachment);
+    glBindTexture(GL_TEXTURE_2D, m_offscreenColorAttachment);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+                 width,
+                 height,
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    
+    glGenRenderbuffers(1, &m_offscreenDepthAttachment);
+    glBindRenderbuffer(GL_RENDERBUFFER, m_offscreenDepthAttachment);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8_OES, width, height);
+    
+    glGenFramebuffers(1, &m_offscreenFrameBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_offscreenFrameBuffer);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_offscreenColorAttachment, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_offscreenDepthAttachment);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_offscreenDepthAttachment);
+    assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, m_offscreenFrameBuffer);
+    glViewport(0, 0, width, height);
+    glClearColor(0.5, 0.5, 0.5, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT |
+            GL_DEPTH_BUFFER_BIT |
+            GL_STENCIL_BUFFER_BIT);
+    m_camera->onResize(width, height);
+}
+
+void ieStage::drawOffscreenEnd(void)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
+    glViewport(0, 0, m_frame.z, m_frame.w);
+    m_camera->onResize(m_frame.z, m_frame.w);
+    
+    if(m_offscreenFrameBuffer != 0)
+    {
+        glDeleteFramebuffers(1, &m_offscreenFrameBuffer);
+    }
+    if(m_offscreenColorAttachment != 0)
+    {
+        glDeleteTextures(1, &m_offscreenColorAttachment);
+    }
+    if(m_offscreenDepthAttachment != 0)
+    {
+        glDeleteRenderbuffers(1, &m_offscreenDepthAttachment);
+    }
 }
 
 

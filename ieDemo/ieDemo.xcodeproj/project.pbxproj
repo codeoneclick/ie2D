@@ -18,6 +18,9 @@
 		21ADFCCD18DAC34F002B603D /* animation_021.png in Resources */ = {isa = PBXBuildFile; fileRef = 21ADFCCB18DAC34F002B603D /* animation_021.png */; };
 		21BBF9F818E583800060CCC1 /* libieEngine-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBF9F318E583290060CCC1 /* libieEngine-ios.a */; };
 		21BBFA0D18E586BE0060CCC1 /* isometric_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBFA0C18E586BE0060CCC1 /* isometric_map.png */; };
+		21BBFA1D18E962CC0060CCC1 /* libieCore-ios_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BBFA1718E962BF0060CCC1 /* libieCore-ios_d.a */; };
+		21BBFA2818E997C80060CCC1 /* human_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 21BBFA2618E997C80060CCC1 /* human_01.json */; };
+		21BBFA2918E997C80060CCC1 /* human_011.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBFA2718E997C80060CCC1 /* human_011.png */; };
 		21D070C5181D9D460019D264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C4181D9D460019D264 /* Foundation.framework */; };
 		21D070C7181D9D460019D264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C6181D9D460019D264 /* CoreGraphics.framework */; };
 		21D070C9181D9D460019D264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D070C8181D9D460019D264 /* UIKit.framework */; };
@@ -53,6 +56,27 @@
 			remoteGlobalIDString = 21BBF99718E577F70060CCC1;
 			remoteInfo = "ieEngine-ios";
 		};
+		21BBFA1618E962BF0060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21D0712A181DA5620019D264;
+			remoteInfo = "ieCore-ios";
+		};
+		21BBFA1818E962BF0060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21853415181EFC6200315CBB;
+			remoteInfo = "ieCore-osx";
+		};
+		21BBFA1B18E962C60060CCC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 21D07129181DA5620019D264;
+			remoteInfo = "ieCore-ios";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +91,9 @@
 		21ADFCCB18DAC34F002B603D /* animation_021.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animation_021.png; path = ../ieBundle/animation_021.png; sourceTree = "<group>"; };
 		21BBF9EC18E583280060CCC1 /* ieEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieEngine.xcodeproj; path = ../ieEngine/ieEngine.xcodeproj; sourceTree = "<group>"; };
 		21BBFA0C18E586BE0060CCC1 /* isometric_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = isometric_map.png; path = ../ieBundle/isometric_map.png; sourceTree = "<group>"; };
+		21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ieCore.xcodeproj; path = ../ieCore/ieCore.xcodeproj; sourceTree = "<group>"; };
+		21BBFA2618E997C80060CCC1 /* human_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = human_01.json; path = ../ieBundle/human_01.json; sourceTree = "<group>"; };
+		21BBFA2718E997C80060CCC1 /* human_011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = human_011.png; path = ../ieBundle/human_011.png; sourceTree = "<group>"; };
 		21D070C1181D9D460019D264 /* ieDemo_d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ieDemo_d.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D070C4181D9D460019D264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21D070C6181D9D460019D264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21BBFA1D18E962CC0060CCC1 /* libieCore-ios_d.a in Frameworks */,
 				21BBF9F818E583800060CCC1 /* libieEngine-ios.a in Frameworks */,
 				21D07252181DAEA60019D264 /* OpenGLES.framework in Frameworks */,
 				21D07250181DAEA00019D264 /* QuartzCore.framework in Frameworks */,
@@ -108,6 +136,15 @@
 			children = (
 				21BBF9F318E583290060CCC1 /* libieEngine-ios.a */,
 				21BBF9F518E583290060CCC1 /* libieEngine-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21BBFA1218E962BE0060CCC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21BBFA1718E962BF0060CCC1 /* libieCore-ios_d.a */,
+				21BBFA1918E962BF0060CCC1 /* libieCore-osx_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +207,7 @@
 		21D070F4181DA09B0019D264 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */,
 				21BBF9EC18E583280060CCC1 /* ieEngine.xcodeproj */,
 			);
 			name = Libraries;
@@ -178,6 +216,8 @@
 		21D07279181DB33E0019D264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21BBFA2618E997C80060CCC1 /* human_01.json */,
+				21BBFA2718E997C80060CCC1 /* human_011.png */,
 				21D6C06B18E85259001C598C /* leather_armor.png */,
 				21BBFA0C18E586BE0060CCC1 /* isometric_map.png */,
 				21ADFCCA18DAC34F002B603D /* animation_02.json */,
@@ -208,6 +248,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				21BBFA1C18E962C60060CCC1 /* PBXTargetDependency */,
 				21BBF9F718E583730060CCC1 /* PBXTargetDependency */,
 			);
 			name = ieDemo;
@@ -241,6 +282,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 21BBFA1218E962BE0060CCC1 /* Products */;
+					ProjectRef = 21BBFA1118E962BE0060CCC1 /* ieCore.xcodeproj */;
+				},
+				{
 					ProductGroup = 21BBF9ED18E583280060CCC1 /* Products */;
 					ProjectRef = 21BBF9EC18E583280060CCC1 /* ieEngine.xcodeproj */;
 				},
@@ -267,6 +312,20 @@
 			remoteRef = 21BBF9F418E583290060CCC1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		21BBFA1718E962BF0060CCC1 /* libieCore-ios_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libieCore-ios_d.a";
+			remoteRef = 21BBFA1618E962BF0060CCC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		21BBFA1918E962BF0060CCC1 /* libieCore-osx_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libieCore-osx_d.a";
+			remoteRef = 21BBFA1818E962BF0060CCC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -274,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21BBFA2818E997C80060CCC1 /* human_01.json in Resources */,
 				21BBFA0D18E586BE0060CCC1 /* isometric_map.png in Resources */,
 				21ADFCC118D8F09E002B603D /* animation_011.png in Resources */,
 				212B8C8E18C4E60200372655 /* 41.png in Resources */,
@@ -283,6 +343,7 @@
 				21DE956118C90D1C0075488D /* dragon1.png in Resources */,
 				21DE956018C90D1C0075488D /* dragon.json in Resources */,
 				21FC83B21887D5E4006AB4B4 /* CGameViewController.xib in Resources */,
+				21BBFA2918E997C80060CCC1 /* human_011.png in Resources */,
 				21D6C06C18E85259001C598C /* leather_armor.png in Resources */,
 				212B8C8D18C4E60200372655 /* 4.json in Resources */,
 				2109422718B1605200C86176 /* _e01_move_18.png in Resources */,
@@ -310,6 +371,11 @@
 			isa = PBXTargetDependency;
 			name = "ieEngine-ios";
 			targetProxy = 21BBF9F618E583730060CCC1 /* PBXContainerItemProxy */;
+		};
+		21BBFA1C18E962C60060CCC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ieCore-ios";
+			targetProxy = 21BBFA1B18E962C60060CCC1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
