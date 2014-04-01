@@ -157,7 +157,7 @@ void ieStage::drawOffscreenStart(ui32 width, ui32 height)
     
     glBindFramebuffer(GL_FRAMEBUFFER, m_offscreenFrameBuffer);
     glViewport(0, 0, width, height);
-    glClearColor(0.5, 0.5, 0.5, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT |
             GL_DEPTH_BUFFER_BIT |
             GL_STENCIL_BUFFER_BIT);

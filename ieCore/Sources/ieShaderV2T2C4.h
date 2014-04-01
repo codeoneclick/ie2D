@@ -37,13 +37,13 @@ static const char* ieShaderV2T2C4_frag = STRING_SHADER
  
  void main(void)
 {
-    gl_FragColor = texture2D(uniform_sampler_01, varying_texcoord) * varying_color;
-    /*if (color.a > 0.1)
+    lowp vec4 color = texture2D(uniform_sampler_01, varying_texcoord) * varying_color;
+    if (color.a > 0.1)
     {
         gl_FragColor = color;
     } else {
         discard;
-    }*/
+    }
 }
 );
 

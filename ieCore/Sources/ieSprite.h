@@ -77,7 +77,7 @@ protected:
     ieSharedMask createUniqueMask(const std::string& name);
     ieSharedMask getActiveMaskWithStateId(const std::string& name);
     ieSharedMask getActiveMaskWithElementId(const std::string& name);
-    ieSpriteElementTransformation getPreviosState(const std::string& name, i32 index);
+    const ieSpriteElementTransformation* getPreviosState(const std::string& name, i32 index);
     
     void saveToFile(const std::string& imageFilename);
     
@@ -91,6 +91,8 @@ public:
     ieSprite(const glm::vec4& frame,
              const std::string& filename,
              const std::shared_ptr<ieColor>& color = nullptr);
+    
+    virtual void setVisible(bool value);
     
     virtual ~ieSprite(void);
 };

@@ -65,7 +65,7 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("human_01.json");
+    path.append("human_02.json");
     self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(250, 250));
@@ -74,7 +74,7 @@
     
     path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
-    path.append("animation_02.json");
+    path.append("animation_01.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
     transition->addChild(self.sprite4);
     self.sprite4->setPosition(glm::vec2(350, 150));
@@ -102,7 +102,7 @@
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0.0 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:0.5 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -171,11 +171,11 @@
     self.sprite3->gotoAndStop(index2);
     index1++;
     index2++;
-    if(index1 >= 465)
+    if(index1 >= 65)
     {
         index1 = 0;
     }
-    if(index2 >= 3)
+    if(index2 >= 11)
     {
         index2 = 0;
     }
