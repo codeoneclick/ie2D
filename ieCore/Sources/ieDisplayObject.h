@@ -26,7 +26,7 @@ class ieDisplayObjectContainer;
 class ieDisplayObject :
 public ieIBitmapDrawable,
 public ieEventDispatcher,
-public virtual ieMaterial
+public ieIMaterial
 {
 private:
     
@@ -38,8 +38,7 @@ private:
     ieEventDispatcherFunctionShared m_functionOnAdded;
     ieEventDispatcherFunctionShared m_functionOnRemoved;
     
-    std::shared_ptr<ieShape> m_shape;
-    std::shared_ptr<ieShader> m_shader;
+    ieSharedShape m_shape;
     
     friend class ieMask;
     friend class ieDisplayObjectContainer;

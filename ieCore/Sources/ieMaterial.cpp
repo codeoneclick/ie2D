@@ -11,6 +11,9 @@
 #include "ieTexture.h"
 #include "ieColor.h"
 
+#pragma mark -
+#pragma mark ieMaterialCachedParameters
+
 class ieMaterialCachedParameters
 {
 private:
@@ -29,9 +32,9 @@ protected:
     bool m_isDepthTest;
     bool m_isDepthMask;
     
-    std::shared_ptr<ieShader> m_shader;
-    ieColor m_color;
-    std::array<std::shared_ptr<ieTexture>, E_SHADER_SAMPLER_MAX> m_textures;
+    ieSharedShader m_shader;
+    ieSharedColor m_color;
+    std::array<ieSharedTexture, E_SHADER_SAMPLER_MAX> m_textures;
     
 public:
     
@@ -41,15 +44,16 @@ public:
 
 ieMaterialCachedParameters::ieMaterialCachedParameters(void) :
 m_shader(nullptr),
-m_color(255, 255, 255, 255)
+m_color(std::make_shared<ieColor>(255, 255, 255, 255))
 {
-    std::for_each(m_textures.begin(), m_textures.end(), [](std::shared_ptr<ieTexture>& iterator){
+    std::for_each(m_textures.begin(), m_textures.end(), [](ieSharedTexture& iterator){
         iterator = nullptr;
     });
 }
 
 ieMaterialCachedParameters::~ieMaterialCachedParameters(void)
 {
+    
 }
 
 std::shared_ptr<ieMaterialCachedParameters> ieMaterial::m_cachedParameters = nullptr;
@@ -67,15 +71,22 @@ std::shared_ptr<ieMaterialCachedParameters> ieMaterial::getCachedParameters(void
     return m_cachedParameters;
 }
 
-ieMaterial::ieMaterial(void)
+#pragma mark -
+#pragma mark ieMaterial - constructor/destructor
+
+ieMaterial::ieMaterial(void) :
+m_parameters(std::make_shared<ieMaterialCachedParameters>())
 {
-    m_parameters = std::make_shared<ieMaterialCachedParameters>();
+    
 }
 
 ieMaterial::~ieMaterial(void)
 {
     
 }
+
+#pragma mark -
+#pragma mark ieMaterial - getters
 
 std::string ieMaterial::getBatchGUID(void) const
 {
@@ -101,16 +112,28 @@ bool ieMaterial::isCulling(void) const
     return m_parameters->m_isCulling;
 }
 
-GLenum ieMaterial::getCullingMode(void) const
-{
-    assert(m_parameters != nullptr);
-    return m_parameters->m_cullingMode;
-}
-
 bool ieMaterial::isBlending(void) const
 {
     assert(m_parameters != nullptr);
     return m_parameters->m_isBlending;
+}
+
+bool ieMaterial::isDepthTest(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isDepthTest;
+}
+
+bool ieMaterial::isDepthMask(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_isDepthMask;
+}
+
+GLenum ieMaterial::getCullingMode(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_cullingMode;
 }
 
 GLenum ieMaterial::getBlendingFunctionSource(void) const
@@ -125,17 +148,26 @@ GLenum ieMaterial::getBlendingFunctionDestination(void) const
     return m_parameters->m_blendingFunctionDestination;
 }
 
-bool ieMaterial::isDepthTest(void) const
+ieSharedShader ieMaterial::getShader(void) const
 {
     assert(m_parameters != nullptr);
-    return m_parameters->m_isDepthTest;
+    return m_parameters->m_shader;
 }
 
-bool ieMaterial::isDepthMask(void) const
+ieSharedTexture ieMaterial::getTexture(E_SHADER_SAMPLER sampler) const
 {
     assert(m_parameters != nullptr);
-    return m_parameters->m_isDepthMask;
+    return m_parameters->m_textures[sampler];
 }
+
+ieSharedColor ieMaterial::getColor(void) const
+{
+    assert(m_parameters != nullptr);
+    return m_parameters->m_color;
+}
+
+#pragma mark -
+#pragma mark ieMaterial - setters
 
 void ieMaterial::setCulling(bool value)
 {
@@ -179,23 +211,27 @@ void ieMaterial::setDepthMask(bool value)
     m_parameters->m_isDepthMask = value;
 }
 
-void ieMaterial::setShader(const std::shared_ptr<ieShader>& shader)
+void ieMaterial::setShader(ieSharedShaderRef shader)
 {
     assert(m_parameters != nullptr);
     m_parameters->m_shader = shader;
 }
 
-std::shared_ptr<ieShader> ieMaterial::getShader(void) const
-{
-    return m_parameters->m_shader;
-}
-
-void ieMaterial::setTexture(const std::shared_ptr<ieTexture>& texture,
+void ieMaterial::setTexture(ieSharedTextureRef texture,
                             E_SHADER_SAMPLER sampler)
 {
     assert(m_parameters != nullptr);
     m_parameters->m_textures.at(sampler) = texture;
 }
+
+void ieMaterial::setColor(ieSharedColorRef color)
+{
+    assert(m_parameters != nullptr);
+    m_parameters->m_color = color;
+}
+
+#pragma mark -
+#pragma mark ieMaterial - functions
 
 void ieMaterial::bind(void) const
 {

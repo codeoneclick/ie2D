@@ -19,7 +19,6 @@
 
 ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
 m_shape(nullptr),
-m_shader(nullptr),
 m_resourceAccessor(nullptr),
 m_batchMgr(nullptr),
 m_stage(nullptr),
@@ -217,12 +216,12 @@ void ieDisplayObject::setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, con
 void ieDisplayObject::setupShader(const std::string& vsSourceCode,
                                   const std::string& fsSourceCode)
 {
-    if(m_shader != nullptr)
+    if(ieMaterial::getShader() != nullptr)
     {
-        m_shader->removeOwner(ieObject::shared_from_this());
+        ieMaterial::getShader()->removeOwner(ieMaterial::shared_from_this());
     }
-    m_shader = m_resourceAccessor->getShader(vsSourceCode, fsSourceCode, ieObject::shared_from_this());
-    ieMaterial::setShader(m_shader);
+    std::shared_ptr<ieShader> shader = m_resourceAccessor->getShader(vsSourceCode, fsSourceCode, ieMaterial::shared_from_this());
+    ieMaterial::setShader(shader);
 }
 
 std::shared_ptr<ieDisplayObjectContainer> ieDisplayObject::getParent(void) const

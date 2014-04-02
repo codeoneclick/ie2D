@@ -561,6 +561,7 @@
 		2156BB3318C278EE009A13AC /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		2156BB3418C278EE009A13AC /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
 		2156BB3518C278EE009A13AC /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		2172A01518EC9ED100D4D317 /* iePredefined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iePredefined.h; path = Sources/iePredefined.h; sourceTree = "<group>"; };
 		217317491821AE6700FF3D1E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		21853415181EFC6200315CBB /* libieCore-osx_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libieCore-osx_d.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C343D718A8D59B0041EF47 /* ieShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieShader.cpp; path = Sources/ieShader.cpp; sourceTree = "<group>"; };
@@ -1399,6 +1400,7 @@
 			children = (
 				21EBB4B9189FD683003CB322 /* ieCommon.h */,
 				21EBB50118A2487E003CB322 /* ieEnums.h */,
+				2172A01518EC9ED100D4D317 /* iePredefined.h */,
 			);
 			name = ieCommon;
 			sourceTree = "<group>";
