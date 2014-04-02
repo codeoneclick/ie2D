@@ -65,14 +65,15 @@
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("human_02.json");
+    path.append("human_04.json");
     self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
-    self.sprite3->setPosition(glm::vec2(250, 250));
-    self.sprite3->setScale(glm::vec2(1.5f, 1.5f));
+    self.sprite3->setPosition(glm::vec2(0, 0));
+    self.sprite3->setScale(glm::vec2(5.0, 5.0));
     self.sprite3->setBatched(true);
+    self.sprite3->gotoAndPlay(true);
     
-    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
     path.append("animation_01.json");
     self.sprite4 = std::make_shared<ieMovieClip>(glm::vec4(0, 0, 50, 50), path);
@@ -80,6 +81,7 @@
     self.sprite4->setPosition(glm::vec2(350, 150));
     self.sprite4->setBatched(false);
     self.sprite4->setVisible(true);
+    self.sprite4->gotoAndPlay(true);*/
     
     /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
@@ -102,7 +104,7 @@
     [invocation setTarget: self];
     [invocation setSelector:@selector(onTick:)];
     
-    NSTimer *sender = [NSTimer timerWithTimeInterval:0.5 invocation:invocation repeats:YES];
+    NSTimer *sender = [NSTimer timerWithTimeInterval:1.0 / 60.0 invocation:invocation repeats:YES];
     NSRunLoop *runner = [NSRunLoop currentRunLoop];
     [runner addTimer:sender forMode:NSDefaultRunLoopMode];
 }
@@ -165,7 +167,7 @@
     }
     rotation += 5.5f;
     
-    static ui32 index1 = 0;
+    /*static ui32 index1 = 0;
     static ui32 index2 = 0;
     self.sprite4->gotoAndStop(index1);
     self.sprite3->gotoAndStop(index2);
@@ -178,7 +180,7 @@
     if(index2 >= 11)
     {
         index2 = 0;
-    }
+    }*/
 }
 
 @end

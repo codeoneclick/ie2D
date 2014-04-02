@@ -218,9 +218,17 @@ void ieSprite::saveToFile(const std::string &imageFilename)
                                         colorSpaceRef,
                                         bitmapInfo,
                                         provider, NULL, NO, renderingIntent);
-    UIImage *image = [UIImage imageWithCGImage:imageRef
-                                         scale: 1.0
-                                   orientation:UIImageOrientationDown];
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    UIGraphicsBeginImageContext(CGSizeMake(m_frame.z, m_frame.w));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, m_frame.w);
+    CGContextConcatCTM(context, flip);
+    [imageView.layer renderInContext:context];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
                           [NSString stringWithCString:imageFilename.c_str()
@@ -459,9 +467,11 @@ void ieSprite::gotoAndStop(ui32 index)
                           const auto& iterator = currentActiveSprites.find(spriteElementPair.second);
                           if(iterator == currentActiveSprites.end())
                           {
-                              i32 previosIndex = index - 1;
+                              //TODO# : reimplement to increase performance
+                              /*i32 previosIndex = index - 1;
                               const ieSpriteElementTransformation* transformation = ieSprite::getPreviosState(spriteElementPair.first, previosIndex);
-                              spriteElementPair.second->setActive(transformation != nullptr ? transformation->m_alpha != 0.0 : false);
+                              spriteElementPair.second->setActive(transformation != nullptr ? transformation->m_alpha != 0.0 : false);*/
+                              spriteElementPair.second->setActive(false);
                           }
                       });
         ieSprite::sortChildrens();

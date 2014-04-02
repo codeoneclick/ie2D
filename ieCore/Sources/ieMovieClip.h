@@ -25,6 +25,16 @@ protected:
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
     
+    std::string m_animationName;
+    ui32 m_namedAnimationStartFrameIndex;
+    ui32 m_namedAnimationEndFrameIndex;
+    ui32 m_currentAnimationFrameIndex;
+    bool m_isLooped;
+    bool m_isStoped;
+    
+    void invokeAnimation(void);
+    bool gotoNextFrame(void);
+    
 public:
     ieMovieClip(const glm::vec4& frame,
                 const std::string& filename,
@@ -33,6 +43,7 @@ public:
     ~ieMovieClip(void);
     
     void gotoAndStop(ui32 index);
+    void gotoAndPlay(bool isLooped = false, const std::string& animationName = "");
 };
 
 #endif
