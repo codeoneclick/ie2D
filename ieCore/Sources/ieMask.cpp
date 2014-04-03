@@ -66,7 +66,7 @@ void ieMask::onDraw(const std::shared_ptr<ieEvent>& event)
     {
         assert(m_camera != nullptr);
         
-        ieMaterial::bind();
+        m_material->bind();
         
         m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
         m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
@@ -74,7 +74,7 @@ void ieMask::onDraw(const std::shared_ptr<ieEvent>& event)
         m_shape->draw();
         m_shape->unbind(m_shader->getAttributes());
         
-        ieMaterial::unbind();
+        m_material->unbind();
         
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glStencilFunc(GL_EQUAL, 0xFF, 0xFF);
@@ -103,14 +103,14 @@ void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
     m_camera = std::static_pointer_cast<ieCamera>(event->getObjectWithKey("camera"));
     assert(m_camera != nullptr);
     
-    ieMaterial::setBlending(false);
-    ieMaterial::setBlendingFunctionSource(GL_SRC_ALPHA);
-    ieMaterial::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
-    ieMaterial::setCulling(false);
-    ieMaterial::setDepthTest(false);
+    ieDisplayObject::setBlending(false);
+    ieDisplayObject::setBlendingFunctionSource(GL_SRC_ALPHA);
+    ieDisplayObject::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
+    ieDisplayObject::setCulling(false);
+    ieDisplayObject::setDepthTest(false);
     
     m_shader = m_resourceAccessor->getShader(ieShaderV2T2M_vert, ieShaderV2T2M_frag, ieObject::shared_from_this());
-    ieMaterial::setShader(m_shader);
+    ieDisplayObject::setShader(m_shader);
     
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);
@@ -123,6 +123,5 @@ void ieMask::onRemoved(const std::shared_ptr<ieEvent>& event)
     m_shader->removeOwner(ieObject::shared_from_this());
     m_shader = nullptr;
     m_shape = nullptr;
-    ieMaterial::setShader(nullptr);
-
+    ieDisplayObject::setShader(nullptr);
 }

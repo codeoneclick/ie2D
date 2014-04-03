@@ -39,7 +39,6 @@ private:
     ieEventDispatcherFunctionShared m_functionOnRemoved;
     
     ieSharedShape m_shape;
-    ieSharedMaterial m_material;
     
     friend class ieMask;
     friend class ieDisplayObjectContainer;
@@ -50,6 +49,7 @@ protected:
     std::shared_ptr<ieBatchMgr> m_batchMgr;
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
+    ieSharedMaterial m_material;
     
     glm::vec2 m_position;
     f32 m_rotation;

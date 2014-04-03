@@ -10,10 +10,9 @@
 #define __ieCore__ieBatchMgr__
 
 #include "ieObject.h"
+#include "iePredefined.h"
 
 class ieBatch;
-class ieMaterial;
-class ieShape;
 class ieCamera;
 
 class ieBatchMgr : public ieObject
@@ -33,7 +32,7 @@ public:
     void end(void);
     void draw(void);
     
-    void batch(const ieMaterial* material,
+    void batch(ieSharedMaterialRef material,
                const std::shared_ptr<ieShape>& shape,
                const glm::mat4& matrix);
 };

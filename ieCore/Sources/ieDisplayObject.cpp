@@ -19,6 +19,7 @@
 
 ieDisplayObject::ieDisplayObject(const glm::vec4& frame) :
 m_shape(nullptr),
+m_material(std::make_shared<ieMaterial>()),
 m_resourceAccessor(nullptr),
 m_batchMgr(nullptr),
 m_stage(nullptr),
@@ -255,23 +256,25 @@ void ieDisplayObject::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObject::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    assert(m_material != nullptr);
     if(m_visible && m_active)
     {
         if(m_batched)
         {
             assert(m_batchMgr != nullptr);
-            m_batchMgr->batch(this, m_shape, m_localTransformation);
+            m_batchMgr->batch(m_material, m_shape, m_localTransformation);
         } else {
             assert(m_camera != nullptr);
-            ieMaterial::bind();
+            assert(m_material->getShader() != nullptr);
+            m_material->bind();
             
-            m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
-            m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
-            m_shape->bind(m_shader->getAttributes());
+            m_material->getShader()->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
+            m_material->getShader()->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
+            m_shape->bind(m_material->getShader()->getAttributes());
             m_shape->draw();
             
-            ieMaterial::unbind();
-            m_shape->unbind(m_shader->getAttributes());
+            m_material->unbind();
+            m_shape->unbind(m_material->getShader()->getAttributes());
         }
     }
 }
@@ -305,12 +308,12 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     m_camera = std::static_pointer_cast<ieCamera>(event->getObjectWithKey("camera"));
     assert(m_camera != nullptr);
     
-    ieMaterial::setBlending(true);
-    ieMaterial::setBlendingFunctionSource(GL_SRC_ALPHA);
-    ieMaterial::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
-    ieMaterial::setCulling(false);
-    ieMaterial::setDepthTest(false);
-    ieMaterial::setDepthMask(false);
+    ieDisplayObject::setBlending(true);
+    ieDisplayObject::setBlendingFunctionSource(GL_SRC_ALPHA);
+    ieDisplayObject::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
+    ieDisplayObject::setCulling(false);
+    ieDisplayObject::setDepthTest(false);
+    ieDisplayObject::setDepthMask(false);
     
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);
@@ -325,10 +328,9 @@ void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::removeEventListener(kEVENT_ON_ENTER_FRAME, m_functionOnEnterFrame);
     ieDisplayObject::removeEventListener(kEVENT_ON_EXIT_FRAME, m_functionOnExitFrame);
     
-    m_shader->removeOwner(ieObject::shared_from_this());
-    m_shader = nullptr;
+    m_material->getShader()->removeOwner(ieObject::shared_from_this());
+    m_material->setShader(nullptr);
     m_shape = nullptr;
-    ieMaterial::setShader(nullptr);
 }
 
 #pragma mark -

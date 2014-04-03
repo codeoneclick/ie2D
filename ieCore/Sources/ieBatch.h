@@ -10,9 +10,8 @@
 #define __ieCore__ieBatch__
 
 #include "ieCommon.h"
+#include "iePredefined.h"
 
-class ieMaterial;
-class ieShape;
 class ieVertexBuffer;
 class ieIndexBuffer;
 class ieCamera;
@@ -31,20 +30,20 @@ private:
     
 protected:
     
-    const ieMaterial* m_material;
-    std::vector<std::shared_ptr<ieShape>> m_shapes;
+    ieSharedMaterial m_material;
+    std::vector<ieSharedShape> m_shapes;
     std::vector<glm::mat4> m_matrices;
     
 public:
     ieBatch(const std::shared_ptr<ieCamera>& camera,
-            const ieMaterial* material);
+            ieSharedMaterialRef material);
     ~ieBatch(void);
     
     void begin(void);
     void end(void);
     void draw(void);
     
-    void batch(const std::shared_ptr<ieShape>& shape, const glm::mat4& matrix);
+    void batch(ieSharedShapeRef shape, const glm::mat4& matrix);
 };
 
 #endif

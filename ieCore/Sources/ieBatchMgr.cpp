@@ -22,7 +22,7 @@ ieBatchMgr::~ieBatchMgr(void)
     m_batches.clear();
 }
 
-void ieBatchMgr::batch(const ieMaterial* material,
+void ieBatchMgr::batch(const ieSharedMaterialRef material,
                        const std::shared_ptr<ieShape>& shape,
                        const glm::mat4& matrix)
 {

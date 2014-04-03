@@ -21,7 +21,7 @@ m_colorAttachment(0),
 m_depthAttachment(0)
 {
     m_functionOnResize = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onResize, this, std::placeholders::_1));
-    m_color = std::make_shared<ieColor>(0, 0, 0, 255);
+    ieDisplayObject::setColor(std::make_shared<ieColor>(0, 0, 0, 255));
 }
 
 ieStage::~ieStage(void)

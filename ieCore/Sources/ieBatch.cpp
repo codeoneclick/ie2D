@@ -18,7 +18,7 @@ const ui32 kMaxVertices = 65535 / 4; // 16k vertices
 const ui32 kMaxIndices = 65535 / 2;  // 32k indices
 
 ieBatch::ieBatch(const std::shared_ptr<ieCamera>& camera,
-                 const ieMaterial* material) :
+                 ieSharedMaterialRef material) :
 m_material(material),
 m_camera(camera),
 m_numActiveVertices(0),
@@ -88,7 +88,7 @@ void ieBatch::end(void)
     m_indexBuffer->unlock(m_numActiveIndices);
 }
 
-void ieBatch::batch(const std::shared_ptr<ieShape>& shape, const glm::mat4& matrix)
+void ieBatch::batch(ieSharedShapeRef shape, const glm::mat4& matrix)
 {
     m_shapes.push_back(shape);
     m_matrices.push_back(matrix);

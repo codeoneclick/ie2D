@@ -34,7 +34,7 @@ m_imageFilename(""),
 m_sequenceFilename("")
 {
     m_description = "ieSprite";
-    m_color = color;
+    ieDisplayObject::setColor(color);
 }
 
 ieSprite::ieSprite(const glm::vec4& frame,
@@ -44,7 +44,7 @@ ieDisplayObjectContainer(frame),
 m_texture(nullptr)
 {
     m_description = "ieSprite";
-    m_color = color != nullptr ? color : std::make_shared<ieColor>(255, 255, 255, 255);
+    ieDisplayObject::setColor(color != nullptr ? color : std::make_shared<ieColor>(255, 255, 255, 255));
     if(filename.find(".png") != std::string::npos)
     {
         m_imageFilename = filename;
@@ -97,8 +97,8 @@ void ieSprite::onDraw(const std::shared_ptr<ieEvent>& event)
         m_mask->begin(ieSprite::getParent());
         m_mask->onDraw(event);
     }
-    ieMaterial::bind();
-    ieMaterial::setTexture(m_texture, E_SHADER_SAMPLER_01);
+    m_material->bind();
+    ieDisplayObject::setTexture(m_texture, E_SHADER_SAMPLER_01);
     ieDisplayObjectContainer::onDraw(event);
     
     if(m_mask != nullptr) {
