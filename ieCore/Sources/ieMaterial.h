@@ -106,7 +106,7 @@ public:
     void setCulling(bool value);
     void setCullingMode(GLenum value);
     
-    void setBlending(bool value) = 0;
+    void setBlending(bool value);
     void setBlendingFunctionSource(GLenum value);
     void setBlendingFunctionDestination(GLenum value);
     

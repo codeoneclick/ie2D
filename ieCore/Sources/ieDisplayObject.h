@@ -39,6 +39,7 @@ private:
     ieEventDispatcherFunctionShared m_functionOnRemoved;
     
     ieSharedShape m_shape;
+    ieSharedMaterial m_material;
     
     friend class ieMask;
     friend class ieDisplayObjectContainer;
@@ -62,7 +63,6 @@ protected:
     glm::mat4 m_externalTransformation;
     glm::mat4 m_localTransformation;
     
-    std::shared_ptr<ieColor> m_color;
     std::shared_ptr<ieDisplayObjectContainer> m_parent;
     
     bool m_visible;
@@ -106,9 +106,6 @@ public:
     void setPivot(const glm::vec2& pivot);
     glm::vec2 getPivot(void) const;
     
-    void setColor(const std::shared_ptr<ieColor>& color);
-    std::shared_ptr<ieColor> getColor(void) const;
-    
     ui32 getZIndex(void);
     void setZIndex(ui32 zIndex);
     
@@ -121,6 +118,45 @@ public:
     void setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, const glm::ivec2& textureSize);
     
     std::shared_ptr<ieDisplayObjectContainer> getParent(void) const;
+    
+#pragma mark -
+#pragma mark ieIMaterial - setters
+    
+    void setCulling(bool value);
+    void setCullingMode(GLenum value);
+    
+    void setBlending(bool value);
+    void setBlendingFunctionSource(GLenum value);
+    void setBlendingFunctionDestination(GLenum value);
+    
+    void setDepthTest(bool value);
+    void setDepthMask(bool value);
+    
+    void setShader(ieSharedShaderRef shader);
+    
+    void setTexture(ieSharedTextureRef texture,
+                    E_SHADER_SAMPLER sampler);
+    
+    void setColor(ieSharedColorRef color);
+    
+#pragma mark -
+#pragma mark ieIMaterial - getters
+    
+    bool isCulling(void) const;
+    GLenum getCullingMode(void) const;
+    
+    bool isBlending(void) const;
+    GLenum getBlendingFunctionSource(void) const;
+    GLenum getBlendingFunctionDestination(void) const;
+    
+    bool isDepthTest(void) const;
+    bool isDepthMask(void) const;
+    
+    ieSharedShader getShader(void) const;
+    
+    ieSharedTexture getTexture(E_SHADER_SAMPLER sampler) const;
+    
+    ieSharedColor getColor(void) const;
     
     void applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
                      const glm::ivec4& sourceRectangle,

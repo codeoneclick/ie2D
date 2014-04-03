@@ -32,7 +32,6 @@ m_rotation(0.0f),
 m_scale(1.0f, 1.0f),
 m_pivot(0.0f),
 m_texCoord(0.0f, 0.0f, 1.0f, 1.0f),
-m_color(std::make_shared<ieColor>(255, 255, 255, 255)),
 m_visible(true),
 m_active(true),
 m_batched(false),
@@ -92,29 +91,17 @@ void ieDisplayObject::updateShapeTexcoordAttributes(const std::shared_ptr<ieShap
 
 void ieDisplayObject::updateShapeColorAttributes(const std::shared_ptr<ieShape>& shape)
 {
+    assert(m_material != nullptr);
+    
     ieVertex *vertexData = shape->getVertexBuffer()->lock();
     for(ui32 i = 0; i < shape->getVertexBuffer()->getSize(); ++i)
     {
-        vertexData[i].m_color = glm::ivec4(m_color->getRedChannel(),
-                                           m_color->getGreenChannel(),
-                                           m_color->getBlueChannel(),
-                                           m_color->getAlphaChannel());
+        vertexData[i].m_color = glm::ivec4(m_material->getColor()->getRedChannel(),
+                                           m_material->getColor()->getGreenChannel(),
+                                           m_material->getColor()->getBlueChannel(),
+                                           m_material->getColor()->getAlphaChannel());
     }
     shape->getVertexBuffer()->unlock();
-}
-
-void ieDisplayObject::setColor(const std::shared_ptr<ieColor> &color)
-{
-    m_color = color;
-    if (m_shape != nullptr)
-    {
-        ieDisplayObject::updateShapeColorAttributes(m_shape);
-    }
-}
-
-std::shared_ptr<ieColor> ieDisplayObject::getColor(void) const
-{
-    return m_color;
 }
 
 void ieDisplayObject::setPosition(const glm::vec2& position)
@@ -216,12 +203,16 @@ void ieDisplayObject::setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, con
 void ieDisplayObject::setupShader(const std::string& vsSourceCode,
                                   const std::string& fsSourceCode)
 {
-    if(ieMaterial::getShader() != nullptr)
+    assert(m_material != nullptr);
+    if(m_material->getShader() != nullptr)
     {
-        ieMaterial::getShader()->removeOwner(ieMaterial::shared_from_this());
+        m_material->getShader()->removeOwner(ieDisplayObject::shared_from_this());
+        m_material->setShader(nullptr);
     }
-    std::shared_ptr<ieShader> shader = m_resourceAccessor->getShader(vsSourceCode, fsSourceCode, ieMaterial::shared_from_this());
-    ieMaterial::setShader(shader);
+    ieSharedShader shader = m_resourceAccessor->getShader(vsSourceCode,
+                                                          fsSourceCode,
+                                                          ieDisplayObject::shared_from_this());
+    m_material->setShader(shader);
 }
 
 std::shared_ptr<ieDisplayObjectContainer> ieDisplayObject::getParent(void) const
@@ -338,6 +329,137 @@ void ieDisplayObject::onRemoved(const std::shared_ptr<ieEvent>& event)
     m_shader = nullptr;
     m_shape = nullptr;
     ieMaterial::setShader(nullptr);
+}
+
+#pragma mark -
+#pragma mark ieIMaterial - setters
+
+void ieDisplayObject::setCulling(bool value)
+{
+    assert(m_material != nullptr);
+    m_material->setCulling(value);
+}
+
+void ieDisplayObject::setCullingMode(GLenum value)
+{
+    assert(m_material != nullptr);
+    m_material->setCullingMode(value);
+}
+
+void ieDisplayObject::setBlending(bool value)
+{
+    assert(m_material != nullptr);
+    m_material->setBlending(value);
+}
+
+void ieDisplayObject::setBlendingFunctionSource(GLenum value)
+{
+    assert(m_material != nullptr);
+    m_material->setBlendingFunctionSource(value);
+}
+
+void ieDisplayObject::setBlendingFunctionDestination(GLenum value)
+{
+    assert(m_material != nullptr);
+    m_material->setBlendingFunctionDestination(value);
+}
+
+void ieDisplayObject::setDepthTest(bool value)
+{
+    assert(m_material != nullptr);
+    m_material->setDepthTest(value);
+}
+
+void ieDisplayObject::setDepthMask(bool value)
+{
+    assert(m_material != nullptr);
+    m_material->setDepthMask(value);
+}
+
+void ieDisplayObject::setShader(ieSharedShaderRef shader)
+{
+    assert(m_material != nullptr);
+    m_material->setShader(shader);
+}
+
+void ieDisplayObject::setTexture(ieSharedTextureRef texture,
+                                 E_SHADER_SAMPLER sampler)
+{
+    assert(m_material != nullptr);
+    m_material->setTexture(texture, sampler);
+}
+
+void ieDisplayObject::setColor(ieSharedColorRef color)
+{
+    assert(m_material != nullptr);
+    m_material->setColor(color);
+    if (m_shape != nullptr)
+    {
+        ieDisplayObject::updateShapeColorAttributes(m_shape);
+    }
+}
+
+#pragma mark -
+#pragma mark ieIMaterial - getters
+
+bool ieDisplayObject::isCulling(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->isCulling();
+}
+
+GLenum ieDisplayObject::getCullingMode(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->getCullingMode();
+}
+
+bool ieDisplayObject::isBlending(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->isBlending();
+}
+
+GLenum ieDisplayObject::getBlendingFunctionSource(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->getBlendingFunctionSource();
+}
+
+GLenum ieDisplayObject::getBlendingFunctionDestination(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->getBlendingFunctionDestination();
+}
+
+bool ieDisplayObject::isDepthTest(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->isDepthTest();
+}
+
+bool ieDisplayObject::isDepthMask(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->isDepthMask();
+}
+
+ieSharedShader ieDisplayObject::getShader(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->getShader();
+}
+
+ieSharedTexture ieDisplayObject::getTexture(E_SHADER_SAMPLER sampler) const
+{
+    assert(m_material != nullptr);
+    return m_material->getTexture(sampler);
+}
+
+ieSharedColor ieDisplayObject::getColor(void) const
+{
+    assert(m_material != nullptr);
+    return m_material->getColor();
 }
 
 void ieDisplayObject::applyFilter(const std::shared_ptr<ieIBitmapDrawable>& sourceBitmapData,
