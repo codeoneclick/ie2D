@@ -27,7 +27,7 @@ ieDisplayObjectContainer::~ieDisplayObjectContainer(void)
 
 void ieDisplayObjectContainer::setVisible(bool value)
 {
-    ieDisplayObject::setVisible(value);
+    ieInteractiveObject::setVisible(value);
     std::for_each(m_childs.begin(), m_childs.end(), [value](std::shared_ptr<ieDisplayObject> iterator){
         iterator->setVisible(value);
     });
@@ -35,7 +35,7 @@ void ieDisplayObjectContainer::setVisible(bool value)
 
 void ieDisplayObjectContainer::setBatched(bool value)
 {
-    ieDisplayObject::setBatched(value);
+    ieInteractiveObject::setBatched(value);
     std::for_each(m_childs.begin(), m_childs.end(), [value](std::shared_ptr<ieDisplayObject> iterator){
         iterator->setBatched(value);
     });
@@ -43,7 +43,7 @@ void ieDisplayObjectContainer::setBatched(bool value)
 
 void ieDisplayObjectContainer::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onUpdate(event);
+    ieInteractiveObject::onUpdate(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onUpdate(event);
     });
@@ -51,7 +51,7 @@ void ieDisplayObjectContainer::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObjectContainer::onDraw(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onDraw(event);
+    ieInteractiveObject::onDraw(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onDraw(event);
     });
@@ -59,7 +59,7 @@ void ieDisplayObjectContainer::onDraw(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObjectContainer::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onEnterFrame(event);
+    ieInteractiveObject::onEnterFrame(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onEnterFrame(event);
     });
@@ -67,7 +67,7 @@ void ieDisplayObjectContainer::onEnterFrame(const std::shared_ptr<ieEvent>& even
 
 void ieDisplayObjectContainer::onExitFrame(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onExitFrame(event);
+    ieInteractiveObject::onExitFrame(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onExitFrame(event);
     });
@@ -75,7 +75,7 @@ void ieDisplayObjectContainer::onExitFrame(const std::shared_ptr<ieEvent>& event
 
 void ieDisplayObjectContainer::onAdded(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onAdded(event);
+    ieInteractiveObject::onAdded(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onAdded(event);
     });
@@ -83,7 +83,7 @@ void ieDisplayObjectContainer::onAdded(const std::shared_ptr<ieEvent>& event)
 
 void ieDisplayObjectContainer::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
-    ieDisplayObject::onRemoved(event);
+    ieInteractiveObject::onRemoved(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onRemoved(event);
     });

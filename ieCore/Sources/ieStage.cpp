@@ -24,8 +24,6 @@ m_depthAttachment(0)
 {
     m_functionOnResize = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onResize, this, std::placeholders::_1));
     ieDisplayObject::setColor(std::make_shared<ieColor>(0, 0, 0, 255));
-    m_touchRenderTarget = std::make_shared<ieRenderTarget>(std::dynamic_pointer_cast<ieStage>(ieDisplayObject::shared_from_this()),
-                                                           glm::ivec2(m_frame.z, m_frame.w));
 }
 
 ieStage::~ieStage(void)
@@ -143,6 +141,9 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObjectContainer::onAdded(event);
     ieDisplayObject::setupShader(ieShaderV2C4_vert, ieShaderV2C4_frag);
     ieStage::addEventListener(kEVENT_ON_RESIZE, m_functionOnResize);
+    
+    m_touchRenderTarget = std::make_shared<ieRenderTarget>(std::dynamic_pointer_cast<ieStage>(ieDisplayObject::shared_from_this()),
+                                                           glm::ivec2(m_frame.z, m_frame.w));
 }
 
 void ieStage::onRemoved(const std::shared_ptr<ieEvent>& event)

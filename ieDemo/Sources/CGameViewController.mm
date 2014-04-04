@@ -72,6 +72,7 @@
     self.sprite3->setScale(glm::vec2(5.0, 5.0));
     self.sprite3->setBatched(true);
     self.sprite3->gotoAndPlay(true);
+    self.sprite3->setTouchable(true);
     
     /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
