@@ -11,6 +11,8 @@
 
 #include "ieDisplayObjectContainer.h"
 
+class ieRenderTarget;
+
 class ieStage : public ieDisplayObjectContainer
 {
 private:
@@ -23,9 +25,7 @@ protected:
     ui32 m_colorAttachment;
     ui32 m_depthAttachment;
     
-    ui32 m_offscreenFrameBuffer;
-    ui32 m_offscreenColorAttachment;
-    ui32 m_offscreenDepthAttachment;
+    std::shared_ptr<ieRenderTarget> m_touchRenderTarget;
     
     void createFBO(ui32 width, ui32 height);
     
@@ -43,9 +43,8 @@ public:
     
     ieStage(const glm::vec4& frame);
     virtual ~ieStage(void);
-    
-    void drawOffscreenStart(ui32 width, ui32 height);
-    void drawOffscreenEnd(void);
+
+    ui32 getFrameBuffer(void) const;
 };
 
 #endif

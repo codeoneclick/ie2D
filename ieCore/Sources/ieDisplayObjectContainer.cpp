@@ -9,6 +9,7 @@
 #include "ieDisplayObjectContainer.h"
 #include "ieResourceAccessor.h"
 #include "ieBatchMgr.h"
+#include "ieTouchRecognizer.h"
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieEvent.h"
@@ -100,6 +101,7 @@ void ieDisplayObjectContainer::addChild(const std::shared_ptr<ieDisplayObjectCon
     eventOnStageAdded->addObjectWithKey(m_stage, "stage");
     eventOnStageAdded->addObjectWithKey(m_camera, "camera");
     eventOnStageAdded->addObjectWithKey(m_batchMgr, "batchMgr");
+    eventOnStageAdded->addObjectWithKey(m_touchRecognizer, "touchRecognizer");
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 
@@ -115,6 +117,8 @@ void ieDisplayObjectContainer::addChildAt(const std::shared_ptr<ieDisplayObjectC
     eventOnStageAdded->addObjectWithKey(m_resourceAccessor, "resourceAccessor");
     eventOnStageAdded->addObjectWithKey(m_stage, "stage");
     eventOnStageAdded->addObjectWithKey(m_camera, "camera");
+    eventOnStageAdded->addObjectWithKey(m_batchMgr, "batchMgr");
+    eventOnStageAdded->addObjectWithKey(m_touchRecognizer, "touchRecognizer");
     ieDisplayObjectContainer::dispatchEvent(eventOnStageAdded);
 }
 

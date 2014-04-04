@@ -61,6 +61,7 @@ void ieMask::onUpdate(const std::shared_ptr<ieEvent>& event)
 
 void ieMask::onDraw(const std::shared_ptr<ieEvent>& event)
 {
+    assert(m_material != nullptr);
     if(m_active &&
        m_visible)
     {
@@ -68,11 +69,11 @@ void ieMask::onDraw(const std::shared_ptr<ieEvent>& event)
         
         m_material->bind();
         
-        m_shader->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
-        m_shader->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
-        m_shape->bind(m_shader->getAttributes());
+        m_material->getShader()->setMatrix4x4(m_localTransformation, E_SHADER_UNIFORM_MODELVIEW);
+        m_material->getShader()->setMatrix4x4(m_camera->getProjection(), E_SHADER_UNIFORM_PROJECTION);
+        m_shape->bind(m_material->getShader()->getAttributes());
         m_shape->draw();
-        m_shape->unbind(m_shader->getAttributes());
+        m_shape->unbind(m_material->getShader()->getAttributes());
         
         m_material->unbind();
         
@@ -109,8 +110,8 @@ void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::setCulling(false);
     ieDisplayObject::setDepthTest(false);
     
-    m_shader = m_resourceAccessor->getShader(ieShaderV2T2M_vert, ieShaderV2T2M_frag, ieObject::shared_from_this());
-    ieDisplayObject::setShader(m_shader);
+    ieSharedShader shader = m_resourceAccessor->getShader(ieShaderV2T2M_vert, ieShaderV2T2M_frag, ieObject::shared_from_this());
+    ieDisplayObject::setShader(shader);
     
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);
@@ -120,8 +121,9 @@ void ieMask::onAdded(const std::shared_ptr<ieEvent>& event)
 
 void ieMask::onRemoved(const std::shared_ptr<ieEvent>& event)
 {
-    m_shader->removeOwner(ieObject::shared_from_this());
-    m_shader = nullptr;
+    assert(m_material != nullptr);
+    assert(m_material->getShader() != nullptr);
+    m_material->getShader()->removeOwner(ieObject::shared_from_this());
+    m_material->setShader(nullptr);
     m_shape = nullptr;
-    ieDisplayObject::setShader(nullptr);
 }

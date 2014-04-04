@@ -163,6 +163,10 @@
 		21EE971418A023F800A65E68 /* ieBitmapFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971218A023F800A65E68 /* ieBitmapFilter.cpp */; };
 		21EE971718A0265200A65E68 /* ieColorTransformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971518A0265200A65E68 /* ieColorTransformation.cpp */; };
 		21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21EE971818A0279800A65E68 /* ieColor.cpp */; };
+		21F8011B18EEABB8006FCA3C /* ieTouchRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8011918EEABB7006FCA3C /* ieTouchRecognizer.cpp */; };
+		21F8012018EEB476006FCA3C /* ieIInputContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8011E18EEB476006FCA3C /* ieIInputContext.cpp */; };
+		21F8012218EEB494006FCA3C /* ieInputContext_ios.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8012118EEB494006FCA3C /* ieInputContext_ios.cpp */; };
+		21F8012718EED994006FCA3C /* ieRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8012518EED994006FCA3C /* ieRenderTarget.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -629,6 +633,14 @@
 		21EE971618A0265200A65E68 /* ieColorTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieColorTransformation.h; path = Sources/ieColorTransformation.h; sourceTree = "<group>"; };
 		21EE971818A0279800A65E68 /* ieColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieColor.cpp; path = Sources/ieColor.cpp; sourceTree = "<group>"; };
 		21EE971918A0279800A65E68 /* ieColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieColor.h; path = Sources/ieColor.h; sourceTree = "<group>"; };
+		21F8011918EEABB7006FCA3C /* ieTouchRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieTouchRecognizer.cpp; path = Sources/ieTouchRecognizer.cpp; sourceTree = "<group>"; };
+		21F8011A18EEABB7006FCA3C /* ieTouchRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieTouchRecognizer.h; path = Sources/ieTouchRecognizer.h; sourceTree = "<group>"; };
+		21F8011E18EEB476006FCA3C /* ieIInputContext.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieIInputContext.cpp; path = Sources/ieIInputContext.cpp; sourceTree = "<group>"; };
+		21F8011F18EEB476006FCA3C /* ieIInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIInputContext.h; path = Sources/ieIInputContext.h; sourceTree = "<group>"; };
+		21F8012118EEB494006FCA3C /* ieInputContext_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieInputContext_ios.cpp; path = Sources/ieInputContext_ios.cpp; sourceTree = "<group>"; };
+		21F8012418EEC2C3006FCA3C /* ieShaderV2T2TA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2TA.h; path = Sources/ieShaderV2T2TA.h; sourceTree = "<group>"; };
+		21F8012518EED994006FCA3C /* ieRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieRenderTarget.cpp; path = Sources/ieRenderTarget.cpp; sourceTree = "<group>"; };
+		21F8012618EED994006FCA3C /* ieRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieRenderTarget.h; path = Sources/ieRenderTarget.h; sourceTree = "<group>"; };
 		A420815E1733A9370004729E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42081601733A9370004729E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A42081621733A9370004729E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1340,6 +1352,11 @@
 				21EBB4FE18A23CD2003CB322 /* ieIndexBuffer.cpp */,
 				2151C78318BDE58C00A33707 /* ieCamera.h */,
 				2151C78218BDE58C00A33707 /* ieCamera.cpp */,
+				21F8011A18EEABB7006FCA3C /* ieTouchRecognizer.h */,
+				21F8011918EEABB7006FCA3C /* ieTouchRecognizer.cpp */,
+				21F8011F18EEB476006FCA3C /* ieIInputContext.h */,
+				21F8011E18EEB476006FCA3C /* ieIInputContext.cpp */,
+				21F8012118EEB494006FCA3C /* ieInputContext_ios.cpp */,
 			);
 			name = ieCore;
 			sourceTree = "<group>";
@@ -1378,6 +1395,8 @@
 				21EBB4D5189FDA6E003CB322 /* ieMovieClip.cpp */,
 				21EBB4E7189FFA91003CB322 /* ieStage.h */,
 				21EBB4E6189FFA91003CB322 /* ieStage.cpp */,
+				21F8012618EED994006FCA3C /* ieRenderTarget.h */,
+				21F8012518EED994006FCA3C /* ieRenderTarget.cpp */,
 				21EBB4F918A23C9A003CB322 /* ieShape.h */,
 				21EBB4F818A23C9A003CB322 /* ieShape.cpp */,
 				21EBB50D18A2679F003CB322 /* ieIOGLWindow.h */,
@@ -1413,6 +1432,7 @@
 				2151C6BD18B4B35000A33707 /* ieShaderV2C4.h */,
 				2109425318B2B27F00C86176 /* ieShaderV2T2C4.h */,
 				21D3D98E18DF82DC005F65EC /* ieShaderV2T2M.h */,
+				21F8012418EEC2C3006FCA3C /* ieShaderV2T2TA.h */,
 			);
 			name = ieShaders;
 			sourceTree = "<group>";
@@ -1705,6 +1725,7 @@
 				210940D418B1563700C86176 /* pngwrite.c in Sources */,
 				210940CC18B1563700C86176 /* pngread.c in Sources */,
 				210940C918B1563700C86176 /* pngget.c in Sources */,
+				21F8012218EEB494006FCA3C /* ieInputContext_ios.cpp in Sources */,
 				2156BB3818C278EE009A13AC /* json_writer.cpp in Sources */,
 				2156BB3618C278EE009A13AC /* json_reader.cpp in Sources */,
 				2156BB3718C278EE009A13AC /* json_value.cpp in Sources */,
@@ -1714,6 +1735,7 @@
 				21EBB4DB189FEED3003CB322 /* ieIBitmapDrawable.cpp in Sources */,
 				21EBB52518A2860B003CB322 /* ieGraphicsContext_ios.cpp in Sources */,
 				21EBB4DC189FEED3003CB322 /* ieBitmapData.cpp in Sources */,
+				21F8012718EED994006FCA3C /* ieRenderTarget.cpp in Sources */,
 				21C343D918A8D59B0041EF47 /* ieShader.cpp in Sources */,
 				21EBB50018A23CD2003CB322 /* ieIndexBuffer.cpp in Sources */,
 				2129066E18E04D7300AD4AE2 /* ieBatch.cpp in Sources */,
@@ -1727,6 +1749,7 @@
 				2151C78418BDE58C00A33707 /* ieCamera.cpp in Sources */,
 				21EBB52818A2863B003CB322 /* ieOGLWindow_ios.cpp in Sources */,
 				2129071418E3395500AD4AE2 /* ieGraphicsContext_osx.cpp in Sources */,
+				21F8011B18EEABB8006FCA3C /* ieTouchRecognizer.cpp in Sources */,
 				2129071218E3391800AD4AE2 /* ieOGLWindow_osx.cpp in Sources */,
 				21EBB4E0189FEED3003CB322 /* ieSprite.cpp in Sources */,
 				21EBB52E18A29ABB003CB322 /* ieGameLoop_ios.cpp in Sources */,
@@ -1738,6 +1761,7 @@
 				21EBB4E2189FEED3003CB322 /* ieIEventDispatcher.cpp in Sources */,
 				2129065D18DC7BDD00AD4AE2 /* ieMask.cpp in Sources */,
 				21EBB52B18A299A5003CB322 /* ieIGameLoop.cpp in Sources */,
+				21F8012018EEB476006FCA3C /* ieIInputContext.cpp in Sources */,
 				21EBB52218A271DF003CB322 /* ieSequence.cpp in Sources */,
 				21EBB51C18A2719E003CB322 /* ieResourceAccessor.cpp in Sources */,
 				21EE971A18A0279800A65E68 /* ieColor.cpp in Sources */,

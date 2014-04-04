@@ -31,4 +31,8 @@ class ieShape;
 typedef std::shared_ptr<ieShape> ieSharedShape;
 typedef const ieSharedShape& ieSharedShapeRef;
 
+class ieInteractiveObject;
+typedef std::shared_ptr<ieInteractiveObject> ieSharedInteractiveObject;
+typedef const ieSharedInteractiveObject& ieSharedInteractiveObjectRef;
+
 #endif

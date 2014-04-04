@@ -8,6 +8,8 @@
 
 #include "ieIGameTransition.h"
 #include "ieIGraphicsContext.h"
+#include "ieIInputContext.h"
+#include "ieTouchRecognizer.h"
 #include "ieEvent.h"
 #include "ieIOGLWindow.h"
 #include "ieResourceAccessor.h"
@@ -29,12 +31,16 @@ m_screenTexture(nullptr)
 {
 #if defined (__IOS__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_IOS);
+    m_inputContext = ieIInputContext::createInputContext(m_window, E_PLATFORM_API_IOS);
 #elif defined(__WIN32__)
 	m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_WIN32);
+    m_inputContext = ieIInputContext::createInputContext(m_window, E_PLATFORM_API_WIN32);
 #elif defined(__OSX__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_OSX);
+    m_inputContext = ieIInputContext::createInputContext(m_window, E_PLATFORM_API_OSX);
 #elif defined(__NDK__)
     m_graphicsContext = ieIGraphicsContext::createGraphicsContext(m_window, E_PLATFORM_API_NDK);
+    m_inputContext = ieIInputContext::createInputContext(m_window, E_PLATFORM_API_NDK);
 #endif
     
     m_functionOnTransitionRegister = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieIGameTransition::onRegistered, this, std::placeholders::_1));
@@ -106,6 +112,7 @@ void ieIGameTransition::onEnter(const std::shared_ptr<ieEvent>& event)
     eventOnStageAdded->addObjectWithKey(stage, "stage");
     eventOnStageAdded->addObjectWithKey(m_camera, "camera");
     eventOnStageAdded->addObjectWithKey(m_batchMgr, "batchMgr");
+    eventOnStageAdded->addObjectWithKey(m_inputContext->getTouchRecognizer(), "touchRecognizer");
     ieIGameTransition::dispatchEvent(eventOnStageAdded);
     
     m_screenTexture = std::make_shared<ieTexture>(m_colorAttachment, m_window->getWidth(), m_window->getHeight());

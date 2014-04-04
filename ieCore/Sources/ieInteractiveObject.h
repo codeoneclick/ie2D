@@ -11,16 +11,32 @@
 
 #include "ieDisplayObject.h"
 
+class ieTouchRecognizer;
+
 class ieInteractiveObject : public ieDisplayObject
 {
 private:
     
 protected:
     
+    virtual void onUpdate(const std::shared_ptr<ieEvent>& event);
+    virtual void onDraw(const std::shared_ptr<ieEvent>& event);
+    virtual void onEnterFrame(const std::shared_ptr<ieEvent>& event);
+    virtual void onExitFrame(const std::shared_ptr<ieEvent>& event);
+    
+    virtual void onAdded(const std::shared_ptr<ieEvent>& event);
+    virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
+    
+    bool m_isTouchable;
+    std::shared_ptr<ieTouchRecognizer> m_touchRecognizer;
+    
 public:
     
     ieInteractiveObject(const glm::vec4& frame);
     ~ieInteractiveObject(void);
+    
+    void setTouchable(bool value);
+    bool isTouchable(void) const;
 };
 
 #endif

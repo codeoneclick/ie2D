@@ -17,6 +17,7 @@
 #include "ieStage.h"
 #include "ieCamera.h"
 #include "ieResourceAccessor.h"
+#include "ieRenderTarget.h"
 
 #if defined(__IOS__)
 
@@ -184,7 +185,11 @@ ieSharedSprite ieSprite::getActiveSprite(const std::string& name)
 
 void ieSprite::saveToFile(const std::string &imageFilename)
 {
-    m_stage->drawOffscreenStart(m_frame.z, m_frame.w);
+    std::shared_ptr<ieRenderTarget> renderTarget = std::make_shared<ieRenderTarget>(m_stage,
+                                                                                    glm::ivec2(m_frame.z, m_frame.w));
+    renderTarget->begin();
+    renderTarget->clear();
+    
     bool isBatched = ieSprite::isBatched();
     glm::vec2 position = ieSprite::getPosition();
     ieSprite::setBatched(false);
@@ -198,7 +203,8 @@ void ieSprite::saveToFile(const std::string &imageFilename)
     ui32 rawdataSize = static_cast<ui32>(m_frame.z) * static_cast<ui32>(m_frame.w) * 4;
     ui8 *rawdata = new ui8[rawdataSize];
     glReadPixels(0, 0, m_frame.z, m_frame.w, GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
-    m_stage->drawOffscreenEnd();
+    
+    renderTarget->end();
 
 #if defined(__IOS__)
     

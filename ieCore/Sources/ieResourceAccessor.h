@@ -11,7 +11,6 @@
 
 #include "ieObject.h"
 
-class ieObject;
 class ieResource;
 class ieShader;
 class ieTexture;

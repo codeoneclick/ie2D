@@ -163,8 +163,6 @@ public:
                      const glm::ivec2& destinationPoint,
                      std::shared_ptr<ieBitmapFilter> filter);
     
-    
-    
     void colorTransform(const glm::ivec4& sourceRectangle,
                         const std::shared_ptr<ieColorTransformation>& colorTransformation);
     

@@ -15,6 +15,7 @@
 class ieResourceAccessor;
 class ieIOGLWindow;
 class ieIGraphicsContext;
+class ieIInputContext;
 class ieIGameTransition : public ieStage
 {
 private:
@@ -37,6 +38,7 @@ protected:
     std::string m_name;
     std::shared_ptr<ieIOGLWindow> m_window;
     std::shared_ptr<ieIGraphicsContext> m_graphicsContext;
+    std::shared_ptr<ieIInputContext> m_inputContext;
     
     virtual void onResize(const std::shared_ptr<ieEvent>& event);
     

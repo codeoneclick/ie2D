@@ -13,6 +13,8 @@
 #include "ieShader.h"
 #include "ieColor.h"
 #include "ieCamera.h"
+#include "ieRenderTarget.h"
+#include "ieTouchRecognizer.h"
 
 ieStage::ieStage(const glm::vec4& frame) :
 ieDisplayObjectContainer(frame),
@@ -22,11 +24,24 @@ m_depthAttachment(0)
 {
     m_functionOnResize = std::make_shared<ieEventDispatcherFunction>(std::bind(&ieStage::onResize, this, std::placeholders::_1));
     ieDisplayObject::setColor(std::make_shared<ieColor>(0, 0, 0, 255));
+    m_touchRenderTarget = std::make_shared<ieRenderTarget>(std::dynamic_pointer_cast<ieStage>(ieDisplayObject::shared_from_this()),
+                                                           glm::ivec2(m_frame.z, m_frame.w));
 }
 
 ieStage::~ieStage(void)
 {
-    
+    if(m_frameBuffer != 0)
+    {
+        glDeleteFramebuffers(1, &m_frameBuffer);
+    }
+    if(m_colorAttachment != 0)
+    {
+        glDeleteTextures(1, &m_colorAttachment);
+    }
+    if(m_depthAttachment != 0)
+    {
+        glDeleteRenderbuffers(1, &m_depthAttachment);
+    }
 }
 
 void ieStage::createFBO(ui32 width, ui32 height)
@@ -115,6 +130,11 @@ void ieStage::onExitFrame(const std::shared_ptr<ieEvent>& event)
 #endif
     
     ieDisplayObjectContainer::onExitFrame(event);
+    
+    m_touchRenderTarget->begin();
+    m_touchRenderTarget->clear();
+    m_touchRecognizer->updateTouchMask();
+    m_touchRenderTarget->end();
 }
 
 void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
@@ -131,57 +151,7 @@ void ieStage::onRemoved(const std::shared_ptr<ieEvent>& event)
     ieStage::removeEventListener(kEVENT_ON_RESIZE, m_functionOnResize);
 }
 
-void ieStage::drawOffscreenStart(ui32 width, ui32 height)
+ui32 ieStage::getFrameBuffer(void) const
 {
-    glGenTextures(1, &m_offscreenColorAttachment);
-    glBindTexture(GL_TEXTURE_2D, m_offscreenColorAttachment);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-                 width,
-                 height,
-                 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-    
-    glGenRenderbuffers(1, &m_offscreenDepthAttachment);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_offscreenDepthAttachment);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8_OES, width, height);
-    
-    glGenFramebuffers(1, &m_offscreenFrameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_offscreenFrameBuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_offscreenColorAttachment, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_offscreenDepthAttachment);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_offscreenDepthAttachment);
-    assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
-    
-    glBindFramebuffer(GL_FRAMEBUFFER, m_offscreenFrameBuffer);
-    glViewport(0, 0, width, height);
-    glClearColor(1.0, 1.0, 1.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT |
-            GL_DEPTH_BUFFER_BIT |
-            GL_STENCIL_BUFFER_BIT);
-    m_camera->onResize(width, height);
+    return m_frameBuffer;
 }
-
-void ieStage::drawOffscreenEnd(void)
-{
-    glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
-    glViewport(0, 0, m_frame.z, m_frame.w);
-    m_camera->onResize(m_frame.z, m_frame.w);
-    
-    if(m_offscreenFrameBuffer != 0)
-    {
-        glDeleteFramebuffers(1, &m_offscreenFrameBuffer);
-    }
-    if(m_offscreenColorAttachment != 0)
-    {
-        glDeleteTextures(1, &m_offscreenColorAttachment);
-    }
-    if(m_offscreenDepthAttachment != 0)
-    {
-        glDeleteRenderbuffers(1, &m_offscreenDepthAttachment);
-    }
-}
-
-
