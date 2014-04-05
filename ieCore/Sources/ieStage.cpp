@@ -129,10 +129,20 @@ void ieStage::onExitFrame(const std::shared_ptr<ieEvent>& event)
     
     ieDisplayObjectContainer::onExitFrame(event);
     
+    assert(m_touchRenderTarget != nullptr);
     m_touchRenderTarget->begin();
     m_touchRenderTarget->clear();
+    
+    //assert(m_batchMgr != nullptr);
+    //m_batchMgr->begin();
+    
     m_touchRecognizer->updateTouchMask();
+    
+    //m_batchMgr->end();
+    //m_batchMgr->draw();
+    
     m_touchRenderTarget->end();
+    m_touchRenderTarget->saveToFile("a_image.png");
 }
 
 void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)

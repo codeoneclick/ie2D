@@ -639,7 +639,7 @@
 		21F8011F18EEB476006FCA3C /* ieIInputContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieIInputContext.h; path = Sources/ieIInputContext.h; sourceTree = "<group>"; };
 		21F8012118EEB494006FCA3C /* ieInputContext_ios.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieInputContext_ios.cpp; path = Sources/ieInputContext_ios.cpp; sourceTree = "<group>"; };
 		21F8012418EEC2C3006FCA3C /* ieShaderV2T2TA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ieShaderV2T2TA.h; path = Sources/ieShaderV2T2TA.h; sourceTree = "<group>"; };
-		21F8012518EED994006FCA3C /* ieRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ieRenderTarget.cpp; path = Sources/ieRenderTarget.cpp; sourceTree = "<group>"; };
+		21F8012518EED994006FCA3C /* ieRenderTarget.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ieRenderTarget.cpp; path = Sources/ieRenderTarget.cpp; sourceTree = "<group>"; };
 		21F8012618EED994006FCA3C /* ieRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ieRenderTarget.h; path = Sources/ieRenderTarget.h; sourceTree = "<group>"; };
 		A420815E1733A9370004729E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42081601733A9370004729E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };

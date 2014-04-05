@@ -11,8 +11,7 @@
 #include "ieEvent.h"
 #include "ieShader.h"
 
-ieTouchRecognizer::ieTouchRecognizer(void) :
-m_shader(std::make_shared<ieShader>(ieShaderV2T2TA_vert, ieShaderV2T2TA_frag))
+ieTouchRecognizer::ieTouchRecognizer(void)
 {
     
 }
@@ -35,12 +34,9 @@ void ieTouchRecognizer::unregisterInteractiveObject(ieSharedInteractiveObjectRef
 void ieTouchRecognizer::updateTouchMask(void)
 {
     std::for_each(m_interactiveObjects.begin(), m_interactiveObjects.end(), [this](ieSharedInteractiveObjectRef iterator){
-        ieSharedShader previousShader = iterator->getShader();
-        iterator->setShader(m_shader);
         
-        std::shared_ptr<ieEvent> eventOnDraw = std::make_shared<ieEvent>(kEVENT_ON_DRAW, iterator);
-        iterator->dispatchEvent(eventOnDraw);
-        
-        iterator->setShader(previousShader);
+        std::shared_ptr<ieEvent> eventOnUpdateTouchMask = std::make_shared<ieEvent>(kEVENT_ON_UPDATE_TOUCH_MASK, iterator);
+        iterator->dispatchEvent(eventOnUpdateTouchMask);
+
     });
 }

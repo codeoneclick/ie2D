@@ -23,6 +23,7 @@ static const std::string kEVENT_ON_TRANSITION_EXIT = "EVENT_ON_TRANSITION_EXIT";
 static const std::string kEVENT_ON_ADDED = "EVENT_ON_ADDED";
 static const std::string kEVENT_ON_REMOVED = "EVENT_ON_REMOVED";
 static const std::string kEVENT_ON_RESIZE = "EVENT_ON_RESIZE";
+static const std::string kEVENT_ON_UPDATE_TOUCH_MASK = "EVENT_ON_UPDATE_TOUCH_MASK";
 
 class ieIEventDispatcher;
 class ieEvent : public ieObject

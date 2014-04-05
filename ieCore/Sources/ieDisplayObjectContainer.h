@@ -27,6 +27,7 @@ protected:
     
     virtual void onAdded(const std::shared_ptr<ieEvent>& event);
     virtual void onRemoved(const std::shared_ptr<ieEvent>& event);
+    virtual void onUpdateTouchMask(const std::shared_ptr<ieEvent>& event);
     
     ieDisplayObjectContainer(const glm::vec4& frame);
     
@@ -39,6 +40,8 @@ public:
     
     void setVisible(bool value);
     void setBatched(bool value);
+    
+    void setShader(ieSharedShaderRef shader, bool isUpdateHierarchy = false);
     
     bool contains(const std::shared_ptr<ieDisplayObjectContainer>& child) const;
     

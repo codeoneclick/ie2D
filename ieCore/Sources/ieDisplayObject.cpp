@@ -189,6 +189,17 @@ bool ieDisplayObject::isBatched(void) const
     return m_batched;
 }
 
+void ieDisplayObject::setSize(const glm::vec2& size)
+{
+    m_frame.z = size.x;
+    m_frame.w = size.y;
+}
+
+glm::vec2 ieDisplayObject::getSize(void) const
+{
+    return glm::vec2(m_frame.z, m_frame.w);
+}
+
 void ieDisplayObject::setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, const glm::ivec2& textureSize)
 {
     m_texCoord = glm::vec4(static_cast<f32>(texCoordsFrame.x) / static_cast<f32>(textureSize.x),
@@ -378,7 +389,7 @@ void ieDisplayObject::setDepthMask(bool value)
     m_material->setDepthMask(value);
 }
 
-void ieDisplayObject::setShader(ieSharedShaderRef shader)
+void ieDisplayObject::setShader(ieSharedShaderRef shader, bool isUpdateHierarchy)
 {
     assert(m_material != nullptr);
     m_material->setShader(shader);

@@ -34,6 +34,8 @@ public:
     void clear(void);
     void begin(void);
     void end(void);
+    
+    void saveToFile(const std::string& imageFilename);
 };
 
 #endif

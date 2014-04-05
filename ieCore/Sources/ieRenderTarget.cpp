@@ -9,6 +9,13 @@
 #include "ieRenderTarget.h"
 #include "ieStage.h"
 
+#if defined(__IOS__)
+
+#include <UIKit/UIKit.h>
+#include <QuartzCore/QuartzCore.h>
+
+#endif
+
 ieRenderTarget::ieRenderTarget(const std::shared_ptr<ieStage>& stage, const glm::ivec2& size) :
 m_stage(stage),
 m_size(size)
@@ -72,4 +79,53 @@ void ieRenderTarget::end(void)
     assert(m_stage != nullptr);
     glBindFramebuffer(GL_FRAMEBUFFER, m_stage->getFrameBuffer());
     glViewport(0, 0, m_size.x, m_size.y);
+}
+
+void ieRenderTarget::saveToFile(const std::string& imageFilename)
+{
+    ieRenderTarget::begin();
+    
+    ui32 rawdataSize = static_cast<ui32>(m_size.x) * static_cast<ui32>(m_size.y) * 4;
+    ui8 *rawdata = new ui8[rawdataSize];
+    glReadPixels(0, 0, m_size.x, m_size.y, GL_RGBA, GL_UNSIGNED_BYTE, rawdata);
+    
+    ieRenderTarget::end();
+    
+#if defined(__IOS__)
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawdata, rawdataSize, NULL);
+    
+    ui32 bitsPerComponent = 8;
+    ui32 bitsPerPixel = 32;
+    ui32 bytesPerRow = 4 * m_size.x;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    CGImageRef imageRef = CGImageCreate(m_size.x,
+                                        m_size.y,
+                                        bitsPerComponent,
+                                        bitsPerPixel,
+                                        bytesPerRow,
+                                        colorSpaceRef,
+                                        bitmapInfo,
+                                        provider, NULL, NO, renderingIntent);
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    UIGraphicsBeginImageContext(CGSizeMake(m_size.x, m_size.y));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform flip = CGAffineTransformMake(1, 0, 0, -1, 0, m_size.y);
+    CGContextConcatCTM(context, flip);
+    [imageView.layer renderInContext:context];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *imageFilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
+                               [NSString stringWithCString:imageFilename.c_str()
+                                                  encoding:[NSString defaultCStringEncoding]]];
+    [UIImagePNGRepresentation(image) writeToFile:imageFilePath atomically:YES];
+    
+#endif
+    delete[] rawdata;
 }

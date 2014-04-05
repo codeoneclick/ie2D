@@ -443,7 +443,8 @@ void ieShader::setVector4(const glm::vec4 &vector, E_SHADER_UNIFORM uniform)
 
 void ieShader::setVector4Custom(const glm::vec4 &vector, const std::string &uniform)
 {
-    glUniform4fv(glGetUniformLocation(m_shader, uniform.c_str()), 1, &vector[0]);
+    i32 uniformLocation = glGetUniformLocation(m_shader, uniform.c_str());
+    glUniform4fv(uniformLocation, 1, &vector[0]);
 }
 
 void ieShader::setFloat(f32 value, E_SHADER_UNIFORM uniform)

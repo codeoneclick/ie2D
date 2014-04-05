@@ -41,6 +41,7 @@ private:
     ieSharedShape m_shape;
     
     friend class ieMask;
+    friend class ieInteractiveObject;
     friend class ieDisplayObjectContainer;
     
 protected:
@@ -49,6 +50,7 @@ protected:
     std::shared_ptr<ieBatchMgr> m_batchMgr;
     std::shared_ptr<ieStage> m_stage;
     std::shared_ptr<ieCamera> m_camera;
+    
     ieSharedMaterial m_material;
     
     glm::vec2 m_position;
@@ -115,6 +117,9 @@ public:
     virtual void setBatched(bool value);
     bool isBatched(void) const;
     
+    void setSize(const glm::vec2& size);
+    glm::vec2 getSize(void) const;
+    
     void setTexCoordsFromFrame(const glm::vec4& texCoordsFrame, const glm::ivec2& textureSize);
     
     std::shared_ptr<ieDisplayObjectContainer> getParent(void) const;
@@ -132,7 +137,7 @@ public:
     void setDepthTest(bool value);
     void setDepthMask(bool value);
     
-    void setShader(ieSharedShaderRef shader);
+    virtual void setShader(ieSharedShaderRef shader, bool isUpdateHierarchy = false);
     
     void setTexture(ieSharedTextureRef texture,
                     E_SHADER_SAMPLER sampler);

@@ -211,7 +211,7 @@ void ieMaterial::setDepthMask(bool value)
     m_parameters->m_isDepthMask = value;
 }
 
-void ieMaterial::setShader(ieSharedShaderRef shader)
+void ieMaterial::setShader(ieSharedShaderRef shader, bool isUpdateHierarchy)
 {
     assert(m_parameters != nullptr);
     m_parameters->m_shader = shader;

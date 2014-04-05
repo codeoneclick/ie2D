@@ -19,7 +19,6 @@ private:
 protected:
     
     std::set<ieSharedInteractiveObject> m_interactiveObjects;
-    ieSharedShader m_shader;
     
 public:
     

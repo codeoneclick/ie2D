@@ -69,7 +69,7 @@
     self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(0, 0));
-    self.sprite3->setScale(glm::vec2(5.0, 5.0));
+    self.sprite3->setScale(glm::vec2(3.0, 3.0));
     self.sprite3->setBatched(true);
     self.sprite3->gotoAndPlay(true);
     self.sprite3->setTouchable(true);
@@ -84,7 +84,7 @@
     self.sprite4->setVisible(true);
     self.sprite4->gotoAndPlay(true);*/
     
-    /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
     path.append("leather_armor.png");
     std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(128, 128));
@@ -98,7 +98,7 @@
         indexX++;
         indexY = indexX >= 6 ? indexY + 1 : indexY;
         indexX = indexX >= 6 ? 0 : indexX;
-    }*/
+    }
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];

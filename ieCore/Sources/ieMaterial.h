@@ -48,7 +48,7 @@ public:
     virtual void setDepthTest(bool value) = 0;
     virtual void setDepthMask(bool value) = 0;
     
-    virtual void setShader(ieSharedShaderRef shader) = 0;
+    virtual void setShader(ieSharedShaderRef shader, bool isUpdateHierarchy = false) = 0;
     
     virtual void setTexture(ieSharedTextureRef texture,
                             E_SHADER_SAMPLER sampler) = 0;
@@ -113,7 +113,7 @@ public:
     void setDepthTest(bool value);
     void setDepthMask(bool value);
     
-    void setShader(ieSharedShaderRef shader);
+    void setShader(ieSharedShaderRef shader, bool isUpdateHierarchy = false);
     
     void setTexture(ieSharedTextureRef texture,
                             E_SHADER_SAMPLER sampler);

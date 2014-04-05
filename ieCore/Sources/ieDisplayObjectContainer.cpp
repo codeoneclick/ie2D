@@ -41,6 +41,17 @@ void ieDisplayObjectContainer::setBatched(bool value)
     });
 }
 
+void ieDisplayObjectContainer::setShader(ieSharedShaderRef shader, bool isUpdateHierarchy)
+{
+    ieDisplayObject::setShader(shader, isUpdateHierarchy);
+    if(isUpdateHierarchy)
+    {
+        std::for_each(m_childs.begin(), m_childs.end(), [shader, isUpdateHierarchy](std::shared_ptr<ieDisplayObject> iterator){
+            iterator->setShader(shader, isUpdateHierarchy);
+        });
+    }
+}
+
 void ieDisplayObjectContainer::onUpdate(const std::shared_ptr<ieEvent>& event)
 {
     ieInteractiveObject::onUpdate(event);
@@ -70,6 +81,14 @@ void ieDisplayObjectContainer::onExitFrame(const std::shared_ptr<ieEvent>& event
     ieInteractiveObject::onExitFrame(event);
     std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieDisplayObject> iterator){
         iterator->onExitFrame(event);
+    });
+}
+
+void ieDisplayObjectContainer::onUpdateTouchMask(const std::shared_ptr<ieEvent> &event)
+{
+    ieInteractiveObject::onUpdateTouchMask(event);
+    std::for_each(m_childs.begin(), m_childs.end(), [event](std::shared_ptr<ieInteractiveObject> iterator){
+        iterator->onUpdateTouchMask(event);
     });
 }
 
