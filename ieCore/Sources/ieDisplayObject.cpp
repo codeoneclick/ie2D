@@ -324,7 +324,7 @@ void ieDisplayObject::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::setBlendingFunctionDestination(GL_ONE_MINUS_SRC_ALPHA);
     ieDisplayObject::setCulling(false);
     ieDisplayObject::setDepthTest(false);
-    ieDisplayObject::setDepthMask(false);
+    ieDisplayObject::setDepthMask(true);
     
     glm::vec4 frame = ieDisplayObject::createShapePositionAttributes();
     m_shape = std::make_shared<ieShape>(frame);

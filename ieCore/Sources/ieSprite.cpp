@@ -331,7 +331,6 @@ void ieSprite::createSpriteAnimationFrame(ui32 index, ieSpriteAnimationFrame& pr
     ieSequenceFrameIterator sequenceFrameIterator = m_sequence->getSequenceFrames().find(index + 1);
     if(index == 0 && sequenceFrameIterator == m_sequence->getSequenceFrames().end())
     {
-        assert(false);
         return;
     } else if(sequenceFrameIterator == m_sequence->getSequenceFrames().end()) {
         m_spriteAnimationFrames[index] = previosSpriteAnimationFrame;
@@ -436,10 +435,10 @@ void ieSprite::gotoAndStop(ui32 index)
                           if(iterator == currentActiveSprites.end())
                           {
                               //TODO# : reimplement to increase performance
-                              /*i32 previosIndex = index - 1;
+                              i32 previosIndex = index - 1;
                               const ieSpriteElementTransformation* transformation = ieSprite::getPreviosState(spriteElementPair.first, previosIndex);
-                              spriteElementPair.second->setActive(transformation != nullptr ? transformation->m_alpha != 0.0 : false);*/
-                              spriteElementPair.second->setActive(false);
+                              spriteElementPair.second->setActive(transformation != nullptr ? transformation->m_alpha != 0.0 : false);
+                              //spriteElementPair.second->setActive(false);
                           }
                       });
         ieSprite::sortChildrens();

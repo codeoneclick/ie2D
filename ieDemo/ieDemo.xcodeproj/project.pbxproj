@@ -12,6 +12,8 @@
 		212B8C8D18C4E60200372655 /* 4.json in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8A18C4E60200372655 /* 4.json */; };
 		212B8C8E18C4E60200372655 /* 41.png in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8B18C4E60200372655 /* 41.png */; };
 		212B8C8F18C4E60200372655 /* sector_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 212B8C8C18C4E60200372655 /* sector_02.png */; };
+		2172A01B18F1BBAB00D4D317 /* wizard_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 2172A01918F1BBAB00D4D317 /* wizard_01.json */; };
+		2172A01C18F1BBAB00D4D317 /* wizard_011.png in Resources */ = {isa = PBXBuildFile; fileRef = 2172A01A18F1BBAB00D4D317 /* wizard_011.png */; };
 		21ADFCC018D8F09E002B603D /* animation_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 21ADFCBE18D8F09E002B603D /* animation_01.json */; };
 		21ADFCC118D8F09E002B603D /* animation_011.png in Resources */ = {isa = PBXBuildFile; fileRef = 21ADFCBF18D8F09E002B603D /* animation_011.png */; };
 		21ADFCCC18DAC34F002B603D /* animation_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 21ADFCCA18DAC34F002B603D /* animation_02.json */; };
@@ -91,6 +93,8 @@
 		212B8C8A18C4E60200372655 /* 4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 4.json; path = ../ieBundle/4.json; sourceTree = "<group>"; };
 		212B8C8B18C4E60200372655 /* 41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 41.png; path = ../ieBundle/41.png; sourceTree = "<group>"; };
 		212B8C8C18C4E60200372655 /* sector_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sector_02.png; path = ../ieBundle/sector_02.png; sourceTree = "<group>"; };
+		2172A01918F1BBAB00D4D317 /* wizard_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = wizard_01.json; path = ../ieBundle/wizard_01.json; sourceTree = "<group>"; };
+		2172A01A18F1BBAB00D4D317 /* wizard_011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wizard_011.png; path = ../ieBundle/wizard_011.png; sourceTree = "<group>"; };
 		21ADFCBE18D8F09E002B603D /* animation_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = animation_01.json; path = ../ieBundle/animation_01.json; sourceTree = "<group>"; };
 		21ADFCBF18D8F09E002B603D /* animation_011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animation_011.png; path = ../ieBundle/animation_011.png; sourceTree = "<group>"; };
 		21ADFCCA18DAC34F002B603D /* animation_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = animation_02.json; path = ../ieBundle/animation_02.json; sourceTree = "<group>"; };
@@ -228,6 +232,8 @@
 		21D07279181DB33E0019D264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2172A01918F1BBAB00D4D317 /* wizard_01.json */,
+				2172A01A18F1BBAB00D4D317 /* wizard_011.png */,
 				21AF321918EC20A500783EEB /* human_04.json */,
 				21AF321A18EC20A500783EEB /* human_041.png */,
 				21AF321318EC119600783EEB /* human_03.json */,
@@ -361,11 +367,13 @@
 				21ADFCCC18DAC34F002B603D /* animation_02.json in Resources */,
 				21DE956118C90D1C0075488D /* dragon1.png in Resources */,
 				21DE956018C90D1C0075488D /* dragon.json in Resources */,
+				2172A01C18F1BBAB00D4D317 /* wizard_011.png in Resources */,
 				21AF321B18EC20A500783EEB /* human_04.json in Resources */,
 				21FC83B21887D5E4006AB4B4 /* CGameViewController.xib in Resources */,
 				21BBFA2918E997C80060CCC1 /* human_011.png in Resources */,
 				21AF321618EC119600783EEB /* human_031.png in Resources */,
 				21D6C06C18E85259001C598C /* leather_armor.png in Resources */,
+				2172A01B18F1BBAB00D4D317 /* wizard_01.json in Resources */,
 				212B8C8D18C4E60200372655 /* 4.json in Resources */,
 				2109422718B1605200C86176 /* _e01_move_18.png in Resources */,
 				21BFBC1B18EAF6BA00EA3073 /* human_021.png in Resources */,

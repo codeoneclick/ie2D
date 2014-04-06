@@ -108,7 +108,7 @@ void ieStage::onEnterFrame(const std::shared_ptr<ieEvent>& event)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuffer);
     glViewport(0, 0, m_frame.z, m_frame.w);
-    glClearColor(0.5, 0.5, 0.5, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT |
             GL_DEPTH_BUFFER_BIT |
             GL_STENCIL_BUFFER_BIT);
@@ -128,21 +128,7 @@ void ieStage::onExitFrame(const std::shared_ptr<ieEvent>& event)
 #endif
     
     ieDisplayObjectContainer::onExitFrame(event);
-    
-    assert(m_touchRenderTarget != nullptr);
-    m_touchRenderTarget->begin();
-    m_touchRenderTarget->clear();
-    
-    //assert(m_batchMgr != nullptr);
-    //m_batchMgr->begin();
-    
     m_touchRecognizer->updateTouchMask();
-    
-    //m_batchMgr->end();
-    //m_batchMgr->draw();
-    
-    m_touchRenderTarget->end();
-    m_touchRenderTarget->saveToFile("a_image.png");
 }
 
 void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
@@ -152,8 +138,8 @@ void ieStage::onAdded(const std::shared_ptr<ieEvent>& event)
     ieDisplayObject::setupShader(ieShaderV2C4_vert, ieShaderV2C4_frag);
     ieStage::addEventListener(kEVENT_ON_RESIZE, m_functionOnResize);
     
-    m_touchRenderTarget = std::make_shared<ieRenderTarget>(std::dynamic_pointer_cast<ieStage>(ieDisplayObject::shared_from_this()),
-                                                           glm::ivec2(m_frame.z, m_frame.w));
+    assert(m_touchRecognizer != nullptr);
+    m_touchRecognizer->setRenderTarget(std::make_shared<ieRenderTarget>(std::dynamic_pointer_cast<ieStage>(ieDisplayObject::shared_from_this()), glm::ivec2(m_frame.z, m_frame.w)));
 }
 
 void ieStage::onRemoved(const std::shared_ptr<ieEvent>& event)

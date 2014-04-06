@@ -10,8 +10,10 @@
 #include "ieInteractiveObject.h"
 #include "ieEvent.h"
 #include "ieShader.h"
+#include "ieRenderTarget.h"
 
-ieTouchRecognizer::ieTouchRecognizer(void)
+ieTouchRecognizer::ieTouchRecognizer(void) :
+m_renderTarget(nullptr)
 {
     
 }
@@ -19,6 +21,11 @@ ieTouchRecognizer::ieTouchRecognizer(void)
 ieTouchRecognizer::~ieTouchRecognizer(void)
 {
     m_interactiveObjects.clear();
+}
+
+void ieTouchRecognizer::setRenderTarget(const std::shared_ptr<ieRenderTarget> &renderTarget)
+{
+    m_renderTarget = renderTarget;
 }
 
 void ieTouchRecognizer::registerInteractiveObject(ieSharedInteractiveObjectRef interactiveObject)
@@ -33,10 +40,17 @@ void ieTouchRecognizer::unregisterInteractiveObject(ieSharedInteractiveObjectRef
 
 void ieTouchRecognizer::updateTouchMask(void)
 {
+    assert(m_renderTarget != nullptr);
+    m_renderTarget->begin();
+    m_renderTarget->clear();
+    
     std::for_each(m_interactiveObjects.begin(), m_interactiveObjects.end(), [this](ieSharedInteractiveObjectRef iterator){
         
         std::shared_ptr<ieEvent> eventOnUpdateTouchMask = std::make_shared<ieEvent>(kEVENT_ON_UPDATE_TOUCH_MASK, iterator);
         iterator->dispatchEvent(eventOnUpdateTouchMask);
 
     });
+    
+    m_renderTarget->end();
+    m_renderTarget->saveToFile("a_image.png");
 }

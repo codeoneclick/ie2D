@@ -51,7 +51,7 @@
     self.gameController->registerTransition(transition);
     self.gameController->goToTransition("demo");
     
-    std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 255, 0, 255);
+    /*std::shared_ptr<ieColor> color_01 = std::make_shared<ieColor>(255, 255, 0, 255);
     self.sprite = std::make_shared<ieSprite>(glm::vec4(10, 10, 50, 50), color_01);
     self.sprite->setPivot(glm::vec2(25, 25));
     transition->addChild(self.sprite);
@@ -61,15 +61,15 @@
     self.sprite2 = std::make_shared<ieSprite>(glm::vec4(250, 250, 100, 100), color_02);
     self.sprite2->setPivot(glm::vec2(50, 50));
     self.sprite->addChild(self.sprite2);
-    self.sprite2->setPosition(glm::vec2(100, 100));
+    self.sprite2->setPosition(glm::vec2(100, 100));*/
     
     std::string path([[[NSBundle mainBundle] resourcePath] UTF8String]);
     path.append("/");
-    path.append("human_04.json");
+    path.append("wizard_01.json");
     self.sprite3 = std::make_shared<ieMovieClip>(glm::vec4(250, 250, 100, 100), path);
     transition->addChild(self.sprite3);
     self.sprite3->setPosition(glm::vec2(0, 0));
-    self.sprite3->setScale(glm::vec2(3.0, 3.0));
+    self.sprite3->setScale(glm::vec2(1.0, 1.0));
     self.sprite3->setBatched(true);
     self.sprite3->gotoAndPlay(true);
     self.sprite3->setTouchable(true);
@@ -84,7 +84,7 @@
     self.sprite4->setVisible(true);
     self.sprite4->gotoAndPlay(true);*/
     
-    path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+    /*path = [[[NSBundle mainBundle] resourcePath] UTF8String];
     path.append("/");
     path.append("leather_armor.png");
     std::shared_ptr<ieTileset> tileset = std::make_shared<ieTileset>(path, glm::ivec2(128, 128));
@@ -98,7 +98,7 @@
         indexX++;
         indexY = indexX >= 6 ? indexY + 1 : indexY;
         indexX = indexX >= 6 ? 0 : indexX;
-    }
+    }*/
     
     NSMethodSignature* signature = [self methodSignatureForSelector:@selector(onTick:)];
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -154,7 +154,7 @@
 
 - (void)onTick:(NSTimer*)sender
 {
-    static f32 rotation = 0.0f;
+    /*static f32 rotation = 0.0f;
     static f32 scale = 0.5f;
     static f32 inc = 0.1f;
     self.sprite->setRotation(rotation);
@@ -166,7 +166,7 @@
     {
         inc *= -1.0f;
     }
-    rotation += 5.5f;
+    rotation += 5.5f;*/
     
     /*static ui32 index1 = 0;
     static ui32 index2 = 0;
